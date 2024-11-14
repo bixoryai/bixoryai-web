@@ -1,5 +1,5 @@
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/ai-empowerment/Hero";
 import { Innovation } from "@/components/sections/ai-empowerment/Innovation";
 import { Productivity } from "@/components/sections/ai-empowerment/Productivity";
