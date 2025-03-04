@@ -1,9 +1,24 @@
+
 import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="min-h-screen bg-hero-pattern flex items-center">
-      <div className="container mx-auto px-6">
+    <div className="min-h-screen relative flex items-center">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-primary/80 z-10" />
+        <img 
+          src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" 
+          alt="AI Background" 
+          className="w-full h-full object-cover opacity-10 z-0"
+        />
+      </div>
+      
+      {/* Content overlay with a subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70 z-10" />
+
+      {/* Hero content */}
+      <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-4xl animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Build Intelligence X

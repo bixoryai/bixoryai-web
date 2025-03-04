@@ -1,9 +1,23 @@
+
 import { Gift } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <section className="relative h-screen bg-hero-pattern flex items-center">
-      <div className="container mx-auto px-6">
+    <section className="relative h-screen flex items-center">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-primary/80 z-10" />
+        <img 
+          src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" 
+          alt="AI Background" 
+          className="w-full h-full object-cover opacity-10 z-0"
+        />
+      </div>
+      
+      {/* Content overlay with a subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/90 to-primary/70 z-10" />
+      
+      <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
             All About
@@ -15,7 +29,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 bg-[url('/images/ai-grid.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
     </section>
   );
 };
