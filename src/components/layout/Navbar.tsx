@@ -9,8 +9,9 @@ const Navbar = () => {
     <nav className="fixed w-full bg-primary/90 backdrop-blur-sm z-50">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="Bixory AI" className="h-10" />
+          <div className="flex items-center gap-3">
+            <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="Bixory AI" className="h-15" />
+            <span className="text-white text-xl font-bold">BIXORY AI</span>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
