@@ -4,16 +4,16 @@ import { ArrowRight } from "lucide-react";
 const Hero = () => {
   return (
     <div className="min-h-screen relative flex items-center">
-      {/* Background image - replacing logo with a better suited tech/AI pattern */}
+      {/* Background image with increased visibility */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-primary/90 z-10" />
+        <div className="absolute inset-0 bg-primary/70 z-10" />
         <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5')] bg-no-repeat bg-cover bg-center opacity-20 z-0"
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5')] bg-no-repeat bg-cover bg-center opacity-40 z-0"
         />
       </div>
       
-      {/* Content overlay with a subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-primary/80 z-10" />
+      {/* Content overlay with reduced opacity gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/60 z-10" />
 
       {/* Hero content */}
       <div className="container mx-auto px-6 relative z-20">
