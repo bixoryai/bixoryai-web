@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="min-h-screen relative flex items-center">
+    <div className="h-[500px] md:h-[600px] relative flex items-center">
       {/* Background image with increased visibility */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-primary/50 z-10" />

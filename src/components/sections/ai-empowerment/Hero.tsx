@@ -3,7 +3,7 @@ import { Gift } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center">
+    <section className="relative h-[500px] md:h-[600px] flex items-center">
       {/* Background image with increased visibility */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-primary/50 z-10" />
