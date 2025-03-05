@@ -4,16 +4,16 @@ import { ArrowRight } from "lucide-react";
 const Hero = () => {
   return (
     <div className="h-[500px] md:h-[600px] relative flex items-center">
-      {/* Background image with increased visibility */}
+      {/* Background image with better visibility */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-primary/50 z-10" />
+        <div className="absolute inset-0 bg-primary/30 z-10" /> 
         <div 
-          className="absolute inset-0 bg-[url('/lovable-uploads/775da253-bbac-4914-9fe0-e5646d67a90e.png')] bg-no-repeat bg-cover bg-center opacity-80 z-0"
+          className="absolute inset-0 bg-[url('/lovable-uploads/775da253-bbac-4914-9fe0-e5646d67a90e.png')] bg-no-repeat bg-cover bg-center opacity-100 z-0"
         />
       </div>
       
-      {/* Content overlay with reduced opacity gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-primary/40 z-10" />
+      {/* Content overlay with less opacity to see background better */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-transparent z-10" />
 
       {/* Hero content */}
       <div className="container mx-auto px-6 relative z-20">
