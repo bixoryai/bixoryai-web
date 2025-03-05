@@ -6,14 +6,14 @@ export const Hero = () => {
     <section className="relative h-screen flex items-center">
       {/* Background image with increased visibility */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-primary/70 z-10" />
+        <div className="absolute inset-0 bg-primary/50 z-10" />
         <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d')] bg-no-repeat bg-cover bg-center opacity-35 z-0"
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d')] bg-no-repeat bg-cover bg-center opacity-55 z-0"
         />
       </div>
       
       {/* Content overlay with reduced opacity gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary/40 z-10" />
       
       <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-3xl mx-auto text-center">

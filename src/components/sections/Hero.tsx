@@ -6,14 +6,14 @@ const Hero = () => {
     <div className="min-h-screen relative flex items-center">
       {/* Background image with increased visibility */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-primary/70 z-10" />
+        <div className="absolute inset-0 bg-primary/50 z-10" />
         <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5')] bg-no-repeat bg-cover bg-center opacity-40 z-0"
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5')] bg-no-repeat bg-cover bg-center opacity-60 z-0"
         />
       </div>
       
       {/* Content overlay with reduced opacity gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/60 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-primary/40 z-10" />
 
       {/* Hero content */}
       <div className="container mx-auto px-6 relative z-20">
