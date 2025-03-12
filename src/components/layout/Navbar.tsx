@@ -18,7 +18,7 @@ const Navbar = () => {
             <a href="#about" className="text-white hover:text-accent transition-colors">About</a>
             <a href="#contact" className="text-white hover:text-accent transition-colors">Contact</a>
             <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
-              Get Started
+              Contact
             </button>
           </div>
 
@@ -33,7 +33,7 @@ const Navbar = () => {
               <a href="#about" className="text-white hover:text-accent transition-colors">About</a>
               <a href="#contact" className="text-white hover:text-accent transition-colors">Contact</a>
               <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
-                Get Started
+                Contact
               </button>
             </div>
           </div>}

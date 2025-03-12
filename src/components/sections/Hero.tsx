@@ -27,7 +27,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-colors flex items-center gap-2">
-              Get Started <ArrowRight className="w-4 h-4" />
+              Contact <ArrowRight className="w-4 h-4" />
             </button>
             <button className="border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent/10 transition-colors">
               Learn More
