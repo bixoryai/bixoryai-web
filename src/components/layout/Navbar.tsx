@@ -1,14 +1,17 @@
+
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return <nav className="fixed w-full bg-primary/90 backdrop-blur-sm z-50">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="Bixory AI" className="h-9" />
             <span className="text-xl font-bold text-red-500">BIXORY AI</span>
-          </div>
+          </Link>
           
           <div className="hidden md:flex items-center space-x-8">
             <a href="#services" className="text-white hover:text-accent transition-colors">Services</a>
