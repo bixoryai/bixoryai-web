@@ -14,9 +14,10 @@ const Navbar = () => {
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#services" className="text-white hover:text-accent transition-colors">Services</a>
+            <a href="#resources" className="text-white hover:text-accent transition-colors">Resources</a>
+            <a href="#projects" className="text-white hover:text-accent transition-colors">Projects</a>
+            <a href="#solutions" className="text-white hover:text-accent transition-colors">Solutions</a>
             <a href="#about" className="text-white hover:text-accent transition-colors">About</a>
-            <a href="#contact" className="text-white hover:text-accent transition-colors">Contact</a>
             <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
               Contact
             </button>
@@ -29,9 +30,10 @@ const Navbar = () => {
 
         {isOpen && <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              <a href="#services" className="text-white hover:text-accent transition-colors">Services</a>
+              <a href="#resources" className="text-white hover:text-accent transition-colors">Resources</a>
+              <a href="#projects" className="text-white hover:text-accent transition-colors">Projects</a>
+              <a href="#solutions" className="text-white hover:text-accent transition-colors">Solutions</a>
               <a href="#about" className="text-white hover:text-accent transition-colors">About</a>
-              <a href="#contact" className="text-white hover:text-accent transition-colors">Contact</a>
               <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
                 Contact
               </button>
