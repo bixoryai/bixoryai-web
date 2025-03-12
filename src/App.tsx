@@ -8,6 +8,9 @@ import Index from "./pages/Index";
 import AIEmpowerment from "./pages/AIEmpowerment";
 import KnowledgeBase from "./pages/KnowledgeBase";
 import AITools from "./pages/AITools";
+import Projects from "./pages/Projects";
+import Solutions from "./pages/Solutions";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +25,9 @@ const App = () => (
           <Route path="/ai-empowerment" element={<AIEmpowerment />} />
           <Route path="/knowledge-base" element={<KnowledgeBase />} />
           <Route path="/ai-tools" element={<AITools />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

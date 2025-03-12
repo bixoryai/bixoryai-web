@@ -34,9 +34,9 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <a href="#projects" className="text-white hover:text-accent transition-colors">Projects</a>
-            <a href="#solutions" className="text-white hover:text-accent transition-colors">Solutions</a>
-            <a href="#about" className="text-white hover:text-accent transition-colors">About</a>
+            <Link to="/projects" className="text-white hover:text-accent transition-colors">Projects</Link>
+            <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
+            <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
             <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
               Contact
             </button>
@@ -67,9 +67,9 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
-              <a href="#projects" className="text-white hover:text-accent transition-colors">Projects</a>
-              <a href="#solutions" className="text-white hover:text-accent transition-colors">Solutions</a>
-              <a href="#about" className="text-white hover:text-accent transition-colors">About</a>
+              <Link to="/projects" className="text-white hover:text-accent transition-colors">Projects</Link>
+              <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
+              <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
               <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
                 Contact
               </button>
