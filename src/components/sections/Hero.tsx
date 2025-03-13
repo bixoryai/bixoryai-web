@@ -3,17 +3,9 @@ import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="h-[500px] md:h-[600px] relative flex items-center">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        {/* Background image with no overlay */}
-        <div 
-          className="absolute inset-0 bg-[url('/lovable-uploads/d498a479-5931-4b37-b81c-eb98dbc202bb.png')] bg-no-repeat bg-cover bg-center z-0"
-        />
-      </div>
-      
+    <div className="h-[500px] md:h-[600px] relative flex items-center bg-[url('/lovable-uploads/d498a479-5931-4b37-b81c-eb98dbc202bb.png')] bg-no-repeat bg-cover bg-center">
       {/* Hero content */}
-      <div className="container mx-auto px-6 relative z-20">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Build Intelligence X
