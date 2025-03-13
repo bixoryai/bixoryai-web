@@ -6,14 +6,14 @@ const Hero = () => {
     <div className="h-[500px] md:h-[600px] relative flex items-center">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
-        {/* Remove the primary color overlay completely */}
+        {/* New background image */}
         <div 
-          className="absolute inset-0 bg-[url('/lovable-uploads/775da253-bbac-4914-9fe0-e5646d67a90e.png')] bg-no-repeat bg-cover bg-center z-0"
+          className="absolute inset-0 bg-[url('/lovable-uploads/d498a479-5931-4b37-b81c-eb98dbc202bb.png')] bg-no-repeat bg-cover bg-center z-0"
         />
       </div>
       
       {/* Light gradient overlay to ensure text is readable */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/30 to-transparent z-10" />
 
       {/* Hero content */}
       <div className="container mx-auto px-6 relative z-20">
