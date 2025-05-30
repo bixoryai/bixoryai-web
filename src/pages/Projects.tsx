@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Search, ExternalLink, Github, Play } from "lucide-react";
+import { Search, ExternalLink, Github, Play, Star, GitFork, Users } from "lucide-react";
 
 interface Project {
   id: number;
@@ -16,8 +15,12 @@ interface Project {
   technologies: string[];
   category: string;
   status: "Completed" | "In Progress" | "Coming Soon";
+  isOpenSource?: boolean;
   demoUrl?: string;
   githubUrl?: string;
+  stars?: number;
+  forks?: number;
+  contributors?: number;
 }
 
 const Projects = () => {
@@ -25,7 +28,7 @@ const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
 
-  // Placeholder projects data
+  // Projects data including open-source projects
   const projects: Project[] = [
     {
       id: 1,
@@ -59,6 +62,50 @@ const Projects = () => {
     },
     {
       id: 4,
+      title: "AI Music Creation Platform",
+      description: "Open-source platform for generating AI-powered music compositions with customizable styles and instruments.",
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=240&fit=crop",
+      technologies: ["PyTorch", "Magenta", "React", "Web Audio API"],
+      category: "Creative AI",
+      status: "Completed",
+      isOpenSource: true,
+      demoUrl: "#",
+      githubUrl: "#",
+      stars: 2847,
+      forks: 543,
+      contributors: 89
+    },
+    {
+      id: 5,
+      title: "AI Movie Creation Suite",
+      description: "Comprehensive open-source toolkit for AI-assisted video generation, editing, and post-production workflows.",
+      image: "https://images.unsplash.com/photo-1489599849675-4c0a2a1acaa0?w=400&h=240&fit=crop",
+      technologies: ["Stable Diffusion", "FFmpeg", "Python", "TypeScript"],
+      category: "Creative AI",
+      status: "In Progress",
+      isOpenSource: true,
+      githubUrl: "#",
+      stars: 1924,
+      forks: 312,
+      contributors: 64
+    },
+    {
+      id: 6,
+      title: "AI Agent Builder Framework",
+      description: "Modular framework for building and deploying intelligent AI agents with custom capabilities and integrations.",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=240&fit=crop",
+      technologies: ["LangChain", "OpenAI", "Docker", "Kubernetes"],
+      category: "AI Agents",
+      status: "Completed",
+      isOpenSource: true,
+      demoUrl: "#",
+      githubUrl: "#",
+      stars: 3621,
+      forks: 782,
+      contributors: 127
+    },
+    {
+      id: 7,
       title: "Voice-to-Text Transcription",
       description: "High-accuracy speech recognition system with real-time processing capabilities.",
       image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=400&h=240&fit=crop",
@@ -67,7 +114,36 @@ const Projects = () => {
       status: "In Progress"
     },
     {
-      id: 5,
+      id: 8,
+      title: "AI Crypto Trading Platform",
+      description: "Open-source algorithmic trading platform with ML-powered market analysis and automated trading strategies.",
+      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=240&fit=crop",
+      technologies: ["Python", "TensorFlow", "FastAPI", "PostgreSQL"],
+      category: "FinTech",
+      status: "In Progress",
+      isOpenSource: true,
+      githubUrl: "#",
+      stars: 1456,
+      forks: 298,
+      contributors: 43
+    },
+    {
+      id: 9,
+      title: "AI-Powered ECom Platform",
+      description: "Complete e-commerce solution with AI-driven product recommendations, inventory management, and customer insights.",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=240&fit=crop",
+      technologies: ["Next.js", "TensorFlow", "Stripe", "MongoDB"],
+      category: "E-Commerce",
+      status: "Completed",
+      isOpenSource: true,
+      demoUrl: "#",
+      githubUrl: "#",
+      stars: 892,
+      forks: 156,
+      contributors: 31
+    },
+    {
+      id: 10,
       title: "Automated Document Processing",
       description: "AI-powered system for extracting and categorizing information from documents.",
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=240&fit=crop",
@@ -76,7 +152,7 @@ const Projects = () => {
       status: "Coming Soon"
     },
     {
-      id: 6,
+      id: 11,
       title: "Recommendation Engine",
       description: "Personalized recommendation system using collaborative and content-based filtering.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=240&fit=crop",
@@ -88,7 +164,7 @@ const Projects = () => {
     }
   ];
 
-  const categories = ["All", "Machine Learning", "NLP", "Computer Vision", "Document AI"];
+  const categories = ["All", "Machine Learning", "NLP", "Computer Vision", "Document AI", "Creative AI", "AI Agents", "FinTech", "E-Commerce"];
   const statuses = ["All", "Completed", "In Progress", "Coming Soon"];
 
   const filteredProjects = projects.filter(project => {
@@ -132,7 +208,7 @@ const Projects = () => {
                 {projects.filter(p => p.status === "Completed").length} Completed
               </Badge>
               <Badge variant="outline" className="bg-white/10 border-white/20 text-white px-4 py-2">
-                {projects.filter(p => p.status === "In Progress").length} In Progress
+                {projects.filter(p => p.isOpenSource).length} Open Source
               </Badge>
             </div>
           </div>
@@ -206,11 +282,19 @@ const Projects = () => {
                         alt={project.title}
                         className="w-full h-48 object-cover"
                       />
-                      <Badge 
-                        className={`absolute top-3 right-3 ${getStatusColor(project.status)}`}
-                      >
-                        {project.status}
-                      </Badge>
+                      <div className="absolute top-3 right-3 flex gap-2">
+                        <Badge 
+                          className={`${getStatusColor(project.status)}`}
+                        >
+                          {project.status}
+                        </Badge>
+                        {project.isOpenSource && (
+                          <Badge className="bg-black text-white hover:bg-gray-800">
+                            <Github className="h-3 w-3 mr-1" />
+                            Open Source
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                     
                     <CardHeader>
@@ -228,9 +312,27 @@ const Projects = () => {
                           </Badge>
                         ))}
                       </div>
-                      <Badge variant="outline" className="text-xs">
-                        {project.category}
-                      </Badge>
+                      <div className="flex items-center justify-between">
+                        <Badge variant="outline" className="text-xs">
+                          {project.category}
+                        </Badge>
+                        {project.isOpenSource && (
+                          <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <Star className="h-3 w-3" />
+                              {project.stars}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <GitFork className="h-3 w-3" />
+                              {project.forks}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Users className="h-3 w-3" />
+                              {project.contributors}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </CardContent>
                     
                     <CardFooter className="flex gap-2">
@@ -243,7 +345,7 @@ const Projects = () => {
                       {project.githubUrl && (
                         <Button variant="outline" size="sm" className="flex-1">
                           <Github className="h-4 w-4 mr-2" />
-                          Code
+                          {project.isOpenSource ? "Contribute" : "Code"}
                         </Button>
                       )}
                       <Button variant="ghost" size="sm">
