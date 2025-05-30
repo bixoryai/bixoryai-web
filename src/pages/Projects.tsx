@@ -1,12 +1,12 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Search, ExternalLink, Github, Play, Star, GitFork, Users } from "lucide-react";
+import { Search, ExternalLink, Github, Play, Star, GitFork, Users, Filter, ChevronDown } from "lucide-react";
 
 interface Project {
   id: number;
@@ -28,6 +28,7 @@ const Projects = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Projects data including open-source projects
   const projects: Project[] = [
@@ -186,6 +187,20 @@ const Projects = () => {
     }
   };
 
+  const getTechColor = (tech: string) => {
+    // Color code technologies by type
+    const aiModels = ["GPT-4", "PyTorch", "TensorFlow", "Whisper", "OpenAI", "Stable Diffusion"];
+    const frameworks = ["React", "Next.js", "FastAPI", "Express", "Docker", "Kubernetes"];
+    const languages = ["Python", "TypeScript", "JavaScript"];
+    const databases = ["MongoDB", "PostgreSQL", "Redis"];
+    
+    if (aiModels.some(model => tech.includes(model))) return "bg-purple-100 text-purple-800";
+    if (frameworks.some(fw => tech.includes(fw))) return "bg-blue-100 text-blue-800";
+    if (languages.some(lang => tech.includes(lang))) return "bg-green-100 text-green-800";
+    if (databases.some(db => tech.includes(db))) return "bg-orange-100 text-orange-800";
+    return "bg-gray-100 text-gray-800";
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -227,55 +242,79 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Filters Section */}
-      <section className="py-8 border-b">
+      {/* Enhanced Filters Section */}
+      <section className="py-8 border-b bg-gray-50/50">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row gap-6">
-              {/* Search */}
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <Input
-                  placeholder="Search projects..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              
-              {/* Category Filter */}
-              <div className="flex flex-wrap gap-2">
-                {categories.map(category => (
-                  <Button
-                    key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category}
-                  </Button>
-                ))}
-              </div>
-              
-              {/* Status Filter */}
-              <div className="flex flex-wrap gap-2">
-                {statuses.map(status => (
-                  <Button
-                    key={status}
-                    variant={selectedStatus === status ? "secondary" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedStatus(status)}
-                  >
-                    {status}
-                  </Button>
-                ))}
-              </div>
+            {/* Search Bar */}
+            <div className="relative mb-6">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                placeholder="Search projects by name, description, or technology..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 h-12 text-base"
+              />
             </div>
+            
+            {/* Collapsible Filters */}
+            <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+              <div className="flex items-center justify-between mb-4">
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Filter className="h-4 w-4" />
+                    Filters
+                    <ChevronDown className={`h-4 w-4 transition-transform ${isFilterOpen ? 'rotate-180' : ''}`} />
+                  </Button>
+                </CollapsibleTrigger>
+                <div className="text-sm text-muted-foreground">
+                  {filteredProjects.length} of {projects.length} projects
+                </div>
+              </div>
+              
+              <CollapsibleContent className="space-y-4">
+                {/* Category Filter */}
+                <div>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Category</label>
+                  <div className="flex flex-wrap gap-2">
+                    {categories.map(category => (
+                      <Button
+                        key={category}
+                        variant={selectedCategory === category ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedCategory(category)}
+                        className="transition-all duration-200 hover:scale-105"
+                      >
+                        {category}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Status Filter */}
+                <div>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Status</label>
+                  <div className="flex flex-wrap gap-2">
+                    {statuses.map(status => (
+                      <Button
+                        key={status}
+                        variant={selectedStatus === status ? "secondary" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedStatus(status)}
+                        className="transition-all duration-200 hover:scale-105"
+                      >
+                        {status}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
           </div>
         </div>
       </section>
 
-      {/* Projects Grid */}
+      {/* Enhanced Projects Grid */}
       <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
@@ -287,21 +326,25 @@ const Projects = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProjects.map(project => (
-                  <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <div className="relative">
+                  <Card 
+                    key={project.id} 
+                    className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer"
+                  >
+                    <div className="relative overflow-hidden">
                       <img 
                         src={project.image} 
                         alt={project.title}
-                        className="w-full h-48 object-cover"
+                        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                       <div className="absolute top-3 right-3 flex gap-2">
                         <Badge 
-                          className={`${getStatusColor(project.status)}`}
+                          className={`${getStatusColor(project.status)} transition-all duration-200`}
                         >
                           {project.status}
                         </Badge>
                         {project.isOpenSource && (
-                          <Badge className="bg-black text-white hover:bg-gray-800">
+                          <Badge className="bg-black text-white hover:bg-gray-800 transition-colors duration-200">
                             <Github className="h-3 w-3 mr-1" />
                             Open Source
                           </Badge>
@@ -309,59 +352,69 @@ const Projects = () => {
                       </div>
                     </div>
                     
-                    <CardHeader>
-                      <CardTitle className="text-xl mb-2">{project.title}</CardTitle>
-                      <CardDescription className="text-sm leading-relaxed">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors duration-200">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-sm leading-relaxed line-clamp-3">
                         {project.description}
                       </CardDescription>
                     </CardHeader>
                     
-                    <CardContent>
+                    <CardContent className="pb-3">
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.map(tech => (
-                          <Badge key={tech} variant="secondary" className="text-xs">
+                        {project.technologies.slice(0, 4).map(tech => (
+                          <Badge 
+                            key={tech} 
+                            className={`text-xs transition-all duration-200 hover:scale-105 ${getTechColor(tech)}`}
+                          >
                             {tech}
                           </Badge>
                         ))}
+                        {project.technologies.length > 4 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{project.technologies.length - 4} more
+                          </Badge>
+                        )}
                       </div>
                       <div className="flex items-center justify-between">
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className="text-xs font-medium">
                           {project.category}
                         </Badge>
                         {project.isOpenSource && (
                           <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-1 hover:text-yellow-600 transition-colors">
                               <Star className="h-3 w-3" />
-                              {project.stars}
+                              <span className="font-medium">{project.stars?.toLocaleString()}</span>
                             </div>
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-1 hover:text-blue-600 transition-colors">
                               <GitFork className="h-3 w-3" />
-                              {project.forks}
+                              <span className="font-medium">{project.forks}</span>
                             </div>
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-1 hover:text-green-600 transition-colors">
                               <Users className="h-3 w-3" />
-                              {project.contributors}
+                              <span className="font-medium">{project.contributors}</span>
                             </div>
                           </div>
                         )}
                       </div>
                     </CardContent>
                     
-                    <CardFooter className="flex gap-2">
+                    <CardFooter className="flex gap-2 pt-2">
                       {project.demoUrl && (
-                        <Button size="sm" className="flex-1">
-                          <Play className="h-4 w-4 mr-2" />
-                          Demo
+                        <Button size="sm" className="flex-1 group/btn">
+                          <Play className="h-4 w-4 mr-2 transition-transform group-hover/btn:scale-110" />
+                          View Demo
                         </Button>
                       )}
                       {project.githubUrl && (
-                        <Button variant="outline" size="sm" className="flex-1">
-                          <Github className="h-4 w-4 mr-2" />
-                          {project.isOpenSource ? "Contribute" : "Code"}
+                        <Button variant="outline" size="sm" className="flex-1 group/btn">
+                          <Github className="h-4 w-4 mr-2 transition-transform group-hover/btn:scale-110" />
+                          {project.isOpenSource ? "Contribute" : "View Code"}
                         </Button>
                       )}
-                      <Button variant="ghost" size="sm">
-                        <ExternalLink className="h-4 w-4" />
+                      <Button variant="ghost" size="sm" className="group/btn">
+                        <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
                       </Button>
                     </CardFooter>
                   </Card>
@@ -380,7 +433,7 @@ const Projects = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Let's discuss how we can build custom AI solutions for your business needs.
             </p>
-            <Button size="lg" className="px-8">
+            <Button size="lg" className="px-8 hover:scale-105 transition-transform duration-200">
               Get In Touch
             </Button>
           </div>
