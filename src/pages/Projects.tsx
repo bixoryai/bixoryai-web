@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Search, ExternalLink, Github, Play, Star, GitFork, Users, Filter, ChevronDown } from "lucide-react";
+import ProjectFilters from "@/components/projects/ProjectFilters";
+import TechnologyLegend from "@/components/projects/TechnologyLegend";
+import ProjectCard from "@/components/projects/ProjectCard";
+import { Search } from "lucide-react";
 
 interface Project {
   id: number;
@@ -22,13 +21,14 @@ interface Project {
   stars?: number;
   forks?: number;
   contributors?: number;
+  createdAt?: string;
 }
 
 const Projects = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [sortBy, setSortBy] = useState("recent");
 
   // Projects data including open-source projects
   const projects: Project[] = [
@@ -41,7 +41,8 @@ const Projects = () => {
       category: "NLP",
       status: "Completed",
       demoUrl: "#",
-      githubUrl: "#"
+      githubUrl: "#",
+      createdAt: "2024-01-15"
     },
     {
       id: 2,
@@ -50,7 +51,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=240&fit=crop",
       technologies: ["OpenCV", "PyTorch", "YOLO", "FastAPI"],
       category: "Computer Vision",
-      status: "In Progress"
+      status: "In Progress",
+      createdAt: "2024-02-20"
     },
     {
       id: 3,
@@ -60,7 +62,8 @@ const Projects = () => {
       technologies: ["Scikit-learn", "Pandas", "D3.js", "Node.js"],
       category: "Machine Learning",
       status: "Completed",
-      demoUrl: "#"
+      demoUrl: "#",
+      createdAt: "2024-01-10"
     },
     {
       id: 4,
@@ -75,7 +78,8 @@ const Projects = () => {
       githubUrl: "#",
       stars: 2847,
       forks: 543,
-      contributors: 89
+      contributors: 89,
+      createdAt: "2024-03-05"
     },
     {
       id: 5,
@@ -89,7 +93,8 @@ const Projects = () => {
       githubUrl: "#",
       stars: 1924,
       forks: 312,
-      contributors: 64
+      contributors: 64,
+      createdAt: "2024-02-28"
     },
     {
       id: 6,
@@ -104,7 +109,8 @@ const Projects = () => {
       githubUrl: "#",
       stars: 3621,
       forks: 782,
-      contributors: 127
+      contributors: 127,
+      createdAt: "2024-03-12"
     },
     {
       id: 7,
@@ -113,7 +119,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=400&h=240&fit=crop",
       technologies: ["Whisper", "WebRTC", "React", "WebSockets"],
       category: "NLP",
-      status: "In Progress"
+      status: "In Progress",
+      createdAt: "2024-02-15"
     },
     {
       id: 8,
@@ -127,7 +134,8 @@ const Projects = () => {
       githubUrl: "#",
       stars: 1456,
       forks: 298,
-      contributors: 43
+      contributors: 43,
+      createdAt: "2024-01-25"
     },
     {
       id: 9,
@@ -142,7 +150,8 @@ const Projects = () => {
       githubUrl: "#",
       stars: 892,
       forks: 156,
-      contributors: 31
+      contributors: 31,
+      createdAt: "2024-01-30"
     },
     {
       id: 10,
@@ -151,7 +160,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=240&fit=crop",
       technologies: ["OCR", "spaCy", "MongoDB", "Express"],
       category: "Document AI",
-      status: "Coming Soon"
+      status: "Coming Soon",
+      createdAt: "2024-04-01"
     },
     {
       id: 11,
@@ -162,21 +172,38 @@ const Projects = () => {
       category: "Machine Learning",
       status: "Completed",
       demoUrl: "#",
-      githubUrl: "#"
+      githubUrl: "#",
+      createdAt: "2024-01-05"
     }
   ];
 
   const categories = ["All", "Machine Learning", "NLP", "Computer Vision", "Document AI", "Creative AI", "AI Agents", "FinTech", "E-Commerce"];
   const statuses = ["All", "Completed", "In Progress", "Coming Soon"];
 
-  const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
-    const matchesStatus = selectedStatus === "All" || project.status === selectedStatus;
-    
-    return matchesSearch && matchesCategory && matchesStatus;
-  });
+  const filteredAndSortedProjects = projects
+    .filter(project => {
+      const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+      const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
+      const matchesStatus = selectedStatus === "All" || project.status === selectedStatus;
+      
+      return matchesSearch && matchesCategory && matchesStatus;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "stars":
+          return (b.stars || 0) - (a.stars || 0);
+        case "name":
+          return a.title.localeCompare(b.title);
+        case "status":
+          const statusOrder = { "Completed": 0, "In Progress": 1, "Coming Soon": 2 };
+          return statusOrder[a.status] - statusOrder[b.status];
+        case "recent":
+        default:
+          return new Date(b.createdAt || "").getTime() - new Date(a.createdAt || "").getTime();
+      }
+    });
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -224,23 +251,23 @@ const Projects = () => {
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#00F0FF]/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-6xl lg:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
               Our AI Projects
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed font-light px-4">
               Explore our innovative AI solutions that are transforming industries. 
               From machine learning models to computer vision systems, discover how we're building the future.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Badge className="bg-gradient-to-r from-[#FF4D00]/20 to-[#FF4D00]/10 border-[#FF4D00]/30 text-white px-6 py-3 text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 px-4">
+              <Badge className="bg-gradient-to-r from-[#FF4D00]/20 to-[#FF4D00]/10 border-[#FF4D00]/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
                 ⚡ {projects.length} Total Projects
               </Badge>
-              <Badge className="bg-gradient-to-r from-green-500/20 to-green-400/10 border-green-400/30 text-white px-6 py-3 text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
+              <Badge className="bg-gradient-to-r from-green-500/20 to-green-400/10 border-green-400/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
                 ✅ {projects.filter(p => p.status === "Completed").length} Completed
               </Badge>
-              <Badge className="bg-gradient-to-r from-[#00F0FF]/20 to-[#00F0FF]/10 border-[#00F0FF]/30 text-white px-6 py-3 text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
+              <Badge className="bg-gradient-to-r from-[#00F0FF]/20 to-[#00F0FF]/10 border-[#00F0FF]/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
                 🔓 {projects.filter(p => p.isOpenSource).length} Open Source
               </Badge>
             </div>
@@ -249,96 +276,29 @@ const Projects = () => {
       </section>
 
       {/* Enhanced Dark Filters Section */}
-      <section className="py-10 border-b border-gray-800/50 bg-gradient-to-r from-[#0A192F]/90 to-[#0D1B2A]/90 backdrop-blur-sm">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            {/* Enhanced Search Bar */}
-            <div className="relative mb-8">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D00]/10 to-[#00F0FF]/10 rounded-xl blur-sm"></div>
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <Input
-                  placeholder="Search projects by name, description, or technology..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-12 h-14 text-base bg-gray-900/50 border-gray-700/50 text-white placeholder-gray-400 backdrop-blur-sm focus:border-[#00F0FF]/50 focus:ring-[#00F0FF]/20 transition-all duration-300"
-                />
-              </div>
-            </div>
-            
-            {/* Enhanced Collapsible Filters */}
-            <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>
-              <div className="flex items-center justify-between mb-6">
-                <CollapsibleTrigger asChild>
-                  <Button 
-                    variant="outline" 
-                    className="flex items-center gap-3 bg-gray-900/50 border-gray-700/50 text-white hover:bg-gray-800/50 hover:border-[#FF4D00]/50 transition-all duration-300 px-6 py-3 backdrop-blur-sm"
-                  >
-                    <Filter className="h-4 w-4" />
-                    Advanced Filters
-                    <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isFilterOpen ? 'rotate-180' : ''}`} />
-                  </Button>
-                </CollapsibleTrigger>
-                <div className="text-sm text-gray-400 bg-gray-900/30 px-4 py-2 rounded-lg backdrop-blur-sm">
-                  <span className="text-[#00F0FF] font-medium">{filteredProjects.length}</span> of <span className="text-white">{projects.length}</span> projects
-                </div>
-              </div>
-              
-              <CollapsibleContent className="space-y-6">
-                {/* Enhanced Category Filter */}
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-300 block">Categories</label>
-                  <div className="flex flex-wrap gap-3">
-                    {categories.map(category => (
-                      <Button
-                        key={category}
-                        variant={selectedCategory === category ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setSelectedCategory(category)}
-                        className={`transition-all duration-300 hover:scale-105 backdrop-blur-sm ${
-                          selectedCategory === category 
-                            ? "bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 border-[#FF4D00] text-white shadow-lg shadow-[#FF4D00]/25" 
-                            : "bg-gray-900/50 border-gray-700/50 text-gray-300 hover:bg-gray-800/50 hover:border-[#FF4D00]/50 hover:text-white"
-                        }`}
-                      >
-                        {category}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Enhanced Status Filter */}
-                <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-300 block">Project Status</label>
-                  <div className="flex flex-wrap gap-3">
-                    {statuses.map(status => (
-                      <Button
-                        key={status}
-                        variant={selectedStatus === status ? "secondary" : "outline"}
-                        size="sm"
-                        onClick={() => setSelectedStatus(status)}
-                        className={`transition-all duration-300 hover:scale-105 backdrop-blur-sm ${
-                          selectedStatus === status 
-                            ? "bg-gradient-to-r from-[#00F0FF] to-[#00F0FF]/80 border-[#00F0FF] text-[#0A192F] font-medium shadow-lg shadow-[#00F0FF]/25" 
-                            : "bg-gray-900/50 border-gray-700/50 text-gray-300 hover:bg-gray-800/50 hover:border-[#00F0FF]/50 hover:text-white"
-                        }`}
-                      >
-                        {status}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
-        </div>
-      </section>
+      <ProjectFilters
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        selectedStatus={selectedStatus}
+        setSelectedStatus={setSelectedStatus}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        filteredCount={filteredAndSortedProjects.length}
+        totalCount={projects.length}
+        categories={categories}
+        statuses={statuses}
+      />
 
       {/* Enhanced Dark Projects Grid */}
       <section className="py-20 bg-gradient-to-br from-[#0A192F] via-[#0D1B2A] to-[#0A192F]">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-6xl mx-auto">
-            {filteredProjects.length === 0 ? (
+            {/* Technology Legend */}
+            <TechnologyLegend />
+            
+            {filteredAndSortedProjects.length === 0 ? (
               <div className="text-center py-20">
                 <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#FF4D00]/20 to-[#00F0FF]/20 rounded-full flex items-center justify-center">
                   <Search className="w-10 h-10 text-gray-400" />
@@ -347,100 +307,14 @@ const Projects = () => {
                 <p className="text-gray-400 text-lg">Try adjusting your search or filter criteria.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredProjects.map(project => (
-                  <Card 
-                    key={project.id} 
-                    className="overflow-hidden hover:shadow-2xl hover:shadow-[#FF4D00]/20 transition-all duration-500 hover:-translate-y-3 group cursor-pointer bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50 backdrop-blur-sm hover:border-[#FF4D00]/50"
-                  >
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={project.image} 
-                        alt={project.title}
-                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent group-hover:from-gray-900/60 transition-all duration-500" />
-                      <div className="absolute top-3 right-3 flex gap-2">
-                        <Badge 
-                          className={`${getStatusColor(project.status)} transition-all duration-300 hover:scale-105 backdrop-blur-sm font-medium`}
-                        >
-                          {project.status}
-                        </Badge>
-                        {project.isOpenSource && (
-                          <Badge className="bg-gradient-to-r from-gray-900/90 to-black/90 text-white hover:bg-gradient-to-r hover:from-gray-800/90 hover:to-gray-900/90 transition-all duration-300 hover:scale-105 backdrop-blur-sm border border-gray-600/50">
-                            <Github className="h-3 w-3 mr-1" />
-                            Open Source
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-xl mb-2 group-hover:text-[#00F0FF] transition-colors duration-300 text-white font-bold">
-                        {project.title}
-                      </CardTitle>
-                      <CardDescription className="text-sm leading-relaxed line-clamp-3 text-gray-400">
-                        {project.description}
-                      </CardDescription>
-                    </CardHeader>
-                    
-                    <CardContent className="pb-3">
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.slice(0, 4).map(tech => (
-                          <Badge 
-                            key={tech} 
-                            className={`text-xs transition-all duration-300 hover:scale-105 backdrop-blur-sm ${getTechColor(tech)} border border-gray-600/30`}
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                        {project.technologies.length > 4 && (
-                          <Badge className="text-xs bg-gray-800/50 text-gray-300 border border-gray-600/30 hover:bg-gray-700/50 transition-all duration-300">
-                            +{project.technologies.length - 4} more
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <Badge className="text-xs font-medium bg-gradient-to-r from-[#FF4D00]/20 to-[#FF4D00]/10 text-[#FF4D00] border border-[#FF4D00]/30">
-                          {project.category}
-                        </Badge>
-                        {project.isOpenSource && (
-                          <div className="flex items-center gap-4 text-xs">
-                            <div className="flex items-center gap-1 hover:text-yellow-400 transition-colors text-gray-400">
-                              <Star className="h-3 w-3" />
-                              <span className="font-medium">{project.stars?.toLocaleString()}</span>
-                            </div>
-                            <div className="flex items-center gap-1 hover:text-blue-400 transition-colors text-gray-400">
-                              <GitFork className="h-3 w-3" />
-                              <span className="font-medium">{project.forks}</span>
-                            </div>
-                            <div className="flex items-center gap-1 hover:text-green-400 transition-colors text-gray-400">
-                              <Users className="h-3 w-3" />
-                              <span className="font-medium">{project.contributors}</span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </CardContent>
-                    
-                    <CardFooter className="flex gap-2 pt-2">
-                      {project.demoUrl && (
-                        <Button size="sm" className="flex-1 group/btn bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/80 hover:to-[#FF4D00] text-white border-none shadow-lg shadow-[#FF4D00]/25 hover:shadow-[#FF4D00]/40 transition-all duration-300">
-                          <Play className="h-4 w-4 mr-2 transition-transform group-hover/btn:scale-110" />
-                          Demo
-                        </Button>
-                      )}
-                      {project.githubUrl && (
-                        <Button size="sm" className="flex-1 group/btn bg-gray-800/50 hover:bg-gray-700/50 text-white border border-gray-600/50 hover:border-[#00F0FF]/50 backdrop-blur-sm transition-all duration-300">
-                          <Github className="h-4 w-4 mr-2 transition-transform group-hover/btn:scale-110" />
-                          Code
-                        </Button>
-                      )}
-                      <Button size="sm" className="group/btn bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-[#00F0FF] border border-gray-600/50 hover:border-[#00F0FF]/50 backdrop-blur-sm transition-all duration-300">
-                        <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
-                      </Button>
-                    </CardFooter>
-                  </Card>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+                {filteredAndSortedProjects.map(project => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    getTechColor={getTechColor}
+                    getStatusColor={getStatusColor}
+                  />
                 ))}
               </div>
             )}
@@ -463,22 +337,22 @@ const Projects = () => {
         {/* Subtle border glow */}
         <div className="absolute inset-0 border-t border-b border-[#FF4D00]/20 shadow-[0_0_50px_rgba(255,77,0,0.1)]"></div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Enhanced background glow effects */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D00]/8 via-[#00F0FF]/8 to-[#FF4D00]/8 rounded-3xl blur-3xl"></div>
             
             <div className="relative z-10">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-[#00F0FF] to-white bg-clip-text text-transparent drop-shadow-2xl">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-[#00F0FF] to-white bg-clip-text text-transparent drop-shadow-2xl">
                 Ready to Start Your AI Project?
               </h2>
-              <p className="text-xl text-gray-300 mb-10 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-10 leading-relaxed px-4">
                 Let's discuss how we can build custom AI solutions for your business needs.
               </p>
-              <Button size="lg" className="px-10 py-4 text-lg bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/90 hover:to-[#FF4D00] text-white font-bold border-none shadow-2xl shadow-[#FF4D00]/30 hover:shadow-[#FF4D00]/50 hover:scale-105 transition-all duration-300 relative">
+              <button className="px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/90 hover:to-[#FF4D00] text-white font-bold border-none rounded-lg shadow-2xl shadow-[#FF4D00]/30 hover:shadow-[#FF4D00]/50 hover:scale-105 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-[#FF4D00]/50 focus:ring-offset-2 focus:ring-offset-gray-900">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 rounded-lg blur-lg opacity-50"></div>
                 <span className="relative z-10">Get In Touch</span>
-              </Button>
+              </button>
             </div>
           </div>
         </div>
