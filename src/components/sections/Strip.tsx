@@ -5,13 +5,13 @@ const Strip = () => {
   const { elementRef: stripRef, isVisible: stripVisible } = useScrollAnimation(0.2);
 
   const aiModels = [
-    "ChatGPT",
-    "Claude", 
-    "Gemini",
-    "Grok",
-    "Llama",
-    "Deepseek",
-    "Mistral"
+    { name: "ChatGPT", color: "text-green-400" },
+    { name: "Claude", color: "text-orange-400" }, 
+    { name: "Gemini", color: "text-blue-400" },
+    { name: "Grok", color: "text-purple-400" },
+    { name: "Llama", color: "text-yellow-400" },
+    { name: "Deepseek", color: "text-cyan-400" },
+    { name: "Mistral", color: "text-red-400" }
   ];
 
   return (
@@ -32,7 +32,7 @@ const Strip = () => {
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
             {aiModels.map((model, index) => (
               <div
-                key={model}
+                key={model.name}
                 className={`bg-card-gradient backdrop-blur-sm px-6 py-3 rounded-lg border border-white/10 hover:border-secondary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                   stripVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
@@ -40,7 +40,7 @@ const Strip = () => {
                   animationDelay: stripVisible ? `${index * 0.1}s` : '0s'
                 }}
               >
-                <span className="text-sm font-medium text-white">{model}</span>
+                <span className={`text-sm font-medium ${model.color}`}>{model.name}</span>
               </div>
             ))}
           </div>
