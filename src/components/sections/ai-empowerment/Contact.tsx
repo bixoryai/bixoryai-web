@@ -10,7 +10,7 @@ export const Contact = () => {
       <div className="container mx-auto px-6 text-center">
         <h2 
           ref={titleRef}
-          className={`text-3xl md:text-4xl font-bold text-white mb-8 transition-all duration-800 ${
+          className={`text-3xl md:text-4xl font-bold text-white mb-8 transition-all duration-1200 ${
             titleVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-75'
           }`}
         >

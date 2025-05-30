@@ -18,7 +18,7 @@ export const Productivity = () => {
           <div className="order-1 md:order-2">
             <h2 
               ref={titleRef}
-              className={`text-3xl md:text-4xl font-bold text-white mb-6 transition-all duration-800 ${
+              className={`text-3xl md:text-4xl font-bold text-white mb-6 transition-all duration-1200 ${
                 titleVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-75'
               }`}
             >
