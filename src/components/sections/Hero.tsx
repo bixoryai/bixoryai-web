@@ -12,6 +12,9 @@ const Hero = () => {
         backgroundRepeat: "no-repeat"
       }}
     >
+      {/* Dark overlay for better text contrast */}
+      <div className="absolute inset-0 bg-black/40 z-0"></div>
+      
       {/* Hero content */}
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl animate-fade-in">
