@@ -107,7 +107,7 @@ const ProjectFilters = ({
           
           <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>
             <CollapsibleContent className="space-y-6" id="filter-content">
-              {/* Enhanced Category Filter with better mobile layout and improved visibility */}
+              {/* Enhanced Category Filter with much better visibility */}
               <div className="space-y-3">
                 <label className="text-sm font-medium text-gray-300 block">Categories</label>
                 <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
@@ -120,7 +120,7 @@ const ProjectFilters = ({
                       className={`transition-all duration-300 hover:scale-105 backdrop-blur-sm text-xs sm:text-sm ${
                         selectedCategory === category 
                           ? "bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 border-[#FF4D00] text-white shadow-lg shadow-[#FF4D00]/25" 
-                          : "bg-gray-800/60 border-gray-600 text-gray-200 hover:bg-gray-700/60 hover:border-[#FF4D00]/50 hover:text-white"
+                          : "bg-gray-700/80 border-gray-500 text-white hover:bg-gray-600/80 hover:border-[#FF4D00]/50 hover:text-white"
                       }`}
                       aria-pressed={selectedCategory === category}
                     >
@@ -130,7 +130,7 @@ const ProjectFilters = ({
                 </div>
               </div>
               
-              {/* Enhanced Status Filter with improved visibility */}
+              {/* Enhanced Status Filter with much better visibility */}
               <div className="space-y-3">
                 <label className="text-sm font-medium text-gray-300 block">Project Status</label>
                 <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
@@ -143,7 +143,7 @@ const ProjectFilters = ({
                       className={`transition-all duration-300 hover:scale-105 backdrop-blur-sm text-xs sm:text-sm ${
                         selectedStatus === status 
                           ? "bg-gradient-to-r from-[#00F0FF] to-[#00F0FF]/80 border-[#00F0FF] text-[#0A192F] font-medium shadow-lg shadow-[#00F0FF]/25" 
-                          : "bg-gray-800/60 border-gray-600 text-gray-200 hover:bg-gray-700/60 hover:border-[#00F0FF]/50 hover:text-white"
+                          : "bg-gray-700/80 border-gray-500 text-white hover:bg-gray-600/80 hover:border-[#00F0FF]/50 hover:text-white"
                       }`}
                       aria-pressed={selectedStatus === status}
                     >
