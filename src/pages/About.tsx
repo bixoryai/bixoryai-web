@@ -13,7 +13,7 @@ const About = () => {
       <section 
         className="relative h-[600px] md:h-[700px] flex items-center"
         style={{ 
-          backgroundImage: "url('/lovable-uploads/c81fdb86-6992-4d62-af6d-9b1d014921d6.png')",
+          backgroundImage: "url('/lovable-uploads/3392d363-afc5-4208-af24-9ed0d2d8a192.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat"
