@@ -15,7 +15,7 @@ const Strip = () => {
   ];
 
   return (
-    <section className="py-16 bg-primary/95 border-t border-primary/20">
+    <section className="py-8 bg-primary/95 border-t border-primary/20">
       <div className="container mx-auto px-6">
         <div 
           ref={stripRef}
@@ -24,16 +24,16 @@ const Strip = () => {
           }`}
         >
           {/* First Row: Empowered By */}
-          <h3 className="text-xl font-semibold text-white mb-8">
+          <h3 className="text-lg font-semibold text-white mb-4">
             Empowered By
           </h3>
           
           {/* Second Row: AI Models */}
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
             {aiModels.map((model, index) => (
               <div
                 key={model.name}
-                className={`bg-card-gradient backdrop-blur-sm px-6 py-3 rounded-lg border border-white/10 hover:border-secondary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                className={`bg-card-gradient backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10 hover:border-secondary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                   stripVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
                 style={{
