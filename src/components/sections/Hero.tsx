@@ -35,8 +35,8 @@ const Hero = () => {
       {/* Hero content */}
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Main title with staggered animation */}
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
+          {/* Main title with staggered animation and increased top margin */}
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 mt-12 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
             Build Intelligence X
             <span className="text-secondary block opacity-0 animate-[fadeInUp_0.8s_ease-out_0.5s_forwards]"> with AI</span>
           </h1>
