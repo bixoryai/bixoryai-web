@@ -191,13 +191,24 @@ const Projects = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-hero-pattern">
-        <div className="container mx-auto px-6">
+      <section 
+        className="pt-32 pb-16 relative"
+        style={{
+          backgroundImage: "url('/lovable-uploads/4c8804a9-47d9-49dc-8702-904300926b2c.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        {/* Dark overlay for better text visibility */}
+        <div className="absolute inset-0 bg-black/60 z-0"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-white mb-6">
               Our AI Projects
             </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
               Explore our innovative AI solutions that are transforming industries. 
               From machine learning models to computer vision systems, discover how we're building the future.
             </p>
