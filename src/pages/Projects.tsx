@@ -448,22 +448,36 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Enhanced Dark Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-[#0A192F] via-[#0D1B2A] to-[#0A192F] border-t border-gray-800/50">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center relative">
-            {/* Background glow effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D00]/5 via-transparent to-[#00F0FF]/5 rounded-3xl blur-3xl"></div>
+      {/* Enhanced CTA Section with Contrasting Background */}
+      <section className="py-20 relative overflow-hidden border-t border-gray-800/30">
+        {/* Contrasting gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A2B42] via-[#243447] to-[#0F1B2E]"></div>
+        
+        {/* Enhanced accent color overlays */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#FF4D00]/15 via-transparent to-[#00F0FF]/15"></div>
+          <div className="absolute top-10 left-20 w-96 h-96 bg-[#FF4D00]/20 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-10 right-20 w-80 h-80 bg-[#00F0FF]/25 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
+        </div>
+        
+        {/* Subtle border glow */}
+        <div className="absolute inset-0 border-t border-b border-[#FF4D00]/20 shadow-[0_0_50px_rgba(255,77,0,0.1)]"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Enhanced background glow effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D00]/8 via-[#00F0FF]/8 to-[#FF4D00]/8 rounded-3xl blur-3xl"></div>
             
             <div className="relative z-10">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-[#00F0FF] to-white bg-clip-text text-transparent drop-shadow-2xl">
                 Ready to Start Your AI Project?
               </h2>
               <p className="text-xl text-gray-300 mb-10 leading-relaxed">
                 Let's discuss how we can build custom AI solutions for your business needs.
               </p>
-              <Button size="lg" className="px-10 py-4 text-lg bg-gradient-to-r from-[#00F0FF] to-[#00F0FF]/80 hover:from-[#00F0FF]/80 hover:to-[#00F0FF] text-[#0A192F] font-bold border-none shadow-2xl shadow-[#00F0FF]/25 hover:shadow-[#00F0FF]/40 hover:scale-105 transition-all duration-300">
-                Get In Touch
+              <Button size="lg" className="px-10 py-4 text-lg bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/90 hover:to-[#FF4D00] text-white font-bold border-none shadow-2xl shadow-[#FF4D00]/30 hover:shadow-[#FF4D00]/50 hover:scale-105 transition-all duration-300 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 rounded-lg blur-lg opacity-50"></div>
+                <span className="relative z-10">Get In Touch</span>
               </Button>
             </div>
           </div>
