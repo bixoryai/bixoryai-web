@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -45,6 +46,9 @@ export default {
         "fade-in": "fadeIn 0.5s ease-out",
         "slide-up": "slideUp 0.5s ease-out",
         "float": "float 6s ease-in-out infinite",
+        "fadeInUp": "fadeInUp 0.8s ease-out forwards",
+        "typewriter": "typewriter 3s steps(80) forwards",
+        "blink": "blink 1s infinite",
       },
       keyframes: {
         fadeIn: {
@@ -58,6 +62,24 @@ export default {
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-20px)" },
+        },
+        fadeInUp: {
+          "0%": { 
+            opacity: "0", 
+            transform: "translateY(30px)" 
+          },
+          "100%": { 
+            opacity: "1", 
+            transform: "translateY(0)" 
+          },
+        },
+        typewriter: {
+          "0%": { width: "0" },
+          "100%": { width: "100%" },
+        },
+        blink: {
+          "0%, 50%": { borderColor: "transparent" },
+          "51%, 100%": { borderColor: "#00F0FF" },
         },
       },
     },
