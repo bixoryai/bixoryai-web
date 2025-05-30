@@ -6,6 +6,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const { elementRef, isVisible } = useScrollAnimation(0.3);
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,9 +32,12 @@ const Newsletter = () => {
       <div className="absolute inset-0 bg-black/60 z-0"></div>
       
       <div className="container mx-auto px-6 text-center relative z-10">
-        <h2 className={`text-3xl md:text-4xl font-bold text-white mb-6 transition-all duration-800 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <h2 
+          ref={titleRef}
+          className={`text-3xl md:text-4xl font-bold text-white mb-6 transition-all duration-800 ${
+            titleVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-75'
+          }`}
+        >
           Stay Updated
         </h2>
         <p className={`text-gray-300 mb-8 max-w-2xl mx-auto transition-all duration-800 delay-200 ${

@@ -22,6 +22,7 @@ const services = [
 
 const Services = () => {
   const { elementRef: sectionRef, isVisible: sectionVisible } = useScrollAnimation(0.2);
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.3);
 
   return (
     <section 
@@ -30,9 +31,12 @@ const Services = () => {
       ref={sectionRef}
     >
       <div className="container mx-auto px-6">
-        <h2 className={`text-3xl md:text-4xl font-bold text-white text-center mb-12 transition-all duration-800 ${
-          sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <h2 
+          ref={titleRef}
+          className={`text-3xl md:text-4xl font-bold text-white text-center mb-12 transition-all duration-800 ${
+            titleVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-75'
+          }`}
+        >
           Our Services
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

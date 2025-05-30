@@ -1,6 +1,10 @@
+
 import { Zap, Users, Target, Search, TrendingUp, Shield } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const Features = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
+
   const features = [
     {
       icon: <Zap className="w-8 h-8 text-secondary" />,
@@ -37,7 +41,12 @@ export const Features = () => {
   return (
     <section className="py-20 bg-primary/95">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+        <h2 
+          ref={titleRef}
+          className={`text-3xl md:text-4xl font-bold text-white text-center mb-12 transition-all duration-800 ${
+            titleVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-75'
+          }`}
+        >
           Maximize Productivity & Growth
         </h2>
         <div className="grid md:grid-cols-3 gap-8">

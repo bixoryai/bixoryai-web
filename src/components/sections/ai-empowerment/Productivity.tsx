@@ -1,4 +1,9 @@
+
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 export const Productivity = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
+
   return (
     <section className="py-20 bg-primary/95">
       <div className="container mx-auto px-6">
@@ -11,7 +16,12 @@ export const Productivity = () => {
             />
           </div>
           <div className="order-1 md:order-2">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 
+              ref={titleRef}
+              className={`text-3xl md:text-4xl font-bold text-white mb-6 transition-all duration-800 ${
+                titleVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-75'
+              }`}
+            >
               Boost Productivity
               <span className="text-secondary block">and Creativity</span>
             </h2>
