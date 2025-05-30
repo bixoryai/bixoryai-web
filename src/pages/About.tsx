@@ -94,7 +94,7 @@ const About = () => {
             Your Cost-effective Full-cycle AI Solution Partner
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild className="bg-secondary hover:bg-secondary/90">
+            <Button asChild className="bg-secondary hover:bg-secondary/90 text-white">
               <Link to="/ai-empowerment">Get Started</Link>
             </Button>
             <Button asChild variant="outline" className="border-accent text-accent hover:bg-accent/10">
