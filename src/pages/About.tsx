@@ -85,19 +85,19 @@ const About = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-16 bg-gradient-to-r from-secondary/20 to-accent/20">
+      <section className="py-16 bg-[#FF4D00]">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Be Empowered Not Overpowered
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-gray-100 mb-8">
             Your Cost-effective Full-cycle AI Solution Partner
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild className="bg-secondary hover:bg-secondary/90 text-white">
+            <Button asChild className="bg-white hover:bg-gray-100 text-[#FF4D00] font-semibold">
               <Link to="/ai-empowerment">Get Started</Link>
             </Button>
-            <Button asChild variant="outline" className="border-accent text-accent hover:bg-accent/10">
+            <Button asChild variant="outline" className="border-white text-white hover:bg-white/10">
               <Link to="/solutions">Our Solutions</Link>
             </Button>
           </div>
