@@ -15,7 +15,7 @@ const Strip = () => {
   ];
 
   return (
-    <section className="py-8 bg-primary/95 border-t border-primary/20">
+    <section className="py-6 bg-primary/95 border-t border-primary/20">
       <div className="container mx-auto px-6">
         <div 
           ref={stripRef}
