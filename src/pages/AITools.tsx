@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -42,13 +41,14 @@ const AITools = () => {
           
           {/* Content Tabs */}
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="grid w-full grid-cols-6 mb-8">
+            <TabsList className="grid w-full grid-cols-7 mb-8">
               <TabsTrigger value="all">All Tools</TabsTrigger>
               <TabsTrigger value="content">Content</TabsTrigger>
               <TabsTrigger value="development">Development</TabsTrigger>
               <TabsTrigger value="design">Design</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
               <TabsTrigger value="productivity">Productivity</TabsTrigger>
+              <TabsTrigger value="ai-models">AI Models</TabsTrigger>
             </TabsList>
 
             {/* All Tools */}
@@ -325,6 +325,133 @@ const AITools = () => {
                       </CardHeader>
                       <CardContent>
                         <Button variant="outline" size="sm" className="w-full">Coming Soon</Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* AI Models for Chatbot */}
+            <TabsContent value="ai-models" className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
+                  <Bot className="h-8 w-8" />
+                  Popular AI Models for Chatbot
+                </h2>
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {[
+                    {
+                      name: "GPT-4",
+                      description: "OpenAI's most advanced language model for conversational AI and complex reasoning.",
+                      category: "Language Model",
+                      pricing: "Paid",
+                      rating: 4.8,
+                      featured: true,
+                      url: "https://openai.com/gpt-4"
+                    },
+                    {
+                      name: "Claude 3",
+                      description: "Anthropic's powerful AI assistant with enhanced safety and reasoning capabilities.",
+                      category: "Language Model",
+                      pricing: "Freemium",
+                      rating: 4.7,
+                      featured: true,
+                      url: "https://claude.ai"
+                    },
+                    {
+                      name: "Gemini Pro",
+                      description: "Google's multimodal AI model with advanced language understanding.",
+                      category: "Language Model",
+                      pricing: "Freemium",
+                      rating: 4.6,
+                      featured: true,
+                      url: "https://gemini.google.com"
+                    },
+                    {
+                      name: "Llama 2",
+                      description: "Meta's open-source large language model for chatbot development.",
+                      category: "Open Source",
+                      pricing: "Free",
+                      rating: 4.5,
+                      featured: false,
+                      url: "https://llama.meta.com"
+                    },
+                    {
+                      name: "Mistral 7B",
+                      description: "High-performance open-source model optimized for efficiency and quality.",
+                      category: "Open Source",
+                      pricing: "Free",
+                      rating: 4.4,
+                      featured: false,
+                      url: "https://mistral.ai"
+                    },
+                    {
+                      name: "PaLM 2",
+                      description: "Google's large language model powering Bard and other applications.",
+                      category: "Language Model",
+                      pricing: "Paid",
+                      rating: 4.3,
+                      featured: false,
+                      url: "#"
+                    },
+                    {
+                      name: "Cohere Command",
+                      description: "Enterprise-focused language model for business applications.",
+                      category: "Enterprise",
+                      pricing: "Paid",
+                      rating: 4.2,
+                      featured: false,
+                      url: "https://cohere.com"
+                    },
+                    {
+                      name: "Falcon 40B",
+                      description: "Open-source large language model trained on diverse, high-quality data.",
+                      category: "Open Source",
+                      pricing: "Free",
+                      rating: 4.1,
+                      featured: false,
+                      url: "#"
+                    },
+                    {
+                      name: "ChatGLM3",
+                      description: "Bilingual conversational language model optimized for Chinese and English.",
+                      category: "Multilingual",
+                      pricing: "Free",
+                      rating: 4.0,
+                      featured: false,
+                      url: "#"
+                    }
+                  ].map((model, index) => (
+                    <Card key={index} className={`hover:shadow-lg transition-shadow ${model.featured ? 'ring-2 ring-primary/20' : ''}`}>
+                      <CardHeader>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <Badge variant={model.pricing === 'Free' ? 'default' : model.pricing === 'Freemium' ? 'secondary' : 'outline'}>
+                              {model.pricing}
+                            </Badge>
+                            {model.featured && <Badge variant="destructive">Featured</Badge>}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                            <span className="text-sm text-muted-foreground">
+                              {model.rating}
+                            </span>
+                          </div>
+                        </div>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          {model.name}
+                          <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                        </CardTitle>
+                        <CardDescription>{model.description}</CardDescription>
+                        <div className="text-xs text-muted-foreground">{model.category}</div>
+                      </CardHeader>
+                      <CardContent>
+                        <Button variant="outline" size="sm" className="w-full" asChild>
+                          <a href={model.url} target="_blank" rel="noopener noreferrer">
+                            {model.url === "#" ? "Coming Soon" : "Learn More"}
+                          </a>
+                        </Button>
                       </CardContent>
                     </Card>
                   ))}
