@@ -6,7 +6,7 @@ const Hero = () => {
     <div 
       className="h-[400px] md:h-[500px] relative flex items-center overflow-hidden"
       style={{ 
-        backgroundImage: "url('/lovable-uploads/1193f0bd-0ad5-478a-8ee5-53eca0c79b93.png')",
+        backgroundImage: "url('/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
