@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 
@@ -14,8 +15,19 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="bg-secondary/10 py-20">
-      <div className="container mx-auto px-6 text-center">
+    <section 
+      className="py-20 relative"
+      style={{ 
+        backgroundImage: "url('/lovable-uploads/e388b3e0-7a73-4ff9-be3e-2848d2a2f38c.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat"
+      }}
+    >
+      {/* Dark overlay for better text contrast */}
+      <div className="absolute inset-0 bg-black/60 z-0"></div>
+      
+      <div className="container mx-auto px-6 text-center relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
           Stay Updated
         </h2>
