@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -79,7 +80,7 @@ const Projects = () => {
       id: 5,
       title: "AI Movie Creation Suite",
       description: "Comprehensive open-source toolkit for AI-assisted video generation, editing, and post-production workflows.",
-      image: "https://images.unsplash.com/photo-1489599849675-4c0a2a1acaa0?w=400&h=240&fit=crop",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=240&fit=crop",
       technologies: ["Stable Diffusion", "FFmpeg", "Python", "TypeScript"],
       category: "Creative AI",
       status: "In Progress",
