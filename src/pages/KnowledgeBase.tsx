@@ -1,5 +1,7 @@
 
 import { useState } from "react";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { KnowledgeBaseHeader } from "@/components/knowledge-base/KnowledgeBaseHeader";
 import { CategoryTabs } from "@/components/knowledge-base/CategoryTabs";
 import { ContentGrid } from "@/components/knowledge-base/ContentGrid";
@@ -80,35 +82,39 @@ const KnowledgeBase = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#0A192F]/90 to-[#0D1B2A]/90">
-      <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-white mb-4">
-                AI Knowledge Base
-              </h1>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Auto-crawled content from the latest AI research, tutorials, and industry insights
-              </p>
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gradient-to-r from-[#0A192F]/90 to-[#0D1B2A]/90">
+        <section className="py-12 pt-24">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold text-white mb-4">
+                  AI Knowledge Base
+                </h1>
+                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                  Auto-crawled content from the latest AI research, tutorials, and industry insights
+                </p>
+              </div>
+
+              <KnowledgeBaseHeader
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+              />
+
+              <CategoryTabs
+                activeCategory={activeCategory}
+                onCategoryChange={setActiveCategory}
+                categories={categories}
+              />
+
+              <ContentGrid items={filteredContent} />
             </div>
-
-            <KnowledgeBaseHeader
-              searchTerm={searchTerm}
-              onSearchChange={setSearchTerm}
-            />
-
-            <CategoryTabs
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-              categories={categories}
-            />
-
-            <ContentGrid items={filteredContent} />
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+      <Footer />
+    </>
   );
 };
 
