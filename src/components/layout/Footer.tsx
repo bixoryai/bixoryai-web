@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -9,7 +8,7 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="Bixory AI" className="h-9" />
-              <span className="text-white text-xl font-bold">BIXORY AI</span>
+              <span className="text-red-500 text-xl font-bold">BIXORY AI</span>
             </Link>
             <p className="text-gray-400">
               Building the future of AI technology together.
