@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -472,12 +471,11 @@ const AITools = () => {
                 <Button asChild className="bg-white text-[#0A192F] hover:bg-gray-100">
                   <Link to="/about">Contact Us</Link>
                 </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                  Submit Tool
-                </Button>
-              </div>
-            </section>
-          </div>
+              <Button className="bg-[#FF4D00] text-white hover:bg-[#e63900]">
+                Submit Tool
+              </Button>
+            </div>
+          </section>
         </main>
       </div>
       <Footer />
