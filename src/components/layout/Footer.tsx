@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -25,9 +26,9 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><a href="#ai-agents" className="text-gray-400 hover:text-accent">AI Agents</a></li>
-              <li><a href="#development" className="text-gray-400 hover:text-accent">Development</a></li>
-              <li><a href="#consulting" className="text-gray-400 hover:text-accent">Consulting</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-accent">AI Education & Training</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-accent">Custom AI Solutions</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-accent">Enterprise AI Consultation</a></li>
             </ul>
           </div>
           <div>
