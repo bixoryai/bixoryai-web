@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -211,8 +210,7 @@ const Careers = () => {
             </p>
             <Button 
               size="lg" 
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg"
+              className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg"
             >
               Send Your Resume
             </Button>
