@@ -10,6 +10,7 @@ import KnowledgeBase from "./pages/KnowledgeBase";
 import AITools from "./pages/AITools";
 import Projects from "./pages/Projects";
 import Solutions from "./pages/Solutions";
+import Careers from "./pages/Careers";
 import About from "./pages/About";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
