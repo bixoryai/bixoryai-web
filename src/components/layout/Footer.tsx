@@ -37,7 +37,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="#twitter" className="text-gray-400 hover:text-accent">Twitter</a></li>
               <li><a href="https://www.linkedin.com/company/1767868/admin/dashboard/" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-              <li><a href="#github" className="text-gray-400 hover:text-accent">GitHub</a></li>
+              <li><a href="https://github.com/bixoryai" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             </ul>
           </div>
         </div>
