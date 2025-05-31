@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -56,7 +57,7 @@ const Careers = () => {
   const { elementRef: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation(0.3);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primary">
       <Navbar />
       
       {/* Hero Section */}
@@ -86,13 +87,13 @@ const Careers = () => {
       </section>
 
       {/* Why Work With Us */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-primary">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Why Work With Us?
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-300 leading-relaxed">
               At Bixory AI, we believe in creating an environment where innovation thrives 
               and every team member can make a meaningful impact on the future of AI.
             </p>
@@ -107,17 +108,17 @@ const Careers = () => {
             {benefits.map((benefit, index) => (
               <Card 
                 key={index} 
-                className="text-center hover:shadow-lg transition-shadow duration-300"
+                className="text-center hover:shadow-lg transition-shadow duration-300 bg-primary/80 border-gray-700"
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <CardHeader>
-                  <div className="mx-auto mb-4 p-3 bg-secondary/10 rounded-lg w-fit">
+                  <div className="mx-auto mb-4 p-3 bg-secondary/20 rounded-lg w-fit">
                     {benefit.icon}
                   </div>
-                  <CardTitle className="text-xl text-primary">{benefit.title}</CardTitle>
+                  <CardTitle className="text-xl text-white">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-gray-600">
+                  <CardDescription className="text-gray-300">
                     {benefit.description}
                   </CardDescription>
                 </CardContent>
@@ -130,14 +131,14 @@ const Careers = () => {
       {/* Job Openings */}
       <section 
         ref={jobsRef}
-        className="py-20 bg-gray-50"
+        className="py-20 bg-gradient-to-br from-primary to-blue-900"
       >
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Current Openings
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-300 leading-relaxed">
               Explore exciting opportunities to grow your career while making a real impact in the AI industry.
             </p>
           </div>
@@ -148,14 +149,14 @@ const Careers = () => {
             {jobOpenings.map((job, index) => (
               <Card 
                 key={index}
-                className="hover:shadow-lg transition-shadow duration-300"
+                className="hover:shadow-lg transition-shadow duration-300 bg-primary/80 border-gray-700"
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <CardHeader>
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div>
-                      <CardTitle className="text-xl text-primary mb-2">{job.title}</CardTitle>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                      <CardTitle className="text-xl text-white mb-2">{job.title}</CardTitle>
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-300">
                         <div className="flex items-center gap-1">
                           <Briefcase className="w-4 h-4" />
                           {job.department}
@@ -176,14 +177,14 @@ const Careers = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-gray-600 mb-4 leading-relaxed">
+                  <CardDescription className="text-gray-300 mb-4 leading-relaxed">
                     {job.description}
                   </CardDescription>
                   <div>
-                    <h4 className="font-semibold text-primary mb-2">Key Requirements:</h4>
+                    <h4 className="font-semibold text-white mb-2">Key Requirements:</h4>
                     <ul className="space-y-1">
                       {job.requirements.map((req, reqIndex) => (
-                        <li key={reqIndex} className="flex items-start gap-2 text-gray-600">
+                        <li key={reqIndex} className="flex items-start gap-2 text-gray-300">
                           <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
                           <span className="text-sm">{req}</span>
                         </li>
