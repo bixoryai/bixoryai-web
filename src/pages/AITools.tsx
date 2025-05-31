@@ -471,11 +471,12 @@ const AITools = () => {
                 <Button asChild className="bg-white text-[#0A192F] hover:bg-gray-100">
                   <Link to="/about">Contact Us</Link>
                 </Button>
-              <Button className="bg-[#FF4D00] text-white hover:bg-[#e63900]">
-                Submit Tool
-              </Button>
-            </div>
-          </section>
+                  <Button className="bg-[#FF4D00] text-white hover:bg-[#e63900]">
+                    Submit Tool
+                  </Button>
+                </div>
+              </section>
+          </div>
         </main>
       </div>
       <Footer />
