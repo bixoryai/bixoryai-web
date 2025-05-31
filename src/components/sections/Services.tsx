@@ -1,22 +1,37 @@
 
-import { Brain, Code, LineChart } from "lucide-react";
+import { GraduationCap, Cog, Building } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const services = [
   {
-    icon: <Brain className="w-8 h-8 text-secondary" />,
-    title: "AI Agent Development",
-    description: "Custom ML model training & fine-tuning for your specific needs",
+    icon: <GraduationCap className="w-8 h-8 text-secondary" />,
+    title: "AI Education & Training",
+    description: "Empower your team with AI knowledge through customized training programs and workshops",
+    features: [
+      "Customized learning paths",
+      "Hands-on workshops", 
+      "Expert-led training"
+    ]
   },
   {
-    icon: <Code className="w-8 h-8 text-secondary" />,
-    title: "App Development",
-    description: "Generative AI-powered applications built with cutting-edge technology",
+    icon: <Cog className="w-8 h-8 text-secondary" />,
+    title: "Custom AI Solutions",
+    description: "From data services to custom model training and deployment, we build tailored AI solutions for your unique challenges",
+    features: [
+      "Data preparation & analysis",
+      "Custom AI model training and finetuning",
+      "AI application development & integration"
+    ]
   },
   {
-    icon: <LineChart className="w-8 h-8 text-secondary" />,
-    title: "Business Consulting",
-    description: "Strategic AI solutions to boost productivity and drive growth",
+    icon: <Building className="w-8 h-8 text-secondary" />,
+    title: "Enterprise AI Consultation",
+    description: "Strategic guidance for implementing AI across your organization to drive innovation and efficiency",
+    features: [
+      "AI readiness assessment",
+      "Implementation roadmap",
+      "Technology selection"
+    ]
   },
 ];
 
@@ -33,13 +48,13 @@ const Services = () => {
       <div className="container mx-auto px-6">
         <h2 
           ref={titleRef}
-          className={`text-3xl md:text-4xl font-bold text-white text-center mb-12 transition-all duration-1200 ${
+          className={`text-3xl md:text-4xl font-bold text-white text-center mb-16 transition-all duration-1200 ${
             titleVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-75'
           }`}
         >
           Our Services
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => {
             const { elementRef: cardRef, isVisible: cardVisible } = useScrollAnimation(0.3);
             
@@ -47,7 +62,7 @@ const Services = () => {
               <div
                 key={index}
                 ref={cardRef}
-                className={`bg-card-gradient p-8 rounded-xl hover:scale-105 transition-all duration-700 ${
+                className={`group bg-card-gradient p-8 rounded-xl hover:scale-105 transition-all duration-700 border border-white/10 hover:border-secondary/30 ${
                   cardVisible 
                     ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-12'
@@ -56,9 +71,44 @@ const Services = () => {
                   transitionDelay: `${index * 150}ms` 
                 }}
               >
-                <div className="mb-6">{service.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-4">{service.title}</h3>
-                <p className="text-gray-300">{service.description}</p>
+                <div className="flex flex-col h-full">
+                  {/* Icon and Title */}
+                  <div className="mb-6">
+                    <div className="mb-4 p-3 bg-secondary/10 rounded-lg w-fit group-hover:bg-secondary/20 transition-colors duration-300">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-gray-300 mb-6 leading-relaxed flex-grow">
+                    {service.description}
+                  </p>
+
+                  {/* Features List */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-semibold text-accent uppercase tracking-wide">
+                      Key Features:
+                    </h4>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start gap-2 text-gray-300">
+                          <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-sm leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Call to Action */}
+                  <div className="mt-6 pt-6 border-t border-white/10">
+                    <button className="w-full py-3 px-4 bg-transparent border border-secondary text-secondary rounded-lg hover:bg-secondary hover:text-white transition-all duration-300 font-medium text-sm group-hover:shadow-lg group-hover:shadow-secondary/20">
+                      Learn More
+                    </button>
+                  </div>
+                </div>
               </div>
             );
           })}
