@@ -1,5 +1,4 @@
 
-
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -35,7 +34,7 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-4">Connect</h3>
             <ul className="space-y-2">
-              <li><a href="#twitter" className="text-gray-400 hover:text-accent">Twitter</a></li>
+              <li><a href="https://www.facebook.com/bixoryai" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">Facebook</a></li>
               <li><a href="https://www.linkedin.com/company/1767868/admin/dashboard/" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
               <li><a href="https://github.com/bixoryai" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             </ul>
@@ -50,4 +49,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
