@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -70,7 +69,7 @@ const Careers = () => {
             heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Join the AI Revolution
+              Join The Team
             </h1>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
               Be part of a team that's shaping the future of artificial intelligence. 
