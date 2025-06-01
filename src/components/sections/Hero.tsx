@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 const Hero = () => {
   return (
     <div 
-      className="h-[400px] md:h-[500px] relative flex items-center overflow-hidden"
+      className="h-[350px] relative flex items-center overflow-hidden"
       style={{ 
         backgroundImage: "url('/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png')",
         backgroundSize: "cover",
