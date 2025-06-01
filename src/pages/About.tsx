@@ -11,7 +11,7 @@ const About = () => {
       
       {/* Hero Section */}
       <section 
-        className="relative h-[350px] flex items-center"
+        className="relative h-[400px] md:h-[500px] flex items-center"
         style={{ 
           backgroundImage: "url('/lovable-uploads/3392d363-afc5-4208-af24-9ed0d2d8a192.png')",
           backgroundSize: "cover",
