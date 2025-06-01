@@ -5,7 +5,7 @@ import Hero from "@/components/sections/Hero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Brain, Zap, Shield, Users, Cog, TrendingUp, ArrowRight, CheckCircle } from "lucide-react";
+import { Brain, Zap, Shield, Users, Cog, TrendingUp, ArrowRight, CheckCircle, Database, Layers } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const solutionCategories = [
@@ -16,44 +16,44 @@ const solutionCategories = [
     features: ["AI Readiness Assessment", "Custom Implementation Strategy", "ROI Optimization", "Change Management"]
   },
   {
+    icon: <Database className="w-8 h-8 text-secondary" />,
+    title: "AI Data Solutions",
+    description: "Comprehensive data solutions including synthetic data generation and domain-specific data curation services.",
+    features: ["Synthetic Data Generation", "Domain Data Curation", "Data Pipeline Solutions", "Privacy-Preserving Datasets"]
+  },
+  {
+    icon: <Layers className="w-8 h-8 text-secondary" />,
+    title: "Synthetic Data Generation",
+    description: "Create high-quality synthetic datasets that preserve statistical properties while ensuring privacy compliance.",
+    features: ["Privacy-Preserving Data", "Training Data Augmentation", "Edge Case Simulation", "Compliance-Ready Datasets"]
+  },
+  {
     icon: <Cog className="w-8 h-8 text-secondary" />,
+    title: "Domain Data Curation",
+    description: "Industry-specific data preparation and curation services with deep domain expertise integration.",
+    features: ["Industry-Specific Preparation", "Data Quality Assessment", "Custom Annotation Services", "Domain Expertise Integration"]
+  },
+  {
+    icon: <TrendingUp className="w-8 h-8 text-secondary" />,
     title: "Custom AI Development",
     description: "Bespoke AI solutions designed and built specifically for your unique business challenges and workflows.",
     features: ["Machine Learning Models", "Natural Language Processing", "Computer Vision", "Predictive Analytics"]
-  },
-  {
-    icon: <Users className="w-8 h-8 text-secondary" />,
-    title: "AI Training & Education",
-    description: "Comprehensive training programs to upskill your team and maximize AI adoption across your organization.",
-    features: ["Executive Workshops", "Technical Training", "AI Literacy Programs", "Certification Courses"]
   },
   {
     icon: <Shield className="w-8 h-8 text-secondary" />,
     title: "AI Integration & Support",
     description: "Seamless integration of AI solutions into your existing infrastructure with ongoing support and optimization.",
     features: ["System Integration", "24/7 Support", "Performance Monitoring", "Continuous Optimization"]
-  },
-  {
-    icon: <TrendingUp className="w-8 h-8 text-secondary" />,
-    title: "AI Analytics & Insights",
-    description: "Advanced analytics platforms that transform your data into actionable insights and competitive advantages.",
-    features: ["Real-time Analytics", "Predictive Modeling", "Business Intelligence", "Data Visualization"]
-  },
-  {
-    icon: <Zap className="w-8 h-8 text-secondary" />,
-    title: "AI Automation Solutions",
-    description: "Intelligent automation systems that streamline operations and eliminate repetitive tasks across departments.",
-    features: ["Process Automation", "Workflow Optimization", "Smart Decision Making", "Cost Reduction"]
   }
 ];
 
 const industries = [
-  { name: "Healthcare", description: "AI-powered diagnostics and patient care solutions" },
-  { name: "Finance", description: "Fraud detection and algorithmic trading systems" },
-  { name: "Manufacturing", description: "Predictive maintenance and quality control" },
-  { name: "Retail", description: "Personalized recommendations and inventory optimization" },
-  { name: "Education", description: "Adaptive learning and student performance analytics" },
-  { name: "Technology", description: "Enhanced software development and testing automation" }
+  { name: "Healthcare", description: "AI-powered diagnostics, synthetic medical data, and patient care solutions" },
+  { name: "Finance", description: "Fraud detection, algorithmic trading, and compliant synthetic financial datasets" },
+  { name: "Manufacturing", description: "Predictive maintenance, quality control, and production data optimization" },
+  { name: "Retail", description: "Personalized recommendations, inventory optimization, and customer behavior analytics" },
+  { name: "Education", description: "Adaptive learning platforms and student performance analytics with privacy protection" },
+  { name: "Technology", description: "Enhanced software development, testing automation, and synthetic test data generation" }
 ];
 
 const Solutions = () => {
@@ -143,11 +143,11 @@ const Solutions = () => {
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed">
               Tailored AI solutions designed for the unique challenges and opportunities 
-              in your industry sector.
+              in your industry sector, with specialized data solutions for each vertical.
             </p>
           </div>
 
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 ${
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 transition-all duration-1000 ${
             industriesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {industries.map((industry, index) => (
@@ -166,6 +166,18 @@ const Solutions = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          <div className={`text-center transition-all duration-1000 ${
+            industriesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`} style={{ transitionDelay: '600ms' }}>
+            <Button 
+              size="lg" 
+              className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg flex items-center gap-2 mx-auto"
+            >
+              Contact for More Info
+              <ArrowRight className="w-5 h-5" />
+            </Button>
           </div>
         </div>
       </section>
