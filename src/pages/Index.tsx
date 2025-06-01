@@ -10,7 +10,14 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
+      <Hero 
+        title={
+          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
+            BIXORY AI
+          </span>
+        }
+        subtitle="Empowering businesses with cutting-edge artificial intelligence solutions"
+      />
       <Strip />
       <Services />
       <Newsletter />

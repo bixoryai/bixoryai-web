@@ -1,5 +1,7 @@
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Clock, Users, Briefcase, Heart, Zap } from "lucide-react";
@@ -51,7 +53,6 @@ const benefits = [
 ];
 
 const Careers = () => {
-  const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation(0.2);
   const { elementRef: jobsRef, isVisible: jobsVisible } = useScrollAnimation(0.3);
   const { elementRef: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation(0.3);
 
@@ -59,31 +60,15 @@ const Careers = () => {
     <div className="min-h-screen bg-primary">
       <Navbar />
       
-      {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="pt-24 pb-20 bg-gradient-to-br from-primary via-primary to-blue-900"
-      >
-        <div className="container mx-auto px-6">
-          <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
-            heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Join The Team
-            </h1>
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Be part of a team that's shaping the future of artificial intelligence. 
-              Help us empower businesses and individuals with cutting-edge AI solutions.
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg"
-            >
-              View Open Positions
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section using reusable Hero component */}
+      <Hero
+        backgroundImage="/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png"
+        title="Join The Team"
+        subtitle="Be part of a team that's shaping the future of artificial intelligence. Help us empower businesses and individuals with cutting-edge AI solutions."
+        primaryButtonText="View Open Positions"
+        secondaryButtonText="Send Your Resume"
+        height="pt-24 pb-20"
+      />
 
       {/* Why Work With Us */}
       <section className="py-20 bg-primary">
