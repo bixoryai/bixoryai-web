@@ -85,33 +85,36 @@ const KnowledgeBase = () => {
     <>
       <Navbar />
       <div className="min-h-screen bg-gradient-to-r from-[#0A192F]/90 to-[#0D1B2A]/90">
-        <section className="py-12 pt-24">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold text-white mb-4">
-                  AI Knowledge Base
-                </h1>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                  Auto-crawled content from the latest AI research, tutorials, and industry insights
-                </p>
-              </div>
-
+        {/* Hero Section - Updated to match AI Tools page */}
+        <section className="pt-32 pb-16">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                AI Knowledge Base
+              </h1>
+              <p className="text-xl text-gray-300 mb-8">
+                Auto-crawled content from the latest AI research, tutorials, and industry insights
+              </p>
+              
               <KnowledgeBaseHeader
                 searchTerm={searchTerm}
                 onSearchChange={setSearchTerm}
               />
-
-              <CategoryTabs
-                activeCategory={activeCategory}
-                onCategoryChange={setActiveCategory}
-                categories={categories}
-              />
-
-              <ContentGrid items={filteredContent} />
             </div>
           </div>
         </section>
+
+        <main className="container mx-auto px-6 pb-16">
+          <div className="max-w-7xl mx-auto">
+            <CategoryTabs
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
+              categories={categories}
+            />
+
+            <ContentGrid items={filteredContent} />
+          </div>
+        </main>
       </div>
       <Footer />
     </>
