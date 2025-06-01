@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -83,10 +82,10 @@ const dataSubSolutions = [
 ];
 
 const trustIndicators = [
-  { icon: <Lock className="w-5 h-5" />, label: "SOC 2 Compliant" },
-  { icon: <Shield className="w-5 h-5" />, label: "GDPR Ready" },
-  { icon: <Award className="w-5 h-5" />, label: "ISO 27001" },
-  { icon: <CheckCircle className="w-5 h-5" />, label: "HIPAA Compatible" }
+  { icon: <Lock className="w-5 h-5 text-green-400" />, label: "SOC 2 Compliant" },
+  { icon: <Shield className="w-5 h-5 text-green-400" />, label: "GDPR Ready" },
+  { icon: <Award className="w-5 h-5 text-green-400" />, label: "ISO 27001" },
+  { icon: <CheckCircle className="w-5 h-5 text-green-400" />, label: "HIPAA Compatible" }
 ];
 
 const industries = [
