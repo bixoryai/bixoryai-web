@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showResourcesMenu, setShowResourcesMenu] = useState(false);
+  const [showAboutMenu, setShowAboutMenu] = useState(false);
   
   return <nav className="fixed w-full bg-primary/90 backdrop-blur-sm z-50">
       <div className="container mx-auto px-6 py-4">
@@ -37,7 +38,24 @@ const Navbar = () => {
             <Link to="/projects" className="text-white hover:text-accent transition-colors">Projects</Link>
             <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
             <Link to="/careers" className="text-white hover:text-accent transition-colors">Careers</Link>
-            <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
+            <div className="relative">
+              <button 
+                className="flex items-center text-white hover:text-accent transition-colors gap-1"
+                onClick={() => setShowAboutMenu(!showAboutMenu)}
+              >
+                About <ChevronDown className="h-4 w-4" />
+              </button>
+              {showAboutMenu && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+                  <Link to="/about" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    About Us
+                  </Link>
+                  <Link to="/ai-empowerment" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    AI Empowerment
+                  </Link>
+                </div>
+              )}
+            </div>
             <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
               Contact
             </button>
@@ -71,7 +89,24 @@ const Navbar = () => {
               <Link to="/projects" className="text-white hover:text-accent transition-colors">Projects</Link>
               <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
               <Link to="/careers" className="text-white hover:text-accent transition-colors">Careers</Link>
-              <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
+              <div className="relative">
+                <button 
+                  className="flex items-center text-white hover:text-accent transition-colors gap-1"
+                  onClick={() => setShowAboutMenu(!showAboutMenu)}
+                >
+                  About <ChevronDown className="h-4 w-4" />
+                </button>
+                {showAboutMenu && (
+                  <div className="mt-2 ml-4 flex flex-col space-y-2">
+                    <Link to="/about" className="text-white hover:text-accent transition-colors">
+                      About Us
+                    </Link>
+                    <Link to="/ai-empowerment" className="text-white hover:text-accent transition-colors">
+                      AI Empowerment
+                    </Link>
+                  </div>
+                )}
+              </div>
               <button className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors">
                 Contact
               </button>
