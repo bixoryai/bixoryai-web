@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
 import ProjectFilters from "@/components/projects/ProjectFilters";
 import TechnologyLegend from "@/components/projects/TechnologyLegend";
 import ProjectCard from "@/components/projects/ProjectCard";
@@ -232,48 +233,27 @@ const Projects = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#0A192F] via-[#0D1B2A] to-[#0A192F]">
       <Navbar />
       
-      {/* Enhanced Hero Section with Dark Theme */}
-      <section 
-        className="pt-32 pb-20 relative overflow-hidden"
-        style={{
-          backgroundImage: "url('/lovable-uploads/4c8804a9-47d9-49dc-8702-904300926b2c.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
+      {/* Hero Section using reusable Hero component */}
+      <Hero
+        backgroundImage="/lovable-uploads/4c8804a9-47d9-49dc-8702-904300926b2c.png"
+        title="Our AI Projects"
+        subtitle="Explore our innovative AI solutions that are transforming industries. From machine learning models to computer vision systems, discover how we're building the future."
+        showButtons={false}
+        height="pt-32 pb-20"
       >
-        {/* Enhanced dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/80 via-[#0D1B2A]/70 to-[#0A192F]/90 z-0"></div>
-        
-        {/* Animated background elements */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#FF4D00]/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#00F0FF]/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+        {/* Custom content for project stats */}
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-6 px-4 opacity-0 animate-[fadeInUp_0.8s_ease-out_1.1s_forwards]">
+          <Badge className="bg-gradient-to-r from-[#FF4D00]/20 to-[#FF4D00]/10 border-[#FF4D00]/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
+            ⚡ {projects.length} Total Projects
+          </Badge>
+          <Badge className="bg-gradient-to-r from-green-500/20 to-green-400/10 border-green-400/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
+            ✅ {projects.filter(p => p.status === "Completed").length} Completed
+          </Badge>
+          <Badge className="bg-gradient-to-r from-[#00F0FF]/20 to-[#00F0FF]/10 border-[#00F0FF]/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
+            🔓 {projects.filter(p => p.isOpenSource).length} Open Source
+          </Badge>
         </div>
-        
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
-              Our AI Projects
-            </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed font-light px-4">
-              Explore our innovative AI solutions that are transforming industries. 
-              From machine learning models to computer vision systems, discover how we're building the future.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 px-4">
-              <Badge className="bg-gradient-to-r from-[#FF4D00]/20 to-[#FF4D00]/10 border-[#FF4D00]/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
-                ⚡ {projects.length} Total Projects
-              </Badge>
-              <Badge className="bg-gradient-to-r from-green-500/20 to-green-400/10 border-green-400/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
-                ✅ {projects.filter(p => p.status === "Completed").length} Completed
-              </Badge>
-              <Badge className="bg-gradient-to-r from-[#00F0FF]/20 to-[#00F0FF]/10 border-[#00F0FF]/30 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium backdrop-blur-sm hover:scale-105 transition-all duration-300">
-                🔓 {projects.filter(p => p.isOpenSource).length} Open Source
-              </Badge>
-            </div>
-          </div>
-        </div>
-      </section>
+      </Hero>
 
       {/* Enhanced Dark Filters Section */}
       <ProjectFilters

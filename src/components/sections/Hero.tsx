@@ -1,12 +1,37 @@
 
 import { ArrowRight } from "lucide-react";
+import { ReactNode } from "react";
 
-const Hero = () => {
+interface HeroProps {
+  backgroundImage?: string;
+  title: string | ReactNode;
+  subtitle?: string;
+  showButtons?: boolean;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
+  onPrimaryClick?: () => void;
+  onSecondaryClick?: () => void;
+  children?: ReactNode;
+  height?: string;
+}
+
+const Hero = ({ 
+  backgroundImage = '/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png',
+  title,
+  subtitle,
+  showButtons = true,
+  primaryButtonText = "Contact",
+  secondaryButtonText = "Learn More",
+  onPrimaryClick,
+  onSecondaryClick,
+  children,
+  height = "h-[400px] md:h-[500px]"
+}: HeroProps) => {
   return (
     <div 
-      className="h-[400px] md:h-[500px] relative flex items-center overflow-hidden"
+      className={`${height} relative flex items-center overflow-hidden`}
       style={{ 
-        backgroundImage: "url('/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png')",
+        backgroundImage: `url('${backgroundImage}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
@@ -36,29 +61,41 @@ const Hero = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main title with staggered animation and increased top margin */}
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 mt-20 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
-            Build Intelligence X
-            <span className="text-secondary block opacity-0 animate-[fadeInUp_0.8s_ease-out_0.5s_forwards]"> with AI</span>
-          </h1>
+          <div className="text-4xl md:text-6xl font-bold text-white mb-6 mt-20 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
+            {title}
+          </div>
           
           {/* Subtitle with typing effect */}
-          <div className="opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards]">
-            <p className="text-lg md:text-xl text-gray-300 mb-8 overflow-hidden border-r-2 border-accent animate-[typewriter_3s_steps(80)_1.5s_forwards,_blink_1s_infinite_4.5s]">
-              Pushing the boundaries of human intelligence at the age of AI. We're your partner in AI-powered solutions, education, and business transformation.
-            </p>
-          </div>
+          {subtitle && (
+            <div className="opacity-0 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards]">
+              <p className="text-lg md:text-xl text-gray-300 mb-8 overflow-hidden border-r-2 border-accent animate-[typewriter_3s_steps(80)_1.5s_forwards,_blink_1s_infinite_4.5s]">
+                {subtitle}
+              </p>
+            </div>
+          )}
+          
+          {/* Custom children content */}
+          {children}
           
           {/* Buttons with enhanced animations */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-[fadeInUp_0.8s_ease-out_1.1s_forwards]">
-            <button className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 flex items-center gap-2 justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-secondary/25 group">
-              Contact 
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
-            <button className="border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent/10 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 relative overflow-hidden group">
-              <span className="relative z-10">Learn More</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-            </button>
-          </div>
+          {showButtons && (
+            <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-[fadeInUp_0.8s_ease-out_1.1s_forwards]">
+              <button 
+                onClick={onPrimaryClick}
+                className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 flex items-center gap-2 justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-secondary/25 group"
+              >
+                {primaryButtonText}
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+              <button 
+                onClick={onSecondaryClick}
+                className="border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent/10 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 relative overflow-hidden group"
+              >
+                <span className="relative z-10">{secondaryButtonText}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+              </button>
+            </div>
+          )}
         </div>
       </div>
       
