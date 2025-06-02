@@ -5,19 +5,21 @@ import Footer from "@/components/layout/Footer";
 import { KnowledgeBaseHeader } from "@/components/knowledge-base/KnowledgeBaseHeader";
 import { CategoryTabs } from "@/components/knowledge-base/CategoryTabs";
 import { ContentGrid } from "@/components/knowledge-base/ContentGrid";
+import { TagFilter } from "@/components/knowledge-base/TagFilter";
 
 const KnowledgeBase = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  // Placeholder data - will be replaced with real crawled content
+  // Enhanced placeholder data with AI buzzword tags
   const placeholderContent = [
     {
       id: "1",
       title: "Getting Started with AI Development",
       description: "A comprehensive guide to beginning your journey in AI development, covering the essential tools, frameworks, and concepts you need to know.",
       category: "Guide",
-      tags: ["AI", "Development", "Beginner"],
+      tags: ["AI", "Development", "Beginner", "Neural Networks", "MLOps"],
       isPlaceholder: true
     },
     {
@@ -25,7 +27,7 @@ const KnowledgeBase = () => {
       title: "Latest Trends in Machine Learning",
       description: "Explore the cutting-edge developments in machine learning, from transformer architectures to federated learning approaches.",
       category: "Article",
-      tags: ["ML", "Trends", "Research"],
+      tags: ["ML", "Trends", "Research", "Transformers", "LLMs"],
       isPlaceholder: true
     },
     {
@@ -33,7 +35,7 @@ const KnowledgeBase = () => {
       title: "Building Your First Neural Network",
       description: "Step-by-step tutorial on creating a neural network from scratch, with practical examples and code implementations.",
       category: "Tutorial", 
-      tags: ["Neural Networks", "Python", "Hands-on"],
+      tags: ["Neural Networks", "Python", "Hands-on", "Fine-tuning"],
       isPlaceholder: true
     },
     {
@@ -41,7 +43,7 @@ const KnowledgeBase = () => {
       title: "AI Ethics and Responsible Development",
       description: "Understanding the ethical implications of AI development and how to build responsible AI systems that benefit society.",
       category: "Article",
-      tags: ["Ethics", "Responsibility", "Society"],
+      tags: ["Ethics", "Responsibility", "Society", "Agents"],
       isPlaceholder: true
     },
     {
@@ -49,7 +51,7 @@ const KnowledgeBase = () => {
       title: "Advanced Prompt Engineering Techniques",
       description: "Master the art of prompt engineering with advanced techniques for getting better results from large language models.",
       category: "Guide",
-      tags: ["Prompting", "LLM", "Advanced"],
+      tags: ["Prompt Engineering", "LLMs", "Advanced", "GPT"],
       isPlaceholder: true
     },
     {
@@ -57,7 +59,23 @@ const KnowledgeBase = () => {
       title: "Setting Up Your AI Development Environment",
       description: "Complete walkthrough of setting up the perfect development environment for AI and machine learning projects.",
       category: "Tutorial",
-      tags: ["Setup", "Environment", "Tools"],
+      tags: ["Setup", "Environment", "Tools", "MLOps"],
+      isPlaceholder: true
+    },
+    {
+      id: "7",
+      title: "Understanding RAG Systems",
+      description: "Deep dive into Retrieval-Augmented Generation systems and how they enhance LLM capabilities with external knowledge.",
+      category: "Article",
+      tags: ["RAG", "LLMs", "Vector Databases", "Embeddings"],
+      isPlaceholder: true
+    },
+    {
+      id: "8",
+      title: "Model Context Protocol (MCP) Explained",
+      description: "Learn about the Model Context Protocol and how it enables better integration between AI models and external tools.",
+      category: "Guide",
+      tags: ["MCP", "Agents", "Integration", "AI"],
       isPlaceholder: true
     }
   ];
@@ -69,7 +87,7 @@ const KnowledgeBase = () => {
     { id: "tutorials", label: "Tutorials", count: placeholderContent.filter(item => item.category === "Tutorial").length }
   ];
 
-  // Filter content based on search and category
+  // Enhanced filtering logic to include tags
   const filteredContent = placeholderContent.filter(item => {
     const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -78,8 +96,27 @@ const KnowledgeBase = () => {
     const matchesCategory = activeCategory === "all" || 
                            item.category.toLowerCase() === activeCategory.toLowerCase();
     
-    return matchesSearch && matchesCategory;
+    const matchesTags = selectedTags.length === 0 || 
+                       selectedTags.some(selectedTag => 
+                         item.tags?.some(itemTag => 
+                           itemTag.toLowerCase().includes(selectedTag.toLowerCase())
+                         )
+                       );
+    
+    return matchesSearch && matchesCategory && matchesTags;
   });
+
+  const handleTagToggle = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
+  };
+
+  const handleClearTags = () => {
+    setSelectedTags([]);
+  };
 
   return (
     <>
@@ -109,6 +146,12 @@ const KnowledgeBase = () => {
 
         <main className="container mx-auto px-6 pb-16">
           <div className="max-w-7xl mx-auto">
+            <TagFilter
+              selectedTags={selectedTags}
+              onTagToggle={handleTagToggle}
+              onClearTags={handleClearTags}
+            />
+
             <CategoryTabs
               activeCategory={activeCategory}
               onCategoryChange={setActiveCategory}
