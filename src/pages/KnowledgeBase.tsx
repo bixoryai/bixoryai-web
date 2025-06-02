@@ -1,7 +1,7 @@
+
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Hero from "@/components/sections/Hero";
 import { KnowledgeBaseHeader } from "@/components/knowledge-base/KnowledgeBaseHeader";
 import { CategoryTabs } from "@/components/knowledge-base/CategoryTabs";
 import { ContentGrid } from "@/components/knowledge-base/ContentGrid";
@@ -85,20 +85,27 @@ const KnowledgeBase = () => {
     <>
       <Navbar />
       <div className="min-h-screen bg-gradient-to-r from-[#0A192F]/90 to-[#0D1B2A]/90">
-        {/* Hero Section - Now using Hero component with consistent height */}
-        <Hero
-          title="AI Knowledge Base"
-          subtitle="Auto-crawled content from the latest AI research, tutorials, and industry insights"
-          showButtons={false}
-          height="h-[400px] md:h-[500px]"
-        >
-          <div className="opacity-0 animate-[fadeInUp_0.8s_ease-out_1.1s_forwards]">
-            <KnowledgeBaseHeader
-              searchTerm={searchTerm}
-              onSearchChange={setSearchTerm}
-            />
+        {/* Hero Section - Updated to match AI Tools style */}
+        <section className="pt-32 pb-16">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                AI Knowledge Base
+              </h1>
+              <p className="text-xl text-gray-300 mb-8">
+                Auto-crawled content from the latest AI research, tutorials, and industry insights
+              </p>
+              
+              {/* Search Section */}
+              <div className="max-w-2xl mx-auto">
+                <KnowledgeBaseHeader
+                  searchTerm={searchTerm}
+                  onSearchChange={setSearchTerm}
+                />
+              </div>
+            </div>
           </div>
-        </Hero>
+        </section>
 
         <main className="container mx-auto px-6 pb-16">
           <div className="max-w-7xl mx-auto">
