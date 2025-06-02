@@ -1,8 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink, Github, Play, Star, GitFork, Users } from "lucide-react";
+import { ExternalLink, Github, Star, GitFork, Users } from "lucide-react";
 
 interface Project {
   id: number;
@@ -112,10 +111,10 @@ const ProjectCard = ({ project, getTechColor, getStatusColor }: ProjectCardProps
           <Button 
             size="sm" 
             className="flex-1 group/btn bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/80 hover:to-[#FF4D00] text-white border-none shadow-lg shadow-[#FF4D00]/25 hover:shadow-[#FF4D00]/40 transition-all duration-300 text-xs sm:text-sm"
-            aria-label={`View demo for ${project.title}`}
+            aria-label={`Visit ${project.title}`}
           >
-            <Play className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 transition-transform group-hover/btn:scale-110" />
-            Demo
+            <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 transition-transform group-hover/btn:scale-110" />
+            Visit
           </Button>
         )}
         {project.githubUrl && (
@@ -125,16 +124,9 @@ const ProjectCard = ({ project, getTechColor, getStatusColor }: ProjectCardProps
             aria-label={`View source code for ${project.title}`}
           >
             <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 transition-transform group-hover/btn:scale-110" />
-            Code
+            Github Code
           </Button>
         )}
-        <Button 
-          size="sm" 
-          className="group/btn bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-[#00F0FF] border border-gray-600/50 hover:border-[#00F0FF]/50 backdrop-blur-sm transition-all duration-300 px-2 sm:px-3"
-          aria-label={`View details for ${project.title}`}
-        >
-          <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover/btn:scale-110" />
-        </Button>
       </CardFooter>
     </Card>
   );
