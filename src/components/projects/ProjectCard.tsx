@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -42,9 +43,6 @@ const ProjectCard = ({ project, getTechColor, getStatusColor }: ProjectCardProps
       showComingSoonToast(`Source code for ${project.title}`);
     }
   };
-
-  const isVisitDisabled = !project.demoUrl || project.demoUrl === "#";
-  const isGithubDisabled = !project.githubUrl || project.githubUrl === "#";
 
   return (
     <Card 
@@ -130,29 +128,19 @@ const ProjectCard = ({ project, getTechColor, getStatusColor }: ProjectCardProps
         <Button 
           size="sm" 
           onClick={handleVisitClick}
-          disabled={isVisitDisabled}
-          className={`flex-1 group/btn text-xs sm:text-sm ${
-            isVisitDisabled 
-              ? 'bg-gray-600/50 text-gray-400 cursor-not-allowed hover:bg-gray-600/50' 
-              : 'bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/80 hover:to-[#FF4D00] text-white border-none shadow-lg shadow-[#FF4D00]/25 hover:shadow-[#FF4D00]/40'
-          } transition-all duration-300`}
-          aria-label={isVisitDisabled ? `Demo for ${project.title} coming soon` : `Visit ${project.title}`}
+          className="flex-1 group/btn text-xs sm:text-sm bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/80 hover:to-[#FF4D00] text-white border-none shadow-lg shadow-[#FF4D00]/25 hover:shadow-[#FF4D00]/40 transition-all duration-300"
+          aria-label={`Visit ${project.title}`}
         >
-          <ExternalLink className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 ${!isVisitDisabled ? 'transition-transform group-hover/btn:scale-110' : ''}`} />
+          <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 transition-transform group-hover/btn:scale-110" />
           Visit
         </Button>
         <Button 
           size="sm" 
           onClick={handleGithubClick}
-          disabled={isGithubDisabled}
-          className={`flex-1 group/btn text-xs sm:text-sm ${
-            isGithubDisabled 
-              ? 'bg-gray-600/50 text-gray-400 cursor-not-allowed hover:bg-gray-600/50 border border-gray-600/50' 
-              : 'bg-gray-800/50 hover:bg-gray-700/50 text-white border border-gray-600/50 hover:border-[#00F0FF]/50 backdrop-blur-sm'
-          } transition-all duration-300`}
-          aria-label={isGithubDisabled ? `Source code for ${project.title} will be available soon` : `View source code for ${project.title}`}
+          className="flex-1 group/btn text-xs sm:text-sm bg-gray-800/50 hover:bg-gray-700/50 text-white border border-gray-600/50 hover:border-[#00F0FF]/50 backdrop-blur-sm transition-all duration-300"
+          aria-label={`View source code for ${project.title}`}
         >
-          <Github className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 ${!isGithubDisabled ? 'transition-transform group-hover/btn:scale-110' : ''}`} />
+          <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 transition-transform group-hover/btn:scale-110" />
           Github Code
         </Button>
       </CardFooter>
