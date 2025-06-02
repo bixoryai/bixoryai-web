@@ -35,14 +35,14 @@ const Projects = () => {
   const projects: Project[] = [
     {
       id: 4,
-      title: "AI Music Creation Platform",
-      description: "Open-source platform for generating AI-powered music compositions with customizable styles and instruments.",
+      title: "Opentunes AI - Create and Showcase Your AI Musics",
+      description: "Revolutionary platform where artists and music enthusiasts can create, discover, and showcase AI-generated music compositions with advanced tools and community features.",
       image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=240&fit=crop",
       technologies: ["PyTorch", "Magenta", "React", "Web Audio API"],
       category: "Creative AI",
       status: "Completed",
       isOpenSource: true,
-      demoUrl: "#",
+      demoUrl: "https://opentunes.ai",
       githubUrl: "#",
       stars: 2847,
       forks: 543,
