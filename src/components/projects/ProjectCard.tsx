@@ -1,8 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, Github, Star, GitFork, Users } from "lucide-react";
+import { showComingSoonToast } from "@/utils/comingSoon";
 
 interface Project {
   id: number;
@@ -31,8 +31,7 @@ const ProjectCard = ({ project, getTechColor, getStatusColor }: ProjectCardProps
     if (project.demoUrl && project.demoUrl !== "#") {
       window.open(project.demoUrl, '_blank', 'noopener,noreferrer');
     } else {
-      console.log(`Demo for ${project.title} is coming soon!`);
-      // You could also show a toast notification here
+      showComingSoonToast(`Demo for ${project.title}`);
     }
   };
 
@@ -40,8 +39,7 @@ const ProjectCard = ({ project, getTechColor, getStatusColor }: ProjectCardProps
     if (project.githubUrl && project.githubUrl !== "#") {
       window.open(project.githubUrl, '_blank', 'noopener,noreferrer');
     } else {
-      console.log(`Source code for ${project.title} will be available soon!`);
-      // You could also show a toast notification here
+      showComingSoonToast(`Source code for ${project.title}`);
     }
   };
 
