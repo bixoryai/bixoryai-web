@@ -58,6 +58,7 @@ const Projects = () => {
       category: "Creative AI",
       status: "In Progress",
       isOpenSource: true,
+      demoUrl: "#",
       githubUrl: "#",
       stars: 1924,
       forks: 312,
@@ -89,6 +90,7 @@ const Projects = () => {
       category: "FinTech",
       status: "In Progress",
       isOpenSource: true,
+      demoUrl: "#",
       githubUrl: "#",
       stars: 1456,
       forks: 298,
@@ -131,6 +133,8 @@ const Projects = () => {
       technologies: ["OpenCV", "PyTorch", "YOLO", "FastAPI"],
       category: "Computer Vision",
       status: "In Progress",
+      demoUrl: "#",
+      githubUrl: "#",
       createdAt: "2024-02-20"
     },
     {
@@ -142,6 +146,7 @@ const Projects = () => {
       category: "Machine Learning",
       status: "Completed",
       demoUrl: "#",
+      githubUrl: "#",
       createdAt: "2024-01-10"
     },
     {
@@ -152,6 +157,8 @@ const Projects = () => {
       technologies: ["Whisper", "WebRTC", "React", "WebSockets"],
       category: "NLP",
       status: "In Progress",
+      demoUrl: "#",
+      githubUrl: "#",
       createdAt: "2024-02-15"
     },
     {
@@ -162,6 +169,8 @@ const Projects = () => {
       technologies: ["OCR", "spaCy", "MongoDB", "Express"],
       category: "Document AI",
       status: "Coming Soon",
+      demoUrl: "#",
+      githubUrl: "#",
       createdAt: "2024-04-01"
     },
     {
