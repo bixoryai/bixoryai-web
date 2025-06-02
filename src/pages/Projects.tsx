@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/layout/Navbar";
@@ -31,8 +32,70 @@ const Projects = () => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [sortBy, setSortBy] = useState("recent");
 
-  // Projects data including open-source projects
+  // Projects data including open-source projects - reordered as requested
   const projects: Project[] = [
+    {
+      id: 4,
+      title: "AI Music Creation Platform",
+      description: "Open-source platform for generating AI-powered music compositions with customizable styles and instruments.",
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=240&fit=crop",
+      technologies: ["PyTorch", "Magenta", "React", "Web Audio API"],
+      category: "Creative AI",
+      status: "Completed",
+      isOpenSource: true,
+      demoUrl: "#",
+      githubUrl: "#",
+      stars: 2847,
+      forks: 543,
+      contributors: 89,
+      createdAt: "2024-03-05"
+    },
+    {
+      id: 5,
+      title: "AI Movie Creation Suite",
+      description: "Comprehensive open-source toolkit for AI-assisted video generation, editing, and post-production workflows.",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=240&fit=crop",
+      technologies: ["Stable Diffusion", "FFmpeg", "Python", "TypeScript"],
+      category: "Creative AI",
+      status: "In Progress",
+      isOpenSource: true,
+      githubUrl: "#",
+      stars: 1924,
+      forks: 312,
+      contributors: 64,
+      createdAt: "2024-02-28"
+    },
+    {
+      id: 9,
+      title: "AI-Powered ECom Platform",
+      description: "Complete e-commerce solution with AI-driven product recommendations, inventory management, and customer insights.",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=240&fit=crop",
+      technologies: ["Next.js", "TensorFlow", "Stripe", "MongoDB"],
+      category: "E-Commerce",
+      status: "Completed",
+      isOpenSource: true,
+      demoUrl: "#",
+      githubUrl: "#",
+      stars: 892,
+      forks: 156,
+      contributors: 31,
+      createdAt: "2024-01-30"
+    },
+    {
+      id: 8,
+      title: "AI Crypto Trading Platform",
+      description: "Open-source algorithmic trading platform with ML-powered market analysis and automated trading strategies.",
+      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=240&fit=crop",
+      technologies: ["Python", "TensorFlow", "FastAPI", "PostgreSQL"],
+      category: "FinTech",
+      status: "In Progress",
+      isOpenSource: true,
+      githubUrl: "#",
+      stars: 1456,
+      forks: 298,
+      contributors: 43,
+      createdAt: "2024-01-25"
+    },
     {
       id: 1,
       title: "AI Customer Support Bot",
@@ -67,37 +130,6 @@ const Projects = () => {
       createdAt: "2024-01-10"
     },
     {
-      id: 4,
-      title: "AI Music Creation Platform",
-      description: "Open-source platform for generating AI-powered music compositions with customizable styles and instruments.",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=240&fit=crop",
-      technologies: ["PyTorch", "Magenta", "React", "Web Audio API"],
-      category: "Creative AI",
-      status: "Completed",
-      isOpenSource: true,
-      demoUrl: "#",
-      githubUrl: "#",
-      stars: 2847,
-      forks: 543,
-      contributors: 89,
-      createdAt: "2024-03-05"
-    },
-    {
-      id: 5,
-      title: "AI Movie Creation Suite",
-      description: "Comprehensive open-source toolkit for AI-assisted video generation, editing, and post-production workflows.",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=240&fit=crop",
-      technologies: ["Stable Diffusion", "FFmpeg", "Python", "TypeScript"],
-      category: "Creative AI",
-      status: "In Progress",
-      isOpenSource: true,
-      githubUrl: "#",
-      stars: 1924,
-      forks: 312,
-      contributors: 64,
-      createdAt: "2024-02-28"
-    },
-    {
       id: 6,
       title: "AI Agent Builder Framework",
       description: "Modular framework for building and deploying intelligent AI agents with custom capabilities and integrations.",
@@ -122,37 +154,6 @@ const Projects = () => {
       category: "NLP",
       status: "In Progress",
       createdAt: "2024-02-15"
-    },
-    {
-      id: 8,
-      title: "AI Crypto Trading Platform",
-      description: "Open-source algorithmic trading platform with ML-powered market analysis and automated trading strategies.",
-      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=240&fit=crop",
-      technologies: ["Python", "TensorFlow", "FastAPI", "PostgreSQL"],
-      category: "FinTech",
-      status: "In Progress",
-      isOpenSource: true,
-      githubUrl: "#",
-      stars: 1456,
-      forks: 298,
-      contributors: 43,
-      createdAt: "2024-01-25"
-    },
-    {
-      id: 9,
-      title: "AI-Powered ECom Platform",
-      description: "Complete e-commerce solution with AI-driven product recommendations, inventory management, and customer insights.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=240&fit=crop",
-      technologies: ["Next.js", "TensorFlow", "Stripe", "MongoDB"],
-      category: "E-Commerce",
-      status: "Completed",
-      isOpenSource: true,
-      demoUrl: "#",
-      githubUrl: "#",
-      stars: 892,
-      forks: 156,
-      contributors: 31,
-      createdAt: "2024-01-30"
     },
     {
       id: 10,
