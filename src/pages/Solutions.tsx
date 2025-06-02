@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Brain, Zap, Shield, Users, Cog, TrendingUp, ArrowRight, CheckCircle, Database, Layers, FileText, BarChart3, Lock, Award, Clock } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { showComingSoonToast } from "@/utils/comingSoon";
 
 const mainSolutionCategories = [
   {
@@ -104,6 +105,10 @@ const Solutions = () => {
   const { elementRef: industriesRef, isVisible: industriesVisible } = useScrollAnimation(0.3);
   const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollAnimation(0.3);
 
+  const handleComingSoon = (featureName: string) => {
+    showComingSoonToast(featureName);
+  };
+
   return (
     <div className="min-h-screen bg-primary">
       <Navbar />
@@ -116,6 +121,8 @@ const Solutions = () => {
         primaryButtonText="Get Started"
         secondaryButtonText="View Case Studies"
         height="pt-24 pb-20"
+        onPrimaryClick={() => handleComingSoon("Get Started Form")}
+        onSecondaryClick={() => handleComingSoon("Case Studies")}
       />
 
       {/* Main Solution Categories */}
@@ -171,6 +178,7 @@ const Solutions = () => {
                   <Button 
                     variant="outline" 
                     className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white"
+                    onClick={() => handleComingSoon(solution.title)}
                   >
                     Learn More
                   </Button>
@@ -327,6 +335,7 @@ const Solutions = () => {
             <Button 
               size="lg" 
               className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg flex items-center gap-2 mx-auto"
+              onClick={() => handleComingSoon("Contact Form")}
             >
               Contact for More Info
               <ArrowRight className="w-5 h-5" />
@@ -355,6 +364,7 @@ const Solutions = () => {
               <Button 
                 size="lg" 
                 className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg flex items-center gap-2"
+                onClick={() => handleComingSoon("Consultation Booking")}
               >
                 Schedule Consultation
                 <ArrowRight className="w-5 h-5" />
