@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/layout/Navbar";
@@ -32,7 +31,7 @@ const Projects = () => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [sortBy, setSortBy] = useState("recent");
 
-  // Projects data including open-source projects - reordered as requested
+  // Projects data reordered with AI Music and Movie platforms first
   const projects: Project[] = [
     {
       id: 4,
@@ -97,6 +96,22 @@ const Projects = () => {
       createdAt: "2024-01-25"
     },
     {
+      id: 6,
+      title: "AI Agent Builder Framework",
+      description: "Modular framework for building and deploying intelligent AI agents with custom capabilities and integrations.",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=240&fit=crop",
+      technologies: ["LangChain", "OpenAI", "Docker", "Kubernetes"],
+      category: "AI Agents",
+      status: "Completed",
+      isOpenSource: true,
+      demoUrl: "#",
+      githubUrl: "#",
+      stars: 3621,
+      forks: 782,
+      contributors: 127,
+      createdAt: "2024-03-12"
+    },
+    {
       id: 1,
       title: "AI Customer Support Bot",
       description: "Intelligent chatbot using NLP to handle customer inquiries with 95% accuracy rate.",
@@ -128,22 +143,6 @@ const Projects = () => {
       status: "Completed",
       demoUrl: "#",
       createdAt: "2024-01-10"
-    },
-    {
-      id: 6,
-      title: "AI Agent Builder Framework",
-      description: "Modular framework for building and deploying intelligent AI agents with custom capabilities and integrations.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=240&fit=crop",
-      technologies: ["LangChain", "OpenAI", "Docker", "Kubernetes"],
-      category: "AI Agents",
-      status: "Completed",
-      isOpenSource: true,
-      demoUrl: "#",
-      githubUrl: "#",
-      stars: 3621,
-      forks: 782,
-      contributors: 127,
-      createdAt: "2024-03-12"
     },
     {
       id: 7,
