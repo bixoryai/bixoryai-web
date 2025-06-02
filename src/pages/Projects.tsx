@@ -29,7 +29,7 @@ const Projects = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
-  const [sortBy, setSortBy] = useState("recent");
+  const [sortBy, setSortBy] = useState("default");
 
   // Projects data reordered with AI Music and Movie platforms first
   const projects: Project[] = [
@@ -201,8 +201,11 @@ const Projects = () => {
           const statusOrder = { "Completed": 0, "In Progress": 1, "Coming Soon": 2 };
           return statusOrder[a.status] - statusOrder[b.status];
         case "recent":
-        default:
           return new Date(b.createdAt || "").getTime() - new Date(a.createdAt || "").getTime();
+        case "default":
+        default:
+          // Maintain original array order by using the index in the original projects array
+          return projects.indexOf(a) - projects.indexOf(b);
       }
     });
 

@@ -39,6 +39,7 @@ const ProjectFilters = ({
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const sortOptions = [
+    { value: "default", label: "Default Order" },
     { value: "recent", label: "Most Recent" },
     { value: "stars", label: "Most Stars" },
     { value: "name", label: "Alphabetical" },
