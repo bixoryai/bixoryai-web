@@ -2,16 +2,11 @@
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { showComingSoonToast } from "@/utils/comingSoon";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showResourcesMenu, setShowResourcesMenu] = useState(false);
   const [showAboutMenu, setShowAboutMenu] = useState(false);
-
-  const handleComingSoon = (featureName: string) => {
-    showComingSoonToast(featureName);
-  };
   
   return <nav className="fixed w-full bg-primary/90 backdrop-blur-sm z-50">
       <div className="container mx-auto px-6 py-4">
@@ -61,12 +56,12 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <button 
-              onClick={() => handleComingSoon("Contact Form")}
+            <Link 
+              to="/contact"
               className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors"
             >
               Contact
-            </button>
+            </Link>
           </div>
 
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -115,12 +110,12 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
-              <button 
-                onClick={() => handleComingSoon("Contact Form")}
+              <Link 
+                to="/contact"
                 className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors"
               >
                 Contact
-              </button>
+              </Link>
             </div>
           </div>}
       </div>

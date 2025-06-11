@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const Contact = () => {
@@ -16,12 +17,14 @@ export const Contact = () => {
         >
           Help Us Better Serve You
         </h2>
-        <Button
-          variant="outline"
-          className="bg-white text-secondary hover:bg-white/90 hover:text-secondary/90"
-        >
-          Contact
-        </Button>
+        <Link to="/contact">
+          <Button
+            variant="outline"
+            className="bg-white text-secondary hover:bg-white/90 hover:text-secondary/90"
+          >
+            Contact
+          </Button>
+        </Link>
       </div>
     </section>
   );

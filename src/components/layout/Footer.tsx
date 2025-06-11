@@ -1,12 +1,7 @@
 
 import { Link } from "react-router-dom";
-import { showComingSoonToast } from "@/utils/comingSoon";
 
 const Footer = () => {
-  const handleComingSoon = (featureName: string) => {
-    showComingSoonToast(featureName);
-  };
-
   return (
     <footer className="bg-primary py-12">
       <div className="container mx-auto px-6">
@@ -25,7 +20,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/about" className="text-gray-400 hover:text-accent">About Us</Link></li>
               <li><Link to="/careers" className="text-gray-400 hover:text-accent">Careers</Link></li>
-              <li><button onClick={() => handleComingSoon("Contact Page")} className="text-gray-400 hover:text-accent text-left">Contact</button></li>
+              <li><Link to="/contact" className="text-gray-400 hover:text-accent">Contact</Link></li>
             </ul>
           </div>
           <div>
@@ -33,7 +28,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/ai-empowerment" className="text-gray-400 hover:text-accent">AI Education & Training</Link></li>
               <li><Link to="/solutions" className="text-gray-400 hover:text-accent">Custom AI Solutions</Link></li>
-              <li><button onClick={() => handleComingSoon("Enterprise AI Consultation")} className="text-gray-400 hover:text-accent text-left">Enterprise AI Consultation</button></li>
+              <li><Link to="/contact" className="text-gray-400 hover:text-accent">Enterprise AI Consultation</Link></li>
             </ul>
           </div>
           <div>
