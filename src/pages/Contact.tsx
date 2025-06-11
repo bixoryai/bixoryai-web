@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, Send } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -63,8 +63,8 @@ const Contact = () => {
     <div className="min-h-screen bg-primary">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-br from-primary via-primary to-blue-900">
+      {/* Hero Section - Increased height by 30% */}
+      <section className="pt-31 pb-16 bg-gradient-to-br from-primary via-primary to-blue-900">
         <div className="container mx-auto px-6 text-center">
           <div
             ref={heroRef}
@@ -230,7 +230,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-white mb-2">Email Us</h3>
-                      <p className="text-gray-300">contact@bixory.ai</p>
+                      <p className="text-gray-300">develop@bixory.ai</p>
                       <p className="text-sm text-gray-400">We'll respond within 24 hours</p>
                     </div>
                   </div>
@@ -241,22 +241,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-white mb-2">Call Us</h3>
-                      <p className="text-gray-300">+1 (555) AI-BIXORY</p>
+                      <p className="text-gray-300">+1 (408) 658-8538</p>
                       <p className="text-sm text-gray-400">Mon-Fri, 9 AM - 6 PM EST</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="bg-secondary/20 p-3 rounded-full">
-                      <MapPin className="w-6 h-6 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Visit Us</h3>
-                      <p className="text-gray-300">
-                        123 AI Innovation Drive<br />
-                        Tech Valley, CA 94000<br />
-                        United States
-                      </p>
                     </div>
                   </div>
                 </div>
