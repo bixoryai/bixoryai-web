@@ -45,8 +45,20 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="border-t border-white/10 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Bixory AI. All rights reserved.</p>
+        <div className="border-t border-white/10 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-gray-400 text-center md:text-left">
+              &copy; {new Date().getFullYear()} Bixory AI. All rights reserved.
+            </p>
+            <div className="flex space-x-6">
+              <Link to="/privacy-policy" className="text-gray-400 hover:text-accent text-sm">
+                Privacy Policy
+              </Link>
+              <Link to="/terms-of-service" className="text-gray-400 hover:text-accent text-sm">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
