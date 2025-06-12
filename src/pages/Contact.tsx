@@ -63,8 +63,8 @@ const Contact = () => {
     <div className="min-h-screen bg-primary">
       <Navbar />
       
-      {/* Hero Section - Positioned below header with proper spacing */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-primary via-primary to-blue-900">
+      {/* Hero Section - Increased height by 50% */}
+      <section className="pt-32 pb-24 bg-gradient-to-br from-primary via-primary to-blue-900">
         <div className="container mx-auto px-6 text-center">
           <div
             ref={heroRef}
