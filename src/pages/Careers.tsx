@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Clock, Users, Briefcase, Heart, Zap } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useNavigate } from "react-router-dom";
 
 const jobOpenings = [
   {
@@ -53,8 +54,13 @@ const benefits = [
 ];
 
 const Careers = () => {
+  const navigate = useNavigate();
   const { elementRef: jobsRef, isVisible: jobsVisible } = useScrollAnimation(0.3);
   const { elementRef: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation(0.3);
+
+  const handleApplyClick = (jobTitle: string) => {
+    navigate("/job-application", { state: { position: jobTitle } });
+  };
 
   return (
     <div className="min-h-screen bg-primary">
@@ -155,7 +161,11 @@ const Careers = () => {
                         </div>
                       </div>
                     </div>
-                    <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => handleApplyClick(job.title)}
+                      className="border-secondary text-secondary hover:bg-secondary hover:text-white"
+                    >
                       Apply Now
                     </Button>
                   </div>
@@ -195,6 +205,7 @@ const Careers = () => {
             </p>
             <Button 
               size="lg" 
+              onClick={() => navigate("/job-application")}
               className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg"
             >
               Send Your Resume
