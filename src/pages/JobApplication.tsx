@@ -140,7 +140,7 @@ const JobApplication = () => {
       {/* Header */}
       <section className="pt-24 pb-12 bg-gradient-to-br from-primary via-primary to-blue-900">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
             <Button
               variant="ghost"
               onClick={() => navigate("/careers")}
@@ -164,7 +164,7 @@ const JobApplication = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <Card className="bg-primary/80 border-gray-700">
-              <CardHeader>
+              <CardHeader className="text-center">
                 <CardTitle className="text-2xl text-white">Application Form</CardTitle>
                 <CardDescription className="text-gray-300">
                   Please fill out all required fields and upload your resume
