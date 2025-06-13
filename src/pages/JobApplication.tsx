@@ -160,7 +160,7 @@ const JobApplication = () => {
       </section>
 
       {/* Application Form */}
-      <section className="py-20 bg-primary">
+      <section className="py-20 bg-gradient-to-br from-primary to-blue-900">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <Card className="bg-primary/80 border-gray-700">
