@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Upload, FileText } from "lucide-react";
+import { ArrowLeft, Upload, FileText, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -134,17 +134,23 @@ const JobApplication = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen bg-gradient-to-br from-primary via-slate-900 to-blue-950">
       <Navbar />
       
       {/* Header */}
-      <section className="pt-24 pb-12 bg-gradient-to-br from-primary via-primary to-blue-900">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="pt-24 pb-12 bg-gradient-to-br from-primary via-slate-800 to-blue-900 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-secondary/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center animate-fadeInUp">
             <Button
               variant="ghost"
               onClick={() => navigate("/careers")}
-              className="mb-6 text-white hover:text-accent hover:bg-white/10"
+              className="mb-6 text-white hover:text-accent hover:bg-white/10 transition-all duration-300 hover:scale-105"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Careers
@@ -160,10 +166,15 @@ const JobApplication = () => {
       </section>
 
       {/* Application Form */}
-      <section className="py-20 bg-gradient-to-br from-primary to-blue-900">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-primary/80 border-gray-700">
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-primary to-slate-800 relative">
+        {/* Subtle animated background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-secondary/20 to-accent/20 animate-pulse"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+            <Card className="bg-primary/90 backdrop-blur-sm border-gray-600 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.01]">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl text-white">Application Form</CardTitle>
                 <CardDescription className="text-gray-300">
@@ -179,12 +190,12 @@ const JobApplication = () => {
                         control={form.control}
                         name="firstName"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
                             <FormLabel className="text-white">First Name *</FormLabel>
                             <FormControl>
                               <Input 
                                 placeholder="Enter your first name" 
-                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400"
+                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
                                 {...field} 
                               />
                             </FormControl>
@@ -197,12 +208,12 @@ const JobApplication = () => {
                         control={form.control}
                         name="lastName"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
                             <FormLabel className="text-white">Last Name *</FormLabel>
                             <FormControl>
                               <Input 
                                 placeholder="Enter your last name" 
-                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400"
+                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
                                 {...field} 
                               />
                             </FormControl>
@@ -217,13 +228,13 @@ const JobApplication = () => {
                         control={form.control}
                         name="email"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '0.5s' }}>
                             <FormLabel className="text-white">Email Address *</FormLabel>
                             <FormControl>
                               <Input 
                                 type="email" 
                                 placeholder="Enter your email" 
-                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400"
+                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
                                 {...field} 
                               />
                             </FormControl>
@@ -236,12 +247,12 @@ const JobApplication = () => {
                         control={form.control}
                         name="phone"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '0.6s' }}>
                             <FormLabel className="text-white">Phone Number *</FormLabel>
                             <FormControl>
                               <Input 
                                 placeholder="Enter your phone number" 
-                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400"
+                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
                                 {...field} 
                               />
                             </FormControl>
@@ -257,11 +268,11 @@ const JobApplication = () => {
                         control={form.control}
                         name="position"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '0.7s' }}>
                             <FormLabel className="text-white">Position *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/20 focus:border-accent text-white">
+                                <SelectTrigger className="bg-white/10 border-white/20 focus:border-accent text-white transition-all duration-300 hover:bg-white/15">
                                   <SelectValue placeholder="Select a position" />
                                 </SelectTrigger>
                               </FormControl>
@@ -281,11 +292,11 @@ const JobApplication = () => {
                         control={form.control}
                         name="experience"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '0.8s' }}>
                             <FormLabel className="text-white">Experience Level *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/20 focus:border-accent text-white">
+                                <SelectTrigger className="bg-white/10 border-white/20 focus:border-accent text-white transition-all duration-300 hover:bg-white/15">
                                   <SelectValue placeholder="Select experience level" />
                                 </SelectTrigger>
                               </FormControl>
@@ -303,9 +314,9 @@ const JobApplication = () => {
                     </div>
 
                     {/* Resume Upload */}
-                    <div className="space-y-2">
+                    <div className="space-y-2 animate-fadeInUp" style={{ animationDelay: '0.9s' }}>
                       <Label className="text-white">Resume Upload *</Label>
-                      <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-accent/50 transition-colors">
+                      <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-accent/50 transition-all duration-300 hover:bg-white/5 hover:scale-[1.02]">
                         <input
                           type="file"
                           accept=".pdf,.doc,.docx"
@@ -315,17 +326,17 @@ const JobApplication = () => {
                         />
                         <label
                           htmlFor="resume-upload"
-                          className="cursor-pointer flex flex-col items-center space-y-2"
+                          className="cursor-pointer flex flex-col items-center space-y-2 transition-all duration-300 hover:scale-105"
                         >
                           {resume ? (
                             <>
-                              <FileText className="w-8 h-8 text-accent" />
+                              <FileText className="w-8 h-8 text-accent animate-pulse" />
                               <span className="text-white font-medium">{resume.name}</span>
                               <span className="text-gray-400 text-sm">Click to replace</span>
                             </>
                           ) : (
                             <>
-                              <Upload className="w-8 h-8 text-gray-400" />
+                              <Upload className="w-8 h-8 text-gray-400 animate-float" />
                               <span className="text-white">Click to upload your resume</span>
                               <span className="text-gray-400 text-sm">PDF, DOC, DOCX (max 5MB)</span>
                             </>
@@ -340,12 +351,12 @@ const JobApplication = () => {
                         control={form.control}
                         name="linkedIn"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '1.0s' }}>
                             <FormLabel className="text-white">LinkedIn Profile</FormLabel>
                             <FormControl>
                               <Input 
                                 placeholder="https://linkedin.com/in/yourprofile" 
-                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400"
+                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
                                 {...field} 
                               />
                             </FormControl>
@@ -358,12 +369,12 @@ const JobApplication = () => {
                         control={form.control}
                         name="portfolio"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="animate-fadeInUp" style={{ animationDelay: '1.1s' }}>
                             <FormLabel className="text-white">Portfolio/Website</FormLabel>
                             <FormControl>
                               <Input 
                                 placeholder="https://yourportfolio.com" 
-                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400"
+                                className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
                                 {...field} 
                               />
                             </FormControl>
@@ -377,11 +388,11 @@ const JobApplication = () => {
                       control={form.control}
                       name="availability"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="animate-fadeInUp" style={{ animationDelay: '1.2s' }}>
                           <FormLabel className="text-white">Availability *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
-                              <SelectTrigger className="bg-white/10 border-white/20 focus:border-accent text-white">
+                              <SelectTrigger className="bg-white/10 border-white/20 focus:border-accent text-white transition-all duration-300 hover:bg-white/15">
                                 <SelectValue placeholder="When can you start?" />
                               </SelectTrigger>
                             </FormControl>
@@ -402,12 +413,12 @@ const JobApplication = () => {
                       control={form.control}
                       name="coverLetter"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="animate-fadeInUp" style={{ animationDelay: '1.3s' }}>
                           <FormLabel className="text-white">Cover Letter *</FormLabel>
                           <FormControl>
                             <Textarea 
                               placeholder="Tell us why you're interested in this position and what you can bring to our team..."
-                              className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 min-h-[120px]"
+                              className="bg-white/10 border-white/20 focus:border-accent text-white placeholder:text-gray-400 min-h-[120px] transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
                               {...field} 
                             />
                           </FormControl>
@@ -421,12 +432,12 @@ const JobApplication = () => {
                       control={form.control}
                       name="consent"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 animate-fadeInUp" style={{ animationDelay: '1.4s' }}>
                           <FormControl>
                             <Checkbox
                               checked={field.value}
                               onCheckedChange={field.onChange}
-                              className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
+                              className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:border-accent transition-all duration-300 hover:scale-110"
                             />
                           </FormControl>
                           <div className="space-y-1 leading-none">
@@ -442,13 +453,22 @@ const JobApplication = () => {
                       )}
                     />
 
-                    <Button 
-                      type="submit" 
-                      disabled={isSubmitting}
-                      className="w-full bg-secondary hover:bg-secondary/90 text-white py-3 text-lg"
-                    >
-                      {isSubmitting ? "Submitting Application..." : "Submit Application"}
-                    </Button>
+                    <div className="animate-fadeInUp" style={{ animationDelay: '1.5s' }}>
+                      <Button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="w-full bg-secondary hover:bg-secondary/90 text-white py-3 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                            Submitting Application...
+                          </>
+                        ) : (
+                          "Submit Application"
+                        )}
+                      </Button>
+                    </div>
                   </form>
                 </Form>
               </CardContent>
