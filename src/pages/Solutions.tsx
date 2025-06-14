@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -42,7 +43,7 @@ const mainSolutionCategories = [
 
 const dataSubSolutions = [
   {
-    icon: <Layers className="w-6 h-6 text-secondary" />,
+    icon: <Layers className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />,
     title: "Synthetic Data Generation",
     problem: "Limited or sensitive training data",
     solution: "Privacy-preserving synthetic datasets",
@@ -55,7 +56,7 @@ const dataSubSolutions = [
     ]
   },
   {
-    icon: <FileText className="w-6 h-6 text-secondary" />,
+    icon: <FileText className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:-rotate-12" />,
     title: "Domain Data Curation",
     problem: "Unstructured industry-specific data",
     solution: "Expert data preparation & annotation",
@@ -68,7 +69,7 @@ const dataSubSolutions = [
     ]
   },
   {
-    icon: <BarChart3 className="w-6 h-6 text-secondary" />,
+    icon: <BarChart3 className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:animate-pulse" />,
     title: "Data Pipeline Solutions",
     problem: "Manual data processing bottlenecks",
     solution: "Automated data workflows",
@@ -211,47 +212,56 @@ const Solutions = () => {
             {dataSubSolutions.map((solution, index) => (
               <Card 
                 key={index}
-                className="hover:shadow-lg transition-all duration-300 bg-primary/80 border-gray-700 hover:border-secondary/50"
+                className="group hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-500 bg-primary/80 border-gray-700 hover:border-secondary/50 hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <CardHeader>
-                  <div className="mb-4 p-3 bg-secondary/20 rounded-lg w-fit">
+                {/* Animated background glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <CardHeader className="relative z-10">
+                  <div className="mb-4 p-4 bg-secondary/10 rounded-xl w-fit mx-auto group-hover:bg-secondary/20 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-secondary/30">
                     {solution.icon}
                   </div>
-                  <CardTitle className="text-lg text-white mb-3">{solution.title}</CardTitle>
+                  <CardTitle className="text-lg text-white mb-3 text-center group-hover:text-accent transition-colors duration-300">
+                    {solution.title}
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 relative z-10">
                   {/* Problem → Solution → Outcome Flow */}
                   <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded">PROBLEM</span>
-                      <span className="text-sm text-gray-300">{solution.problem}</span>
+                    <div className="flex items-start gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                      <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded group-hover:bg-red-500/30 transition-colors duration-300">PROBLEM</span>
+                      <span className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{solution.problem}</span>
                     </div>
                     
                     <div className="flex justify-center">
-                      <ArrowRight className="w-4 h-4 text-secondary" />
+                      <ArrowRight className="w-4 h-4 text-secondary group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                     
-                    <div className="flex items-start gap-2">
-                      <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded">SOLUTION</span>
-                      <span className="text-sm text-gray-300">{solution.solution}</span>
+                    <div className="flex items-start gap-2 group-hover:translate-x-1 transition-transform duration-300" style={{ transitionDelay: '50ms' }}>
+                      <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded group-hover:bg-yellow-500/30 transition-colors duration-300">SOLUTION</span>
+                      <span className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{solution.solution}</span>
                     </div>
                     
                     <div className="flex justify-center">
-                      <ArrowRight className="w-4 h-4 text-secondary" />
+                      <ArrowRight className="w-4 h-4 text-secondary group-hover:translate-x-1 transition-transform duration-300" style={{ transitionDelay: '100ms' }} />
                     </div>
                     
-                    <div className="flex items-start gap-2">
-                      <span className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded">OUTCOME</span>
-                      <span className="text-sm text-gray-300">{solution.outcome}</span>
+                    <div className="flex items-start gap-2 group-hover:translate-x-1 transition-transform duration-300" style={{ transitionDelay: '100ms' }}>
+                      <span className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded group-hover:bg-green-500/30 transition-colors duration-300">OUTCOME</span>
+                      <span className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{solution.outcome}</span>
                     </div>
                   </div>
                   
-                  <div className="border-t border-gray-700 pt-4">
+                  <div className="border-t border-gray-700 pt-4 group-hover:border-gray-600 transition-colors duration-300">
                     <ul className="space-y-2">
                       {solution.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start gap-2 text-gray-300">
-                          <CheckCircle className="w-3 h-3 text-secondary mt-1 flex-shrink-0" />
+                        <li 
+                          key={featureIndex} 
+                          className="flex items-start gap-2 text-gray-300 group-hover:text-gray-200 transition-all duration-300 group-hover:translate-x-1"
+                          style={{ transitionDelay: `${featureIndex * 50}ms` }}
+                        >
+                          <CheckCircle className="w-3 h-3 text-secondary mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                           <span className="text-xs">{feature}</span>
                         </li>
                       ))}
