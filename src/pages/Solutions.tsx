@@ -142,7 +142,7 @@ const Solutions = () => {
           }}>
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-secondary/20 rounded-lg">
+                    <div className="p-3 rounded-lg bg-transparent">
                       {solution.icon}
                     </div>
                     <div>
