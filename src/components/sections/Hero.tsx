@@ -1,6 +1,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface HeroProps {
   backgroundImage?: string;
@@ -27,6 +28,24 @@ const Hero = ({
   children,
   height = "h-[400px] md:h-[500px]"
 }: HeroProps) => {
+  const navigate = useNavigate();
+
+  const handlePrimaryClick = () => {
+    if (onPrimaryClick) {
+      onPrimaryClick();
+    } else {
+      navigate('/contact');
+    }
+  };
+
+  const handleSecondaryClick = () => {
+    if (onSecondaryClick) {
+      onSecondaryClick();
+    } else {
+      navigate('/solutions');
+    }
+  };
+
   return (
     <div 
       className={`${height} relative flex items-center overflow-hidden`}
@@ -81,14 +100,14 @@ const Hero = ({
           {showButtons && (
             <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-[fadeInUp_0.8s_ease-out_1.1s_forwards]">
               <button 
-                onClick={onPrimaryClick}
+                onClick={handlePrimaryClick}
                 className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 flex items-center gap-2 justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-secondary/25 group"
               >
                 {primaryButtonText}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
               <button 
-                onClick={onSecondaryClick}
+                onClick={handleSecondaryClick}
                 className="border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent/10 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 relative overflow-hidden group"
               >
                 <span className="relative z-10">{secondaryButtonText}</span>
