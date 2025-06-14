@@ -147,7 +147,7 @@ const Solutions = () => {
                     </div>
                     <div>
                       <CardTitle className="text-xl text-white">{solution.title}</CardTitle>
-                      <Badge variant="outline" className="border-secondary text-secondary mt-1">
+                      <Badge variant="outline" className="border-secondary text-cyan-400 mt-1">
                         {solution.subtitle}
                       </Badge>
                     </div>
@@ -342,4 +342,5 @@ const Solutions = () => {
       <Footer />
     </div>;
 };
+
 export default Solutions;
