@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Brain, Zap, Shield, Users, Cog, TrendingUp, ArrowRight, CheckCircle, Database, Layers, FileText, BarChart3, Lock, Award, Clock } from "lucide-react";
+import { Brain, Zap, Shield, Users, Cog, TrendingUp, ArrowRight, CheckCircle, Database, Layers, FileText, BarChart3, Lock, Award, Clock, Heart, DollarSign, Factory, ShoppingCart, GraduationCap, Monitor } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { showComingSoonToast } from "@/utils/comingSoon";
 
@@ -91,12 +91,36 @@ const trustIndicators = [
 ];
 
 const industries = [
-  { name: "Healthcare", description: "AI-powered diagnostics, synthetic medical data, and patient care solutions with privacy compliance" },
-  { name: "Finance", description: "Fraud detection, algorithmic trading, and compliant synthetic financial datasets for risk modeling" },
-  { name: "Manufacturing", description: "Predictive maintenance, quality control, and production data optimization with synthetic datasets" },
-  { name: "Retail", description: "Personalized recommendations, inventory optimization, and customer behavior analytics with privacy protection" },
-  { name: "Education", description: "Adaptive learning platforms and student performance analytics with privacy-preserving synthetic data" },
-  { name: "Technology", description: "Enhanced software development, testing automation, and synthetic test data generation for DevOps" }
+  { 
+    name: "Healthcare", 
+    description: "AI-powered diagnostics, synthetic medical data, and patient care solutions with privacy compliance",
+    icon: <Heart className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:animate-pulse" />
+  },
+  { 
+    name: "Finance", 
+    description: "Fraud detection, algorithmic trading, and compliant synthetic financial datasets for risk modeling",
+    icon: <DollarSign className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
+  },
+  { 
+    name: "Manufacturing", 
+    description: "Predictive maintenance, quality control, and production data optimization with synthetic datasets",
+    icon: <Factory className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:-rotate-12" />
+  },
+  { 
+    name: "Retail", 
+    description: "Personalized recommendations, inventory optimization, and customer behavior analytics with privacy protection",
+    icon: <ShoppingCart className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:animate-bounce" />
+  },
+  { 
+    name: "Education", 
+    description: "Adaptive learning platforms and student performance analytics with privacy-preserving synthetic data",
+    icon: <GraduationCap className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
+  },
+  { 
+    name: "Technology", 
+    description: "Enhanced software development, testing automation, and synthetic test data generation for DevOps",
+    icon: <Monitor className="w-8 h-8 text-secondary transition-all duration-300 group-hover:scale-110 group-hover:animate-pulse" />
+  }
 ];
 
 const Solutions = () => {
@@ -324,14 +348,22 @@ const Solutions = () => {
             {industries.map((industry, index) => (
               <Card 
                 key={index}
-                className="text-center hover:shadow-lg transition-all duration-300 bg-primary/80 border-gray-700 hover:border-secondary/50"
+                className="group text-center hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-500 bg-primary/80 border-gray-700 hover:border-secondary/50 hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <CardHeader>
-                  <CardTitle className="text-lg text-white">{industry.name}</CardTitle>
+                {/* Animated background glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <CardHeader className="relative z-10">
+                  <div className="mb-4 p-4 bg-secondary/10 rounded-xl w-fit mx-auto group-hover:bg-secondary/20 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-secondary/30">
+                    {industry.icon}
+                  </div>
+                  <CardTitle className="text-lg text-white group-hover:text-accent transition-colors duration-300">
+                    {industry.name}
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-gray-300">
+                <CardContent className="relative z-10">
+                  <CardDescription className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 group-hover:translate-x-1">
                     {industry.description}
                   </CardDescription>
                 </CardContent>
