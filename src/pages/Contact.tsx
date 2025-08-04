@@ -10,6 +10,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { toast } from "@/hooks/use-toast";
+import Hero from "@/components/sections/Hero";
+import contactHeroImage from "@/assets/contact-hero.jpg";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -63,28 +65,13 @@ const Contact = () => {
     <div className="min-h-screen bg-primary">
       <Navbar />
       
-      {/* Hero Section - Increased height by 50% */}
-      <section className="pt-32 pb-24 bg-gradient-to-br from-primary via-primary to-blue-900">
-        <div className="container mx-auto px-6 text-center">
-          <div
-            ref={heroRef}
-            className={`transition-all duration-1200 ${
-              heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Get in Touch with{" "}
-              <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
-                BIXORY AI
-              </span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Ready to transform your business with AI? We're here to help you navigate 
-              the future of technology and unlock new possibilities.
-            </p>
-          </div>
-        </div>
-      </section>
+      <Hero
+        backgroundImage={contactHeroImage}
+        title="Get in Touch with Us"
+        subtitle="Ready to transform your business with AI? We're here to help you navigate the future of technology and unlock new possibilities."
+        showButtons={false}
+        height="pt-24 pb-20"
+      />
 
       {/* Main Content */}
       <section className="py-20">
