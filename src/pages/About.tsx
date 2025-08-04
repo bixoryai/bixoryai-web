@@ -129,7 +129,7 @@ const About = () => {
       </section>
 
       {/* Innovation Section */}
-      <section className="py-20 bg-primary/95">
+      <section className="py-20 bg-gradient-to-br from-primary to-blue-900">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <h2 
@@ -177,7 +177,7 @@ const About = () => {
       </section>
 
       {/* Knowledge Section */}
-      <section className="py-20 bg-primary/95">
+      <section className="py-20 bg-gradient-to-br from-primary to-blue-900">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
