@@ -77,44 +77,17 @@ const Careers = () => {
     <div className="min-h-screen bg-primary">
       <Navbar />
       
-      {/* Hero Section using reusable Hero component */}
-      <section className="pt-24 pb-20 bg-gradient-to-br from-primary via-primary to-blue-900 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png)',
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Join The Team
-            </h1>
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Be part of a team that's shaping the future of artificial intelligence. Help us empower businesses and individuals with cutting-edge AI solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                onClick={handleViewPositionsClick}
-                className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full"
-              >
-                View Open Positions
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={handleSendResumeClick}
-                className="border border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
-              >
-                Send Your Resume
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section */}
+      <Hero 
+        backgroundImage="/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png" 
+        title="Join The Team" 
+        subtitle="Be part of a team that's shaping the future of artificial intelligence. Help us empower businesses and individuals with cutting-edge AI solutions." 
+        primaryButtonText="View Open Positions" 
+        secondaryButtonText="Send Your Resume" 
+        height="pt-24 pb-20" 
+        onPrimaryClick={handleViewPositionsClick} 
+        onSecondaryClick={handleSendResumeClick} 
+      />
 
       {/* Why Work With Us */}
       <section className="py-20 bg-primary">
