@@ -17,8 +17,14 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero 
-        backgroundImage="/src/assets/hero-circuit-board.jpg"
-        title="Build Intelligent X with AI"
+        title={
+          <span>
+            <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
+              Build Intelligent X
+            </span>
+            <span className="text-white"> with AI</span>
+          </span>
+        }
         subtitle="Transform your vision into AI-powered reality with cutting-edge solutions that adapt, learn, and evolve with your business"
       />
       <Strip />
