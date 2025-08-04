@@ -8,7 +8,7 @@ import { Gift, Zap, Users, Target, Search, TrendingUp, Shield } from "lucide-rea
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import productivityImage from "@/assets/productivity-illustration.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
-import { showComingSoonToast } from "@/utils/comingSoon";
+
 
 const About = () => {
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
@@ -50,9 +50,6 @@ const About = () => {
     }
   ];
 
-  const handleComingSoon = (featureName: string) => {
-    showComingSoonToast(featureName);
-  };
 
   return (
     <div className="min-h-screen bg-primary">
@@ -70,8 +67,6 @@ const About = () => {
         primaryButtonText="Get Started"
         secondaryButtonText="Our Solutions"
         height="pt-24 pb-20"
-        onPrimaryClick={() => handleComingSoon("Get Started Form")}
-        onSecondaryClick={() => handleComingSoon("Our Solutions")}
       >
         <div className="flex items-center justify-center space-x-2 text-white mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards]">
           <Gift className="w-6 h-6 text-secondary" />
