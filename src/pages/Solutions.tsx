@@ -305,16 +305,6 @@ const Solutions = () => {
               </Card>)}
           </div>
 
-          <div className={`text-center transition-all duration-1000 ${industriesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
-          transitionDelay: '600ms'
-        }}>
-            <Link to="/contact">
-              <Button size="lg" className="text-white px-8 py-4 text-lg flex items-center gap-2 mx-auto bg-red-900 hover:bg-red-800">
-                Contact for More Info
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -330,9 +320,11 @@ const Solutions = () => {
               and unlock new opportunities for growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg flex items-center gap-2" onClick={() => handleComingSoon("Consultation Booking")}>
-                Schedule Consultation
-                <ArrowRight className="w-5 h-5" />
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg flex items-center gap-2" asChild>
+                <Link to="/contact">
+                  Schedule Consultation
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
               </Button>
               <Button variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10 px-8 py-4 text-lg" asChild>
                 <Link to="/about">Learn About Us</Link>
