@@ -1,6 +1,7 @@
 
 import { GraduationCap, Cog, Building } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -11,7 +12,8 @@ const services = [
       "Customized learning paths",
       "Hands-on workshops", 
       "Expert-led training"
-    ]
+    ],
+    link: "/knowledge-base"
   },
   {
     icon: <Cog className="w-8 h-8 text-secondary" />,
@@ -21,7 +23,8 @@ const services = [
       "Data preparation & analysis",
       "Custom AI model training and finetuning",
       "AI application development & integration"
-    ]
+    ],
+    link: "/solutions"
   },
   {
     icon: <Building className="w-8 h-8 text-secondary" />,
@@ -31,13 +34,15 @@ const services = [
       "AI readiness assessment",
       "Implementation roadmap",
       "Technology selection"
-    ]
+    ],
+    link: "/about"
   },
 ];
 
 const Services = () => {
   const { elementRef: sectionRef, isVisible: sectionVisible } = useScrollAnimation(0.2);
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.3);
+  const navigate = useNavigate();
 
   return (
     <section 
@@ -104,7 +109,10 @@ const Services = () => {
 
                   {/* Call to Action */}
                   <div className="mt-6 pt-6 border-t border-white/10">
-                    <button className="w-full py-3 px-4 bg-transparent border border-secondary text-secondary rounded-lg hover:bg-secondary hover:text-white transition-all duration-300 font-medium text-sm group-hover:shadow-lg group-hover:shadow-secondary/20">
+                    <button 
+                      onClick={() => navigate(service.link)}
+                      className="w-full py-3 px-4 bg-transparent border border-secondary text-secondary rounded-lg hover:bg-secondary hover:text-white transition-all duration-300 font-medium text-sm group-hover:shadow-lg group-hover:shadow-secondary/20"
+                    >
                       Learn More
                     </button>
                   </div>
