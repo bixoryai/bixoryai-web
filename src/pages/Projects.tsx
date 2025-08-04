@@ -175,18 +175,6 @@ const Projects = () => {
       githubUrl: "#",
       createdAt: "2024-04-01"
     },
-    {
-      id: 11,
-      title: "Recommendation Engine",
-      description: "Personalized recommendation system using collaborative and content-based filtering.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=240&fit=crop",
-      technologies: ["TensorFlow", "Apache Spark", "Redis", "PostgreSQL"],
-      category: "Machine Learning",
-      status: "Completed",
-      demoUrl: "#",
-      githubUrl: "#",
-      createdAt: "2024-01-05"
-    }
   ];
 
   const categories = ["All", "Machine Learning", "NLP", "Computer Vision", "Document AI", "Creative AI", "AI Agents", "FinTech", "E-Commerce"];
