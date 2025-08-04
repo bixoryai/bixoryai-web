@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <footer className="bg-primary py-12">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
           <div>
-            <Link to="/" className="flex items-center justify-center gap-3 mb-4">
+            <Link to="/" className="flex items-center justify-center md:justify-start gap-3 mb-4">
               <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="Bixory AI" className="h-9" />
               <span className="text-xl font-bold bg-gradient-to-r from-red-500 via-orange-400 to-red-600 bg-clip-text text-transparent animate-pulse">BIXORY AI</span>
             </Link>
@@ -41,11 +41,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-white/10 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
             <p className="text-gray-400 text-center md:text-left">
               &copy; {new Date().getFullYear()} Bixory AI. All rights reserved.
             </p>
-            <div className="flex space-x-6">
+            <div className="flex flex-wrap justify-center md:justify-end space-x-6">
               <Link to="/privacy-policy" className="text-gray-400 hover:text-accent text-sm">
                 Privacy Policy
               </Link>

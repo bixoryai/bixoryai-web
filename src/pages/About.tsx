@@ -213,15 +213,15 @@ const About = () => {
           >
             Maximize Productivity & Growth
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="p-6 rounded-lg bg-card-gradient backdrop-blur-sm hover:scale-105 transition-transform duration-300"
+                className="p-4 sm:p-6 rounded-lg bg-card-gradient backdrop-blur-sm hover:scale-105 transition-transform duration-300"
               >
                 <div className="mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-400 text-sm sm:text-base">{feature.description}</p>
               </div>
             ))}
           </div>

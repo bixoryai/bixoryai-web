@@ -54,7 +54,7 @@ const Services = () => {
         >
           Our Services
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => {
             const { elementRef: cardRef, isVisible: cardVisible } = useScrollAnimation(0.3);
             
@@ -62,7 +62,7 @@ const Services = () => {
               <div
                 key={index}
                 ref={cardRef}
-                className={`group bg-card-gradient p-8 rounded-xl hover:scale-105 transition-all duration-700 border border-white/10 hover:border-secondary/30 ${
+                className={`group bg-card-gradient p-6 sm:p-8 rounded-xl hover:scale-105 transition-all duration-700 border border-white/10 hover:border-secondary/30 ${
                   cardVisible 
                     ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-12'
@@ -77,13 +77,13 @@ const Services = () => {
                     <div className="mb-4 p-3 bg-secondary/10 rounded-lg w-fit group-hover:bg-secondary/20 transition-colors duration-300">
                       {service.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">
                       {service.title}
                     </h3>
                   </div>
 
                   {/* Description */}
-                  <p className="text-gray-300 mb-6 leading-relaxed flex-grow">
+                  <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed flex-grow text-sm sm:text-base">
                     {service.description}
                   </p>
 

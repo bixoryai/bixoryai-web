@@ -41,27 +41,27 @@ const AITools = () => {
             
             {/* Content Tabs */}
             <Tabs defaultValue="all" className="w-full">
-              <TabsList className="grid w-full grid-cols-7 mb-8 bg-gray-900/50 border border-gray-700/50 backdrop-blur-sm">
-                <TabsTrigger value="all" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300">All Tools</TabsTrigger>
-                <TabsTrigger value="content" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300">Content</TabsTrigger>
-                <TabsTrigger value="development" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300">Development</TabsTrigger>
-                <TabsTrigger value="design" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300">Design</TabsTrigger>
-                <TabsTrigger value="analytics" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300">Analytics</TabsTrigger>
-                <TabsTrigger value="productivity" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300">Productivity</TabsTrigger>
-                <TabsTrigger value="ai-models" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300">AI Models</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 mb-8 bg-gray-900/50 border border-gray-700/50 backdrop-blur-sm">
+                <TabsTrigger value="all" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">All</TabsTrigger>
+                <TabsTrigger value="content" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">Content</TabsTrigger>
+                <TabsTrigger value="development" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">Dev</TabsTrigger>
+                <TabsTrigger value="design" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">Design</TabsTrigger>
+                <TabsTrigger value="analytics" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm lg:block hidden">Analytics</TabsTrigger>
+                <TabsTrigger value="productivity" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm lg:block hidden">Productivity</TabsTrigger>
+                <TabsTrigger value="ai-models" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm lg:block hidden">AI Models</TabsTrigger>
               </TabsList>
 
               {/* All Tools */}
               <TabsContent value="all" className="space-y-8">
                 <div>
-                  <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-3xl font-bold text-white">Featured AI Tools</h2>
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white">Featured AI Tools</h2>
                     <div className="text-sm text-gray-400">
                       120+ tools available
                     </div>
                   </div>
                   
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       {
                         name: "ChatGPT",
@@ -146,7 +146,7 @@ const AITools = () => {
                       }
                     ].map((tool, index) => (
                       <Card key={index} className={`hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50 ${tool.featured ? 'ring-2 ring-[#FF4D00]/20' : ''}`}>
-                        <CardHeader>
+                        <CardHeader className="p-4 sm:p-6">
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
                               <Badge variant={tool.pricing === 'Free' ? 'default' : tool.pricing === 'Freemium' ? 'secondary' : 'outline'} className="bg-gray-800/50 text-gray-300 border-gray-600">
@@ -161,14 +161,14 @@ const AITools = () => {
                               </span>
                             </div>
                           </div>
-                          <CardTitle className="text-lg flex items-center gap-2 text-white">
+                          <CardTitle className="text-base sm:text-lg flex items-center gap-2 text-white">
                             {tool.name}
                             <ExternalLink className="h-4 w-4 text-gray-400" />
                           </CardTitle>
                           <CardDescription className="text-gray-300">{tool.description}</CardDescription>
                           <div className="text-xs text-gray-400">{tool.category}</div>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="p-4 sm:p-6 pt-0">
                           <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white" asChild>
                             <a href={tool.url} target="_blank" rel="noopener noreferrer">
                               {tool.url === "#" ? "Coming Soon" : "Visit Tool"}
@@ -188,7 +188,7 @@ const AITools = () => {
                     <FileText className="h-8 w-8" />
                     Content Generation Tools
                   </h2>
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       "ChatGPT - Conversational AI",
                       "Jasper AI - Marketing Copy",
@@ -218,7 +218,7 @@ const AITools = () => {
                     <Code className="h-8 w-8" />
                     Development Tools
                   </h2>
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       "GitHub Copilot - Code Completion",
                       "Tabnine - AI Code Assistant",
@@ -248,7 +248,7 @@ const AITools = () => {
                     <Palette className="h-8 w-8" />
                     Design & Creative Tools
                   </h2>
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       "Midjourney - Image Generation",
                       "DALL-E 3 - OpenAI Images",
@@ -278,7 +278,7 @@ const AITools = () => {
                     <BarChart3 className="h-8 w-8" />
                     Analytics & Data Tools
                   </h2>
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       "MonkeyLearn - Text Analytics",
                       "DataRobot - AutoML Platform",
@@ -308,7 +308,7 @@ const AITools = () => {
                     <Bot className="h-8 w-8" />
                     Productivity Tools
                   </h2>
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       "Notion AI - Workspace Assistant",
                       "Zapier AI - Automation",
@@ -338,7 +338,7 @@ const AITools = () => {
                     <Bot className="h-8 w-8" />
                     Popular AI Models for Chatbot
                   </h2>
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       {
                         name: "GPT-4",
@@ -460,11 +460,11 @@ const AITools = () => {
             </Tabs>
 
             {/* Call to Action */}
-            <section className="mt-16 bg-gradient-to-r from-[#FF4D00] to-[#00F0FF] rounded-lg p-8 text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">
+            <section className="mt-16 bg-gradient-to-r from-[#FF4D00] to-[#00F0FF] rounded-lg p-6 sm:p-8 text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 Submit Your AI Tool
               </h2>
-              <p className="text-xl text-gray-200 mb-6">
+              <p className="text-lg sm:text-xl text-gray-200 mb-6">
                 Know an amazing AI tool that's not listed? Help us expand our directory!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

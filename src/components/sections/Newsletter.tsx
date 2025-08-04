@@ -47,7 +47,7 @@ const Newsletter = () => {
         </p>
         <form 
           onSubmit={handleSubmit} 
-          className={`max-w-md mx-auto flex gap-4 transition-all duration-800 delay-400 ${
+          className={`max-w-md mx-auto flex flex-col sm:flex-row gap-4 transition-all duration-800 delay-400 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
@@ -61,7 +61,7 @@ const Newsletter = () => {
           />
           <button
             type="submit"
-            className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 hover:scale-105"
+            className="bg-secondary text-white px-6 sm:px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 hover:scale-105 whitespace-nowrap"
           >
             Subscribe
           </button>
