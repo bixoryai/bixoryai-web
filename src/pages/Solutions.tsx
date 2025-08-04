@@ -308,10 +308,12 @@ const Solutions = () => {
           <div className={`text-center transition-all duration-1000 ${industriesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
           transitionDelay: '600ms'
         }}>
-            <Button size="lg" onClick={() => handleComingSoon("Contact Form")} className="text-white px-8 py-4 text-lg flex items-center gap-2 mx-auto bg-red-900 hover:bg-red-800">
-              Contact for More Info
-              <ArrowRight className="w-5 h-5" />
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" className="text-white px-8 py-4 text-lg flex items-center gap-2 mx-auto bg-red-900 hover:bg-red-800">
+                Contact for More Info
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
