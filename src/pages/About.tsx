@@ -5,6 +5,8 @@ import Footer from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
 import { Gift, Zap, Users, Target, Search, TrendingUp, Shield } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import productivityImage from "@/assets/productivity-illustration.jpg";
+import knowledgeImage from "@/assets/knowledge-illustration.jpg";
 
 const About = () => {
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
@@ -164,9 +166,11 @@ const About = () => {
               </p>
             </div>
             <div>
-              <div className="w-full max-w-md mx-auto h-64 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-lg flex items-center justify-center">
-                <p className="text-gray-300 text-center">Productivity Illustration</p>
-              </div>
+              <img
+                src={productivityImage}
+                alt="Boost Productivity and Creativity"
+                className="w-full max-w-md mx-auto rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </div>
@@ -177,9 +181,11 @@ const About = () => {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <div className="w-full max-w-md mx-auto h-64 bg-gradient-to-br from-accent/20 to-secondary/20 rounded-lg flex items-center justify-center">
-                <p className="text-gray-300 text-center">Knowledge Illustration</p>
-              </div>
+              <img
+                src={knowledgeImage}
+                alt="Knowledge Empowerment"
+                className="w-full max-w-md mx-auto rounded-lg shadow-lg"
+              />
             </div>
             <div className="order-1 md:order-2">
               <h2 
