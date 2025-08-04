@@ -17,12 +17,9 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero 
-        title={
-          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
-            BIXORY AI
-          </span>
-        }
-        subtitle="Empowering businesses with cutting-edge artificial intelligence solutions"
+        backgroundImage="/src/assets/hero-circuit-board.jpg"
+        title="Build Intelligent X with AI"
+        subtitle="Transform your vision into AI-powered reality with cutting-edge solutions that adapt, learn, and evolve with your business"
       />
       <Strip />
       <WhyChooseUs />
