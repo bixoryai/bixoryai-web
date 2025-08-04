@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Brain, Zap, Shield, Users, Cog, TrendingUp, ArrowRight, CheckCircle, Database, Layers, FileText, BarChart3, Lock, Award, Clock, Heart, DollarSign, Factory, ShoppingCart, GraduationCap, Monitor } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { showComingSoonToast } from "@/utils/comingSoon";
+import solutionsHeroImage from "@/assets/solutions-hero.jpg";
 const mainSolutionCategories = [{
   icon: <Brain className="w-8 h-8 text-secondary" />,
   title: "AI Strategy & Consulting",
@@ -121,7 +122,7 @@ const Solutions = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <Hero backgroundImage="/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png" title="AI Solutions That Transform" subtitle="Comprehensive artificial intelligence solutions designed to accelerate your business growth and operational efficiency." primaryButtonText="Get Started" secondaryButtonText="View Case Studies" height="pt-24 pb-20" onPrimaryClick={() => handleComingSoon("Get Started Form")} onSecondaryClick={() => handleComingSoon("Case Studies")} />
+      <Hero backgroundImage={solutionsHeroImage} title="AI Solutions That Transform" subtitle="Comprehensive artificial intelligence solutions designed to accelerate your business growth and operational efficiency." primaryButtonText="Get Started" secondaryButtonText="View Case Studies" height="pt-24 pb-20" onPrimaryClick={() => handleComingSoon("Get Started Form")} onSecondaryClick={() => handleComingSoon("Case Studies")} />
 
       {/* Main Solution Categories */}
       <section ref={categoriesRef} className="py-12 pb-8 bg-primary">
