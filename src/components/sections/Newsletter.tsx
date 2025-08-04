@@ -2,19 +2,35 @@
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { supabase } from "@/integrations/supabase/client";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const { elementRef, isVisible } = useScrollAnimation(0.3);
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Success!",
-      description: "Thank you for subscribing to our newsletter.",
-    });
-    setEmail("");
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('newsletter-subscribe', {
+        body: { email }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Success!",
+        description: "Thank you for subscribing! Check your email for a welcome message.",
+      });
+      setEmail("");
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to subscribe. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
