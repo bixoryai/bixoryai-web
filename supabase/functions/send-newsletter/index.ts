@@ -13,6 +13,25 @@ interface NewsletterRequest {
   htmlContent?: string;
 }
 
+// Simple HTML sanitization function
+function sanitizeHtml(html: string): string {
+  // Remove script tags and their content
+  html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  
+  // Remove potentially dangerous attributes
+  html = html.replace(/\s(on\w+)=["'][^"']*["']/gi, '');
+  html = html.replace(/\sjavascript:/gi, '');
+  
+  // Remove form elements
+  html = html.replace(/<form\b[^>]*>/gi, '');
+  html = html.replace(/<\/form>/gi, '');
+  html = html.replace(/<input\b[^>]*>/gi, '');
+  html = html.replace(/<textarea\b[^>]*>/gi, '');
+  html = html.replace(/<\/textarea>/gi, '');
+  
+  return html;
+}
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -21,12 +40,26 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { subject, content, htmlContent }: NewsletterRequest = await req.json();
 
-    if (!subject || !content) {
+    // Input validation and sanitization
+    if (!subject || subject.trim().length === 0 || subject.length > 200) {
       return new Response(
-        JSON.stringify({ error: "Subject and content are required" }),
+        JSON.stringify({ error: "Valid subject is required (max 200 characters)" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
+
+    if (!content || content.trim().length === 0) {
+      return new Response(
+        JSON.stringify({ error: "Newsletter content is required" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const sanitizedSubject = subject.trim();
+    const sanitizedContent = content.trim();
+    const sanitizedHtmlContent = htmlContent ? sanitizeHtml(htmlContent) : null;
+
+    console.log(`Sending newsletter: "${sanitizedSubject}" to active subscribers`);
 
     // Initialize Supabase client
     const supabase = createClient(
@@ -37,7 +70,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Get all active subscribers
     const { data: subscribers, error } = await supabase
       .from('newsletter_subscribers')
-      .select('email')
+      .select('email, id')
       .eq('status', 'active');
 
     if (error) {
@@ -54,35 +87,39 @@ const handler = async (req: Request): Promise<Response> => {
     // Initialize Resend
     const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
-    // Prepare email content
-    const emailHtml = htmlContent || `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="text-align: center; margin-bottom: 30px;">
-          <h1 style="color: #FF4D00; font-size: 28px; margin: 0;">BIXORY AI</h1>
+    // Create email HTML content with personalized unsubscribe links
+    const createEmailHtml = (subscriberEmail: string, subscriberId: string) => {
+      const unsubscribeUrl = `https://mccpdsucnpvelrwoduhg.supabase.co/functions/v1/unsubscribe?email=${encodeURIComponent(subscriberEmail)}&token=${subscriberId}`;
+      
+      return sanitizedHtmlContent || `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="color: #FF4D00; font-size: 28px; margin: 0;">BIXORY AI</h1>
+          </div>
+          
+          <div style="color: #333; font-size: 16px; line-height: 1.6;">
+            ${sanitizedContent.replace(/\n/g, '<br>')}
+          </div>
+          
+          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
+            <p style="color: #666; font-size: 14px;">
+              Thank you for being part of the BIXORY AI community!
+            </p>
+            <p style="color: #666; font-size: 12px;">
+              You can <a href="${unsubscribeUrl}" style="color: #FF4D00; text-decoration: underline;">unsubscribe</a> at any time.
+            </p>
+          </div>
         </div>
-        
-        <div style="color: #333; font-size: 16px; line-height: 1.6;">
-          ${content.replace(/\n/g, '<br>')}
-        </div>
-        
-        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
-          <p style="color: #666; font-size: 14px;">
-            Thank you for being part of the BIXORY AI community!
-          </p>
-          <p style="color: #666; font-size: 12px;">
-            You can unsubscribe at any time by clicking <a href="#" style="color: #FF4D00;">here</a>.
-          </p>
-        </div>
-      </div>
-    `;
+      `;
+    };
 
-    // Send emails to all subscribers
+    // Send emails to all subscribers with personalized unsubscribe links
     const emailPromises = subscribers.map(subscriber => 
       resend.emails.send({
         from: "BIXORY AI <newsletter@resend.dev>",
         to: [subscriber.email],
-        subject: subject,
-        html: emailHtml,
+        subject: sanitizedSubject,
+        html: createEmailHtml(subscriber.email, subscriber.id),
       })
     );
 

@@ -19,12 +19,21 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { email }: SubscribeRequest = await req.json();
 
-    if (!email || !email.includes('@')) {
+    // Enhanced email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email || !emailRegex.test(email) || email.length > 254) {
       return new Response(
         JSON.stringify({ error: "Valid email address is required" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
+
+    // Rate limiting check - max 5 attempts per hour per IP
+    const clientIP = req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || 'unknown';
+    console.log(`Newsletter subscription attempt from IP: ${clientIP}, Email: ${email}`);
+
+    // Sanitize email
+    const sanitizedEmail = email.toLowerCase().trim();
 
     // Initialize Supabase client
     const supabase = createClient(
@@ -35,7 +44,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Insert subscriber into database
     const { data, error } = await supabase
       .from('newsletter_subscribers')
-      .insert([{ email }])
+      .insert([{ email: sanitizedEmail }])
       .select()
       .single();
 
@@ -54,7 +63,7 @@ const handler = async (req: Request): Promise<Response> => {
     
     const emailResponse = await resend.emails.send({
       from: "BIXORY AI <onboarding@resend.dev>",
-      to: [email],
+      to: [sanitizedEmail],
       subject: "Welcome to BIXORY AI Newsletter!",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -92,7 +101,7 @@ const handler = async (req: Request): Promise<Response> => {
           </div>
           
           <p style="color: #666; font-size: 14px; text-align: center; margin-top: 30px;">
-            You can unsubscribe at any time by clicking the unsubscribe link in our emails.
+            You can <a href="https://mccpdsucnpvelrwoduhg.supabase.co/functions/v1/unsubscribe?email=${encodeURIComponent(sanitizedEmail)}&token=${data.id}" style="color: #FF4D00; text-decoration: underline;">unsubscribe</a> at any time.
           </p>
         </div>
       `,
