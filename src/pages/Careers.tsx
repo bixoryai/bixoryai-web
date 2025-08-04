@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { MapPin, Clock, Users, Briefcase, Heart, Zap } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useNavigate } from "react-router-dom";
+import careersHeroImage from "@/assets/careers-hero.jpg";
 
 const jobOpenings = [
   {
@@ -79,7 +80,7 @@ const Careers = () => {
       
       {/* Hero Section */}
       <Hero 
-        backgroundImage="/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png" 
+        backgroundImage={careersHeroImage}
         title="Join The Team" 
         subtitle="Be part of a team that's shaping the future of artificial intelligence. Help us empower businesses and individuals with cutting-edge AI solutions." 
         primaryButtonText="View Open Positions" 
