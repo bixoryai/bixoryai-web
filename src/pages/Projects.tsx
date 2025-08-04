@@ -7,6 +7,7 @@ import ProjectFilters from "@/components/projects/ProjectFilters";
 import TechnologyLegend from "@/components/projects/TechnologyLegend";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Project {
   id: number;
@@ -26,6 +27,7 @@ interface Project {
 }
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
@@ -341,7 +343,10 @@ const Projects = () => {
               <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-10 leading-relaxed px-4">
                 Let's discuss how we can build custom AI solutions for your business needs.
               </p>
-              <button className="px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/90 hover:to-[#FF4D00] text-white font-bold border-none rounded-lg shadow-2xl shadow-[#FF4D00]/30 hover:shadow-[#FF4D00]/50 hover:scale-105 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-[#FF4D00]/50 focus:ring-offset-2 focus:ring-offset-gray-900">
+              <button 
+                onClick={() => navigate('/contact')}
+                className="px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 hover:from-[#FF4D00]/90 hover:to-[#FF4D00] text-white font-bold border-none rounded-lg shadow-2xl shadow-[#FF4D00]/30 hover:shadow-[#FF4D00]/50 hover:scale-105 transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-[#FF4D00]/50 focus:ring-offset-2 focus:ring-offset-gray-900"
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D00] to-[#FF4D00]/80 rounded-lg blur-lg opacity-50"></div>
                 <span className="relative z-10">Get In Touch</span>
               </button>
