@@ -2,11 +2,13 @@
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
 import { Link } from "react-router-dom";
 import { Gift, Zap, Users, Target, Search, TrendingUp, Shield } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import productivityImage from "@/assets/productivity-illustration.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
+import { showComingSoonToast } from "@/utils/comingSoon";
 
 const About = () => {
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
@@ -48,35 +50,33 @@ const About = () => {
     }
   ];
 
+  const handleComingSoon = (featureName: string) => {
+    showComingSoonToast(featureName);
+  };
+
   return (
     <div className="min-h-screen bg-primary">
       <Navbar />
       
       {/* Hero Section */}
-      <section 
-        className="relative h-[400px] md:h-[500px] flex items-center pt-24"
-        style={{ 
-          backgroundImage: "url('/lovable-uploads/3392d363-afc5-4208-af24-9ed0d2d8a192.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
+      <Hero 
+        backgroundImage="/lovable-uploads/3392d363-afc5-4208-af24-9ed0d2d8a192.png"
+        title={
+          <>
+            About <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">BIXORY AI</span>
+          </>
+        }
+        subtitle="Pushing Boundaries & Redefining Possibilities"
+        primaryButtonText="Get Started"
+        secondaryButtonText="Our Solutions"
+        height="pt-24 pb-20"
+        onPrimaryClick={() => handleComingSoon("Get Started Form")}
+        onSecondaryClick={() => handleComingSoon("Our Solutions")}
       >
-        {/* Dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-black/60 z-0"></div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
-              About <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">BIXORY AI</span>
-            </h1>
-            <div className="flex items-center justify-center space-x-2 text-white animate-slide-up">
-              <Gift className="w-6 h-6 text-secondary" />
-              <p className="text-lg md:text-xl">Pushing Boundaries & Redefining Possibilities</p>
-            </div>
-          </div>
+        <div className="flex items-center justify-center space-x-2 text-white mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards]">
+          <Gift className="w-6 h-6 text-secondary" />
         </div>
-      </section>
+      </Hero>
 
       {/* Our Story Section */}
       <section className="py-20 bg-primary">
