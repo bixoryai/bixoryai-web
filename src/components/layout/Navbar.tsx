@@ -49,9 +49,6 @@ const Navbar = () => {
                   <Link to="/about" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     About Us
                   </Link>
-                  <Link to="/ai-empowerment" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                    AI Empowerment
-                  </Link>
                 </div>
               )}
             </div>
@@ -102,9 +99,6 @@ const Navbar = () => {
                   <div className="mt-2 ml-4 flex flex-col space-y-2">
                     <Link to="/about" className="text-white hover:text-accent transition-colors">
                       About Us
-                    </Link>
-                    <Link to="/ai-empowerment" className="text-white hover:text-accent transition-colors">
-                      AI Empowerment
                     </Link>
                   </div>
                 )}
