@@ -179,13 +179,13 @@ export const GuideTemplate = ({
                     {downloadableResources.map((resource, index) => (
                       <Button
                         key={index}
-                        variant="outline"
-                        className="justify-start border-[#FF4D00]/50 text-white hover:bg-[#FF4D00]/10"
+                        variant="ghost"
+                        className="justify-start bg-white/5 border border-[#FF4D00]/30 text-white hover:bg-[#FF4D00]/20 hover:border-[#FF4D00]/50 transition-all duration-300"
                         onClick={() => window.open(resource.url, '_blank')}
                       >
                         <FileDown className="h-4 w-4 mr-2 text-[#FF4D00]" />
-                        {resource.title}
-                        <Badge variant="secondary" className="ml-auto text-xs">
+                        <span className="flex-1 text-left">{resource.title}</span>
+                        <Badge variant="outline" className="ml-auto text-xs text-[#00F0FF] border-[#00F0FF]/50 bg-transparent">
                           {resource.type}
                         </Badge>
                       </Button>
