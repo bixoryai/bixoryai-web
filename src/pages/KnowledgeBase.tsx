@@ -53,8 +53,10 @@ const KnowledgeBase = () => {
       title: "Advanced Prompt Engineering Techniques",
       description: "Master the art of prompt engineering with advanced techniques for getting better results from large language models.",
       category: "Guide",
+      url: "/knowledge-base/advanced-prompt-engineering",
       tags: ["Prompt Engineering", "LLMs", "Advanced", "GPT"],
-      isPlaceholder: true
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
     },
     {
       id: "6",
