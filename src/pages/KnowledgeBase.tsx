@@ -19,8 +19,10 @@ const KnowledgeBase = () => {
       title: "Getting Started with AI Development",
       description: "A comprehensive guide to beginning your journey in AI development, covering the essential tools, frameworks, and concepts you need to know.",
       category: "Guide",
+      url: "/knowledge-base/getting-started-ai-development",
       tags: ["AI", "Development", "Beginner", "Neural Networks", "MLOps"],
-      isPlaceholder: true
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
     },
     {
       id: "2", 

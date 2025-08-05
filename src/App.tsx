@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import AIEmpowerment from "./pages/AIEmpowerment";
 import KnowledgeBase from "./pages/KnowledgeBase";
+import AIGettingStartedGuide from "./pages/AIGettingStartedGuide";
 import AITools from "./pages/AITools";
 import Projects from "./pages/Projects";
 import Solutions from "./pages/Solutions";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           
           <Route path="/knowledge-base" element={<KnowledgeBase />} />
+          <Route path="/knowledge-base/getting-started-ai-development" element={<AIGettingStartedGuide />} />
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />
