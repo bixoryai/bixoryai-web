@@ -273,8 +273,6 @@ def analyze_sentiment_gpt(text):
       id: "ml-pipeline",
       title: "Understanding ML Pipelines",
       content: `<div class="space-y-6">
-        <img src="${aiRoadmap}" alt="AI Development Roadmap" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
-        
         <p class="text-lg text-gray-200">A modern ML pipeline in 2025 follows this structured approach:</p>
 
         <div class="grid md:grid-cols-3 gap-4">
