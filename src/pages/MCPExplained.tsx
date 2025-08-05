@@ -819,6 +819,9 @@ server.setRequestHandler("tools/call", async (request) => {
             downloadableResources={downloadableResources}
             tags={tags}
           />
+          
+          {/* Bottom gradient transition before footer */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#0A192F] to-transparent"></div>
         </div>
         
         {/* Navigation Component */}
