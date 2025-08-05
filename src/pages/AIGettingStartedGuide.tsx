@@ -1,4 +1,6 @@
 import { GuideTemplate } from "@/components/knowledge-base/templates/GuideTemplate";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import aiHero from "@/assets/ai-development-hero.jpg";
 import aiRoadmap from "@/assets/ai-roadmap-infographic.jpg";
 import aiFrameworks from "@/assets/ai-frameworks-comparison.jpg";
@@ -550,29 +552,33 @@ Remember: AI development is as much about the process as it is about the technol
   ];
 
   return (
-    <div className="relative">
-      {/* Hero Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${aiHero})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/95 to-[#0D1B2A]/95"></div>
+    <>
+      <Navbar />
+      <div className="relative">
+        {/* Hero Background */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${aiHero})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/95 to-[#0D1B2A]/95"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10">
+          <GuideTemplate
+            title="Getting Started with AI Development"
+            description="A comprehensive guide to beginning your AI development journey in 2025. From setting up your environment to deploying production-ready AI applications, this guide covers everything you need to know to start building intelligent systems."
+            estimatedTime={120}
+            difficulty="Beginner"
+            prerequisites={prerequisites}
+            sections={sections}
+            downloadableResources={downloadableResources}
+            tags={tags}
+          />
+        </div>
       </div>
-      
-      {/* Content */}
-      <div className="relative z-10">
-        <GuideTemplate
-          title="Getting Started with AI Development"
-          description="A comprehensive guide to beginning your AI development journey in 2025. From setting up your environment to deploying production-ready AI applications, this guide covers everything you need to know to start building intelligent systems."
-          estimatedTime={120}
-          difficulty="Beginner"
-          prerequisites={prerequisites}
-          sections={sections}
-          downloadableResources={downloadableResources}
-          tags={tags}
-        />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

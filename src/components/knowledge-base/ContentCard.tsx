@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Clock, Globe } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface ContentCardProps {
   title: string;
@@ -25,6 +26,8 @@ export const ContentCard = ({
   tags = [],
   isPlaceholder = false
 }: ContentCardProps) => {
+  const navigate = useNavigate();
+  
   const getCategoryColor = (cat: string) => {
     switch (cat.toLowerCase()) {
       case 'article': return 'text-[#00F0FF]';
@@ -34,8 +37,19 @@ export const ContentCard = ({
     }
   };
 
+  const handleUrlClick = () => {
+    if (!url) return;
+    
+    // Check if it's an internal route (starts with /)
+    if (url.startsWith('/')) {
+      navigate(url);
+    } else {
+      window.open(url, '_blank');
+    }
+  };
+
   return (
-    <Card className="bg-gray-900/50 border border-gray-700/50 backdrop-blur-sm hover:border-gray-600/50 transition-all duration-300 group">
+    <Card className="bg-gray-900/50 border border-gray-700/50 backdrop-blur-sm hover:border-gray-600/50 transition-all duration-300 group cursor-pointer" onClick={url ? handleUrlClick : undefined}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-lg font-semibold text-white group-hover:text-[#00F0FF] transition-colors">
@@ -46,7 +60,10 @@ export const ContentCard = ({
               variant="ghost" 
               size="icon"
               className="text-gray-400 hover:text-white flex-shrink-0"
-              onClick={() => window.open(url, '_blank')}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleUrlClick();
+              }}
             >
               <ExternalLink className="h-4 w-4" />
             </Button>
