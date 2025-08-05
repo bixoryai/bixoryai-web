@@ -704,12 +704,12 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]</code>
   const downloadableResources = [
     {
       title: "AI Development Roadmap PDF",
-      url: "https://github.com/microsoft/AI-For-Beginners/blob/main/pdf/ai-for-beginners.pdf",
+      url: "https://www.microsoft.com/en-us/research/uploads/prod/2023/02/ML-Sys-AI-Research-Roadmap.pdf",
       type: "PDF"
     },
     {
       title: "Python Environment Setup Script",
-      url: "https://raw.githubusercontent.com/microsoft/vscode-python/main/build/conda/install.sh",
+      url: "https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer",
       type: "Shell Script"
     },
     {
