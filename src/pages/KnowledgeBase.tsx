@@ -130,7 +130,7 @@ const KnowledgeBase = () => {
                 AI Knowledge Base
               </h1>
               <p className="text-xl text-gray-300 mb-8">
-                Auto-crawled content from the latest AI research, tutorials, and industry insights
+                Latest AI research, tutorials, and industry insights.
               </p>
               
               {/* Search Section */}
