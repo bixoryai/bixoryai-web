@@ -47,8 +47,10 @@ const KnowledgeBase = () => {
       title: "AI Ethics and Responsible Development",
       description: "Understanding the ethical implications of AI development and how to build responsible AI systems that benefit society.",
       category: "Article",
+      url: "/knowledge-base/ai-ethics-responsible-development",
       tags: ["Ethics", "Responsibility", "Society", "Agents"],
-      isPlaceholder: true
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
     },
     {
       id: "5",
