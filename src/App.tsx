@@ -9,6 +9,7 @@ import AIEmpowerment from "./pages/AIEmpowerment";
 import KnowledgeBase from "./pages/KnowledgeBase";
 import AIGettingStartedGuide from "./pages/AIGettingStartedGuide";
 import AdvancedPromptEngineering from "./pages/AdvancedPromptEngineering";
+import MCPExplained from "./pages/MCPExplained";
 import AITools from "./pages/AITools";
 import Projects from "./pages/Projects";
 import Solutions from "./pages/Solutions";
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/knowledge-base" element={<KnowledgeBase />} />
           <Route path="/knowledge-base/getting-started-ai-development" element={<AIGettingStartedGuide />} />
           <Route path="/knowledge-base/advanced-prompt-engineering" element={<AdvancedPromptEngineering />} />
+          <Route path="/knowledge-base/mcp-explained" element={<MCPExplained />} />
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />

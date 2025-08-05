@@ -79,8 +79,10 @@ const KnowledgeBase = () => {
       title: "Model Context Protocol (MCP) Explained",
       description: "Learn about the Model Context Protocol and how it enables better integration between AI models and external tools.",
       category: "Guide",
-      tags: ["MCP", "Agents", "Integration", "AI"],
-      isPlaceholder: true
+      url: "/knowledge-base/mcp-explained",
+      tags: ["MCP", "Agents", "Integration", "Protocol"],
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
     }
   ];
 

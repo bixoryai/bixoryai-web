@@ -37,7 +37,8 @@ const GuideNavigation = () => {
           <span className="text-gray-500">/</span>
           <span className="text-white truncate">
             {window.location.pathname.includes('getting-started') ? 'AI Getting Started' : 
-             window.location.pathname.includes('advanced-prompt') ? 'Advanced Prompt Engineering' : 
+             window.location.pathname.includes('advanced-prompt') ? 'Advanced Prompt Engineering' :
+             window.location.pathname.includes('mcp-explained') ? 'MCP Explained' :
              'Knowledge Guide'}
           </span>
         </div>
