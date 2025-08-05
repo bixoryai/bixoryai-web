@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer";
 import { Clock } from "lucide-react";
 import aiHero from "@/assets/ai-development-hero.jpg";
 import aiRoadmap from "@/assets/ai-roadmap-infographic.jpg";
-import aiFrameworks from "@/assets/ai-frameworks-comparison.jpg";
+import aiFrameworksGuide from "@/assets/ai-frameworks-selection-guide.jpg";
 
 const AIGettingStartedGuide = () => {
   const sections = [
@@ -113,7 +113,7 @@ const AIGettingStartedGuide = () => {
       id: "frameworks",
       title: "Choosing the Right AI Framework",
       content: `<div class="space-y-6">
-        <img src="${aiFrameworks}" alt="AI Frameworks Comparison" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
+        <img src="${aiFrameworksGuide}" alt="AI Frameworks Selection Guide" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
         
         <p class="text-lg text-gray-200">In 2025, the AI framework landscape has stabilized around several key players:</p>
         
