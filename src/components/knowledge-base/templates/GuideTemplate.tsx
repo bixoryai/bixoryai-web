@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Clock, FileDown, CheckCircle, Circle, ChevronRight, ChevronDown } from "lucide-react";
+import { Clock, FileDown, CheckCircle, Circle } from "lucide-react";
+import GuideNavigation from "@/components/navigation/GuideNavigation";
 
 interface GuideSection {
   id: string;
@@ -74,12 +75,13 @@ export const GuideTemplate = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 py-12">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <div className="min-h-screen bg-primary">
+      <GuideNavigation />
+      <div className="container mx-auto px-6 max-w-6xl pt-24 pb-12">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar - Table of Contents */}
           <div className="lg:col-span-1">
-            <Card className="bg-white/5 border-white/10 backdrop-blur-sm sticky top-8 shadow-xl">
+            <Card className="bg-primary/80 border-gray-700 backdrop-blur-sm sticky top-32 shadow-xl">
               <CardHeader>
                 <h3 className="text-lg font-semibold text-white">Contents</h3>
                 <Progress value={completionPercentage} className="w-full" />
@@ -138,11 +140,11 @@ export const GuideTemplate = ({
                 {/* Tags */}
                 {tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-[#00F0FF] border-[#00F0FF]/50">
-                        {tag}
-                      </Badge>
-                    ))}
+                  {tags.map((tag) => (
+                    <Badge key={tag} variant="outline" className="text-accent border-accent/50">
+                      {tag}
+                    </Badge>
+                  ))}
                   </div>
                 )}
 
@@ -152,7 +154,7 @@ export const GuideTemplate = ({
 
             {/* Prerequisites */}
             {prerequisites.length > 0 && (
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm mb-8 shadow-lg">
+              <Card className="bg-primary/80 border-gray-700 backdrop-blur-sm mb-8 shadow-lg">
                 <CardHeader>
                   <h2 className="text-xl font-semibold text-white">Prerequisites</h2>
                 </CardHeader>
@@ -160,7 +162,7 @@ export const GuideTemplate = ({
                   <ul className="space-y-2">
                     {prerequisites.map((prereq, index) => (
                       <li key={index} className="flex items-center gap-2 text-gray-300">
-                        <CheckCircle className="h-4 w-4 text-[#00F0FF] flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
                         <span>{prereq}</span>
                       </li>
                     ))}
@@ -170,7 +172,7 @@ export const GuideTemplate = ({
             )}
 
             {/* Guide Sections - Accordion Style */}
-            <Card className="bg-white/5 border-white/10 backdrop-blur-sm shadow-lg">
+            <Card className="bg-primary/80 border-gray-700 backdrop-blur-sm shadow-lg">
               <CardHeader>
                 <h2 className="text-2xl font-semibold text-white">Guide Sections</h2>
                 <p className="text-gray-400">Click on any section to expand its content</p>
@@ -178,20 +180,20 @@ export const GuideTemplate = ({
               <CardContent>
                 <Accordion type="single" collapsible className="w-full space-y-4">
                   {sections.map((section, index) => (
-                    <AccordionItem 
-                      key={section.id} 
-                      value={section.id}
-                      className="border border-white/10 rounded-lg bg-white/5 backdrop-blur-sm"
-                    >
-                      <AccordionTrigger className="px-6 py-4 text-left hover:no-underline hover:bg-white/10 rounded-t-lg">
+                      <AccordionItem 
+                        key={section.id} 
+                        value={section.id}
+                        className="border border-gray-700/50 rounded-lg bg-primary/40 backdrop-blur-sm"
+                      >
+                      <AccordionTrigger className="px-6 py-4 text-left hover:no-underline hover:bg-gray-700/30 rounded-t-lg">
                         <div className="flex items-center gap-3 text-white w-full">
                           <Checkbox
                             checked={completedSections.has(section.id)}
                             onCheckedChange={() => toggleCompletion(section.id)}
-                            className="border-[#00F0FF]/50 data-[state=checked]:bg-[#00F0FF] data-[state=checked]:border-[#00F0FF]"
+                            className="border-accent/50 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
                             onClick={(e) => e.stopPropagation()}
                           />
-                          <span className="bg-gradient-to-r from-[#FF4D00] to-[#FF6B35] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">
+                          <span className="bg-secondary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">
                             {index + 1}
                           </span>
                           <span className="text-lg font-semibold flex-1 text-left">{section.title}</span>
@@ -205,7 +207,7 @@ export const GuideTemplate = ({
                               prose-p:text-gray-300 prose-p:leading-relaxed
                               prose-strong:text-white prose-strong:font-semibold
                               prose-ul:text-gray-300 prose-li:text-gray-300
-                              prose-code:bg-gray-800 prose-code:text-[#00F0FF] prose-code:px-2 prose-code:py-1 prose-code:rounded
+                              prose-code:bg-gray-800 prose-code:text-accent prose-code:px-2 prose-code:py-1 prose-code:rounded
                               prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-lg
                               prose-img:rounded-lg prose-img:shadow-lg prose-img:border prose-img:border-gray-700"
                             dangerouslySetInnerHTML={{ 
@@ -230,7 +232,7 @@ export const GuideTemplate = ({
 
             {/* Downloadable Resources - Moved to end */}
             {downloadableResources.length > 0 && (
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm mt-12 shadow-lg">
+              <Card className="bg-primary/80 border-gray-700 backdrop-blur-sm mt-12 shadow-lg">
                 <CardHeader>
                   <h2 className="text-xl font-semibold text-white">Take These Resources With You</h2>
                   <p className="text-gray-400">Download these materials to support your AI development journey</p>
@@ -238,15 +240,15 @@ export const GuideTemplate = ({
                 <CardContent>
                   <div className="grid gap-3">
                     {downloadableResources.map((resource, index) => (
-                      <Button
-                        key={index}
-                        variant="ghost"
-                        className="justify-start bg-white/5 border border-[#FF4D00]/30 text-white hover:bg-[#FF4D00]/20 hover:border-[#FF4D00]/50 transition-all duration-300"
-                        onClick={() => window.open(resource.url, '_blank')}
-                      >
-                        <FileDown className="h-4 w-4 mr-2 text-[#FF4D00]" />
-                        <span className="flex-1 text-left">{resource.title}</span>
-                        <Badge variant="outline" className="ml-auto text-xs text-[#00F0FF] border-[#00F0FF]/50 bg-transparent">
+                        <Button
+                          key={index}
+                          variant="ghost"
+                          className="justify-start bg-primary/60 border border-secondary/30 text-white hover:bg-secondary/20 hover:border-secondary/50 transition-all duration-300"
+                          onClick={() => window.open(resource.url, '_blank')}
+                        >
+                          <FileDown className="h-4 w-4 mr-2 text-secondary" />
+                          <span className="flex-1 text-left">{resource.title}</span>
+                          <Badge variant="outline" className="ml-auto text-xs text-accent border-accent/50 bg-transparent">
                           {resource.type}
                         </Badge>
                       </Button>
