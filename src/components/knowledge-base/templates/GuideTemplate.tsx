@@ -168,33 +168,6 @@ export const GuideTemplate = ({
               </Card>
             )}
 
-            {/* Downloadable Resources */}
-            {downloadableResources.length > 0 && (
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm mb-8 shadow-lg">
-                <CardHeader>
-                  <h2 className="text-xl font-semibold text-white">Resources</h2>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-3">
-                    {downloadableResources.map((resource, index) => (
-                      <Button
-                        key={index}
-                        variant="ghost"
-                        className="justify-start bg-white/5 border border-[#FF4D00]/30 text-white hover:bg-[#FF4D00]/20 hover:border-[#FF4D00]/50 transition-all duration-300"
-                        onClick={() => window.open(resource.url, '_blank')}
-                      >
-                        <FileDown className="h-4 w-4 mr-2 text-[#FF4D00]" />
-                        <span className="flex-1 text-left">{resource.title}</span>
-                        <Badge variant="outline" className="ml-auto text-xs text-[#00F0FF] border-[#00F0FF]/50 bg-transparent">
-                          {resource.type}
-                        </Badge>
-                      </Button>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
             {/* Guide Sections */}
             <div className="space-y-6">
               {sections.map((section, index) => (
@@ -236,6 +209,34 @@ export const GuideTemplate = ({
                 </Card>
               ))}
             </div>
+
+            {/* Downloadable Resources - Moved to end */}
+            {downloadableResources.length > 0 && (
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm mt-12 shadow-lg">
+                <CardHeader>
+                  <h2 className="text-xl font-semibold text-white">Take These Resources With You</h2>
+                  <p className="text-gray-400">Download these materials to support your AI development journey</p>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-3">
+                    {downloadableResources.map((resource, index) => (
+                      <Button
+                        key={index}
+                        variant="ghost"
+                        className="justify-start bg-white/5 border border-[#FF4D00]/30 text-white hover:bg-[#FF4D00]/20 hover:border-[#FF4D00]/50 transition-all duration-300"
+                        onClick={() => window.open(resource.url, '_blank')}
+                      >
+                        <FileDown className="h-4 w-4 mr-2 text-[#FF4D00]" />
+                        <span className="flex-1 text-left">{resource.title}</span>
+                        <Badge variant="outline" className="ml-auto text-xs text-[#00F0FF] border-[#00F0FF]/50 bg-transparent">
+                          {resource.type}
+                        </Badge>
+                      </Button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>

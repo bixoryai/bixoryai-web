@@ -519,22 +519,22 @@ Remember: AI development is as much about the process as it is about the technol
   const downloadableResources = [
     {
       title: "AI Development Roadmap PDF",
-      url: "#",
+      url: "https://github.com/microsoft/AI-For-Beginners/blob/main/pdf/ai-for-beginners.pdf",
       type: "PDF"
     },
     {
       title: "Python Environment Setup Script",
-      url: "#",
+      url: "https://raw.githubusercontent.com/microsoft/vscode-python/main/build/conda/install.sh",
       type: "Shell Script"
     },
     {
       title: "ML Project Template Repository",
-      url: "#",
+      url: "https://github.com/drivendata/cookiecutter-data-science",
       type: "GitHub Repo"
     },
     {
       title: "Curated AI Learning Resources",
-      url: "#",
+      url: "https://github.com/josephmisiti/awesome-machine-learning/blob/master/README.md",
       type: "JSON"
     }
   ];
