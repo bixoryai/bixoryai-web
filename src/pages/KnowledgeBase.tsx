@@ -29,8 +29,10 @@ const KnowledgeBase = () => {
       title: "Latest Trends in Machine Learning",
       description: "Explore the cutting-edge developments in machine learning, from transformer architectures to federated learning approaches.",
       category: "Article",
+      url: "/knowledge-base/latest-ml-trends",
       tags: ["ML", "Trends", "Research", "Transformers", "LLMs"],
-      isPlaceholder: true
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
     },
     {
       id: "3",
