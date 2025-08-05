@@ -534,8 +534,8 @@ const prompt = await promptTemplate.format({
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#0A192F] to-transparent"></div>
         </section>
 
-        {/* Content Section */}
-        <div className="relative">
+        {/* Content Section with Different Background */}
+        <div className="relative bg-gradient-to-br from-primary via-primary to-blue-900">
           <GuideTemplate
             title="" // Empty title since we handle it in hero
             description=""
@@ -547,6 +547,9 @@ const prompt = await promptTemplate.format({
             tags={tags}
           />
         </div>
+        
+        {/* Gradient Transition Before Footer */}
+        <div className="h-32 bg-gradient-to-b from-blue-900 to-primary"></div>
         
         {/* Navigation Component */}
         <GuideNavigation />
