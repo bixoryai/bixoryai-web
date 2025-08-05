@@ -1,7 +1,8 @@
-import { ArticleTemplate } from "@/components/knowledge-base/templates/ArticleTemplate";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Zap, Smartphone, Atom, Building2, Cpu, TrendingUp, Shield, Globe, Users } from "lucide-react";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import heroImage from "@/assets/ml-trends-hero.jpg";
 import agenticAiImage from "@/assets/agentic-ai-illustration.jpg";
 import multimodalAiImage from "@/assets/multimodal-ai-illustration.jpg";
@@ -366,89 +367,63 @@ export default function LatestMLTrends() {
 `;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A192F] to-[#0D1B2A]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A192F]/90 backdrop-blur-sm border-b border-gray-700/50">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="BIXORY AI" className="h-9" />
-              <span className="text-xl font-bold bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
-                BIXORY AI
-              </span>
-            </div>
-            <a 
-              href="/knowledge-base" 
-              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm"
-            >
-              ← Back to Knowledge Base
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Article Content */}
-      <div className="pt-24 pb-16">
-        <div className="container mx-auto px-6 max-w-7xl">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
-                Latest Trends in Machine Learning
-              </span>
-            </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              Shaping the Future of AI in 2025: An in-depth analysis of breakthrough innovations transforming industries worldwide
-            </p>
-            
-            {/* Meta Information */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-gray-300 mb-8">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-                <span>BIXORY AI Research Team</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span>12 min read</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span>January 8, 2025</span>
-              </div>
-            </div>
-
-            {/* Tags */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              {["Machine Learning", "AI Trends", "Agentic AI", "Multimodal AI", "Edge Computing", "Enterprise AI"].map((tag) => (
-                <span key={tag} className="px-3 py-1 bg-gray-800/50 border border-[#00F0FF]/50 text-[#00F0FF] text-sm rounded-full">
-                  {tag}
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-[#0A192F] to-[#0D1B2A]">
+        <div className="pt-24 pb-16">
+          <div className="container mx-auto px-6 max-w-7xl">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+                  Latest Trends in Machine Learning
                 </span>
-              ))}
-            </div>
-          </div>
+              </h1>
+              <p className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto">
+                Shaping the Future of AI in 2025: An in-depth analysis of breakthrough innovations transforming industries worldwide
+              </p>
+              
+              {/* Meta Information */}
+              <div className="flex flex-wrap items-center justify-center gap-6 text-gray-300 mb-8">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                  </svg>
+                  <span>BIXORY AI Research Team</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span>12 min read</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  <span>January 8, 2025</span>
+                </div>
+              </div>
 
-          {/* Article Content */}
-          <div 
-            className="prose prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+              {/* Tags */}
+              <div className="flex flex-wrap justify-center gap-2 mb-8">
+                {["Machine Learning", "AI Trends", "Agentic AI", "Multimodal AI", "Edge Computing", "Enterprise AI"].map((tag) => (
+                  <span key={tag} className="px-3 py-1 bg-gray-800/50 border border-[#00F0FF]/50 text-[#00F0FF] text-sm rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Article Content */}
+            <div 
+              className="prose prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-[#0A192F] border-t border-gray-700/50 py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-400">
-            © 2025 BIXORY AI. Empowering the future through artificial intelligence.
-          </p>
-        </div>
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 }
