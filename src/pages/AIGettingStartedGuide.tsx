@@ -1,6 +1,7 @@
 import { GuideTemplate } from "@/components/knowledge-base/templates/GuideTemplate";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import GuideNavigation from "@/components/navigation/GuideNavigation";
 import { Clock } from "lucide-react";
 import aiHero from "@/assets/ai-development-hero.jpg";
 import aiRoadmap from "@/assets/ai-roadmap-infographic.jpg";
@@ -798,6 +799,9 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]</code>
             tags={tags}
           />
         </div>
+        
+        {/* Navigation Component */}
+        <GuideNavigation />
       </div>
       <Footer />
     </>
