@@ -3,7 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GuideNavigation from "@/components/navigation/GuideNavigation";
 import { Clock } from "lucide-react";
-import aiFrameworksComparison from "@/assets/ai-frameworks-comparison.jpg";
+import advancedPromptHero from "@/assets/advanced-prompt-engineering-hero.jpg";
 
 const AdvancedPromptEngineering = () => {
   const sections = [
@@ -469,18 +469,18 @@ const prompt = await promptTemplate.format({
   const downloadableResources = [
     {
       title: "Advanced Prompting Cheat Sheet",
-      url: "/downloads/advanced-prompting-cheat-sheet.pdf",
+      url: "https://docs.google.com/document/d/1XXrw4HouOAB5iM8HY5d3MxlmRJLuSZVEZ4x-WWQR_58/edit",
       type: "PDF"
     },
     {
       title: "Prompt Template Library",
-      url: "/downloads/prompt-templates.json",
-      type: "JSON"
+      url: "https://github.com/f/awesome-chatgpt-prompts",
+      type: "GitHub"
     },
     {
-      title: "Testing Framework Code",
-      url: "/downloads/prompt-testing-framework.py",
-      type: "Python"
+      title: "LangChain Prompt Templates",
+      url: "https://python.langchain.com/docs/concepts/#prompt-templates",
+      type: "Documentation"
     }
   ];
 
@@ -495,7 +495,7 @@ const prompt = await promptTemplate.format({
           {/* Hero Background */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${aiFrameworksComparison})` }}
+            style={{ backgroundImage: `url(${advancedPromptHero})` }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/70 via-[#0A192F]/60 to-[#0D1B2A]/80"></div>
           </div>
