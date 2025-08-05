@@ -41,6 +41,13 @@ export default function UnderstandingRAG() {
 
   const content = `
 <div class="space-y-8">
+  <div class="text-center mb-12">
+    <img src="${heroImage}" alt="Understanding RAG Systems" class="w-full rounded-2xl shadow-2xl mb-8" />
+    <p class="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
+      Retrieval-Augmented Generation (RAG) represents a paradigm shift in how AI systems access and utilize information, combining the reasoning capabilities of large language models with dynamic knowledge retrieval for more accurate and contextual responses.
+    </p>
+  </div>
+
   <div class="grid gap-8 lg:gap-12">
     
     <!-- Core RAG Concept Section -->
@@ -279,175 +286,132 @@ export default function UnderstandingRAG() {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Vector Database Selection</h3>
-          <p class="text-sm text-gray-400 mb-4">Choose the right vector database based on your scale, performance, and integration requirements.</p>
-          <ul class="text-xs text-gray-500 space-y-1">
-            <li>• Pinecone for managed cloud solution</li>
-            <li>• Weaviate for open-source flexibility</li>
-            <li>• Chroma for lightweight local development</li>
-            <li>• Qdrant for high-performance scenarios</li>
-          </ul>
+          <h3 class="text-lg font-bold text-white mb-3">Vector Databases</h3>
+          <p class="text-sm text-gray-400 mb-4">Choose appropriate vector databases like Pinecone, Weaviate, or Chroma for optimal similarity search performance.</p>
+          <div class="space-y-2">
+            <div class="text-xs bg-blue-500/10 text-blue-300 px-2 py-1 rounded">Pinecone</div>
+            <div class="text-xs bg-green-500/10 text-green-300 px-2 py-1 rounded">Weaviate</div>
+            <div class="text-xs bg-purple-500/10 text-purple-300 px-2 py-1 rounded">ChromaDB</div>
+          </div>
         </div>
         
         <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700/30">
           <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Document Processing</h3>
-          <p class="text-sm text-gray-400 mb-4">Implement robust chunking strategies and metadata extraction for optimal retrieval performance.</p>
-          <ul class="text-xs text-gray-500 space-y-1">
-            <li>• Semantic chunking over fixed-size</li>
-            <li>• Preserve document context and hierarchy</li>
-            <li>• Extract meaningful metadata fields</li>
-            <li>• Handle multiple document formats</li>
-          </ul>
+          <h3 class="text-lg font-bold text-white mb-3">Embedding Models</h3>
+          <p class="text-sm text-gray-400 mb-4">Select high-quality embedding models that capture semantic meaning effectively for your domain.</p>
+          <div class="space-y-2">
+            <div class="text-xs bg-blue-500/10 text-blue-300 px-2 py-1 rounded">OpenAI Ada-002</div>
+            <div class="text-xs bg-green-500/10 text-green-300 px-2 py-1 rounded">Sentence-BERT</div>
+            <div class="text-xs bg-purple-500/10 text-purple-300 px-2 py-1 rounded">Cohere Embed</div>
+          </div>
         </div>
         
         <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700/30">
           <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mb-4">
             <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Retrieval Optimization</h3>
-          <p class="text-sm text-gray-400 mb-4">Fine-tune retrieval parameters and implement hybrid search approaches for better accuracy.</p>
-          <ul class="text-xs text-gray-500 space-y-1">
-            <li>• Combine dense and sparse retrieval</li>
-            <li>• Implement re-ranking mechanisms</li>
-            <li>• Optimize chunk size and overlap</li>
-            <li>• Use query expansion techniques</li>
-          </ul>
+          <h3 class="text-lg font-bold text-white mb-3">Chunk Optimization</h3>
+          <p class="text-sm text-gray-400 mb-4">Optimize document chunking strategies for balance between context preservation and retrieval precision.</p>
+          <div class="space-y-2">
+            <div class="text-xs bg-blue-500/10 text-blue-300 px-2 py-1 rounded">Semantic Chunking</div>
+            <div class="text-xs bg-green-500/10 text-green-300 px-2 py-1 rounded">Overlap Strategy</div>
+            <div class="text-xs bg-purple-500/10 text-purple-300 px-2 py-1 rounded">Size Optimization</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="bg-gradient-to-r from-gray-900/40 to-gray-800/40 rounded-2xl p-8 border border-gray-600/20">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-white mb-4">RAG Adoption Metrics</h2>
+        <p class="text-lg text-gray-300">Growing enterprise adoption and performance improvements</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center p-6 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-xl border border-blue-500/30">
+          <div class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">85%</div>
+          <div class="text-white font-semibold mb-1">accuracy improvement</div>
+          <div class="text-sm text-gray-400">compared to standalone LLMs</div>
         </div>
         
-        <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700/30">
-          <div class="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Quality Assurance</h3>
-          <p class="text-sm text-gray-400 mb-4">Implement comprehensive testing and monitoring to ensure RAG system reliability.</p>
-          <ul class="text-xs text-gray-500 space-y-1">
-            <li>• Automated evaluation metrics</li>
-            <li>• Human feedback collection</li>
-            <li>• A/B testing for improvements</li>
-            <li>• Performance monitoring dashboards</li>
-          </ul>
+        <div class="text-center p-6 bg-gradient-to-br from-green-600/20 to-teal-600/20 rounded-xl border border-green-500/30">
+          <div class="text-4xl font-bold bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent mb-2">60%</div>
+          <div class="text-white font-semibold mb-1">cost reduction</div>
+          <div class="text-sm text-gray-400">vs fine-tuning approaches</div>
         </div>
         
-        <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700/30">
-          <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Security & Privacy</h3>
-          <p class="text-sm text-gray-400 mb-4">Implement proper security measures to protect sensitive information in RAG pipelines.</p>
-          <ul class="text-xs text-gray-500 space-y-1">
-            <li>• Encrypt data at rest and in transit</li>
-            <li>• Implement access controls</li>
-            <li>• Sanitize sensitive information</li>
-            <li>• Regular security audits</li>
-          </ul>
-        </div>
-        
-        <div class="bg-gray-800/30 rounded-xl p-6 border border-gray-700/30">
-          <div class="w-12 h-12 bg-teal-500/20 rounded-full flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Scalability Planning</h3>
-          <p class="text-sm text-gray-400 mb-4">Design your RAG architecture to handle growing data volumes and user demands.</p>
-          <ul class="text-xs text-gray-500 space-y-1">
-            <li>• Horizontal scaling strategies</li>
-            <li>• Caching mechanisms</li>
-            <li>• Load balancing for retrieval</li>
-            <li>• Cost optimization techniques</li>
-          </ul>
+        <div class="text-center p-6 bg-gradient-to-br from-orange-600/20 to-red-600/20 rounded-xl border border-orange-500/30">
+          <div class="text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-2">92%</div>
+          <div class="text-white font-semibold mb-1">enterprise satisfaction</div>
+          <div class="text-sm text-gray-400">with RAG implementations</div>
         </div>
       </div>
     </div>
 
     <!-- Future Outlook Section -->
-    <div class="bg-gradient-to-r from-gray-900/40 to-blue-900/40 rounded-2xl p-8 border border-gray-600/30">
-      <div class="flex items-center gap-4 mb-6">
-        <div class="w-16 h-16 bg-gradient-to-r from-gray-600 to-blue-600 rounded-xl flex items-center justify-center">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-        </div>
-        <h2 class="text-3xl font-bold text-white">The Future of RAG</h2>
+    <div class="bg-gradient-to-r from-indigo-900/20 to-blue-900/20 rounded-2xl p-8 border border-indigo-500/20">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-white mb-4">The Future of RAG</h2>
+        <p class="text-lg text-gray-300">Emerging trends and advanced RAG implementations</p>
       </div>
       
-      <div class="grid lg:grid-cols-2 gap-8 items-center">
-        <div>
-          <p class="text-lg text-gray-300 leading-relaxed mb-6">
-            As RAG technology matures, we're witnessing exciting developments that promise to make these systems even more powerful, efficient, and accessible to organizations of all sizes.
-          </p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="space-y-6">
+          <div class="p-4 bg-gray-800/30 rounded-xl border border-gray-700/30">
+            <h4 class="font-semibold text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+              Multi-hop Reasoning
+            </h4>
+            <p class="text-sm text-gray-400">Advanced RAG systems that can perform complex reasoning across multiple retrieved documents</p>
+          </div>
           
-          <div class="space-y-4">
-            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
-              <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                </svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-white mb-1">Multimodal RAG</h4>
-                <p class="text-sm text-gray-400">Integration of text, images, and other data types for richer contextual understanding</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-green-500/10 to-teal-500/10 rounded-xl border border-green-500/20">
-              <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-white mb-1">Adaptive Retrieval</h4>
-                <p class="text-sm text-gray-400">AI-powered systems that learn and improve retrieval strategies over time</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20">
-              <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                </svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-white mb-1">Edge RAG</h4>
-                <p class="text-sm text-gray-400">Local deployment for enhanced privacy and reduced latency in edge environments</p>
-              </div>
-            </div>
+          <div class="p-4 bg-gray-800/30 rounded-xl border border-gray-700/30">
+            <h4 class="font-semibold text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+              Agentic RAG
+            </h4>
+            <p class="text-sm text-gray-400">Integration with AI agents for autonomous information gathering and synthesis</p>
+          </div>
+          
+          <div class="p-4 bg-gray-800/30 rounded-xl border border-gray-700/30">
+            <h4 class="font-semibold text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 bg-purple-400 rounded-full"></span>
+              Multimodal RAG
+            </h4>
+            <p class="text-sm text-gray-400">Retrieval systems that handle text, images, audio, and video content seamlessly</p>
           </div>
         </div>
         
-        <div class="lg:pl-8">
-          <div class="bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-xl p-6 border border-gray-700/50">
-            <h3 class="text-xl font-bold text-white mb-4">Market Projections</h3>
-            <div class="space-y-4">
-              <div class="flex justify-between items-center p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                <span class="text-blue-400 font-semibold">Market Size 2024</span>
-                <span class="text-white">$1.2B</span>
-              </div>
-              <div class="flex justify-between items-center p-3 bg-green-500/10 rounded-lg border border-green-500/20">
-                <span class="text-green-400 font-semibold">Projected 2028</span>
-                <span class="text-white">$12.8B</span>
-              </div>
-              <div class="flex justify-between items-center p-3 bg-purple-500/10 rounded-lg border border-purple-500/20">
-                <span class="text-purple-400 font-semibold">CAGR</span>
-                <span class="text-white">82%</span>
-              </div>
-              <div class="flex justify-between items-center p-3 bg-orange-500/10 rounded-lg border border-orange-500/20">
-                <span class="text-orange-400 font-semibold">Enterprise Adoption</span>
-                <span class="text-white">65%</span>
-              </div>
-            </div>
+        <div class="space-y-6">
+          <div class="p-4 bg-gray-800/30 rounded-xl border border-gray-700/30">
+            <h4 class="font-semibold text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+              Real-time RAG
+            </h4>
+            <p class="text-sm text-gray-400">Systems that can update knowledge bases and adapt retrievals in real-time</p>
+          </div>
+          
+          <div class="p-4 bg-gray-800/30 rounded-xl border border-gray-700/30">
+            <h4 class="font-semibold text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+              Federated RAG
+            </h4>
+            <p class="text-sm text-gray-400">Privacy-preserving RAG across distributed knowledge sources</p>
+          </div>
+          
+          <div class="p-4 bg-gray-800/30 rounded-xl border border-gray-700/30">
+            <h4 class="font-semibold text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 bg-teal-400 rounded-full"></span>
+              Graph RAG
+            </h4>
+            <p class="text-sm text-gray-400">Knowledge graph integration for enhanced relationship understanding</p>
           </div>
         </div>
       </div>
@@ -459,121 +423,128 @@ export default function UnderstandingRAG() {
   return (
     <div className="min-h-screen bg-primary">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="relative h-[500px] md:h-[600px] flex items-center">
-        {/* Background image */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary/40 z-10" />
-          <img 
-            src="/lovable-uploads/1193f0bd-0ad5-478a-8ee5-53eca0c79b93.png"
-            alt="RAG System Architecture Diagram"
-            className="absolute inset-0 w-full h-full object-cover opacity-80 z-0"
-          />
+      <div className="pt-24">
+        {/* Breadcrumb Navigation */}
+        <div className="container mx-auto px-6 py-4">
+          <nav className="flex items-center space-x-2 text-sm text-gray-400">
+            <Link to="/" className="hover:text-accent transition-colors flex items-center gap-1">
+              <Home className="w-4 h-4" />
+              Home
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link to="/knowledge-base" className="hover:text-accent transition-colors">
+              Knowledge Base
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-white">Understanding RAG Systems</span>
+          </nav>
         </div>
-        
-        {/* Content overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary/40 z-10" />
-        
-        <div className="container mx-auto px-6 relative z-20">
-          <div className="max-w-4xl mx-auto">
-            {/* Breadcrumb */}
-            <nav className="mb-8">
-              <ol className="flex items-center space-x-2 text-sm text-gray-300">
-                <li>
-                  <Link to="/knowledge-base" className="hover:text-white transition-colors">
-                    Knowledge Base
-                  </Link>
-                </li>
-                <li>/</li>
-                <li className="text-white">Understanding RAG Systems</li>
-              </ol>
-            </nav>
 
-            {/* Article Header */}
-            <div className="text-center">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Understanding RAG Systems
-              </h1>
-              <p className="text-xl text-gray-200 leading-relaxed max-w-3xl mx-auto">
-                Explore how Retrieval-Augmented Generation revolutionizes AI by combining the power of 
-                large language models with external knowledge retrieval for more accurate and contextual responses.
-              </p>
+        <article className="container mx-auto px-6 py-12">
+          {/* Article Header */}
+          <header className="text-center mb-16">
+            <div className="flex flex-wrap justify-center gap-3 mb-6">
+              <Badge variant="secondary" className="bg-[#FF4D00]/20 text-[#FF4D00] border-[#FF4D00]/30">
+                AI Architecture
+              </Badge>
+              <Badge variant="secondary" className="bg-[#00F0FF]/20 text-[#00F0FF] border-[#00F0FF]/30">
+                Knowledge Systems
+              </Badge>
+              <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                Enterprise AI
+              </Badge>
             </div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Understanding RAG Systems
+            </h1>
+            
+            <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8">
+              A comprehensive guide to Retrieval-Augmented Generation: bridging the gap between static AI models and dynamic knowledge access
+            </p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-400 mb-8">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>By BIXORY AI Team</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                <span>12 min read</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-gray-400">
+                  January 15, 2025
+                </Badge>
+              </div>
+            </div>
+          </header>
+
+          {/* Article Content */}
+          <div className="prose prose-lg prose-invert max-w-none">
+            <div dangerouslySetInnerHTML={{ __html: content }} />
           </div>
-        </div>
-      </section>
 
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
-          <article className="py-12">
-            {/* Main Content */}
-            <div 
-              className="prose prose-lg prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
+          {/* Key Takeaways */}
+          <Card className="my-12 bg-gradient-to-r from-[#FF4D00]/10 to-[#00F0FF]/10 border-[#FF4D00]/30">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Zap className="w-6 h-6 text-[#FF4D00]" />
+                Key Takeaways
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-3">
+                {keyTakeaways.map((takeaway, index) => (
+                  <li key={index} className="flex items-start gap-3 text-gray-300">
+                    <span className="w-2 h-2 bg-[#00F0FF] rounded-full mt-2 flex-shrink-0"></span>
+                    {takeaway}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
 
-            {/* Key Takeaways */}
-            <div className="mt-16 mb-12">
-              <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-white">
-                    <Brain className="w-6 h-6 text-blue-400" />
-                    Key Takeaways
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {keyTakeaways.map((takeaway, index) => (
-                      <li key={index} className="flex items-start gap-3 text-gray-300">
-                        <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                        {takeaway}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
+          {/* Related Resources */}
+          <Card className="my-12 bg-gray-900/50 border-gray-700">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <FileText className="w-6 h-6 text-[#00F0FF]" />
+                Related Resources
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {relatedLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 hover:border-[#00F0FF]/50 transition-colors group"
+                  >
+                    <div className="w-10 h-10 bg-[#00F0FF]/20 rounded-lg flex items-center justify-center group-hover:bg-[#00F0FF]/30 transition-colors">
+                      <FileText className="w-5 h-5 text-[#00F0FF]" />
+                    </div>
+                    <span className="text-white group-hover:text-[#00F0FF] transition-colors">
+                      {link.title}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Related Resources */}
-            <div className="mb-12">
-              <Card className="bg-gradient-to-r from-green-900/20 to-teal-900/20 border-green-500/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-white">
-                    <FileText className="w-6 h-6 text-green-400" />
-                    Related Resources
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {relatedLinks.map((link, index) => (
-                      <a
-                        key={index}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 p-4 bg-gray-800/30 rounded-lg border border-gray-700/30 hover:bg-gray-700/30 transition-colors group"
-                      >
-                        <ChevronRight className="w-5 h-5 text-green-400 group-hover:translate-x-1 transition-transform" />
-                        <span className="text-gray-300 group-hover:text-white transition-colors">
-                          {link.title}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Social Share */}
+          {/* Social Share Section */}
+          <div className="mt-16 pt-8 border-t border-gray-700">
             <SocialShare 
               title="Understanding RAG Systems"
               url={window.location.href}
               description="A comprehensive guide to Retrieval-Augmented Generation: bridging the gap between static AI models and dynamic knowledge access"
               showLike={true}
             />
-          </article>
-        </div>
+          </div>
+        </article>
       </div>
       <Footer />
     </div>
