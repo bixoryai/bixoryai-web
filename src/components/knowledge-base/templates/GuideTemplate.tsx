@@ -198,10 +198,29 @@ export const GuideTemplate = ({
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="px-6 pb-6" id={section.id}>
-                        <div 
-                          className="text-gray-300 leading-relaxed prose prose-invert max-w-none"
-                          dangerouslySetInnerHTML={{ __html: section.content }}
-                        />
+                        <div className="text-gray-300 leading-relaxed space-y-4">
+                          <div 
+                            className="prose prose-invert prose-lg max-w-none
+                              prose-headings:text-white prose-headings:font-bold
+                              prose-p:text-gray-300 prose-p:leading-relaxed
+                              prose-strong:text-white prose-strong:font-semibold
+                              prose-ul:text-gray-300 prose-li:text-gray-300
+                              prose-code:bg-gray-800 prose-code:text-[#00F0FF] prose-code:px-2 prose-code:py-1 prose-code:rounded
+                              prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-lg
+                              prose-img:rounded-lg prose-img:shadow-lg prose-img:border prose-img:border-gray-700"
+                            dangerouslySetInnerHTML={{ 
+                              __html: section.content
+                                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                .replace(/• /g, '<li>')
+                                .replace(/\n\n/g, '</p><p>')
+                                .replace(/```python\n([\s\S]*?)\n```/g, '<pre><code class="language-python">$1</code></pre>')
+                                .replace(/```yaml\n([\s\S]*?)\n```/g, '<pre><code class="language-yaml">$1</code></pre>')
+                                .replace(/```dockerfile\n([\s\S]*?)\n```/g, '<pre><code class="language-dockerfile">$1</code></pre>')
+                                .replace(/```\n([\s\S]*?)\n```/g, '<pre><code>$1</code></pre>')
+                                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                            }}
+                          />
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
