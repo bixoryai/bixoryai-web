@@ -239,7 +239,7 @@ const AIEthicsAndResponsibleDevelopment = () => {
   `;
 
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-blue-900">
       <Navbar />
       
       <Hero
@@ -254,80 +254,82 @@ const AIEthicsAndResponsibleDevelopment = () => {
         height="h-[60vh]"
       />
 
-      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
-        <Breadcrumb className="mb-6 md:mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/knowledge-base" className="text-gray-400 hover:text-white">
-                Knowledge Base
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage className="text-white">AI Ethics and Responsible Development</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="bg-primary/95 backdrop-blur-sm">
+        <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+          <Breadcrumb className="mb-6 md:mb-8">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/knowledge-base" className="text-gray-400 hover:text-white">
+                  Knowledge Base
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-white">AI Ethics and Responsible Development</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mb-8">
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">AI Ethics</span>
-              <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Responsible AI</span>
-              <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Technology Policy</span>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mb-8">
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">AI Ethics</span>
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Responsible AI</span>
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Technology Policy</span>
+              </div>
+              
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-6">
+                <span>By BIXORY AI Research Team</span>
+                <span>•</span>
+                <span>12 min read</span>
+                <span>•</span>
+                <span>August 5, 2024</span>
+              </div>
+              
+              <p className="text-lg text-gray-300 leading-relaxed">
+                As artificial intelligence becomes increasingly integrated into our daily lives, the importance of ethical AI development cannot be overstated. This comprehensive guide explores the fundamental principles of AI ethics, common challenges faced by developers, and practical frameworks for building responsible AI systems that benefit humanity while minimizing potential harms.
+              </p>
             </div>
-            
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-6">
-              <span>By BIXORY AI Research Team</span>
-              <span>•</span>
-              <span>12 min read</span>
-              <span>•</span>
-              <span>August 5, 2024</span>
-            </div>
-            
-            <p className="text-lg text-gray-300 leading-relaxed">
-              As artificial intelligence becomes increasingly integrated into our daily lives, the importance of ethical AI development cannot be overstated. This comprehensive guide explores the fundamental principles of AI ethics, common challenges faced by developers, and practical frameworks for building responsible AI systems that benefit humanity while minimizing potential harms.
-            </p>
-          </div>
 
-          <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mb-8">
-            <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Key Takeaways</h2>
-            <ul className="space-y-3">
-              {keyTakeaways.map((takeaway, index) => (
-                <li key={index} className="flex items-start space-x-3">
-                  <div className="bg-secondary w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white text-xs font-bold">{index + 1}</span>
+            <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Key Takeaways</h2>
+              <ul className="space-y-3">
+                {keyTakeaways.map((takeaway, index) => (
+                  <li key={index} className="flex items-start space-x-3">
+                    <div className="bg-secondary w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-white text-xs font-bold">{index + 1}</span>
+                    </div>
+                    <span className="text-gray-300">{takeaway}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div dangerouslySetInnerHTML={{ __html: articleContent }} />
+
+            <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mt-8">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Related Research</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {relatedLinks.map((link, index) => (
+                  <div
+                    key={index}
+                    className="p-4 bg-primary/50 rounded-lg border border-gray-600 hover:border-gray-500 transition-colors cursor-pointer"
+                    onClick={() => window.open(link.url, '_blank')}
+                  >
+                    <h3 className="text-white font-medium mb-2">{link.title}</h3>
+                    <span className="text-sm text-gray-400">External Resource →</span>
                   </div>
-                  <span className="text-gray-300">{takeaway}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div dangerouslySetInnerHTML={{ __html: articleContent }} />
-
-          <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mt-8">
-            <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Related Research</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              {relatedLinks.map((link, index) => (
-                <div
-                  key={index}
-                  className="p-4 bg-primary/50 rounded-lg border border-gray-600 hover:border-gray-500 transition-colors cursor-pointer"
-                  onClick={() => window.open(link.url, '_blank')}
-                >
-                  <h3 className="text-white font-medium mb-2">{link.title}</h3>
-                  <span className="text-sm text-gray-400">External Resource →</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="mt-8">
-            <SocialShare 
-              title="AI Ethics and Responsible Development: Building a Better Future"
-              url={`${window.location.origin}/knowledge-base/ai-ethics-responsible-development`}
-              description="Explore the fundamental principles of AI ethics and learn how to build responsible AI systems that benefit humanity."
-            />
+            <div className="mt-8">
+              <SocialShare 
+                title="AI Ethics and Responsible Development: Building a Better Future"
+                url={`${window.location.origin}/knowledge-base/ai-ethics-responsible-development`}
+                description="Explore the fundamental principles of AI ethics and learn how to build responsible AI systems that benefit humanity."
+              />
+            </div>
           </div>
         </div>
       </div>
