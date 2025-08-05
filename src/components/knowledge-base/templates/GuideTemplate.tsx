@@ -75,7 +75,7 @@ export const GuideTemplate = ({
   };
 
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen bg-transparent">
       <GuideNavigation />
       <div className="container mx-auto px-4 md:px-6 max-w-6xl pt-24 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
