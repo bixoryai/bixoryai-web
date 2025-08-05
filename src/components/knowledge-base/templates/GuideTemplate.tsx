@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Clock, FileDown, CheckCircle, Circle } from "lucide-react";
 import GuideNavigation from "@/components/navigation/GuideNavigation";
+import { SocialShare } from "@/components/social/SocialShare";
 
 interface GuideSection {
   id: string;
@@ -257,6 +258,22 @@ export const GuideTemplate = ({
                 </CardContent>
               </Card>
             )}
+
+            {/* Social Share Section */}
+            <Card className="bg-primary/80 border-gray-700 backdrop-blur-sm mt-8 lg:mt-12 shadow-lg">
+              <CardHeader>
+                <h2 className="text-lg md:text-xl font-semibold text-white">Found this guide helpful?</h2>
+              </CardHeader>
+              <CardContent>
+                <SocialShare 
+                  title={title}
+                  url={typeof window !== 'undefined' ? window.location.pathname : ''}
+                  description={description}
+                  showLike={true}
+                  compact={false}
+                />
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

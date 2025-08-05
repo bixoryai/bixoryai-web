@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Brain, Zap, Smartphone, Atom, Building2, Cpu, TrendingUp, Shield, Globe, Users, ChevronRight, Home } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { SocialShare } from "@/components/social/SocialShare";
 import heroImage from "@/assets/ml-trends-hero.jpg";
 import agenticAiImage from "@/assets/agentic-ai-illustration.jpg";
 import multimodalAiImage from "@/assets/multimodal-ai-illustration.jpg";
@@ -430,9 +431,21 @@ export default function LatestMLTrends() {
 
             {/* Article Content */}
             <div 
-              className="prose prose-invert max-w-none"
+              className="prose prose-invert max-w-none mb-12"
               dangerouslySetInnerHTML={{ __html: content }}
             />
+
+            {/* Social Share Section */}
+            <div className="bg-gradient-to-r from-gray-900/40 to-gray-800/40 rounded-2xl p-8 border border-gray-600/20 mb-8">
+              <h3 className="text-xl font-bold text-white mb-4">Found this article helpful?</h3>
+              <SocialShare 
+                title="Latest Trends in Machine Learning: Shaping the Future of AI in 2025"
+                url="/knowledge-base/latest-ml-trends"
+                description="An in-depth analysis of the most significant machine learning trends emerging in 2025, from agentic AI and multimodal systems to edge computing and quantum ML."
+                showLike={true}
+                compact={false}
+              />
+            </div>
           </div>
         </div>
       </div>

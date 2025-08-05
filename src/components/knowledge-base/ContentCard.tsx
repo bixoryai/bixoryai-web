@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Clock, Globe } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { SocialShare } from "@/components/social/SocialShare";
 
 interface ContentCardProps {
   title: string;
@@ -102,15 +103,28 @@ export const ContentCard = ({
         )}
 
         {crawledAt && (
-          <div className="flex items-center gap-1 text-xs text-gray-500">
+          <div className="flex items-center gap-1 text-xs text-gray-500 mb-3">
             <Clock className="h-3 w-3" />
             <span>Crawled {new Date(crawledAt).toLocaleDateString()}</span>
           </div>
         )}
 
         {isPlaceholder && (
-          <div className="text-xs text-yellow-400 italic">
+          <div className="text-xs text-yellow-400 italic mb-3">
             Placeholder - Will be populated via web crawling
+          </div>
+        )}
+
+        {/* Social Share Component */}
+        {url && (
+          <div className="border-t border-gray-700/30 pt-3 mt-3" onClick={(e) => e.stopPropagation()}>
+            <SocialShare 
+              title={title}
+              url={url}
+              description={description}
+              compact={true}
+              className="justify-between"
+            />
           </div>
         )}
       </CardContent>
