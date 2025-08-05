@@ -73,12 +73,12 @@ export const GuideTemplate = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A192F] to-[#0D1B2A] py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 py-12">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar - Table of Contents */}
           <div className="lg:col-span-1">
-            <Card className="bg-gray-900/50 border-gray-700/50 sticky top-8">
+            <Card className="bg-white/5 border-white/10 backdrop-blur-sm sticky top-8 shadow-xl">
               <CardHeader>
                 <h3 className="text-lg font-semibold text-white">Contents</h3>
                 <Progress value={completionPercentage} className="w-full" />
@@ -151,7 +151,7 @@ export const GuideTemplate = ({
 
             {/* Prerequisites */}
             {prerequisites.length > 0 && (
-              <Card className="bg-gray-900/50 border-gray-700/50 mb-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm mb-8 shadow-lg">
                 <CardHeader>
                   <h2 className="text-xl font-semibold text-white">Prerequisites</h2>
                 </CardHeader>
@@ -170,7 +170,7 @@ export const GuideTemplate = ({
 
             {/* Downloadable Resources */}
             {downloadableResources.length > 0 && (
-              <Card className="bg-gray-900/50 border-gray-700/50 mb-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm mb-8 shadow-lg">
                 <CardHeader>
                   <h2 className="text-xl font-semibold text-white">Resources</h2>
                 </CardHeader>
@@ -198,7 +198,7 @@ export const GuideTemplate = ({
             {/* Guide Sections */}
             <div className="space-y-6">
               {sections.map((section, index) => (
-                <Card key={section.id} id={section.id} className="bg-gray-900/50 border-gray-700/50">
+                <Card key={section.id} id={section.id} className="bg-white/5 border-white/10 backdrop-blur-sm shadow-lg hover:bg-white/10 transition-all duration-300">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
