@@ -704,7 +704,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]</code>
   const downloadableResources = [
     {
       title: "AI Development Roadmap PDF",
-      url: "https://www.microsoft.com/en-us/research/uploads/prod/2023/02/ML-Sys-AI-Research-Roadmap.pdf",
+      url: "https://www.dfc.gov/sites/default/files/media/documents/DFC_AI_Roadmap_and_Compliance_Plan_0.pdf",
       type: "PDF"
     },
     {
