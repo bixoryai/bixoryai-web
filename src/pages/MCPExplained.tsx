@@ -782,14 +782,14 @@ server.setRequestHandler("tools/call", async (request) => {
                 </span>
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 md:mb-8 leading-relaxed drop-shadow-md px-2">
-                Master the Model Context Protocol (MCP) to build powerful AI integrations that connect models with external tools and data sources.
+                A comprehensive guide to understanding and implementing the Model Context Protocol for AI tool integrations. Learn how to build secure, standardized connections between AI models and external services.
               </p>
               
               {/* Meta Information - Mobile Responsive */}
               <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 md:gap-8 text-gray-200 mb-6 md:mb-8 px-2">
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
                   <Clock className="h-4 w-4 md:h-5 md:w-5 text-[#00F0FF]" />
-                  <span className="font-medium">45 minutes</span>
+                  <span className="font-medium">90 minutes</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
                   <span className="text-yellow-400 text-base md:text-lg">●</span>
@@ -812,7 +812,7 @@ server.setRequestHandler("tools/call", async (request) => {
           <GuideTemplate
             title="" // Empty title since we handle it in hero
             description=""
-            estimatedTime={45}
+            estimatedTime={90}
             difficulty="Intermediate"
             prerequisites={prerequisites}
             sections={sections}
