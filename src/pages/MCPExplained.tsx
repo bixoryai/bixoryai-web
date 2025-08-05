@@ -11,9 +11,9 @@ const MCPExplained = () => {
       id: "what-is-mcp",
       title: "What is Model Context Protocol (MCP)?",
       content: `<div class="space-y-6">
-        <p class="text-lg text-gray-200"><strong>Model Context Protocol (MCP)</strong> is an open-source specification developed by Anthropic that standardizes how AI models and development tools interact with external data sources and services.</p>
+        <p class="text-lg text-gray-200"><strong>Model Context Protocol (MCP)</strong> is an open-source specification developed by <a href="https://www.anthropic.com" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Anthropic</a> that standardizes how AI models and development tools interact with external data sources and services.</p>
         
-        <p class="text-gray-300">Think of MCP as a <strong>universal translator</strong> between AI models and the tools they need to access. Instead of each AI application creating custom integrations for every service, MCP provides a standardized way for AI models to:</p>
+        <p class="text-gray-300">Think of MCP as a <strong>universal translator</strong> between AI models and the tools they need to access. Read the full <a href="https://spec.modelcontextprotocol.io/" target="_blank" class="text-blue-400 hover:text-blue-300 underline">MCP specification</a> for technical details.</p>
         
         <div class="grid md:grid-cols-2 gap-4 my-6">
           <div class="bg-blue-500/20 border border-blue-400/30 rounded-lg p-4">
@@ -81,7 +81,7 @@ const MCPExplained = () => {
               <li>• Manages authentication</li>
               <li>• Handles responses</li>
             </ul>
-            <div class="mt-2 text-xs text-cyan-300">Examples: Claude Desktop, custom AI apps</div>
+            <div class="mt-2 text-xs text-cyan-300">Examples: <a href="https://claude.ai/desktop" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Claude Desktop</a>, custom AI apps</div>
           </div>
           <div class="bg-purple-500/20 border border-purple-400/30 rounded-lg p-4">
             <h4 class="text-purple-300 font-semibold mb-2">🔧 MCP Server</h4>
@@ -165,13 +165,13 @@ const MCPExplained = () => {
             <div>
               <h5 class="text-gray-200 font-medium mb-2">For Node.js:</h5>
               <div class="bg-gray-900 border border-gray-700 rounded-lg p-3">
-                <code class="text-green-300 text-sm">npm install @modelcontextprotocol/sdk</code>
+                <code class="text-green-300 text-sm">npm install <a href="https://github.com/modelcontextprotocol/typescript-sdk" target="_blank" class="text-blue-400 hover:text-blue-300 underline">@modelcontextprotocol/sdk</a></code>
               </div>
             </div>
             <div>
               <h5 class="text-gray-200 font-medium mb-2">For Python:</h5>
               <div class="bg-gray-900 border border-gray-700 rounded-lg p-3">
-                <code class="text-green-300 text-sm">pip install mcp</code>
+                <code class="text-green-300 text-sm">pip install <a href="https://github.com/modelcontextprotocol/python-sdk" target="_blank" class="text-blue-400 hover:text-blue-300 underline">mcp</a></code>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@ await server.connect(transport);</code></pre>
 
         <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-6">
           <h4 class="text-green-300 font-semibold mb-4 text-lg">🔧 Step 3: Configure Your AI Application</h4>
-          <p class="text-gray-300 mb-4">Add your MCP server to your AI application's configuration (e.g., Claude Desktop config):</p>
+          <p class="text-gray-300 mb-4">Add your MCP server to your AI application's configuration (e.g., <a href="https://claude.ai/desktop" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Claude Desktop</a> config):</p>
           <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
             <pre class="text-sm text-gray-300"><code class="language-json">{
   "mcpServers": {
@@ -577,21 +577,21 @@ server.setRequestHandler("tools/call", async (request) => {
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-4">
               <div class="bg-purple-500/20 border border-purple-400/30 rounded-lg p-4">
-                <h5 class="text-purple-300 font-semibold mb-2">🎯 Official Integrations</h5>
-                <ul class="text-sm text-gray-300 space-y-1">
-                  <li>• Claude Desktop: Built-in MCP support</li>
-                  <li>• Claude API: Server-side integration</li>
-                  <li>• Development Tools: Multi-language SDKs</li>
-                </ul>
+              <h5 class="text-purple-300 font-semibold mb-2">🎯 Official Integrations</h5>
+              <ul class="text-sm text-gray-300 space-y-1">
+                <li>• <a href="https://claude.ai/desktop" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Claude Desktop</a>: Built-in MCP support</li>
+                <li>• <a href="https://docs.anthropic.com/en/api/mcp" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Claude API</a>: Server-side integration</li>
+                <li>• Development Tools: Multi-language SDKs</li>
+              </ul>
               </div>
               <div class="bg-emerald-500/20 border border-emerald-400/30 rounded-lg p-4">
-                <h5 class="text-emerald-300 font-semibold mb-2">🌟 Community Projects</h5>
-                <ul class="text-sm text-gray-300 space-y-1">
-                  <li>• Database Connectors (PostgreSQL, MongoDB)</li>
-                  <li>• Cloud Services (AWS, GCP, Azure)</li>
-                  <li>• Development Tools (Git, Docker, K8s)</li>
-                  <li>• Productivity (Google Workspace, Office 365)</li>
-                </ul>
+              <h5 class="text-emerald-300 font-semibold mb-2">🌟 Community Projects</h5>
+              <ul class="text-sm text-gray-300 space-y-1">
+                <li>• Database Connectors (<a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="text-blue-400 hover:text-blue-300 underline">PostgreSQL, MongoDB</a>)</li>
+                <li>• Cloud Services (AWS, GCP, Azure)</li>
+                <li>• Development Tools (<a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Git, Docker, K8s</a>)</li>
+                <li>• Productivity (Google Workspace, Office 365)</li>
+              </ul>
               </div>
             </div>
             <div class="space-y-4">
@@ -599,15 +599,15 @@ server.setRequestHandler("tools/call", async (request) => {
                 <h5 class="text-orange-300 font-semibold mb-2">📦 Popular MCP Servers</h5>
                 <div class="space-y-3">
                   <div>
-                    <div class="text-xs text-cyan-300 font-medium">Filesystem Server</div>
+                    <div class="text-xs text-cyan-300 font-medium"><a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Filesystem Server</a></div>
                     <div class="text-xs text-gray-400">Safe file system access with restrictions</div>
                   </div>
                   <div>
-                    <div class="text-xs text-cyan-300 font-medium">SQLite Server</div>
+                    <div class="text-xs text-cyan-300 font-medium"><a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="text-blue-400 hover:text-blue-300 underline">SQLite Server</a></div>
                     <div class="text-xs text-gray-400">Direct database queries with schema inspection</div>
                   </div>
                   <div>
-                    <div class="text-xs text-cyan-300 font-medium">Web Search Server</div>
+                    <div class="text-xs text-cyan-300 font-medium"><a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="text-blue-400 hover:text-blue-300 underline">Web Search Server</a></div>
                     <div class="text-xs text-gray-400">Real-time search with content extraction</div>
                   </div>
                 </div>
@@ -688,7 +688,7 @@ server.setRequestHandler("tools/call", async (request) => {
             <div class="bg-emerald-500/10 border border-emerald-400/30 rounded-lg p-4">
               <h5 class="text-emerald-300 font-semibold mb-2">👨‍💻 For Developers</h5>
               <ul class="text-sm text-gray-300 space-y-1">
-                <li>• Contribute to open-source development</li>
+                <li>• Contribute to <a href="https://github.com/modelcontextprotocol" target="_blank" class="text-blue-400 hover:text-blue-300 underline">open-source development</a></li>
                 <li>• Build MCP servers for favorite tools</li>
                 <li>• Share reusable components</li>
               </ul>
