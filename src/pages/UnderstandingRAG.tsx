@@ -440,7 +440,8 @@ export default function UnderstandingRAG() {
           </nav>
         </div>
 
-        <article className="container mx-auto px-6 py-12">
+        <div className="bg-gradient-to-br from-primary via-primary to-blue-900 py-12">
+          <article className="container mx-auto px-6">
           {/* Article Header */}
           <header className="text-center mb-16">
             <div className="flex flex-wrap justify-center gap-3 mb-6">
@@ -545,6 +546,7 @@ export default function UnderstandingRAG() {
             />
           </div>
         </article>
+        </div>
       </div>
       <Footer />
     </div>
