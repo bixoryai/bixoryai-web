@@ -600,13 +600,20 @@ Remember: AI development is as much about the process as it is about the technol
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#0A192F] to-transparent"></div>
         </section>
 
-        {/* Content Section with distinct background */}
-        <div className="relative bg-gradient-to-br from-[#0A192F] to-[#0D1B2A] min-h-screen">
-          {/* Subtle pattern overlay for texture */}
+        {/* Content Section with distinct lighter background */}
+        <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen">
+          {/* Subtle circuit pattern overlay for tech feel */}
           <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
+            backgroundImage: `
+              radial-gradient(circle at 20% 20%, #00F0FF 2px, transparent 2px),
+              radial-gradient(circle at 80% 80%, #FF4D00 1px, transparent 1px),
+              linear-gradient(45deg, transparent 40%, rgba(0,240,255,0.03) 50%, transparent 60%)
+            `,
+            backgroundSize: '60px 60px, 40px 40px, 120px 120px'
           }}></div>
+          
+          {/* Top border separator */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00F0FF]/30 to-transparent"></div>
           
           <div className="relative z-10">
             <GuideTemplate
@@ -620,6 +627,9 @@ Remember: AI development is as much about the process as it is about the technol
               tags={tags}
             />
           </div>
+          
+          {/* Bottom gradient transition to footer */}
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#0A192F]/30"></div>
         </div>
       </div>
       <Footer />
