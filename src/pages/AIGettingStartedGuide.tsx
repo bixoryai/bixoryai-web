@@ -11,92 +11,179 @@ const AIGettingStartedGuide = () => {
     {
       id: "fundamentals",
       title: "Understanding AI Fundamentals",
-      content: `Artificial Intelligence (AI) in 2025 encompasses three main paradigms that every developer should understand:
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">Artificial Intelligence in 2025 encompasses three main paradigms that every developer should understand:</p>
+        
+        <div class="grid md:grid-cols-3 gap-4 my-6">
+          <div class="bg-blue-500/20 border border-blue-400/30 rounded-lg p-4">
+            <h4 class="text-blue-300 font-semibold mb-2">🧠 Machine Learning (ML)</h4>
+            <p class="text-sm text-gray-300">Systems that learn patterns from data without explicit programming</p>
+          </div>
+          <div class="bg-purple-500/20 border border-purple-400/30 rounded-lg p-4">
+            <h4 class="text-purple-300 font-semibold mb-2">🔗 Deep Learning</h4>
+            <p class="text-sm text-gray-300">Neural networks with multiple layers for complex representations</p>
+          </div>
+          <div class="bg-green-500/20 border border-green-400/30 rounded-lg p-4">
+            <h4 class="text-green-300 font-semibold mb-2">💬 Large Language Models</h4>
+            <p class="text-sm text-gray-300">Pre-trained models like GPT-4 and Claude for text understanding</p>
+          </div>
+        </div>
 
-**Machine Learning (ML)**: Systems that learn patterns from data without explicit programming. This includes:
-• Supervised Learning: Training models with labeled examples
-• Unsupervised Learning: Finding hidden patterns in unlabeled data  
-• Reinforcement Learning: Learning through interaction and rewards
-
-**Deep Learning**: Neural networks with multiple layers that can learn complex representations:
-• Convolutional Neural Networks (CNNs) for image processing
-• Recurrent Neural Networks (RNNs) for sequential data
-• Transformers for natural language processing
-
-**Large Language Models (LLMs)**: Pre-trained models like GPT-4, Claude, and others that understand and generate human-like text. These are revolutionizing how we build AI applications through:
-• API integration for instant AI capabilities
-• Fine-tuning for specialized tasks
-• Prompt engineering for better outputs
-
-The key insight for 2025 is that you don't need to build everything from scratch. Most AI development now involves leveraging existing models and frameworks.`
+        <div class="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+          <h4 class="text-yellow-300 font-semibold mb-2">💡 Key Insight for 2025</h4>
+          <p class="text-gray-300">You don't need to build everything from scratch. Most AI development now involves leveraging existing models and frameworks.</p>
+        </div>
+      </div>`
     },
     {
       id: "environment",
       title: "Setting Up Your Development Environment",
-      content: `Your AI development setup in 2025 should include these essential components:
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">Your AI development setup in 2025 should include these essential components:</p>
+        
+        <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-lg p-6">
+          <h4 class="text-blue-300 font-semibold mb-4 text-lg">🐍 Python Environment</h4>
+          <div class="space-y-2 text-gray-300">
+            <div class="flex items-center gap-3">
+              <span class="text-green-400">✓</span>
+              <span>Python 3.11+ for optimal performance</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-green-400">✓</span>
+              <span>Anaconda or Miniconda for package management</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-green-400">✓</span>
+              <span>Virtual environments for project isolation</span>
+            </div>
+          </div>
+        </div>
 
-**Python Environment**:
-• Python 3.9+ (recommended: Python 3.11 for optimal performance)
-• Anaconda or Miniconda for package management
-• Virtual environments for project isolation
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-4">
+            <h4 class="text-green-300 font-semibold mb-3">📚 Essential Libraries</h4>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• NumPy & Pandas for data manipulation</li>
+              <li>• Matplotlib & Seaborn for visualization</li>
+              <li>• Scikit-learn for traditional ML</li>
+              <li>• Jupyter Notebooks for experimentation</li>
+            </ul>
+          </div>
+          
+          <div class="bg-orange-500/10 border border-orange-400/30 rounded-lg p-4">
+            <h4 class="text-orange-300 font-semibold mb-3">🔧 Development Tools</h4>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• VS Code with Python extensions</li>
+              <li>• Git for version control</li>
+              <li>• Docker for containerization</li>
+              <li>• Weights & Biases for tracking</li>
+            </ul>
+          </div>
+        </div>
 
-**Essential Libraries**:
-• NumPy & Pandas for data manipulation
-• Matplotlib & Seaborn for visualization
-• Scikit-learn for traditional machine learning
-• Jupyter Notebooks for experimentation
+        <div class="bg-red-500/10 border border-red-400/30 rounded-lg p-4">
+          <h4 class="text-red-300 font-semibold mb-3">💻 Hardware Considerations</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <div>
+              <strong class="text-white">Local Setup:</strong>
+              <ul class="mt-2 space-y-1">
+                <li>• GPU: NVIDIA RTX 4060+</li>
+                <li>• RAM: 16GB minimum, 32GB ideal</li>
+                <li>• Storage: 500GB+ SSD</li>
+              </ul>
+            </div>
+            <div>
+              <strong class="text-white">Cloud Alternatives:</strong>
+              <ul class="mt-2 space-y-1">
+                <li>• <a href="https://colab.research.google.com/" target="_blank" class="text-[#00F0FF] hover:underline">Google Colab Pro</a></li>
+                <li>• <a href="https://aws.amazon.com/sagemaker/" target="_blank" class="text-[#00F0FF] hover:underline">AWS SageMaker</a></li>
+                <li>• <a href="https://azure.microsoft.com/en-us/products/machine-learning/" target="_blank" class="text-[#00F0FF] hover:underline">Azure ML</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-**Hardware Considerations**:
-• GPU: NVIDIA RTX 4060 or better for local training
-• RAM: Minimum 16GB, ideally 32GB for larger models
-• Storage: SSD with at least 500GB free space
-• Cloud alternatives: Google Colab Pro, AWS SageMaker, or Azure ML
-
-**Development Tools**:
-• VS Code with Python and Jupyter extensions
-• Git for version control
-• Docker for containerization
-• Weights & Biases (wandb) for experiment tracking
-
-Pro tip: Start with cloud-based solutions like Google Colab if you're just beginning - you can always transition to local development later.`
+        <div class="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+          <h4 class="text-yellow-300 font-semibold mb-2">💡 Pro Tip</h4>
+          <p class="text-gray-300">Start with <a href="https://colab.research.google.com/" target="_blank" class="text-[#00F0FF] hover:underline font-semibold">Google Colab</a> if you're just beginning - you can always transition to local development later.</p>
+        </div>
+      </div>`
     },
     {
       id: "frameworks",
       title: "Choosing the Right AI Framework",
-      content: `<img src="${aiFrameworks}" alt="AI Frameworks Comparison" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
+      content: `<div class="space-y-6">
+        <img src="${aiFrameworks}" alt="AI Frameworks Comparison" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
+        
+        <p class="text-lg text-gray-200">In 2025, the AI framework landscape has stabilized around several key players:</p>
+        
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-400/30 rounded-lg p-4">
+            <h4 class="text-orange-300 font-semibold mb-3 flex items-center gap-2">
+              🔥 <a href="https://www.tensorflow.org/" target="_blank" class="hover:underline">TensorFlow 2.15+</a>
+            </h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <p><strong class="text-white">Best for:</strong> Production deployment and mobile/edge applications</p>
+              <p><strong class="text-white">Use when:</strong> Building production-ready applications with complex pipelines</p>
+            </div>
+          </div>
+          
+          <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-lg p-4">
+            <h4 class="text-purple-300 font-semibold mb-3 flex items-center gap-2">
+              🔬 <a href="https://pytorch.org/" target="_blank" class="hover:underline">PyTorch 2.2+</a>
+            </h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <p><strong class="text-white">Best for:</strong> Research, prototyping, and dynamic neural networks</p>
+              <p><strong class="text-white">Use when:</strong> Experimenting with new architectures or research projects</p>
+            </div>
+          </div>
+          
+          <div class="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-lg p-4">
+            <h4 class="text-yellow-300 font-semibold mb-3 flex items-center gap-2">
+              🤗 <a href="https://huggingface.co/transformers/" target="_blank" class="hover:underline">Hugging Face Transformers</a>
+            </h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <p><strong class="text-white">Best for:</strong> Natural language processing and pre-trained models</p>
+              <p><strong class="text-white">Use when:</strong> Working with text, speech, or vision transformers</p>
+            </div>
+          </div>
+          
+          <div class="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-400/30 rounded-lg p-4">
+            <h4 class="text-blue-300 font-semibold mb-3 flex items-center gap-2">
+              ⚡ <a href="https://jax.readthedocs.io/" target="_blank" class="hover:underline">JAX (by Google)</a>
+            </h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <p><strong class="text-white">Best for:</strong> High-performance numerical computing</p>
+              <p><strong class="text-white">Use when:</strong> Need maximum performance for mathematical computations</p>
+            </div>
+          </div>
+        </div>
 
-In 2025, the AI framework landscape has stabilized around several key players:
+        <div class="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-400/30 rounded-lg p-6">
+          <h4 class="text-green-300 font-semibold mb-4 text-lg flex items-center gap-2">
+            🚀 API-First Approach
+          </h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <h5 class="text-white font-medium"><a href="https://openai.com/api/" target="_blank" class="text-[#00F0FF] hover:underline">OpenAI API</a></h5>
+              <p class="text-sm text-gray-300">General-purpose applications, code generation</p>
+            </div>
+            <div class="space-y-2">
+              <h5 class="text-white font-medium"><a href="https://www.anthropic.com/api" target="_blank" class="text-[#00F0FF] hover:underline">Anthropic Claude</a></h5>
+              <p class="text-sm text-gray-300">Complex reasoning, safety-critical applications</p>
+            </div>
+          </div>
+        </div>
 
-**TensorFlow 2.15+**: 
-• Best for: Production deployment and mobile/edge applications
-• Strengths: Mature ecosystem, TensorFlow Serving, TensorFlow Lite
-• Use when: Building production-ready applications with complex pipelines
-
-**PyTorch 2.2+**:
-• Best for: Research, prototyping, and dynamic neural networks
-• Strengths: Intuitive API, strong community, excellent debugging
-• Use when: Experimenting with new architectures or research projects
-
-**Hugging Face Transformers**:
-• Best for: Natural language processing and pre-trained models
-• Strengths: Massive model hub, easy API, state-of-the-art models
-• Use when: Working with text, speech, or vision transformers
-
-**JAX (by Google)**:
-• Best for: High-performance numerical computing
-• Strengths: NumPy-compatible, auto-differentiation, JIT compilation
-• Use when: Need maximum performance for mathematical computations
-
-**OpenAI API / Anthropic Claude**:
-• Best for: Quick AI integration without training
-• Strengths: No training required, powerful capabilities, easy integration
-• Use when: Building applications that need conversational AI or text processing
-
-**Framework Selection Guide**:
-• Beginners: Start with PyTorch for learning, then add Hugging Face for NLP
-• Production focus: TensorFlow for deployment, PyTorch for development
-• Quick prototypes: OpenAI/Anthropic APIs + basic web framework
-• Research: PyTorch + JAX for performance-critical components`
+        <div class="bg-gray-500/10 border border-gray-400/30 rounded-lg p-4">
+          <h4 class="text-gray-300 font-semibold mb-3">🎯 Framework Selection Guide</h4>
+          <div class="space-y-2 text-sm text-gray-300">
+            <p><strong class="text-white">Beginners:</strong> Start with <a href="https://pytorch.org/" target="_blank" class="text-[#00F0FF] hover:underline">PyTorch</a> for learning, then add <a href="https://huggingface.co/" target="_blank" class="text-[#00F0FF] hover:underline">Hugging Face</a> for NLP</p>
+            <p><strong class="text-white">Production focus:</strong> <a href="https://www.tensorflow.org/" target="_blank" class="text-[#00F0FF] hover:underline">TensorFlow</a> for deployment, PyTorch for development</p>
+            <p><strong class="text-white">Quick prototypes:</strong> <a href="https://openai.com/api/" target="_blank" class="text-[#00F0FF] hover:underline">OpenAI</a>/<a href="https://www.anthropic.com/" target="_blank" class="text-[#00F0FF] hover:underline">Anthropic</a> APIs + basic web framework</p>
+          </div>
+        </div>
+      </div>`
     },
     {
       id: "first-project",
