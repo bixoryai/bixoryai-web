@@ -555,57 +555,71 @@ Remember: AI development is as much about the process as it is about the technol
   return (
     <>
       <Navbar />
-      <div className="relative min-h-screen">
+      <div className="relative">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-16">
+        <section className="relative pt-32 pb-20 overflow-hidden">
+          {/* Hero Background with lighter overlay to show image */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${aiHero})` }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/95 to-[#0D1B2A]/95"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/70 via-[#0A192F]/60 to-[#0D1B2A]/80"></div>
           </div>
           
+          {/* Hero Content */}
           <div className="relative z-10 container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
                   Getting Started with AI Development
                 </span>
               </h1>
-              <p className="text-xl text-gray-300 mb-8">
+              <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed drop-shadow-md">
                 A comprehensive guide to beginning your AI development journey in 2025. From setting up your environment to deploying production-ready AI applications.
               </p>
               
-              {/* Meta Information */}
-              <div className="flex flex-wrap justify-center items-center gap-6 text-gray-300 mb-8">
-                <div className="flex items-center gap-2">
+              {/* Meta Information with enhanced styling */}
+              <div className="flex flex-wrap justify-center items-center gap-8 text-gray-200 mb-8">
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
                   <Clock className="h-5 w-5 text-[#00F0FF]" />
-                  <span>120 minutes</span>
+                  <span className="font-medium">120 minutes</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-green-400">●</span>
-                  <span>Beginner Level</span>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                  <span className="text-green-400 text-lg">●</span>
+                  <span className="font-medium">Beginner Level</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#FF4D00]">7 Sections</span>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                  <span className="text-[#FF4D00] font-bold">7</span>
+                  <span className="font-medium">Sections</span>
                 </div>
               </div>
             </div>
           </div>
+          
+          {/* Bottom gradient transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#0A192F] to-transparent"></div>
         </section>
 
-        {/* Guide Content */}
-        <div className="relative bg-gradient-to-br from-[#0A192F] to-[#0D1B2A]">
-          <GuideTemplate
-            title="" // Empty title since we handle it in hero
-            description=""
-            estimatedTime={120}
-            difficulty="Beginner"
-            prerequisites={prerequisites}
-            sections={sections}
-            downloadableResources={downloadableResources}
-            tags={tags}
-          />
+        {/* Content Section with distinct background */}
+        <div className="relative bg-gradient-to-br from-[#0A192F] to-[#0D1B2A] min-h-screen">
+          {/* Subtle pattern overlay for texture */}
+          <div className="absolute inset-0 opacity-5" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}></div>
+          
+          <div className="relative z-10">
+            <GuideTemplate
+              title="" // Empty title since we handle it in hero
+              description=""
+              estimatedTime={120}
+              difficulty="Beginner"
+              prerequisites={prerequisites}
+              sections={sections}
+              downloadableResources={downloadableResources}
+              tags={tags}
+            />
+          </div>
         </div>
       </div>
       <Footer />
