@@ -74,7 +74,8 @@ const KnowledgeBase = () => {
       description: "Deep dive into Retrieval-Augmented Generation systems and how they enhance LLM capabilities with external knowledge.",
       category: "Article",
       tags: ["RAG", "LLMs", "Vector Databases", "Embeddings"],
-      isPlaceholder: true
+      url: "/knowledge-base/understanding-rag",
+      isPlaceholder: false
     },
     {
       id: "8",
