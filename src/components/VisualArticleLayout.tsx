@@ -8,14 +8,12 @@ interface VisualArticleLayoutProps {
 
 export const VisualArticleLayout = ({ children }: VisualArticleLayoutProps) => {
   return (
-    <>
+    <div className="min-h-screen bg-primary">
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-[#0A192F] to-[#0D1B2A]">
-        <div className="pt-24">
-          {children}
-        </div>
+      <div className="pt-24">
+        {children}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
