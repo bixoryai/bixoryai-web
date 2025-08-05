@@ -1,7 +1,4 @@
 import { GuideTemplate } from "@/components/knowledge-base/templates/GuideTemplate";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import GuideNavigation from "@/components/navigation/GuideNavigation";
 
 const AdvancedPromptEngineering = () => {
   const sections = [
@@ -457,47 +454,44 @@ const prompt = await promptTemplate.format({
     }
   ];
 
+  const prerequisites = [
+    "Basic understanding of AI/ML concepts",
+    "Experience with API calls",
+    "Familiarity with at least one LLM (GPT, Claude, etc.)",
+    "Basic programming knowledge"
+  ];
+
+  const downloadableResources = [
+    {
+      title: "Advanced Prompting Cheat Sheet",
+      url: "/downloads/advanced-prompting-cheat-sheet.pdf",
+      type: "PDF"
+    },
+    {
+      title: "Prompt Template Library",
+      url: "/downloads/prompt-templates.json",
+      type: "JSON"
+    },
+    {
+      title: "Testing Framework Code",
+      url: "/downloads/prompt-testing-framework.py",
+      type: "Python"
+    }
+  ];
+
+  const tags = ["Prompt Engineering", "LLMs", "Advanced", "Production", "AI Development"];
+
   return (
-    <>
-      <Navbar />
-      <GuideNavigation />
-      
-      <div className="min-h-screen bg-primary pt-24">
-        <GuideTemplate
-          title="Advanced Prompt Engineering Techniques"
-          description="Master sophisticated prompting strategies to unlock the full potential of large language models and build production-ready AI applications."
-          estimatedTime={45}
-          difficulty="Advanced"
-          prerequisites={[
-            "Basic understanding of AI/ML concepts",
-            "Experience with API calls",
-            "Familiarity with at least one LLM (GPT, Claude, etc.)",
-            "Basic programming knowledge"
-          ]}
-          sections={sections}
-          downloadableResources={[
-            {
-              title: "Advanced Prompting Cheat Sheet",
-              url: "/downloads/advanced-prompting-cheat-sheet.pdf",
-              type: "PDF"
-            },
-            {
-              title: "Prompt Template Library",
-              url: "/downloads/prompt-templates.json",
-              type: "JSON"
-            },
-            {
-              title: "Testing Framework Code",
-              url: "/downloads/prompt-testing-framework.py",
-              type: "Python"
-            }
-          ]}
-          tags={["Prompt Engineering", "LLMs", "Advanced", "Production", "AI Development"]}
-        />
-      </div>
-      
-      <Footer />
-    </>
+    <GuideTemplate
+      title="Advanced Prompt Engineering Techniques"
+      description="Master sophisticated prompting strategies to unlock the full potential of large language models and build production-ready AI applications."
+      estimatedTime={45}
+      difficulty="Advanced"
+      prerequisites={prerequisites}
+      sections={sections}
+      downloadableResources={downloadableResources}
+      tags={tags}
+    />
   );
 };
 
