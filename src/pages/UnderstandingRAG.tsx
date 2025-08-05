@@ -5,6 +5,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SocialShare } from "@/components/social/SocialShare";
 import { Link } from "react-router-dom";
+import Hero from "@/components/sections/Hero";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import heroImage from "@/assets/ai-development-hero.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
 import productivityImage from "@/assets/productivity-illustration.jpg";
@@ -421,131 +423,99 @@ export default function UnderstandingRAG() {
   `;
 
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-blue-900">
       <Navbar />
-      <div className="pt-24">
-        {/* Breadcrumb Navigation */}
-        <div className="container mx-auto px-6 py-4">
-          <nav className="flex items-center space-x-2 text-sm text-gray-400">
-            <Link to="/" className="hover:text-accent transition-colors flex items-center gap-1">
-              <Home className="w-4 h-4" />
-              Home
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <Link to="/knowledge-base" className="hover:text-accent transition-colors">
-              Knowledge Base
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-white">Understanding RAG Systems</span>
-          </nav>
-        </div>
+      
+      <Hero
+        backgroundImage={heroImage}
+        title={
+          <span>
+            Understanding <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">RAG Systems</span>
+          </span>
+        }
+        subtitle="Retrieval-Augmented Generation: Bridging AI reasoning with real-time knowledge access"
+        showButtons={false}
+        height="h-[60vh]"
+      />
 
-        <div className="bg-gradient-to-br from-primary via-primary to-blue-900 py-12">
-          <article className="container mx-auto px-6">
-          {/* Article Header */}
-          <header className="text-center mb-16">
-            <div className="flex flex-wrap justify-center gap-3 mb-6">
-              <Badge variant="secondary" className="bg-[#FF4D00]/20 text-[#FF4D00] border-[#FF4D00]/30">
-                AI Architecture
-              </Badge>
-              <Badge variant="secondary" className="bg-[#00F0FF]/20 text-[#00F0FF] border-[#00F0FF]/30">
-                Knowledge Systems
-              </Badge>
-              <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
-                Enterprise AI
-              </Badge>
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Understanding RAG Systems
-            </h1>
-            
-            <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8">
-              A comprehensive guide to Retrieval-Augmented Generation: bridging the gap between static AI models and dynamic knowledge access
-            </p>
-            
-            <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-400 mb-8">
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4" />
-                <span>By BIXORY AI Team</span>
+      <div className="bg-primary/95 backdrop-blur-sm">
+        <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+          <Breadcrumb className="mb-6 md:mb-8">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/knowledge-base" className="text-gray-400 hover:text-white">
+                  Knowledge Base
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-white">Understanding RAG Systems</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mb-8">
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">AI Architecture</span>
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Knowledge Systems</span>
+                <span className="px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Enterprise AI</span>
               </div>
-              <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4" />
+              
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-6">
+                <span>By BIXORY AI Research Team</span>
+                <span>•</span>
                 <span>12 min read</span>
+                <span>•</span>
+                <span>January 15, 2025</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="text-gray-400">
-                  January 15, 2025
-                </Badge>
-              </div>
+              
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Retrieval-Augmented Generation (RAG) represents a paradigm shift in how AI systems access and utilize information, combining the reasoning capabilities of large language models with dynamic knowledge retrieval for more accurate and contextual responses.
+              </p>
             </div>
-          </header>
 
-          {/* Article Content */}
-          <div className="prose prose-lg prose-invert max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: content }} />
-          </div>
-
-          {/* Key Takeaways */}
-          <Card className="my-12 bg-gradient-to-r from-[#FF4D00]/10 to-[#00F0FF]/10 border-[#FF4D00]/30">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Zap className="w-6 h-6 text-[#FF4D00]" />
-                Key Takeaways
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+            <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Key Takeaways</h2>
               <ul className="space-y-3">
                 {keyTakeaways.map((takeaway, index) => (
-                  <li key={index} className="flex items-start gap-3 text-gray-300">
-                    <span className="w-2 h-2 bg-[#00F0FF] rounded-full mt-2 flex-shrink-0"></span>
-                    {takeaway}
+                  <li key={index} className="flex items-start space-x-3">
+                    <div className="bg-secondary w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-white text-xs font-bold">{index + 1}</span>
+                    </div>
+                    <span className="text-gray-300">{takeaway}</span>
                   </li>
                 ))}
               </ul>
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Related Resources */}
-          <Card className="my-12 bg-gray-900/50 border-gray-700">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <FileText className="w-6 h-6 text-[#00F0FF]" />
-                Related Resources
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+
+            <div className="bg-card-gradient p-6 md:p-8 rounded-lg border border-gray-700 mt-8">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Related Research</h2>
+              <div className="grid md:grid-cols-2 gap-4">
                 {relatedLinks.map((link, index) => (
-                  <a
+                  <div
                     key={index}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 hover:border-[#00F0FF]/50 transition-colors group"
+                    className="p-4 bg-primary/50 rounded-lg border border-gray-600 hover:border-gray-500 transition-colors cursor-pointer"
+                    onClick={() => window.open(link.url, '_blank')}
                   >
-                    <div className="w-10 h-10 bg-[#00F0FF]/20 rounded-lg flex items-center justify-center group-hover:bg-[#00F0FF]/30 transition-colors">
-                      <FileText className="w-5 h-5 text-[#00F0FF]" />
-                    </div>
-                    <span className="text-white group-hover:text-[#00F0FF] transition-colors">
-                      {link.title}
-                    </span>
-                  </a>
+                    <h3 className="text-white font-medium mb-2">{link.title}</h3>
+                    <span className="text-sm text-gray-400">External Resource →</span>
+                  </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Social Share Section */}
-          <div className="mt-16 pt-8 border-t border-gray-700">
-            <SocialShare 
-              title="Understanding RAG Systems"
-              url={window.location.href}
-              description="A comprehensive guide to Retrieval-Augmented Generation: bridging the gap between static AI models and dynamic knowledge access"
-              showLike={true}
-            />
+            <div className="mt-16 pt-8 border-t border-gray-700">
+              <SocialShare 
+                title="Understanding RAG Systems"
+                url={window.location.href}
+                description="Retrieval-Augmented Generation: Bridging AI reasoning with real-time knowledge access"
+                showLike={true}
+              />
+            </div>
           </div>
-        </article>
         </div>
       </div>
       <Footer />
