@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Zap, Smartphone, Atom, Building2, Cpu, TrendingUp, Shield, Globe, Users } from "lucide-react";
+import { Brain, Zap, Smartphone, Atom, Building2, Cpu, TrendingUp, Shield, Globe, Users, ChevronRight, Home } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import heroImage from "@/assets/ml-trends-hero.jpg";
@@ -372,6 +372,19 @@ export default function LatestMLTrends() {
       <div className="min-h-screen bg-gradient-to-br from-[#0A192F] to-[#0D1B2A]">
         <div className="pt-24 pb-16">
           <div className="container mx-auto px-6 max-w-7xl">
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-sm text-gray-400 mb-8">
+              <a href="/" className="flex items-center gap-1 hover:text-[#00F0FF] transition-colors duration-300">
+                <Home className="w-4 h-4" />
+                <span>Home</span>
+              </a>
+              <ChevronRight className="w-4 h-4" />
+              <a href="/knowledge-base" className="hover:text-[#00F0FF] transition-colors duration-300">
+                Knowledge Base
+              </a>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-[#00F0FF]">Latest Trends in Machine Learning</span>
+            </div>
             {/* Header */}
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
