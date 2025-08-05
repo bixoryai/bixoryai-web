@@ -10,88 +10,177 @@ const MCPExplained = () => {
     {
       id: "what-is-mcp",
       title: "What is Model Context Protocol (MCP)?",
-      content: `**Model Context Protocol (MCP)** is an open-source specification developed by Anthropic that standardizes how AI models and development tools interact with external data sources and services.
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200"><strong>Model Context Protocol (MCP)</strong> is an open-source specification developed by Anthropic that standardizes how AI models and development tools interact with external data sources and services.</p>
+        
+        <p class="text-gray-300">Think of MCP as a <strong>universal translator</strong> between AI models and the tools they need to access. Instead of each AI application creating custom integrations for every service, MCP provides a standardized way for AI models to:</p>
+        
+        <div class="grid md:grid-cols-2 gap-4 my-6">
+          <div class="bg-blue-500/20 border border-blue-400/30 rounded-lg p-4">
+            <h4 class="text-blue-300 font-semibold mb-2">🗄️ Data Access</h4>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Connect to databases</li>
+              <li>• Access file systems</li>
+              <li>• Read/write documents</li>
+            </ul>
+          </div>
+          <div class="bg-purple-500/20 border border-purple-400/30 rounded-lg p-4">
+            <h4 class="text-purple-300 font-semibold mb-2">🔧 Tool Integration</h4>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Interact with APIs</li>
+              <li>• Execute code securely</li>
+              <li>• Browse the web</li>
+            </ul>
+          </div>
+        </div>
 
-Think of MCP as a **universal translator** between AI models and the tools they need to access. Instead of each AI application creating custom integrations for every service, MCP provides a standardized way for AI models to:
+        <div class="bg-gradient-to-r from-green-500/10 to-cyan-500/10 border border-green-400/30 rounded-lg p-6">
+          <h4 class="text-green-300 font-semibold mb-4 text-lg">🚀 Key Benefits</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <div class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                <span class="text-gray-300"><strong>Standardization:</strong> One protocol for all AI tool integrations</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                <span class="text-gray-300"><strong>Security:</strong> Built-in permissions and sandboxing</span>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                <span class="text-gray-300"><strong>Efficiency:</strong> Reusable components across applications</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-green-400">✓</span>
+                <span class="text-gray-300"><strong>Flexibility:</strong> Easy to extend and customize</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-• **Connect to databases** and retrieve relevant information
-• **Access file systems** and read/write documents
-• **Interact with APIs** and web services
-• **Execute code** in secure environments
-• **Browse the web** and fetch real-time data
-
-**Key Benefits:**
-• **Standardization**: One protocol for all AI tool integrations
-• **Security**: Built-in permissions and sandboxing
-• **Efficiency**: Reusable components across different AI applications
-• **Flexibility**: Easy to extend and customize for specific needs
-
-The protocol enables AI models to maintain context across different tools and services, making them more capable and useful for complex tasks.`
+        <div class="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+          <h4 class="text-yellow-300 font-semibold mb-2">💡 Key Insight</h4>
+          <p class="text-gray-300">The protocol enables AI models to maintain context across different tools and services, making them more capable and useful for complex tasks.</p>
+        </div>
+      </div>`
     },
     {
       id: "how-mcp-works",
       title: "How MCP Works: Architecture Overview",
-      content: `MCP follows a **client-server architecture** where AI applications (clients) communicate with various tools and services (servers) through a standardized protocol.
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">MCP follows a <strong>client-server architecture</strong> where AI applications (clients) communicate with various tools and services (servers) through a standardized protocol.</p>
+        
+        <div class="grid md:grid-cols-3 gap-4 my-6">
+          <div class="bg-blue-500/20 border border-blue-400/30 rounded-lg p-4">
+            <h4 class="text-blue-300 font-semibold mb-2">🤖 MCP Client</h4>
+            <p class="text-xs text-gray-400 mb-2">AI Application</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Sends requests for data</li>
+              <li>• Manages authentication</li>
+              <li>• Handles responses</li>
+            </ul>
+            <div class="mt-2 text-xs text-cyan-300">Examples: Claude Desktop, custom AI apps</div>
+          </div>
+          <div class="bg-purple-500/20 border border-purple-400/30 rounded-lg p-4">
+            <h4 class="text-purple-300 font-semibold mb-2">🔧 MCP Server</h4>
+            <p class="text-xs text-gray-400 mb-2">Tool/Service</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• Exposes capabilities</li>
+              <li>• Handles data retrieval</li>
+              <li>• Processes actions</li>
+            </ul>
+            <div class="mt-2 text-xs text-cyan-300">Examples: Database connectors, file systems</div>
+          </div>
+          <div class="bg-green-500/20 border border-green-400/30 rounded-lg p-4">
+            <h4 class="text-green-300 font-semibold mb-2">📡 Protocol Layer</h4>
+            <p class="text-xs text-gray-400 mb-2">Communication</p>
+            <ul class="text-sm text-gray-300 space-y-1">
+              <li>• JSON-RPC based</li>
+              <li>• Error handling</li>
+              <li>• Transport agnostic</li>
+            </ul>
+            <div class="mt-2 text-xs text-cyan-300">HTTP, WebSocket, IPC</div>
+          </div>
+        </div>
 
-**Core Components:**
+        <div class="bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-400/30 rounded-lg p-6">
+          <h4 class="text-orange-300 font-semibold mb-4 text-lg">🔄 Communication Flow</h4>
+          <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+            <code class="text-cyan-300 text-sm">
+              AI Application → MCP Request → Tool/Service<br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← MCP Response ←
+            </code>
+          </div>
+        </div>
 
-**1. MCP Client (AI Application)**
-• Sends requests for data or actions
-• Manages authentication and permissions
-• Handles responses and error cases
-• Examples: Claude Desktop, custom AI applications
-
-**2. MCP Server (Tool/Service)**
-• Exposes specific capabilities through standardized endpoints
-• Handles data retrieval, processing, or actions
-• Examples: Database connectors, file system access, API integrations
-
-**3. Protocol Layer**
-• JSON-RPC based communication
-• Standardized message formats
-• Built-in error handling and validation
-• Transport agnostic (HTTP, WebSocket, IPC)
-
-**Communication Flow:**
-\`\`\`
-AI Application → MCP Request → Tool/Service
-               ← MCP Response ←
-\`\`\`
-
-**Message Types:**
-• **Resources**: Request data from external sources
-• **Tools**: Execute actions or operations
-• **Prompts**: Get structured prompts with context
-• **Sampling**: Request AI model completions
-
-This architecture ensures that any MCP-compatible AI application can work with any MCP-compatible tool without custom integration work.`
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-indigo-500/10 border border-indigo-400/30 rounded-lg p-4">
+            <h4 class="text-indigo-300 font-semibold mb-3">📋 Message Types</h4>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li class="flex items-center gap-2"><span class="text-blue-400">•</span><strong>Resources:</strong> Request data from sources</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">•</span><strong>Tools:</strong> Execute actions/operations</li>
+              <li class="flex items-center gap-2"><span class="text-purple-400">•</span><strong>Prompts:</strong> Get structured prompts</li>
+              <li class="flex items-center gap-2"><span class="text-orange-400">•</span><strong>Sampling:</strong> Request AI completions</li>
+            </ul>
+          </div>
+          
+          <div class="bg-teal-500/10 border border-teal-400/30 rounded-lg p-4">
+            <h4 class="text-teal-300 font-semibold mb-3">🔗 Compatibility</h4>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              This architecture ensures that any MCP-compatible AI application can work with any MCP-compatible tool without custom integration work.
+            </p>
+          </div>
+        </div>
+      </div>`
     },
     {
       id: "setting-up-mcp",
       title: "Setting Up Your First MCP Integration",
-      content: `Let's walk through setting up a basic MCP server that provides file system access to AI models.
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">Let's walk through setting up a basic MCP server that provides file system access to AI models.</p>
+        
+        <div class="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/30 rounded-lg p-6">
+          <h4 class="text-amber-300 font-semibold mb-4 text-lg">📋 Prerequisites</h4>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="flex items-center gap-3">
+              <span class="text-green-400">✓</span>
+              <span class="text-gray-300">Node.js 18+ or Python 3.8+</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-green-400">✓</span>
+              <span class="text-gray-300">Basic understanding of JSON-RPC</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-green-400">✓</span>
+              <span class="text-gray-300">AI application with MCP support</span>
+            </div>
+          </div>
+        </div>
 
-**Prerequisites:**
-• Node.js 18+ or Python 3.8+
-• Basic understanding of JSON-RPC
-• An AI application that supports MCP (like Claude Desktop)
+        <div class="bg-blue-500/10 border border-blue-400/30 rounded-lg p-6">
+          <h4 class="text-blue-300 font-semibold mb-4 text-lg">📦 Step 1: Install MCP SDK</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <h5 class="text-gray-200 font-medium mb-2">For Node.js:</h5>
+              <div class="bg-gray-900 border border-gray-700 rounded-lg p-3">
+                <code class="text-green-300 text-sm">npm install @modelcontextprotocol/sdk</code>
+              </div>
+            </div>
+            <div>
+              <h5 class="text-gray-200 font-medium mb-2">For Python:</h5>
+              <div class="bg-gray-900 border border-gray-700 rounded-lg p-3">
+                <code class="text-green-300 text-sm">pip install mcp</code>
+              </div>
+            </div>
+          </div>
+        </div>
 
-**Step 1: Install MCP SDK**
-
-For Node.js:
-\`\`\`bash
-npm install @modelcontextprotocol/sdk
-\`\`\`
-
-For Python:
-\`\`\`bash
-pip install mcp
-\`\`\`
-
-**Step 2: Create a Basic MCP Server**
-
-\`\`\`javascript
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+        <div class="bg-purple-500/10 border border-purple-400/30 rounded-lg p-6">
+          <h4 class="text-purple-300 font-semibold mb-4 text-lg">⚙️ Step 2: Create a Basic MCP Server</h4>
+          <div class="bg-gray-900 border border-gray-700 rounded-lg p-4 overflow-x-auto">
+            <pre class="text-sm text-gray-300"><code class="language-javascript">import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
 const server = new Server(
@@ -141,77 +230,117 @@ server.setRequestHandler('tools/list', async () => {
 
 // Start the server
 const transport = new StdioServerTransport();
-await server.connect(transport);
-\`\`\`
+await server.connect(transport);</code></pre>
+          </div>
+        </div>
 
-**Step 3: Configure Your AI Application**
-
-Add your MCP server to your AI application's configuration (e.g., Claude Desktop config):
-\`\`\`json
-{
+        <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-6">
+          <h4 class="text-green-300 font-semibold mb-4 text-lg">🔧 Step 3: Configure Your AI Application</h4>
+          <p class="text-gray-300 mb-4">Add your MCP server to your AI application's configuration (e.g., Claude Desktop config):</p>
+          <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+            <pre class="text-sm text-gray-300"><code class="language-json">{
   "mcpServers": {
     "filesystem": {
       "command": "node",
       "args": ["path/to/your/server.js"]
     }
   }
-}
-\`\`\`
+}</code></pre>
+          </div>
+        </div>
 
-Your AI model can now securely access and read files through the MCP protocol!`
+        <div class="bg-cyan-500/10 border border-cyan-400/30 rounded-lg p-4">
+          <h4 class="text-cyan-300 font-semibold mb-2">🎉 Success!</h4>
+          <p class="text-gray-300">Your AI model can now securely access and read files through the MCP protocol!</p>
+        </div>
+      </div>`
     },
     {
       id: "mcp-capabilities",
       title: "MCP Capabilities and Use Cases",
-      content: `MCP enables a wide range of capabilities that make AI models more powerful and practical for real-world applications.
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">MCP enables a wide range of capabilities that make AI models more powerful and practical for real-world applications.</p>
+        
+        <div class="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-400/30 rounded-lg p-6">
+          <h4 class="text-indigo-300 font-semibold mb-4 text-lg">🎯 Core Capabilities</h4>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-blue-500/20 border border-blue-400/30 rounded-lg p-4">
+              <h5 class="text-blue-300 font-semibold mb-2">📊 Resources</h5>
+              <ul class="text-sm text-gray-300 space-y-1">
+                <li>• Database Access</li>
+                <li>• File Systems</li>
+                <li>• Web Content</li>
+                <li>• Documents</li>
+              </ul>
+            </div>
+            <div class="bg-purple-500/20 border border-purple-400/30 rounded-lg p-4">
+              <h5 class="text-purple-300 font-semibold mb-2">🛠️ Tools</h5>
+              <ul class="text-sm text-gray-300 space-y-1">
+                <li>• Code Execution</li>
+                <li>• API Integrations</li>
+                <li>• Data Processing</li>
+                <li>• External Services</li>
+              </ul>
+            </div>
+            <div class="bg-green-500/20 border border-green-400/30 rounded-lg p-4">
+              <h5 class="text-green-300 font-semibold mb-2">💬 Prompts</h5>
+              <ul class="text-sm text-gray-300 space-y-1">
+                <li>• Dynamic Templates</li>
+                <li>• Multi-modal</li>
+                <li>• Personalization</li>
+                <li>• Context-aware</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-**Core Capabilities:**
+        <div class="bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-400/30 rounded-lg p-6">
+          <h4 class="text-orange-300 font-semibold mb-4 text-lg">🌍 Real-World Use Cases</h4>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div class="bg-cyan-500/10 border border-cyan-400/30 rounded-lg p-4">
+                <h5 class="text-cyan-300 font-semibold mb-2">💻 Software Development</h5>
+                <ul class="text-sm text-gray-300 space-y-1">
+                  <li>• Access codebases and documentation</li>
+                  <li>• Execute tests and deploy applications</li>
+                  <li>• Integrate with Git, Jira, CI/CD systems</li>
+                </ul>
+              </div>
+              <div class="bg-emerald-500/10 border border-emerald-400/30 rounded-lg p-4">
+                <h5 class="text-emerald-300 font-semibold mb-2">📈 Data Analysis</h5>
+                <ul class="text-sm text-gray-300 space-y-1">
+                  <li>• Connect to analytics databases</li>
+                  <li>• Generate reports and visualizations</li>
+                  <li>• Automate data pipelines</li>
+                </ul>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="bg-pink-500/10 border border-pink-400/30 rounded-lg p-4">
+                <h5 class="text-pink-300 font-semibold mb-2">✍️ Content Creation</h5>
+                <ul class="text-sm text-gray-300 space-y-1">
+                  <li>• Access content management systems</li>
+                  <li>• Integrate with design tools</li>
+                  <li>• Publish to multiple platforms</li>
+                </ul>
+              </div>
+              <div class="bg-violet-500/10 border border-violet-400/30 rounded-lg p-4">
+                <h5 class="text-violet-300 font-semibold mb-2">🏢 Business Operations</h5>
+                <ul class="text-sm text-gray-300 space-y-1">
+                  <li>• Connect to CRM and ERP systems</li>
+                  <li>• Automate workflows and approvals</li>
+                  <li>• Generate compliance reports</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
-**1. Resources**
-• **Database Access**: Query SQL databases, NoSQL stores
-• **File Systems**: Read/write files, directory traversal
-• **Web Content**: Fetch web pages, APIs, RSS feeds
-• **Documents**: Access PDFs, Word docs, spreadsheets
-
-**2. Tools**
-• **Code Execution**: Run Python, JavaScript, shell commands
-• **API Integrations**: Call REST APIs, GraphQL endpoints
-• **Data Processing**: Transform, filter, aggregate data
-• **External Services**: Email, notifications, webhooks
-
-**3. Prompts**
-• **Dynamic Templates**: Context-aware prompt generation
-• **Multi-modal**: Text, image, audio prompt combinations
-• **Personalization**: User-specific prompt adaptations
-
-**Real-World Use Cases:**
-
-**Software Development**
-• Access codebases and documentation
-• Execute tests and deploy applications
-• Integrate with Git, Jira, CI/CD systems
-
-**Data Analysis**
-• Connect to analytics databases
-• Generate reports and visualizations
-• Automate data pipelines
-
-**Content Creation**
-• Access content management systems
-• Integrate with design tools
-• Publish to multiple platforms
-
-**Business Operations**
-• Connect to CRM and ERP systems
-• Automate workflows and approvals
-• Generate compliance reports
-
-**Research and Learning**
-• Access academic databases
-• Retrieve real-time information
-• Synthesize information from multiple sources
-
-The key advantage is that once you build an MCP integration, it works with any MCP-compatible AI application, maximizing reusability and reducing development effort.`
+        <div class="bg-gradient-to-r from-teal-500/10 to-cyan-500/10 border border-teal-400/30 rounded-lg p-4">
+          <h4 class="text-teal-300 font-semibold mb-2">🔑 Key Advantage</h4>
+          <p class="text-gray-300">Once you build an MCP integration, it works with any MCP-compatible AI application, maximizing reusability and reducing development effort.</p>
+        </div>
+      </div>`
     },
     {
       id: "security-best-practices",
