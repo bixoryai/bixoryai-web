@@ -1,4 +1,9 @@
 import { GuideTemplate } from "@/components/knowledge-base/templates/GuideTemplate";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import GuideNavigation from "@/components/navigation/GuideNavigation";
+import { Clock } from "lucide-react";
+import aiFrameworksComparison from "@/assets/ai-frameworks-comparison.jpg";
 
 const AdvancedPromptEngineering = () => {
   const sections = [
@@ -482,16 +487,72 @@ const prompt = await promptTemplate.format({
   const tags = ["Prompt Engineering", "LLMs", "Advanced", "Production", "AI Development"];
 
   return (
-    <GuideTemplate
-      title="Advanced Prompt Engineering Techniques"
-      description="Master sophisticated prompting strategies to unlock the full potential of large language models and build production-ready AI applications."
-      estimatedTime={45}
-      difficulty="Advanced"
-      prerequisites={prerequisites}
-      sections={sections}
-      downloadableResources={downloadableResources}
-      tags={tags}
-    />
+    <>
+      <Navbar />
+      <div className="relative">
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 overflow-hidden">
+          {/* Hero Background */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${aiFrameworksComparison})` }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/70 via-[#0A192F]/60 to-[#0D1B2A]/80"></div>
+          </div>
+          
+          {/* Hero Content */}
+          <div className="relative z-10 container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-lg px-2">
+                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
+                  Advanced Prompt Engineering Techniques
+                </span>
+              </h1>
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 md:mb-8 leading-relaxed drop-shadow-md px-2">
+                Master sophisticated prompting strategies to unlock the full potential of large language models and build production-ready AI applications.
+              </p>
+              
+              {/* Meta Information - Mobile Responsive */}
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 md:gap-8 text-gray-200 mb-6 md:mb-8 px-2">
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
+                  <Clock className="h-4 w-4 md:h-5 md:w-5 text-[#00F0FF]" />
+                  <span className="font-medium">45 minutes</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
+                  <span className="text-red-400 text-base md:text-lg">●</span>
+                  <span className="font-medium">Advanced Level</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
+                  <span className="text-[#FF4D00] font-bold">6</span>
+                  <span className="font-medium">Sections</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Bottom gradient transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#0A192F] to-transparent"></div>
+        </section>
+
+        {/* Content Section */}
+        <div className="relative">
+          <GuideTemplate
+            title="" // Empty title since we handle it in hero
+            description=""
+            estimatedTime={45}
+            difficulty="Advanced"
+            prerequisites={prerequisites}
+            sections={sections}
+            downloadableResources={downloadableResources}
+            tags={tags}
+          />
+        </div>
+        
+        {/* Navigation Component */}
+        <GuideNavigation />
+      </div>
+      <Footer />
+    </>
   );
 };
 
