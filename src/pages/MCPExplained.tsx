@@ -735,7 +735,7 @@ server.setRequestHandler("tools/call", async (request) => {
     },
     {
       title: "MCP Security Best Practices",
-      url: "https://docs.modelcontextprotocol.io/security/",
+      url: "https://spec.modelcontextprotocol.io/specification/basic/security/",
       type: "Guide"
     }
   ];
