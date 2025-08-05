@@ -755,26 +755,26 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]</code>
           {/* Hero Content */}
           <div className="relative z-10 container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-lg px-2">
                 <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
                   Getting Started with AI Development
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed drop-shadow-md">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 md:mb-8 leading-relaxed drop-shadow-md px-2">
                 A comprehensive guide to beginning your AI development journey in 2025. From setting up your environment to deploying production-ready AI applications.
               </p>
               
-              {/* Meta Information with enhanced styling */}
-              <div className="flex flex-wrap justify-center items-center gap-8 text-gray-200 mb-8">
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                  <Clock className="h-5 w-5 text-[#00F0FF]" />
+              {/* Meta Information with enhanced styling - Mobile Responsive */}
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 md:gap-8 text-gray-200 mb-6 md:mb-8 px-2">
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
+                  <Clock className="h-4 w-4 md:h-5 md:w-5 text-[#00F0FF]" />
                   <span className="font-medium">120 minutes</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                  <span className="text-green-400 text-lg">●</span>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
+                  <span className="text-green-400 text-base md:text-lg">●</span>
                   <span className="font-medium">Beginner Level</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20 text-sm md:text-base">
                   <span className="text-[#FF4D00] font-bold">7</span>
                   <span className="font-medium">Sections</span>
                 </div>
