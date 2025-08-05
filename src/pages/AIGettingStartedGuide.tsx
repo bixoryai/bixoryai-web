@@ -1,6 +1,7 @@
 import { GuideTemplate } from "@/components/knowledge-base/templates/GuideTemplate";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Clock } from "lucide-react";
 import aiHero from "@/assets/ai-development-hero.jpg";
 import aiRoadmap from "@/assets/ai-roadmap-infographic.jpg";
 import aiFrameworks from "@/assets/ai-frameworks-comparison.jpg";
@@ -554,20 +555,50 @@ Remember: AI development is as much about the process as it is about the technol
   return (
     <>
       <Navbar />
-      <div className="relative">
-        {/* Hero Background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${aiHero})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/95 to-[#0D1B2A]/95"></div>
-        </div>
-        
-        {/* Content */}
-        <div className="relative z-10">
+      <div className="relative min-h-screen">
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-16">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${aiHero})` }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F]/95 to-[#0D1B2A]/95"></div>
+          </div>
+          
+          <div className="relative z-10 container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+                  Getting Started with AI Development
+                </span>
+              </h1>
+              <p className="text-xl text-gray-300 mb-8">
+                A comprehensive guide to beginning your AI development journey in 2025. From setting up your environment to deploying production-ready AI applications.
+              </p>
+              
+              {/* Meta Information */}
+              <div className="flex flex-wrap justify-center items-center gap-6 text-gray-300 mb-8">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-[#00F0FF]" />
+                  <span>120 minutes</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-green-400">●</span>
+                  <span>Beginner Level</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#FF4D00]">7 Sections</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Guide Content */}
+        <div className="relative bg-gradient-to-br from-[#0A192F] to-[#0D1B2A]">
           <GuideTemplate
-            title="Getting Started with AI Development"
-            description="A comprehensive guide to beginning your AI development journey in 2025. From setting up your environment to deploying production-ready AI applications, this guide covers everything you need to know to start building intelligent systems."
+            title="" // Empty title since we handle it in hero
+            description=""
             estimatedTime={120}
             difficulty="Beginner"
             prerequisites={prerequisites}

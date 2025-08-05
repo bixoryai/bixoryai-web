@@ -113,39 +113,41 @@ export const GuideTemplate = ({
           </div>
 
           {/* Main Content */}
-          <div className="lg:col-span-3">
-            {/* Header */}
-            <div className="mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
-                  {title}
-                </span>
-              </h1>
-              
-              {/* Meta Information */}
-              <div className="flex flex-wrap items-center gap-4 text-gray-300 mb-6">
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  <span>{estimatedTime} minutes</span>
+        <div className="lg:col-span-3">
+            {/* Header - Only show if title is provided */}
+            {title && (
+              <div className="mb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                  <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+                    {title}
+                  </span>
+                </h1>
+                
+                {/* Meta Information */}
+                <div className="flex flex-wrap items-center gap-4 text-gray-300 mb-6">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{estimatedTime} minutes</span>
+                  </div>
+                  <Badge variant="outline" className={getDifficultyColor(difficulty)}>
+                    {difficulty}
+                  </Badge>
                 </div>
-                <Badge variant="outline" className={getDifficultyColor(difficulty)}>
-                  {difficulty}
-                </Badge>
+
+                {/* Tags */}
+                {tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {tags.map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-[#00F0FF] border-[#00F0FF]/50">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+
+                {description && <p className="text-lg text-gray-300 leading-relaxed mb-6">{description}</p>}
               </div>
-
-              {/* Tags */}
-              {tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-[#00F0FF] border-[#00F0FF]/50">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">{description}</p>
-            </div>
+            )}
 
             {/* Prerequisites */}
             {prerequisites.length > 0 && (
