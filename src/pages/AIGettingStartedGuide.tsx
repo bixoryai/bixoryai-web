@@ -113,8 +113,6 @@ const AIGettingStartedGuide = () => {
       id: "frameworks",
       title: "Choosing the Right AI Framework",
       content: `<div class="space-y-6">
-        <img src="${aiFrameworksGuide}" alt="AI Frameworks Selection Guide" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
-        
         <p class="text-lg text-gray-200">In 2025, the AI framework landscape has stabilized around several key players:</p>
         
         <div class="grid md:grid-cols-2 gap-4">
@@ -188,33 +186,44 @@ const AIGettingStartedGuide = () => {
     {
       id: "first-project",
       title: "Building Your First AI Project",
-      content: `Let's build a practical AI application: a sentiment analysis tool using modern approaches.
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">Let's build a practical AI application: a sentiment analysis tool using modern approaches.</p>
+        
+        <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-lg p-6">
+          <h4 class="text-blue-300 font-semibold mb-4 text-lg flex items-center gap-2">
+            🚀 Project: Real-time Sentiment Analyzer
+          </h4>
+        </div>
 
-**Project: Real-time Sentiment Analyzer**
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-6">
+            <h4 class="text-green-300 font-semibold mb-4 flex items-center gap-2">
+              🤗 Approach 1: Pre-trained Models
+            </h4>
+            <p class="text-sm text-gray-400 mb-4">Recommended for beginners - using <a href="https://huggingface.co/transformers/" target="_blank" class="text-[#00F0FF] hover:underline">Hugging Face Transformers</a></p>
+            <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 text-sm text-gray-300 overflow-x-auto">
+<code>from transformers import pipeline
 
-**Approach 1: Using Pre-trained Models (Recommended for beginners)**
-\`\`\`python
-from transformers import pipeline
-
-# Load pre-trained sentiment analysis model
+# Load pre-trained sentiment model
 classifier = pipeline("sentiment-analysis", 
-                     model="cardiffnlp/twitter-roberta-base-sentiment-latest")
+    model="cardiffnlp/twitter-roberta-base-sentiment-latest")
 
 def analyze_sentiment(text):
     result = classifier(text)
     return {
         'sentiment': result[0]['label'],
         'confidence': result[0]['score']
-    }
-
-# Test the model
-sample_text = "I love learning AI development!"
-print(analyze_sentiment(sample_text))
-\`\`\`
-
-**Approach 2: Using OpenAI API (For production applications)**
-\`\`\`python
-import openai
+    }</code>
+            </pre>
+          </div>
+          
+          <div class="bg-orange-500/10 border border-orange-400/30 rounded-lg p-6">
+            <h4 class="text-orange-300 font-semibold mb-4 flex items-center gap-2">
+              🔥 Approach 2: OpenAI API
+            </h4>
+            <p class="text-sm text-gray-400 mb-4">For production applications - using <a href="https://openai.com/api/" target="_blank" class="text-[#00F0FF] hover:underline">OpenAI API</a></p>
+            <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 text-sm text-gray-300 overflow-x-auto">
+<code>import openai
 
 client = openai.OpenAI(api_key="your-api-key")
 
@@ -222,166 +231,234 @@ def analyze_sentiment_gpt(text):
     response = client.chat.completions.create(
         model="gpt-4.1-2025-04-14",
         messages=[
-            {"role": "system", "content": "Analyze sentiment: positive, negative, or neutral. Respond with JSON."},
+            {"role": "system", "content": "Analyze sentiment: positive, negative, or neutral."},
             {"role": "user", "content": text}
-        ],
-        response_format={"type": "json_object"}
+        ]
     )
-    return response.choices[0].message.content
-\`\`\`
+    return response.choices[0].message.content</code>
+            </pre>
+          </div>
+        </div>
 
-**Key Learning Points**:
-• Start simple: Use pre-trained models before building from scratch
-• Understand your data: Always examine what you're working with
-• Evaluate performance: Test with diverse examples
-• Consider costs: API calls vs. local computation trade-offs
+        <div class="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+          <h4 class="text-yellow-300 font-semibold mb-3">💡 Key Learning Points</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Start simple: Use pre-trained models first</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Understand your data: Examine what you're working with</li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Evaluate performance: Test with diverse examples</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Consider costs: API calls vs. local computation</li>
+            </ul>
+          </div>
+        </div>
 
-**Next Steps**:
-• Add a web interface using Streamlit or Flask
-• Implement batch processing for multiple texts
-• Add visualization of sentiment trends over time
-• Deploy using Docker and cloud services`
+        <div class="bg-purple-500/10 border border-purple-400/30 rounded-lg p-4">
+          <h4 class="text-purple-300 font-semibold mb-3">🎯 Next Steps</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-1">
+              <li>• Add web interface using <a href="https://streamlit.io/" target="_blank" class="text-[#00F0FF] hover:underline">Streamlit</a></li>
+              <li>• Implement batch processing for multiple texts</li>
+            </ul>
+            <ul class="space-y-1">
+              <li>• Add visualization of sentiment trends over time</li>
+              <li>• Deploy using <a href="https://www.docker.com/" target="_blank" class="text-[#00F0FF] hover:underline">Docker</a> and cloud services</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
     },
     {
       id: "ml-pipeline",
       title: "Understanding ML Pipelines",
-      content: `<img src="${aiRoadmap}" alt="AI Development Roadmap" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
+      content: `<div class="space-y-6">
+        <img src="${aiRoadmap}" alt="AI Development Roadmap" style="width: 100%; margin: 20px 0; border-radius: 8px;" />
+        
+        <p class="text-lg text-gray-200">A modern ML pipeline in 2025 follows this structured approach:</p>
 
-A modern ML pipeline in 2025 follows this structure:
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-blue-500/10 border border-blue-400/30 rounded-lg p-4">
+            <h4 class="text-blue-300 font-semibold mb-3 flex items-center gap-2">
+              📊 1. Data Collection & Preparation
+            </h4>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Data sources: APIs, databases, web scraping</li>
+              <li>• Cleaning: Handle missing values, outliers</li>
+              <li>• Feature engineering: Create meaningful inputs</li>
+              <li>• Data validation: Ensure quality and consistency</li>
+            </ul>
+          </div>
+          
+          <div class="bg-purple-500/10 border border-purple-400/30 rounded-lg p-4">
+            <h4 class="text-purple-300 font-semibold mb-3 flex items-center gap-2">
+              🔬 2. Model Development
+            </h4>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Problem definition: Classification, regression</li>
+              <li>• Model selection: Start simple, progress to complex</li>
+              <li>• Training: Split data, fit models, tune parameters</li>
+              <li>• Evaluation: Use appropriate metrics</li>
+            </ul>
+          </div>
+          
+          <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-4">
+            <h4 class="text-green-300 font-semibold mb-3 flex items-center gap-2">
+              🚀 3. Model Deployment
+            </h4>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Containerization: <a href="https://www.docker.com/" target="_blank" class="text-[#00F0FF] hover:underline">Docker</a> for consistent environments</li>
+              <li>• API creation: <a href="https://fastapi.tiangolo.com/" target="_blank" class="text-[#00F0FF] hover:underline">FastAPI</a> or Flask for serving</li>
+              <li>• Monitoring: Track model performance</li>
+              <li>• CI/CD: Automated testing and deployment</li>
+            </ul>
+          </div>
+        </div>
 
-**1. Data Collection & Preparation**
-• Data sources: APIs, databases, web scraping, synthetic data
-• Cleaning: Handle missing values, outliers, duplicates
-• Feature engineering: Create meaningful inputs for your model
-• Data validation: Ensure quality and consistency
+        <div class="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-lg p-6">
+          <h4 class="text-yellow-300 font-semibold mb-4 text-lg">🛠️ Modern Tools for Each Stage</h4>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-3">
+              <div>
+                <h5 class="text-white font-medium mb-2">Data Processing</h5>
+                <p class="text-sm text-gray-300">Pandas, Polars, <a href="https://duckdb.org/" target="_blank" class="text-[#00F0FF] hover:underline">DuckDB</a></p>
+              </div>
+              <div>
+                <h5 class="text-white font-medium mb-2">Training</h5>
+                <p class="text-sm text-gray-300"><a href="https://pytorch-lightning.readthedocs.io/" target="_blank" class="text-[#00F0FF] hover:underline">PyTorch Lightning</a>, Hugging Face Trainer</p>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <h5 class="text-white font-medium mb-2">Experimentation</h5>
+                <p class="text-sm text-gray-300"><a href="https://wandb.ai/" target="_blank" class="text-[#00F0FF] hover:underline">Weights & Biases</a>, <a href="https://mlflow.org/" target="_blank" class="text-[#00F0FF] hover:underline">MLflow</a></p>
+              </div>
+              <div>
+                <h5 class="text-white font-medium mb-2">Deployment</h5>
+                <p class="text-sm text-gray-300">FastAPI, Docker, <a href="https://kubernetes.io/" target="_blank" class="text-[#00F0FF] hover:underline">Kubernetes</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-**2. Model Development**
-• Problem definition: Classification, regression, generation, etc.
-• Model selection: Start simple (linear models), then progress to complex
-• Training: Split data (train/validation/test), fit models, tune hyperparameters
-• Evaluation: Use appropriate metrics for your problem type
-
-**3. Model Deployment**
-• Containerization: Docker for consistent environments
-• API creation: FastAPI or Flask for serving predictions
-• Monitoring: Track model performance in production
-• CI/CD: Automated testing and deployment pipelines
-
-**Modern Tools for Each Stage**:
-• **Data**: Pandas, Polars, DuckDB for processing
-• **Training**: PyTorch Lightning, Hugging Face Trainer
-• **Experimentation**: Weights & Biases, MLflow
-• **Deployment**: FastAPI, Docker, Kubernetes
-• **Monitoring**: Evidently AI, Great Expectations
-
-**MLOps Best Practices**:
-• Version control everything: code, data, models
-• Automate testing: unit tests, integration tests, model validation
-• Monitor drift: data distribution changes over time
-• Plan for scaling: from prototype to production loads
-
-**Common Pipeline Architecture**:
-\`\`\`
-Raw Data → Feature Store → Model Training → Model Registry → Deployment → Monitoring
-\`\`\`
-
-This pipeline approach ensures reproducibility, scalability, and maintainability of your AI systems.`
+        <div class="bg-gray-500/10 border border-gray-400/30 rounded-lg p-4">
+          <h4 class="text-gray-300 font-semibold mb-3">📈 Common Pipeline Architecture</h4>
+          <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+            <div class="text-center text-gray-300 font-mono text-sm">
+              Raw Data → Feature Store → Model Training → Model Registry → Deployment → Monitoring
+            </div>
+          </div>
+        </div>
+      </div>`
     },
     {
       id: "llm-integration",
       title: "Working with Large Language Models",
-      content: `LLMs have revolutionized AI development in 2025. Here's how to leverage them effectively:
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">LLMs have revolutionized AI development in 2025. Here's how to leverage them effectively:</p>
 
-**Understanding LLM Capabilities**:
-• Text generation and completion
-• Language translation and summarization
-• Code generation and debugging
-• Reasoning and problem-solving
-• Multimodal understanding (text + images)
+        <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-lg p-6">
+          <h4 class="text-purple-300 font-semibold mb-4 text-lg">🧠 Understanding LLM Capabilities</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-purple-400">•</span> Text generation and completion</li>
+              <li class="flex items-center gap-2"><span class="text-purple-400">•</span> Language translation and summarization</li>
+              <li class="flex items-center gap-2"><span class="text-purple-400">•</span> Code generation and debugging</li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-purple-400">•</span> Reasoning and problem-solving</li>
+              <li class="flex items-center gap-2"><span class="text-purple-400">•</span> Multimodal understanding (text + images)</li>
+            </ul>
+          </div>
+        </div>
 
-**Popular LLM APIs in 2025**:
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-4">
+            <h4 class="text-green-300 font-semibold mb-3 flex items-center gap-2">
+              🤖 <a href="https://openai.com/api/" target="_blank" class="hover:underline">OpenAI GPT-4.1</a>
+            </h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <p><strong class="text-white">Best for:</strong> General-purpose, code generation</p>
+              <p><strong class="text-white">Context:</strong> 128K tokens</p>
+              <p><strong class="text-white">Pricing:</strong> $15/1M input tokens</p>
+            </div>
+          </div>
+          
+          <div class="bg-blue-500/10 border border-blue-400/30 rounded-lg p-4">
+            <h4 class="text-blue-300 font-semibold mb-3 flex items-center gap-2">
+              🔬 <a href="https://www.anthropic.com/api" target="_blank" class="hover:underline">Anthropic Claude</a>
+            </h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <p><strong class="text-white">Best for:</strong> Complex reasoning, safety-critical</p>
+              <p><strong class="text-white">Context:</strong> 200K tokens</p>
+              <p><strong class="text-white">Pricing:</strong> Competitive rates</p>
+            </div>
+          </div>
+          
+          <div class="bg-red-500/10 border border-red-400/30 rounded-lg p-4">
+            <h4 class="text-red-300 font-semibold mb-3 flex items-center gap-2">
+              🌟 <a href="https://ai.google.dev/" target="_blank" class="hover:underline">Google Gemini</a>
+            </h4>
+            <div class="space-y-2 text-sm text-gray-300">
+              <p><strong class="text-white">Best for:</strong> Multimodal applications</p>
+              <p><strong class="text-white">Strengths:</strong> Native multimodal, fast inference</p>
+              <p><strong class="text-white">Pricing:</strong> Free tier available</p>
+            </div>
+          </div>
+        </div>
 
-**OpenAI GPT-4.1**: 
-• Best for: General-purpose applications, code generation
-• Pricing: $15/1M input tokens, $30/1M output tokens
-• Context: 128K tokens
-• Strengths: Versatile, reliable, strong coding abilities
+        <div class="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+          <h4 class="text-yellow-300 font-semibold mb-3">💡 Prompt Engineering Best Practices</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Be specific and clear in instructions</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Provide examples (few-shot prompting)</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Use system messages for context</li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Break complex tasks into smaller steps</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Test prompts extensively with edge cases</li>
+            </ul>
+          </div>
+        </div>
 
-**Anthropic Claude Opus 4**:
-• Best for: Complex reasoning, long-form content, safety-critical applications
-• Pricing: $15/1M tokens for 7-hour coding sessions
-• Context: 200K tokens
-• Strengths: Superior reasoning, ethical considerations, document analysis
-
-**Google Gemini Pro**:
-• Best for: Multimodal applications, integration with Google services
-• Pricing: Competitive rates, free tier available
-• Strengths: Native multimodal capabilities, fast inference
-
-**Practical Integration Example**:
-\`\`\`python
-# Using multiple LLM providers with fallback
-import openai
-import anthropic
-from typing import Optional
-
-class LLMManager:
-    def __init__(self):
-        self.openai_client = openai.OpenAI()
-        self.anthropic_client = anthropic.Anthropic()
-    
-    async def generate_response(self, prompt: str, 
-                              provider: str = "openai") -> Optional[str]:
-        try:
-            if provider == "openai":
-                response = self.openai_client.chat.completions.create(
-                    model="gpt-4.1-2025-04-14",
-                    messages=[{"role": "user", "content": prompt}],
-                    max_tokens=1000
-                )
-                return response.choices[0].message.content
-            
-            elif provider == "anthropic":
-                response = self.anthropic_client.messages.create(
-                    model="claude-opus-4-20250514",
-                    max_tokens=1000,
-                    messages=[{"role": "user", "content": prompt}]
-                )
-                return response.content[0].text
-                
-        except Exception as e:
-            # Fallback to alternative provider
-            print(f"Error with {provider}: {e}")
-            return await self.generate_response(prompt, 
-                                               "anthropic" if provider == "openai" else "openai")
-\`\`\`
-
-**Prompt Engineering Best Practices**:
-• Be specific and clear in your instructions
-• Provide examples (few-shot prompting)
-• Use system messages to set context and constraints
-• Break complex tasks into smaller steps
-• Test prompts extensively with edge cases
-
-**Cost Optimization Strategies**:
-• Cache responses for repeated queries
-• Use streaming for real-time applications
-• Implement smart truncation for long inputs
-• Consider fine-tuning for specialized tasks
-• Monitor token usage and set limits`
+        <div class="bg-orange-500/10 border border-orange-400/30 rounded-lg p-4">
+          <h4 class="text-orange-300 font-semibold mb-3">💰 Cost Optimization Strategies</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-1">
+              <li>• Cache responses for repeated queries</li>
+              <li>• Use streaming for real-time applications</li>
+              <li>• Implement smart truncation for long inputs</li>
+            </ul>
+            <ul class="space-y-1">
+              <li>• Consider fine-tuning for specialized tasks</li>
+              <li>• Monitor token usage and set limits</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
     },
     {
       id: "production",
       title: "Deploying AI to Production",
-      content: `Moving from prototype to production requires careful planning and robust infrastructure:
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">Moving from prototype to production requires careful planning and robust infrastructure:</p>
 
-**Deployment Architecture Patterns**:
+        <div class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-lg p-6">
+          <h4 class="text-blue-300 font-semibold mb-4 text-lg flex items-center gap-2">
+            🏗️ Deployment Architecture Patterns
+          </h4>
+        </div>
 
-**1. API-First Approach**
-\`\`\`python
-from fastapi import FastAPI, BackgroundTasks
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-6">
+            <h4 class="text-green-300 font-semibold mb-4 flex items-center gap-2">
+              🚀 API-First Approach
+            </h4>
+            <p class="text-sm text-gray-400 mb-4">Using <a href="https://fastapi.tiangolo.com/" target="_blank" class="text-[#00F0FF] hover:underline">FastAPI</a> for scalable AI services</p>
+            <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 text-sm text-gray-300 overflow-x-auto">
+<code>from fastapi import FastAPI
 from pydantic import BaseModel
-import asyncio
 
 app = FastAPI(title="AI Service API")
 
@@ -389,209 +466,232 @@ class PredictionRequest(BaseModel):
     text: str
     model_version: str = "v1.0"
 
-class PredictionResponse(BaseModel):
-    prediction: str
-    confidence: float
-    processing_time: float
-
-@app.post("/predict", response_model=PredictionResponse)
+@app.post("/predict")
 async def predict(request: PredictionRequest):
-    start_time = time.time()
-    
-    # Load model based on version
-    model = model_registry.get_model(request.model_version)
-    
-    # Make prediction
-    result = await model.predict(request.text)
-    
-    processing_time = time.time() - start_time
-    
-    return PredictionResponse(
-        prediction=result.prediction,
-        confidence=result.confidence,
-        processing_time=processing_time
-    )
-\`\`\`
-
-**2. Containerization with Docker**
-\`\`\`dockerfile
-FROM python:3.11-slim
+    # AI prediction logic here
+    return {"prediction": "positive", "confidence": 0.95}</code>
+            </pre>
+          </div>
+          
+          <div class="bg-blue-500/10 border border-blue-400/30 rounded-lg p-6">
+            <h4 class="text-blue-300 font-semibold mb-4 flex items-center gap-2">
+              🐳 Containerization
+            </h4>
+            <p class="text-sm text-gray-400 mb-4">Using <a href="https://www.docker.com/" target="_blank" class="text-[#00F0FF] hover:underline">Docker</a> for consistent environments</p>
+            <pre class="bg-gray-900 border border-gray-700 rounded-lg p-4 text-sm text-gray-300 overflow-x-auto">
+<code>FROM python:3.11-slim
 
 WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy application code
 COPY . .
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD curl -f http://localhost:8000/health || exit 1
-
 # Run application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-\`\`\`
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]</code>
+            </pre>
+          </div>
+        </div>
 
-**3. Kubernetes Deployment**
-\`\`\`yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ai-service
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: ai-service
-  template:
-    metadata:
-      labels:
-        app: ai-service
-    spec:
-      containers:
-      - name: ai-service
-        image: your-registry/ai-service:latest
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            memory: "2Gi"
-            cpu: "1000m"
-          limits:
-            memory: "4Gi"
-            cpu: "2000m"
-        env:
-        - name: MODEL_PATH
-          value: "/models/latest"
-\`\`\`
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+            <h4 class="text-yellow-300 font-semibold mb-3">⚡ Performance Optimization</h4>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Model quantization to reduce memory usage</li>
+              <li>• Batch processing for multiple requests</li>
+              <li>• Caching for frequently requested predictions</li>
+              <li>• Load balancing across multiple instances</li>
+            </ul>
+          </div>
+          
+          <div class="bg-purple-500/10 border border-purple-400/30 rounded-lg p-4">
+            <h4 class="text-purple-300 font-semibold mb-3">📊 Monitoring & Observability</h4>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Request/response logging</li>
+              <li>• Model performance metrics</li>
+              <li>• Infrastructure monitoring (CPU, memory, GPU)</li>
+              <li>• Error tracking and alerting</li>
+            </ul>
+          </div>
+        </div>
 
-**Production Considerations**:
+        <div class="bg-red-500/10 border border-red-400/30 rounded-lg p-4">
+          <h4 class="text-red-300 font-semibold mb-3">🔒 Security Best Practices</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-1">
+              <li>• API authentication and rate limiting</li>
+              <li>• Input validation and sanitization</li>
+            </ul>
+            <ul class="space-y-1">
+              <li>• Secure secret management</li>
+              <li>• Network security and encryption</li>
+            </ul>
+          </div>
+        </div>
 
-**Performance Optimization**:
-• Model quantization to reduce memory usage
-• Batch processing for multiple requests
-• Caching for frequently requested predictions
-• Load balancing across multiple instances
-
-**Monitoring & Observability**:
-• Request/response logging
-• Model performance metrics
-• Infrastructure monitoring (CPU, memory, GPU)
-• Error tracking and alerting
-
-**Security Best Practices**:
-• API authentication and rate limiting
-• Input validation and sanitization
-• Secure secret management
-• Network security and encryption
-
-**Scaling Strategies**:
-• Horizontal scaling: Add more instances
-• Vertical scaling: Increase instance resources
-• Auto-scaling based on metrics
-• Edge deployment for reduced latency
-
-**CI/CD Pipeline Example**:
-1. Code commit triggers automated tests
-2. Model validation and performance benchmarks
-3. Container build and security scanning
-4. Staged deployment (dev → staging → production)
-5. Monitoring and rollback capabilities
-
-**Cost Management**:
-• Right-size your infrastructure
-• Use spot instances for non-critical workloads
-• Implement intelligent caching
-• Monitor and optimize API usage
-• Consider serverless options for sporadic workloads`
+        <div class="bg-gray-500/10 border border-gray-400/30 rounded-lg p-4">
+          <h4 class="text-gray-300 font-semibold mb-3">📈 CI/CD Pipeline</h4>
+          <div class="space-y-2 text-sm text-gray-300">
+            <div class="flex items-center gap-3">
+              <span class="bg-blue-500 text-white px-2 py-1 rounded text-xs">1</span>
+              <span>Code commit triggers automated tests</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="bg-green-500 text-white px-2 py-1 rounded text-xs">2</span>
+              <span>Model validation and performance benchmarks</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="bg-orange-500 text-white px-2 py-1 rounded text-xs">3</span>
+              <span>Container build and security scanning</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="bg-purple-500 text-white px-2 py-1 rounded text-xs">4</span>
+              <span>Staged deployment (dev → staging → production)</span>
+            </div>
+          </div>
+        </div>
+      </div>`
     },
     {
       id: "best-practices",
       title: "AI Development Best Practices",
-      content: `As AI development matures in 2025, following established best practices is crucial for success:
+      content: `<div class="space-y-6">
+        <p class="text-lg text-gray-200">As AI development matures in 2025, following established best practices is crucial for success:</p>
 
-**Data Management**:
-• **Data Quality**: "Garbage in, garbage out" - invest time in data cleaning
-• **Data Versioning**: Track data changes with tools like DVC or Pachyderm
-• **Privacy Compliance**: Implement GDPR, CCPA, and other privacy regulations
-• **Bias Detection**: Regularly audit data for demographic and selection biases
-• **Synthetic Data**: Use tools like Faker or Gretel for privacy-safe development
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-blue-500/10 border border-blue-400/30 rounded-lg p-6">
+            <h4 class="text-blue-300 font-semibold mb-4 flex items-center gap-2">
+              📊 Data Management
+            </h4>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Data Quality:</strong> "Garbage in, garbage out" - invest time in data cleaning
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Data Versioning:</strong> Track changes with <a href="https://dvc.org/" target="_blank" class="text-[#00F0FF] hover:underline">DVC</a> or Pachyderm
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Privacy Compliance:</strong> Implement GDPR, CCPA regulations
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Bias Detection:</strong> Regularly audit data for demographic biases
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-green-500/10 border border-green-400/30 rounded-lg p-6">
+            <h4 class="text-green-300 font-semibold mb-4 flex items-center gap-2">
+              🔬 Model Development
+            </h4>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Start Simple:</strong> Begin with baseline models before complex architectures
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Reproducibility:</strong> Set random seeds, version environments
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Cross-Validation:</strong> Use robust validation strategies
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 mt-1">•</span>
+                <div>
+                  <strong class="text-white">Regular Evaluation:</strong> Test models on new, unseen data
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-**Model Development**:
-• **Start Simple**: Begin with baseline models before moving to complex architectures
-• **Reproducibility**: Set random seeds, version environments, document everything
-• **Cross-Validation**: Use robust validation strategies appropriate for your data
-• **Feature Engineering**: Domain knowledge often beats algorithmic complexity
-• **Regular Evaluation**: Continuously test models on new, unseen data
+        <div class="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-6">
+          <h4 class="text-yellow-300 font-semibold mb-4 flex items-center gap-2">
+            🤝 Team Collaboration
+          </h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Clear Documentation: README, API docs, model cards</li>
+              <li class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Code Reviews: Peer review for quality and ML methodology</li>
+              <li class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Experiment Tracking: Use <a href="https://mlflow.org/" target="_blank" class="text-[#00F0FF] hover:underline">MLflow</a> or <a href="https://wandb.ai/" target="_blank" class="text-[#00F0FF] hover:underline">W&B</a></li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Knowledge Sharing: Regular tech talks and walkthroughs</li>
+              <li class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Version Control: Git for code, DVC for data</li>
+            </ul>
+          </div>
+        </div>
 
-**Code Quality**:
-\`\`\`python
-# Example of well-structured AI code
-import logging
-from typing import Dict, List, Optional
-from dataclasses import dataclass
-import numpy as np
+        <div class="bg-purple-500/10 border border-purple-400/30 rounded-lg p-6">
+          <h4 class="text-purple-300 font-semibold mb-4 flex items-center gap-2">
+            🔍 Ethical AI Considerations
+          </h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400 mt-1">•</span>
+                <div><strong class="text-white">Fairness Testing:</strong> Test across demographic groups</div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400 mt-1">•</span>
+                <div><strong class="text-white">Explainability:</strong> Use <a href="https://shap.readthedocs.io/" target="_blank" class="text-[#00F0FF] hover:underline">SHAP</a> or LIME for model decisions</div>
+              </li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400 mt-1">•</span>
+                <div><strong class="text-white">Human Oversight:</strong> Maintain human-in-the-loop for critical decisions</div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400 mt-1">•</span>
+                <div><strong class="text-white">Transparency:</strong> Document model limitations and failure modes</div>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-@dataclass
-class ModelConfig:
-    model_name: str
-    learning_rate: float
-    batch_size: int
-    max_epochs: int
-    
-class ModelTrainer:
-    def __init__(self, config: ModelConfig):
-        self.config = config
-        self.logger = logging.getLogger(__name__)
-        
-    def train(self, train_data: np.ndarray, 
-              val_data: np.ndarray) -> Dict[str, float]:
-        """Train model with proper logging and validation."""
-        self.logger.info(f"Starting training with {self.config.model_name}")
-        
-        # Training logic here
-        metrics = self._validate_model(val_data)
-        
-        self.logger.info(f"Training completed. Metrics: {metrics}")
-        return metrics
-    
-    def _validate_model(self, val_data: np.ndarray) -> Dict[str, float]:
-        """Validate model performance."""
-        # Validation logic
-        return {"accuracy": 0.95, "f1_score": 0.92}
-\`\`\`
+        <div class="bg-orange-500/10 border border-orange-400/30 rounded-lg p-4">
+          <h4 class="text-orange-300 font-semibold mb-3">📚 Staying Current</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <ul class="space-y-1">
+              <li>• Follow Research: <a href="https://arxiv.org/" target="_blank" class="text-[#00F0FF] hover:underline">ArXiv</a>, <a href="https://paperswithcode.com/" target="_blank" class="text-[#00F0FF] hover:underline">Papers with Code</a></li>
+              <li>• Community: AI Twitter, <a href="https://reddit.com/r/MachineLearning" target="_blank" class="text-[#00F0FF] hover:underline">Reddit r/MachineLearning</a></li>
+              <li>• Conferences: <a href="https://neurips.cc/" target="_blank" class="text-[#00F0FF] hover:underline">NeurIPS</a>, <a href="https://icml.cc/" target="_blank" class="text-[#00F0FF] hover:underline">ICML</a>, <a href="https://iclr.cc/" target="_blank" class="text-[#00F0FF] hover:underline">ICLR</a></li>
+            </ul>
+            <ul class="space-y-1">
+              <li>• Continuous Learning: Online courses, certifications</li>
+              <li>• Open Source: Contribute to projects, learn from code</li>
+            </ul>
+          </div>
+        </div>
 
-**Ethical AI Considerations**:
-• **Fairness Testing**: Test model performance across different demographic groups
-• **Explainability**: Use tools like SHAP or LIME to understand model decisions
-• **Human Oversight**: Maintain human-in-the-loop for critical decisions
-• **Transparency**: Document model limitations and failure modes
-• **Continuous Monitoring**: Watch for drift in model behavior over time
-
-**Team Collaboration**:
-• **Clear Documentation**: Maintain up-to-date README, API docs, and model cards
-• **Code Reviews**: Peer review for both code quality and ML methodology
-• **Experiment Tracking**: Use MLflow or Weights & Biases for team visibility
-• **Knowledge Sharing**: Regular tech talks and code walkthroughs
-• **Version Control**: Git for code, DVC for data, model registries for models
-
-**Performance Monitoring**:
-• **A/B Testing**: Compare model versions in production
-• **Data Drift Detection**: Monitor input distribution changes
-• **Model Degradation**: Track performance metrics over time
-• **Business Metrics**: Connect AI metrics to business outcomes
-• **Alerting**: Set up notifications for anomalies or performance drops
-
-**Staying Current**:
-• **Follow Research**: ArXiv, Papers with Code, Google AI Blog
-• **Community Engagement**: AI Twitter, Reddit r/MachineLearning, Discord servers
-• **Conferences**: NeurIPS, ICML, ICLR (virtual attendance is often available)
-• **Continuous Learning**: Online courses, certifications, hands-on projects
-• **Open Source**: Contribute to projects, learn from others' code
-
-Remember: AI development is as much about the process as it is about the technology. Focus on building reliable, maintainable systems that solve real problems.`
+        <div class="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-400/30 rounded-lg p-4">
+          <h4 class="text-red-300 font-semibold mb-2">🎯 Remember</h4>
+          <p class="text-gray-300 italic">AI development is as much about the process as it is about the technology. Focus on building reliable, maintainable systems that solve real problems.</p>
+        </div>
+      </div>`
     }
   ];
 
