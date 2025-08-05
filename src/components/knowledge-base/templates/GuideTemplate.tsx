@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Clock, FileDown, CheckCircle, Circle, ChevronRight, ChevronDown } from "lucide-react";
 
 interface GuideSection {
@@ -168,47 +169,45 @@ export const GuideTemplate = ({
               </Card>
             )}
 
-            {/* Guide Sections */}
-            <div className="space-y-6">
-              {sections.map((section, index) => (
-                <Card key={section.id} id={section.id} className="bg-white/5 border-white/10 backdrop-blur-sm shadow-lg hover:bg-white/10 transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Checkbox
-                          checked={completedSections.has(section.id)}
-                          onCheckedChange={() => toggleCompletion(section.id)}
-                          className="border-[#00F0FF]/50 data-[state=checked]:bg-[#00F0FF] data-[state=checked]:border-[#00F0FF]"
-                        />
-                        <h3 className="text-xl font-semibold text-white">
-                          {index + 1}. {section.title}
-                        </h3>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => toggleSection(section.id)}
-                      >
-                        {expandedSections.has(section.id) ? (
-                          <ChevronDown className="h-4 w-4" />
-                        ) : (
-                          <ChevronRight className="h-4 w-4" />
-                        )}
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  {expandedSections.has(section.id) && (
-                    <CardContent>
-                      <div className="prose prose-invert max-w-none">
-                        <div className="text-gray-300 leading-relaxed whitespace-pre-line">
-                          {section.content}
+            {/* Guide Sections - Accordion Style */}
+            <Card className="bg-white/5 border-white/10 backdrop-blur-sm shadow-lg">
+              <CardHeader>
+                <h2 className="text-2xl font-semibold text-white">Guide Sections</h2>
+                <p className="text-gray-400">Click on any section to expand its content</p>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full space-y-4">
+                  {sections.map((section, index) => (
+                    <AccordionItem 
+                      key={section.id} 
+                      value={section.id}
+                      className="border border-white/10 rounded-lg bg-white/5 backdrop-blur-sm"
+                    >
+                      <AccordionTrigger className="px-6 py-4 text-left hover:no-underline hover:bg-white/10 rounded-t-lg">
+                        <div className="flex items-center gap-3 text-white w-full">
+                          <Checkbox
+                            checked={completedSections.has(section.id)}
+                            onCheckedChange={() => toggleCompletion(section.id)}
+                            className="border-[#00F0FF]/50 data-[state=checked]:bg-[#00F0FF] data-[state=checked]:border-[#00F0FF]"
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                          <span className="bg-gradient-to-r from-[#FF4D00] to-[#FF6B35] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">
+                            {index + 1}
+                          </span>
+                          <span className="text-lg font-semibold flex-1 text-left">{section.title}</span>
                         </div>
-                      </div>
-                    </CardContent>
-                  )}
-                </Card>
-              ))}
-            </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-6 pb-6" id={section.id}>
+                        <div 
+                          className="text-gray-300 leading-relaxed prose prose-invert max-w-none"
+                          dangerouslySetInnerHTML={{ __html: section.content }}
+                        />
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </CardContent>
+            </Card>
 
             {/* Downloadable Resources - Moved to end */}
             {downloadableResources.length > 0 && (
