@@ -35,7 +35,11 @@ const GuideNavigation = () => {
             <span className="sm:hidden">KB</span>
           </Link>
           <span className="text-gray-500">/</span>
-          <span className="text-white truncate">AI Getting Started</span>
+          <span className="text-white truncate">
+            {window.location.pathname.includes('getting-started') ? 'AI Getting Started' : 
+             window.location.pathname.includes('advanced-prompt') ? 'Advanced Prompt Engineering' : 
+             'Knowledge Guide'}
+          </span>
         </div>
       </div>
 
