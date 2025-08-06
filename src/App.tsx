@@ -20,6 +20,7 @@ import Careers from "./pages/Careers";
 import JobApplication from "./pages/JobApplication";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import AdminTest from "./pages/AdminTest";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/job-application" element={<JobApplication />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin-test" element={<AdminTest />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>

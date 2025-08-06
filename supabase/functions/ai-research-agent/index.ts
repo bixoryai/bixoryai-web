@@ -26,6 +26,7 @@ interface ResearchRequest {
   query?: string;
   sources?: string[];
   limit?: number;
+  category?: string;
 }
 
 serve(async (req) => {
@@ -39,9 +40,9 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const { provider = 'openai', query = 'AI tools directory', sources = [], limit = 20 }: ResearchRequest = await req.json();
+    const { provider = 'openai', query = 'AI tools directory', sources = [], limit = 20, category }: ResearchRequest = await req.json();
 
-    console.log(`Starting research with ${provider} for: ${query}`);
+    console.log(`Starting research with ${provider} for: ${query}${category ? ` (Category: ${category})` : ''}`);
 
     // Step 1: Crawl sources using Firecrawl
     const firecrawlApiKey = Deno.env.get('FIRECRAWL_API_KEY');
@@ -106,6 +107,20 @@ serve(async (req) => {
         throw new Error('OPENAI_API_KEY not found');
       }
 
+      // Category-specific research prompts
+      const categoryPrompts = {
+        'Content': 'Focus on AI tools for content creation, writing, copywriting, social media, marketing content, blog posts, video creation, image generation, and content optimization.',
+        'Development': 'Focus on AI tools for software development, coding assistants, code generation, debugging, testing, DevOps, API development, and programming productivity.',
+        'Design': 'Focus on AI tools for graphic design, UI/UX design, image generation, logo creation, prototyping, color palettes, and creative visual content.',
+        'Analytics': 'Focus on AI tools for data analysis, business intelligence, predictive analytics, data visualization, reporting, and insights generation.',
+        'Productivity': 'Focus on AI tools for task management, automation, scheduling, note-taking, document processing, workflow optimization, and general productivity enhancement.',
+        'AI Models': 'Focus on AI platforms, model APIs, foundation models, training platforms, AI infrastructure, and model deployment services.'
+      };
+
+      const categoryFocus = category && categoryPrompts[category as keyof typeof categoryPrompts] 
+        ? `\n\nSPECIAL FOCUS: ${categoryPrompts[category as keyof typeof categoryPrompts]}`
+        : '';
+
       const analysisPrompt = `
 Analyze the following crawled content from AI tool directories and extract AI tools information. 
 Return a JSON array of AI tools with the following structure:
@@ -122,7 +137,10 @@ Return a JSON array of AI tools with the following structure:
   "is_featured": false
 }
 
-Focus on popular, legitimate AI tools. Limit to ${limit} tools maximum.
+Focus on popular, legitimate AI tools. Prioritize tools that are actively maintained and have good user reviews.
+${category ? `CATEGORY FILTER: Only extract tools that belong to the "${category}" category.` : 'Include tools from all categories: Content, Development, Design, Analytics, Productivity, AI Models.'}
+${categoryFocus}
+Limit to ${limit} tools maximum.
 
 Crawled Content:
 ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join('\n\n')}
@@ -135,7 +153,7 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'gpt-4o-mini',
+          model: 'gpt-4.1-2025-04-14',
           messages: [
             { 
               role: 'system', 
@@ -166,6 +184,20 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
         throw new Error('ANTHROPIC_API_KEY not found');
       }
 
+      // Category-specific research prompts
+      const categoryPrompts = {
+        'Content': 'Focus on AI tools for content creation, writing, copywriting, social media, marketing content, blog posts, video creation, image generation, and content optimization.',
+        'Development': 'Focus on AI tools for software development, coding assistants, code generation, debugging, testing, DevOps, API development, and programming productivity.',
+        'Design': 'Focus on AI tools for graphic design, UI/UX design, image generation, logo creation, prototyping, color palettes, and creative visual content.',
+        'Analytics': 'Focus on AI tools for data analysis, business intelligence, predictive analytics, data visualization, reporting, and insights generation.',
+        'Productivity': 'Focus on AI tools for task management, automation, scheduling, note-taking, document processing, workflow optimization, and general productivity enhancement.',
+        'AI Models': 'Focus on AI platforms, model APIs, foundation models, training platforms, AI infrastructure, and model deployment services.'
+      };
+
+      const categoryFocus = category && categoryPrompts[category as keyof typeof categoryPrompts] 
+        ? `\n\nSPECIAL FOCUS: ${categoryPrompts[category as keyof typeof categoryPrompts]}`
+        : '';
+
       const analysisPrompt = `
 Analyze the following crawled content from AI tool directories and extract AI tools information. 
 Return a JSON array of AI tools with the following structure:
@@ -182,7 +214,10 @@ Return a JSON array of AI tools with the following structure:
   "is_featured": false
 }
 
-Focus on popular, legitimate AI tools. Limit to ${limit} tools maximum.
+Focus on popular, legitimate AI tools. Prioritize tools that are actively maintained and have good user reviews.
+${category ? `CATEGORY FILTER: Only extract tools that belong to the "${category}" category.` : 'Include tools from all categories: Content, Development, Design, Analytics, Productivity, AI Models.'}
+${categoryFocus}
+Limit to ${limit} tools maximum.
 
 Crawled Content:
 ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join('\n\n')}
@@ -196,7 +231,7 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
           'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
-          model: 'claude-3-5-haiku-20241022',
+          model: 'claude-sonnet-4-20250514',
           max_tokens: 4000,
           messages: [
             { 
