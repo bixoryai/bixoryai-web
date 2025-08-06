@@ -6,7 +6,21 @@ import { useAuth } from "@/contexts/AuthContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showResourcesMenu, setShowResourcesMenu] = useState(false);
-  const { user, isAdmin, signOut } = useAuth();
+  
+  // Safely access auth context with fallback
+  let user = null;
+  let isAdmin = false;
+  let signOut = () => {};
+  
+  try {
+    const auth = useAuth();
+    user = auth.user;
+    isAdmin = auth.isAdmin;
+    signOut = auth.signOut;
+  } catch (error) {
+    // Auth context not available yet
+    console.log('Auth context not available');
+  }
   
   
   return <nav className="fixed w-full bg-primary/90 backdrop-blur-sm z-50">
