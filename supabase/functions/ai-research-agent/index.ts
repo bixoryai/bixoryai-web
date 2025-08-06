@@ -214,8 +214,19 @@ Return a JSON array of AI tools with the following structure:
   "is_featured": false
 }
 
+CATEGORY DEFINITIONS - Use these exact definitions to classify tools correctly:
+
+• Content: Writing, copywriting, content generation, blog posts, social media content, video scripts, SEO content, translations, summarization
+• Development: Code generation, programming assistants, API tools, developer frameworks, debugging tools, code review, software development platforms
+• Design: UI/UX design, graphic design, logo creation, image generation, prototyping, design assets, creative tools
+• Analytics: Data analysis, business intelligence, reporting, metrics tracking, A/B testing, market research, performance monitoring
+• Productivity: Task management, scheduling, automation, workflow optimization, note-taking, project management, collaboration tools
+• AI Models: Large Language Models (LLMs), chatbots, AI assistants, foundational AI models, conversational AI, AI APIs (like GPT, Claude, Gemini, etc.)
+
+IMPORTANT: Google Gemini, GPT models, Claude, Grok, and similar conversational AI systems belong in "AI Models" category.
+
 Focus on popular, legitimate AI tools. Prioritize tools that are actively maintained and have good user reviews.
-${category ? `CATEGORY FILTER: Only extract tools that belong to the "${category}" category.` : 'Include tools from all categories: Content, Development, Design, Analytics, Productivity, AI Models.'}
+${category ? `CATEGORY FILTER: Only extract tools that belong to the "${category}" category. Use the definition above to ensure accurate classification.` : 'Include tools from all categories: Content, Development, Design, Analytics, Productivity, AI Models.'}
 ${categoryFocus}
 Limit to ${limit} tools maximum.
 
