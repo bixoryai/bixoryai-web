@@ -43,13 +43,6 @@ export default function UnderstandingRAG() {
 
   const content = `
   <div class="space-y-6 md:space-y-8">
-  <div class="text-center mb-8 md:mb-12">
-    <img src="${heroImage}" alt="Understanding RAG Systems" class="w-full rounded-xl md:rounded-2xl shadow-2xl mb-6 md:mb-8" />
-    <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto px-4">
-      Retrieval-Augmented Generation (RAG) represents a paradigm shift in how AI systems access and utilize information, combining the reasoning capabilities of large language models with dynamic knowledge retrieval for more accurate and contextual responses.
-    </p>
-  </div>
-
   <div class="grid gap-8 lg:gap-12">
     
     <!-- Core RAG Concept Section -->
