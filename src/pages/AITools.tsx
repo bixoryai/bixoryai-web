@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Star, ExternalLink, Search, Zap, Code, Palette, BarChart3, Cog, Brain, Plus, RefreshCw } from "lucide-react";
+import { Star, ExternalLink, Search, Zap, Code, Palette, BarChart3, Cog, Brain, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -29,7 +29,6 @@ const AITools = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [tools, setTools] = useState<AITool[]>([]);
   const [loading, setLoading] = useState(true);
-  const [researching, setResearching] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -56,37 +55,6 @@ const AITools = () => {
       });
     } finally {
       setLoading(false);
-    }
-  };
-
-  const startResearch = async (provider: 'openai' | 'claude') => {
-    setResearching(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('ai-research-agent', {
-        body: { 
-          provider,
-          limit: 10
-        }
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: "Research Complete!",
-        description: `Found ${data.results.savedTools} new AI tools using ${provider}`,
-      });
-
-      // Refresh the tools list
-      await fetchTools();
-    } catch (error) {
-      console.error('Research error:', error);
-      toast({
-        title: "Research Failed",
-        description: "Could not complete AI tools research",
-        variant: "destructive",
-      });
-    } finally {
-      setResearching(false);
     }
   };
 
@@ -189,15 +157,7 @@ const AITools = () => {
     <div className="text-center py-12">
       <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
       <h3 className="text-xl text-white mb-2">No AI Tools Found</h3>
-      <p className="text-gray-400 mb-6">Use the research buttons above to discover new AI tools</p>
-      <Button
-        onClick={() => startResearch('openai')}
-        disabled={researching}
-        className="bg-secondary hover:bg-secondary/90 text-white"
-      >
-        {researching ? <RefreshCw className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4 mr-2" />}
-        Start Research
-      </Button>
+      <p className="text-gray-400 mb-6">Try adjusting your search terms or check back later</p>
     </div>
   );
 
@@ -216,12 +176,12 @@ const AITools = () => {
                 Tools Directory
               </h1>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                Discover and explore the most powerful AI tools across every category, powered by intelligent research agents
+                Discover and explore the most powerful AI tools across every category
               </p>
               
-              {/* Search and Research Controls */}
-              <div className="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
-                <div className="relative flex-1">
+              {/* Search Controls */}
+              <div className="max-w-2xl mx-auto">
+                <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <Input
                     type="text"
@@ -230,25 +190,6 @@ const AITools = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10 bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:border-accent"
                   />
-                </div>
-                <div className="flex gap-2">
-                  <Button
-                    onClick={() => startResearch('openai')}
-                    disabled={researching}
-                    className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full"
-                  >
-                    {researching ? <RefreshCw className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4 mr-2" />}
-                    Research with OpenAI
-                  </Button>
-                  <Button
-                    onClick={() => startResearch('claude')}
-                    disabled={researching}
-                    variant="outline"
-                    className="border border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
-                  >
-                    {researching ? <RefreshCw className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4 mr-2" />}
-                    Research with Claude
-                  </Button>
                 </div>
               </div>
             </div>
@@ -320,8 +261,8 @@ const AITools = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 Missing an AI Tool?
               </h2>
-              <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                Can't find the AI tool you're looking for? Let us know and our research agents will find it for you.
+               <p className="text-lg text-gray-300 leading-relaxed mb-8">
+                Can't find the AI tool you're looking for? Let us know and we'll add it to our directory.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
