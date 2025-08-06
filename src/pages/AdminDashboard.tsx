@@ -243,13 +243,13 @@ const AdminDashboard = () => {
                 </Card>
               </div>
 
-              {/* Quick Actions */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <Card className="bg-primary/80 border-gray-700">
+              {/* Admin Navigation */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <Card className="bg-primary/80 border-gray-700 hover:shadow-lg transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-white flex items-center gap-2">
                       <Database className="h-5 w-5" />
-                      Manage AI Tools
+                      AI Tools Manager
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -263,11 +263,29 @@ const AdminDashboard = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-primary/80 border-gray-700">
+                <Card className="bg-primary/80 border-gray-700 hover:shadow-lg transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-white flex items-center gap-2">
                       <Search className="h-5 w-5" />
-                      Research Agent
+                      Research Agent Test
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-300 mb-4">Test the autonomous AI research agent functionality</p>
+                    <Button 
+                      onClick={() => navigate('/admin-test')}
+                      className="w-full bg-secondary hover:bg-secondary/90"
+                    >
+                      Open Test Interface
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-primary/80 border-gray-700 hover:shadow-lg transition-shadow duration-300">
+                  <CardHeader>
+                    <CardTitle className="text-white flex items-center gap-2">
+                      <Play className="h-5 w-5" />
+                      Quick Research Run
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -278,12 +296,12 @@ const AdminDashboard = () => {
                       className="w-full bg-secondary hover:bg-secondary/90"
                     >
                       <Play className="h-4 w-4 mr-2" />
-                      {runningResearch ? 'Running...' : 'Run Research Agent'}
+                      {runningResearch ? 'Running...' : 'Run Agent'}
                     </Button>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-primary/80 border-gray-700">
+                <Card className="bg-primary/80 border-gray-700 hover:shadow-lg transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="text-white flex items-center gap-2">
                       <Users className="h-5 w-5" />
