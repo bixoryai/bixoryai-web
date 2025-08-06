@@ -1,483 +1,351 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Link } from "react-router-dom";
-import { Search, Bot, Palette, Code, BarChart3, FileText, Video, Headphones, Star, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Star, ExternalLink, Search, Zap, Code, Palette, BarChart3, Cog, Brain, Plus, RefreshCw } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
+interface AITool {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  pricing: string;
+  rating?: number;
+  website_url: string;
+  logo_url?: string;
+  tags: string[];
+  features: string[];
+  is_featured: boolean;
+  status: string;
+}
 
 const AITools = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [tools, setTools] = useState<AITool[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [researching, setResearching] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchTools();
+  }, []);
+
+  const fetchTools = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('ai_tools')
+        .select('*')
+        .eq('status', 'active')
+        .order('is_featured', { ascending: false })
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setTools(data || []);
+    } catch (error) {
+      console.error('Error fetching tools:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load AI tools",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const startResearch = async (provider: 'openai' | 'claude') => {
+    setResearching(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('ai-research-agent', {
+        body: { 
+          provider,
+          limit: 10
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Research Complete!",
+        description: `Found ${data.results.savedTools} new AI tools using ${provider}`,
+      });
+
+      // Refresh the tools list
+      await fetchTools();
+    } catch (error) {
+      console.error('Research error:', error);
+      toast({
+        title: "Research Failed",
+        description: "Could not complete AI tools research",
+        variant: "destructive",
+      });
+    } finally {
+      setResearching(false);
+    }
+  };
+
+  const filteredTools = tools.filter(tool =>
+    tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    tool.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    tool.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    tool.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const getToolsByCategory = (category: string) => {
+    if (category === "All") return filteredTools;
+    return filteredTools.filter(tool => tool.category === category);
+  };
+
+  const renderToolCard = (tool: AITool) => (
+    <Card 
+      key={tool.id} 
+      className={`bg-primary/80 border-gray-700 hover:shadow-lg transition-shadow duration-300 ${
+        tool.is_featured ? 'border-2 border-accent' : ''
+      }`}
+    >
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xl text-white">{tool.name}</CardTitle>
+          {tool.is_featured && (
+            <Badge className="bg-accent text-primary">Featured</Badge>
+          )}
+        </div>
+        <CardDescription className="text-gray-300">
+          {tool.description}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <Badge variant="secondary" className="bg-gray-700 text-gray-300">
+              {tool.category}
+            </Badge>
+            {tool.rating && (
+              <div className="flex items-center text-yellow-400">
+                <Star className="w-4 h-4 fill-current" />
+                <span className="ml-1 text-sm">{tool.rating}</span>
+              </div>
+            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-gray-400">{tool.pricing}</span>
+            <Button 
+              size="sm" 
+              className="bg-secondary hover:bg-secondary/90 text-white"
+              asChild
+            >
+              <a href={tool.website_url} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="w-4 h-4 mr-1" />
+                Visit
+              </a>
+            </Button>
+          </div>
+          {tool.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {tool.tags.slice(0, 3).map((tag, index) => (
+                <Badge key={index} variant="outline" className="text-xs border-gray-600 text-gray-400">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  const renderLoadingCards = () => (
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <Card key={i} className="bg-primary/80 border-gray-700 animate-pulse">
+          <CardHeader className="pb-3">
+            <div className="h-6 bg-gray-700 rounded mb-2"></div>
+            <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="h-6 bg-gray-700 rounded w-20"></div>
+                <div className="h-4 bg-gray-700 rounded w-12"></div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="h-4 bg-gray-700 rounded w-16"></div>
+                <div className="h-8 bg-gray-700 rounded w-20"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+
+  const renderEmptyState = () => (
+    <div className="text-center py-12">
+      <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+      <h3 className="text-xl text-white mb-2">No AI Tools Found</h3>
+      <p className="text-gray-400 mb-6">Use the research buttons above to discover new AI tools</p>
+      <Button
+        onClick={() => startResearch('openai')}
+        disabled={researching}
+        className="bg-secondary hover:bg-secondary/90 text-white"
+      >
+        {researching ? <RefreshCw className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4 mr-2" />}
+        Start Research
+      </Button>
+    </div>
+  );
+
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-r from-[#0A192F]/90 to-[#0D1B2A]/90">
+      <div className="min-h-screen bg-primary">
         {/* Hero Section */}
-        <section className="pt-32 pb-16">
+        <section className="pt-24 pb-12">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Popular AI Tools
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
+                  BIXORY AI
+                </span>{" "}
+                Tools Directory
               </h1>
-              <p className="text-xl text-gray-300 mb-8">
-                Discover and explore the most powerful AI tools across every category
+              <p className="text-lg text-gray-300 leading-relaxed mb-8">
+                Discover and explore the most powerful AI tools across every category, powered by intelligent research agents
               </p>
               
-              {/* Search Bar */}
-              <div className="relative max-w-2xl mx-auto">
-                <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <Input 
-                  placeholder="Search AI tools by name, category, or feature..." 
-                  className="pl-10 py-3 text-lg bg-gray-900/50 backdrop-blur-sm border-gray-700/50 text-white placeholder:text-gray-400"
-                />
+              {/* Search and Research Controls */}
+              <div className="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Input
+                    type="text"
+                    placeholder="Search AI tools..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10 bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:border-accent"
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    onClick={() => startResearch('openai')}
+                    disabled={researching}
+                    className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full"
+                  >
+                    {researching ? <RefreshCw className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4 mr-2" />}
+                    Research with OpenAI
+                  </Button>
+                  <Button
+                    onClick={() => startResearch('claude')}
+                    disabled={researching}
+                    variant="outline"
+                    className="border border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
+                  >
+                    {researching ? <RefreshCw className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4 mr-2" />}
+                    Research with Claude
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <main className="container mx-auto px-6 pb-16">
+        {/* Main Content */}
+        <div className="container mx-auto px-6 pb-20">
           <div className="max-w-6xl mx-auto">
-            
-            {/* Content Tabs */}
-            <Tabs defaultValue="all" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 mb-8 bg-gray-900/50 border border-gray-700/50 backdrop-blur-sm">
-                <TabsTrigger value="all" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">All</TabsTrigger>
-                <TabsTrigger value="content" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">Content</TabsTrigger>
-                <TabsTrigger value="development" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">Dev</TabsTrigger>
-                <TabsTrigger value="design" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm">Design</TabsTrigger>
-                <TabsTrigger value="analytics" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm lg:block hidden">Analytics</TabsTrigger>
-                <TabsTrigger value="productivity" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm lg:block hidden">Productivity</TabsTrigger>
-                <TabsTrigger value="ai-models" className="data-[state=active]:bg-[#FF4D00] data-[state=active]:text-white bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-300 text-xs sm:text-sm lg:block hidden">AI Models</TabsTrigger>
+            <Tabs defaultValue="All" className="w-full">
+              <TabsList className="grid grid-cols-7 bg-gray-900/50 border border-gray-700">
+                <TabsTrigger value="All" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  All ({getToolsByCategory("All").length})
+                </TabsTrigger>
+                <TabsTrigger value="Content" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <Zap className="w-4 h-4 mr-1" />
+                  Content ({getToolsByCategory("Content").length})
+                </TabsTrigger>
+                <TabsTrigger value="Development" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <Code className="w-4 h-4 mr-1" />
+                  Development ({getToolsByCategory("Development").length})
+                </TabsTrigger>
+                <TabsTrigger value="Design" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <Palette className="w-4 h-4 mr-1" />
+                  Design ({getToolsByCategory("Design").length})
+                </TabsTrigger>
+                <TabsTrigger value="Analytics" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <BarChart3 className="w-4 h-4 mr-1" />
+                  Analytics ({getToolsByCategory("Analytics").length})
+                </TabsTrigger>
+                <TabsTrigger value="Productivity" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <Cog className="w-4 h-4 mr-1" />
+                  Productivity ({getToolsByCategory("Productivity").length})
+                </TabsTrigger>
+                <TabsTrigger value="AI Models" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <Brain className="w-4 h-4 mr-1" />
+                  AI Models ({getToolsByCategory("AI Models").length})
+                </TabsTrigger>
               </TabsList>
 
-              {/* All Tools */}
-              <TabsContent value="all" className="space-y-8">
-                <div>
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-white">Featured AI Tools</h2>
-                    <div className="text-sm text-gray-400">
-                      120+ tools available
+              {/* All Tools Tab */}
+              <TabsContent value="All" className="space-y-6">
+                {loading ? renderLoadingCards() : 
+                 getToolsByCategory("All").length === 0 ? renderEmptyState() : (
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {getToolsByCategory("All").map(renderToolCard)}
+                  </div>
+                )}
+              </TabsContent>
+
+              {/* Category-specific tabs */}
+              {['Content', 'Development', 'Design', 'Analytics', 'Productivity', 'AI Models'].map((category) => (
+                <TabsContent key={category} value={category} className="space-y-6">
+                  {loading ? renderLoadingCards() : (
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                      {getToolsByCategory(category).map(renderToolCard)}
                     </div>
-                  </div>
-                  
-                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {[
-                      {
-                        name: "ChatGPT",
-                        description: "Advanced conversational AI for various tasks and applications.",
-                        category: "Content Generation",
-                        pricing: "Freemium",
-                        rating: 4.8,
-                        featured: true,
-                        url: "https://openai.com/chatgpt"
-                      },
-                      {
-                        name: "Midjourney",
-                        description: "AI-powered image generation and creative design tool.",
-                        category: "Design & Art",
-                        pricing: "Paid",
-                        rating: 4.7,
-                        featured: true,
-                        url: "https://midjourney.com"
-                      },
-                      {
-                        name: "GitHub Copilot",
-                        description: "AI pair programmer that helps write code faster.",
-                        category: "Development",
-                        pricing: "Paid",
-                        rating: 4.6,
-                        featured: true,
-                        url: "https://github.com/features/copilot"
-                      },
-                      {
-                        name: "Notion AI",
-                        description: "AI-powered writing and productivity assistant.",
-                        category: "Productivity",
-                        pricing: "Freemium",
-                        rating: 4.5,
-                        featured: false,
-                        url: "https://notion.so"
-                      },
-                      {
-                        name: "Runway ML",
-                        description: "Creative AI tools for video, image, and audio generation.",
-                        category: "Creative",
-                        pricing: "Freemium",
-                        rating: 4.4,
-                        featured: false,
-                        url: "https://runwayml.com"
-                      },
-                      {
-                        name: "Jasper AI",
-                        description: "AI content creation platform for marketing and copywriting.",
-                        category: "Content Generation",
-                        pricing: "Paid",
-                        rating: 4.3,
-                        featured: false,
-                        url: "#"
-                      },
-                      {
-                        name: "Stable Diffusion",
-                        description: "Open-source AI image generation model and tools.",
-                        category: "Design & Art",
-                        pricing: "Free",
-                        rating: 4.5,
-                        featured: false,
-                        url: "#"
-                      },
-                      {
-                        name: "Claude AI",
-                        description: "Helpful, harmless, and honest AI assistant by Anthropic.",
-                        category: "Content Generation",
-                        pricing: "Freemium",
-                        rating: 4.6,
-                        featured: false,
-                        url: "#"
-                      },
-                      {
-                        name: "Bixory AI Tools",
-                        description: "Coming soon - Proprietary AI tools and solutions by Bixory.",
-                        category: "Custom Solutions",
-                        pricing: "TBA",
-                        rating: 0,
-                        featured: true,
-                        url: "#"
-                      }
-                    ].map((tool, index) => (
-                      <Card key={index} className={`hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50 ${tool.featured ? 'ring-2 ring-[#FF4D00]/20' : ''}`}>
-                        <CardHeader className="p-4 sm:p-6">
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-2">
-                              <Badge variant={tool.pricing === 'Free' ? 'default' : tool.pricing === 'Freemium' ? 'secondary' : 'outline'} className="bg-gray-800/50 text-gray-300 border-gray-600">
-                                {tool.pricing}
-                              </Badge>
-                              {tool.featured && <Badge variant="destructive" className="bg-[#FF4D00] text-white">Featured</Badge>}
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm text-gray-400">
-                                {tool.rating > 0 ? tool.rating : 'New'}
-                              </span>
-                            </div>
-                          </div>
-                          <CardTitle className="text-base sm:text-lg flex items-center gap-2 text-white">
-                            {tool.name}
-                            <ExternalLink className="h-4 w-4 text-gray-400" />
-                          </CardTitle>
-                          <CardDescription className="text-gray-300">{tool.description}</CardDescription>
-                          <div className="text-xs text-gray-400">{tool.category}</div>
-                        </CardHeader>
-                        <CardContent className="p-4 sm:p-6 pt-0">
-                          <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white" asChild>
-                            <a href={tool.url} target="_blank" rel="noopener noreferrer">
-                              {tool.url === "#" ? "Coming Soon" : "Visit Tool"}
-                            </a>
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Content Generation Tools */}
-              <TabsContent value="content" className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6 flex items-center gap-2 text-white">
-                    <FileText className="h-8 w-8" />
-                    Content Generation Tools
-                  </h2>
-                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {[
-                      "ChatGPT - Conversational AI",
-                      "Jasper AI - Marketing Copy",
-                      "Copy.ai - Sales Content",
-                      "Writesonic - Blog Writing",
-                      "Claude AI - Long-form Content",
-                      "Grammarly AI - Writing Enhancement"
-                    ].map((tool, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-white">[Placeholder] {tool}</CardTitle>
-                          <CardDescription className="text-gray-300">Detailed information about this content generation tool will be populated through web crawling.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white">Coming Soon</Button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Development Tools */}
-              <TabsContent value="development" className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6 flex items-center gap-2 text-white">
-                    <Code className="h-8 w-8" />
-                    Development Tools
-                  </h2>
-                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {[
-                      "GitHub Copilot - Code Completion",
-                      "Tabnine - AI Code Assistant",
-                      "Replit AI - Collaborative Coding",
-                      "CodeT5 - Code Generation",
-                      "Cursor - AI Code Editor",
-                      "Amazon CodeWhisperer - AWS Integration"
-                    ].map((tool, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-white">[Placeholder] {tool}</CardTitle>
-                          <CardDescription className="text-gray-300">Detailed information about this development tool will be populated through web crawling.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white">Coming Soon</Button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Design Tools */}
-              <TabsContent value="design" className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6 flex items-center gap-2 text-white">
-                    <Palette className="h-8 w-8" />
-                    Design & Creative Tools
-                  </h2>
-                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {[
-                      "Midjourney - Image Generation",
-                      "DALL-E 3 - OpenAI Images",
-                      "Stable Diffusion - Open Source",
-                      "Figma AI - Design Assistant",
-                      "Canva AI - Graphic Design",
-                      "Adobe Firefly - Creative Suite"
-                    ].map((tool, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-white">[Placeholder] {tool}</CardTitle>
-                          <CardDescription className="text-gray-300">Detailed information about this design tool will be populated through web crawling.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white">Coming Soon</Button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Analytics Tools */}
-              <TabsContent value="analytics" className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6 flex items-center gap-2 text-white">
-                    <BarChart3 className="h-8 w-8" />
-                    Analytics & Data Tools
-                  </h2>
-                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {[
-                      "MonkeyLearn - Text Analytics",
-                      "DataRobot - AutoML Platform",
-                      "H2O.ai - Machine Learning",
-                      "Tableau AI - Data Visualization",
-                      "Power BI AI - Business Intelligence",
-                      "Google Analytics Intelligence"
-                    ].map((tool, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-white">[Placeholder] {tool}</CardTitle>
-                          <CardDescription className="text-gray-300">Detailed information about this analytics tool will be populated through web crawling.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white">Coming Soon</Button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Productivity Tools */}
-              <TabsContent value="productivity" className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6 flex items-center gap-2 text-white">
-                    <Bot className="h-8 w-8" />
-                    Productivity Tools
-                  </h2>
-                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {[
-                      "Notion AI - Workspace Assistant",
-                      "Zapier AI - Automation",
-                      "Calendly AI - Scheduling",
-                      "Otter.ai - Meeting Transcription",
-                      "Grammarly - Writing Assistant",
-                      "Motion AI - Task Management"
-                    ].map((tool, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50">
-                        <CardHeader>
-                          <CardTitle className="text-lg text-white">[Placeholder] {tool}</CardTitle>
-                          <CardDescription className="text-gray-300">Detailed information about this productivity tool will be populated through web crawling.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white">Coming Soon</Button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* AI Models for Chatbot */}
-              <TabsContent value="ai-models" className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6 flex items-center gap-2 text-white">
-                    <Bot className="h-8 w-8" />
-                    Popular AI Models for Chatbot
-                  </h2>
-                  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {[
-                      {
-                        name: "GPT-4",
-                        description: "OpenAI's most advanced language model for conversational AI and complex reasoning.",
-                        category: "Language Model",
-                        pricing: "Paid",
-                        rating: 4.8,
-                        featured: true,
-                        url: "https://openai.com/gpt-4"
-                      },
-                      {
-                        name: "Claude 3",
-                        description: "Anthropic's powerful AI assistant with enhanced safety and reasoning capabilities.",
-                        category: "Language Model",
-                        pricing: "Freemium",
-                        rating: 4.7,
-                        featured: true,
-                        url: "https://claude.ai"
-                      },
-                      {
-                        name: "Gemini Pro",
-                        description: "Google's multimodal AI model with advanced language understanding.",
-                        category: "Language Model",
-                        pricing: "Freemium",
-                        rating: 4.6,
-                        featured: true,
-                        url: "https://gemini.google.com"
-                      },
-                      {
-                        name: "Llama 2",
-                        description: "Meta's open-source large language model for chatbot development.",
-                        category: "Open Source",
-                        pricing: "Free",
-                        rating: 4.5,
-                        featured: false,
-                        url: "https://llama.meta.com"
-                      },
-                      {
-                        name: "Mistral 7B",
-                        description: "High-performance open-source model optimized for efficiency and quality.",
-                        category: "Open Source",
-                        pricing: "Free",
-                        rating: 4.4,
-                        featured: false,
-                        url: "https://mistral.ai"
-                      },
-                      {
-                        name: "PaLM 2",
-                        description: "Google's large language model powering Bard and other applications.",
-                        category: "Language Model",
-                        pricing: "Paid",
-                        rating: 4.3,
-                        featured: false,
-                        url: "#"
-                      },
-                      {
-                        name: "Cohere Command",
-                        description: "Enterprise-focused language model for business applications.",
-                        category: "Enterprise",
-                        pricing: "Paid",
-                        rating: 4.2,
-                        featured: false,
-                        url: "https://cohere.com"
-                      },
-                      {
-                        name: "Falcon 40B",
-                        description: "Open-source large language model trained on diverse, high-quality data.",
-                        category: "Open Source",
-                        pricing: "Free",
-                        rating: 4.1,
-                        featured: false,
-                        url: "#"
-                      },
-                      {
-                        name: "ChatGLM3",
-                        description: "Bilingual conversational language model optimized for Chinese and English.",
-                        category: "Multilingual",
-                        pricing: "Free",
-                        rating: 4.0,
-                        featured: false,
-                        url: "#"
-                      }
-                    ].map((model, index) => (
-                      <Card key={index} className={`hover:shadow-lg transition-shadow bg-gray-900/50 backdrop-blur-sm border-gray-700/50 ${model.featured ? 'ring-2 ring-[#FF4D00]/20' : ''}`}>
-                        <CardHeader>
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-2">
-                              <Badge variant={model.pricing === 'Free' ? 'default' : model.pricing === 'Freemium' ? 'secondary' : 'outline'} className="bg-gray-800/50 text-gray-300 border-gray-600">
-                                {model.pricing}
-                              </Badge>
-                              {model.featured && <Badge variant="destructive" className="bg-[#FF4D00] text-white">Featured</Badge>}
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm text-gray-400">
-                                {model.rating}
-                              </span>
-                            </div>
-                          </div>
-                          <CardTitle className="text-lg flex items-center gap-2 text-white">
-                            {model.name}
-                            <ExternalLink className="h-4 w-4 text-gray-400" />
-                          </CardTitle>
-                          <CardDescription className="text-gray-300">{model.description}</CardDescription>
-                          <div className="text-xs text-gray-400">{model.category}</div>
-                        </CardHeader>
-                        <CardContent>
-                          <Button variant="outline" size="sm" className="w-full bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700/50 hover:text-white" asChild>
-                            <a href={model.url} target="_blank" rel="noopener noreferrer">
-                              {model.url === "#" ? "Coming Soon" : "Learn More"}
-                            </a>
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
+                  )}
+                </TabsContent>
+              ))}
             </Tabs>
+          </div>
+        </div>
 
-            {/* Call to Action */}
-            <section className="mt-16 bg-gradient-to-r from-[#FF4D00] to-[#00F0FF] rounded-lg p-6 sm:p-8 text-center">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                Submit Your AI Tool
+        {/* Call to Action Section */}
+        <section className="py-20 bg-gradient-to-br from-primary via-primary to-blue-900">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Missing an AI Tool?
               </h2>
-              <p className="text-lg sm:text-xl text-gray-200 mb-6">
-                Know an amazing AI tool that's not listed? Help us expand our directory!
+              <p className="text-lg text-gray-300 leading-relaxed mb-8">
+                Can't find the AI tool you're looking for? Let us know and our research agents will find it for you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild className="bg-white text-[#0A192F] hover:bg-gray-100">
-                  <Link to="/about">Contact Us</Link>
-                </Button>
-                  <Button className="bg-[#FF4D00] text-white hover:bg-[#e63900]">
+                <Button 
+                  className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full"
+                  asChild
+                >
+                  <a href="/contact">
+                    <Plus className="w-5 h-5 mr-2" />
                     Submit Tool
-                  </Button>
-                </div>
-              </section>
+                  </a>
+                </Button>
+                <Button 
+                  variant="outline"
+                  className="border border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
+                  asChild
+                >
+                  <a href="/contact">
+                    Contact Us
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
-        </main>
+        </section>
       </div>
       <Footer />
     </>

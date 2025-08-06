@@ -14,6 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_tools: {
+        Row: {
+          category: string
+          crawled_at: string | null
+          created_at: string
+          description: string | null
+          features: string[] | null
+          id: string
+          is_featured: boolean | null
+          is_verified: boolean | null
+          logo_url: string | null
+          name: string
+          pricing: string | null
+          rating: number | null
+          source_url: string | null
+          status: string | null
+          tags: string[] | null
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          category: string
+          crawled_at?: string | null
+          created_at?: string
+          description?: string | null
+          features?: string[] | null
+          id?: string
+          is_featured?: boolean | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name: string
+          pricing?: string | null
+          rating?: number | null
+          source_url?: string | null
+          status?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          category?: string
+          crawled_at?: string | null
+          created_at?: string
+          description?: string | null
+          features?: string[] | null
+          id?: string
+          is_featured?: boolean | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string
+          pricing?: string | null
+          rating?: number | null
+          source_url?: string | null
+          status?: string | null
+          tags?: string[] | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           created_at: string
