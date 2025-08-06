@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Brain, RefreshCw, CheckCircle, AlertCircle } from "lucide-react";
+import { Brain, RefreshCw, CheckCircle, AlertCircle, Database } from "lucide-react";
 
 interface ResearchResult {
   success: boolean;
@@ -21,14 +21,49 @@ interface ResearchResult {
 
 export const ResearchAgentTest = () => {
   const [loading, setLoading] = useState(false);
+  const [seeding, setSeeding] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState<'openai' | 'claude'>('openai');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [result, setResult] = useState<ResearchResult | null>(null);
+  const [seedResult, setSeedResult] = useState<any>(null);
   const { toast } = useToast();
 
   const categories = [
     'Content', 'Development', 'Design', 'Analytics', 'Productivity', 'AI Models'
   ];
+
+  const runSeedDatabase = async () => {
+    setSeeding(true);
+    setSeedResult(null);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('seed-database');
+
+      if (error) throw error;
+
+      setSeedResult(data);
+      
+      toast({
+        title: "Database Seeded!",
+        description: `Successfully seeded ${data.results?.successfulSeeds || 0} tools`,
+      });
+
+    } catch (error) {
+      console.error('Seeding error:', error);
+      setSeedResult({
+        success: false,
+        error: error.message || 'Failed to seed database'
+      });
+      
+      toast({
+        title: "Seeding Failed",
+        description: "Could not seed database",
+        variant: "destructive",
+      });
+    } finally {
+      setSeeding(false);
+    }
+  };
 
   const runResearch = async () => {
     setLoading(true);
@@ -71,6 +106,80 @@ export const ResearchAgentTest = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
+      {/* Database Seeding Card */}
+      <Card className="bg-primary/80 border-gray-700">
+        <CardHeader>
+          <CardTitle className="text-white flex items-center gap-2">
+            <Database className="w-6 h-6 text-green-400" />
+            Database Seeding
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-gray-300 text-sm">
+            First-time setup: Seed your database with the existing static AI tools as a foundation.
+          </p>
+          
+          <Button
+            onClick={runSeedDatabase}
+            disabled={seeding}
+            className="w-full bg-green-600 hover:bg-green-700 text-white"
+          >
+            {seeding ? (
+              <>
+                <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                Seeding Database...
+              </>
+            ) : (
+              <>
+                <Database className="w-4 h-4 mr-2" />
+                Seed Database with Static Tools
+              </>
+            )}
+          </Button>
+        </CardContent>
+      </Card>
+
+      {seedResult && (
+        <Card className="bg-primary/80 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2">
+              {seedResult.success ? (
+                <CheckCircle className="w-6 h-6 text-green-400" />
+              ) : (
+                <AlertCircle className="w-6 h-6 text-red-400" />
+              )}
+              Seeding Results
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {seedResult.success ? (
+              <div className="space-y-2">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-accent">{seedResult.results?.totalTools || 0}</div>
+                    <div className="text-sm text-gray-400">Total Tools</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-400">{seedResult.results?.successfulSeeds || 0}</div>
+                    <div className="text-sm text-gray-400">Successfully Seeded</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-red-400">{seedResult.results?.errors || 0}</div>
+                    <div className="text-sm text-gray-400">Errors</div>
+                  </div>
+                </div>
+                <p className="text-green-400 text-sm mt-4">✅ Database is now ready for research agent testing!</p>
+              </div>
+            ) : (
+              <div className="text-red-400">
+                <strong>Error:</strong> {seedResult.error}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Research Agent Testing Card */}
       <Card className="bg-primary/80 border-gray-700">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
