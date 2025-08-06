@@ -8,20 +8,28 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Star, ExternalLink, Search, Zap, Code, Palette, BarChart3, Cog, Brain } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect } from "react";
 import aiToolsHeroImage from "@/assets/solutions-hero.jpg";
 
 interface AITool {
+  id?: string;
   name: string;
   description: string;
   category: string;
   pricing: string;
   rating: number;
-  website: string;
+  website_url?: string;
+  website?: string;
   tags: string[];
   featured?: boolean;
+  is_featured?: boolean;
+  logo_url?: string;
+  features?: string[];
+  status?: string;
 }
 
-const aiTools: AITool[] = [
+const staticAiTools: AITool[] = [
   // Content Creation Tools
   {
     name: "ChatGPT",
@@ -239,10 +247,78 @@ const aiTools: AITool[] = [
 
 const AITools = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [tools, setTools] = useState<AITool[]>([]);
+  const [loading, setLoading] = useState(true);
   const heroAnimation = useScrollAnimation();
   const toolsAnimation = useScrollAnimation();
 
-  const filteredTools = aiTools.filter(tool =>
+  useEffect(() => {
+    fetchTools();
+  }, []);
+
+  const fetchTools = async () => {
+    try {
+      // First, try to fetch from database
+      const { data: dbTools, error } = await supabase
+        .from('ai_tools')
+        .select('*')
+        .eq('status', 'active')
+        .order('is_featured', { ascending: false })
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      // Merge database tools with static tools, prioritizing database
+      const mergedTools = [...staticAiTools];
+      
+      if (dbTools && dbTools.length > 0) {
+        // Convert database tools to match interface
+        const convertedDbTools: AITool[] = dbTools.map(tool => ({
+          id: tool.id,
+          name: tool.name,
+          description: tool.description || '',
+          category: tool.category,
+          pricing: tool.pricing || 'Not specified',
+          rating: Number(tool.rating) || 4.0,
+          website: tool.website_url || '',
+          website_url: tool.website_url || '',
+          tags: tool.tags || [],
+          featured: tool.is_featured || false,
+          is_featured: tool.is_featured || false,
+          logo_url: tool.logo_url,
+          features: tool.features,
+          status: tool.status
+        }));
+
+        // Replace static tools with database tools where names match, and add new ones
+        const staticToolNames = staticAiTools.map(t => t.name.toLowerCase());
+        
+        convertedDbTools.forEach(dbTool => {
+          const staticIndex = mergedTools.findIndex(t => 
+            t.name.toLowerCase() === dbTool.name.toLowerCase()
+          );
+          
+          if (staticIndex >= 0) {
+            // Replace static tool with database version
+            mergedTools[staticIndex] = dbTool;
+          } else {
+            // Add new database tool
+            mergedTools.push(dbTool);
+          }
+        });
+      }
+
+      setTools(mergedTools);
+    } catch (error) {
+      console.error('Error fetching tools:', error);
+      // Fallback to static tools if database fails
+      setTools(staticAiTools);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredTools = tools.filter(tool =>
     tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tool.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tool.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -270,14 +346,14 @@ const AITools = () => {
     <Card 
       key={tool.name} 
       className={`bg-primary/80 border-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-105 ${
-        tool.featured ? 'border-2 border-accent' : ''
+        (tool.featured || tool.is_featured) ? 'border-2 border-accent' : ''
       }`}
       style={{ transitionDelay: `${index * 50}ms` }}
     >
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl text-white">{tool.name}</CardTitle>
-          {tool.featured && (
+          {(tool.featured || tool.is_featured) && (
             <Badge className="bg-accent text-primary">Featured</Badge>
           )}
         </div>
@@ -304,7 +380,7 @@ const AITools = () => {
               className="bg-secondary hover:bg-secondary/90 text-white"
               asChild
             >
-              <a href={tool.website} target="_blank" rel="noopener noreferrer">
+              <a href={tool.website_url || tool.website} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-1" />
                 Visit
               </a>
@@ -408,17 +484,47 @@ const AITools = () => {
 
                 {/* All Tools Tab */}
                 <TabsContent value="All" className="space-y-6">
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {getToolsByCategory("All").map(renderToolCard)}
-                  </div>
+                  {loading ? (
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                      {Array.from({ length: 6 }).map((_, i) => (
+                        <div key={i} className="bg-primary/80 border border-gray-700 rounded-lg p-6 animate-pulse">
+                          <div className="h-6 bg-gray-700 rounded mb-2"></div>
+                          <div className="h-4 bg-gray-700 rounded mb-4 w-3/4"></div>
+                          <div className="space-y-2">
+                            <div className="h-2 bg-gray-700 rounded"></div>
+                            <div className="h-2 bg-gray-700 rounded w-5/6"></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                      {getToolsByCategory("All").map(renderToolCard)}
+                    </div>
+                  )}
                 </TabsContent>
 
                 {/* Category-specific tabs */}
                 {['Content', 'Development', 'Design', 'Analytics', 'Productivity', 'AI Models'].map((category) => (
                   <TabsContent key={category} value={category} className="space-y-6">
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                      {getToolsByCategory(category).map(renderToolCard)}
-                    </div>
+                    {loading ? (
+                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {Array.from({ length: 3 }).map((_, i) => (
+                          <div key={i} className="bg-primary/80 border border-gray-700 rounded-lg p-6 animate-pulse">
+                            <div className="h-6 bg-gray-700 rounded mb-2"></div>
+                            <div className="h-4 bg-gray-700 rounded mb-4 w-3/4"></div>
+                            <div className="space-y-2">
+                              <div className="h-2 bg-gray-700 rounded"></div>
+                              <div className="h-2 bg-gray-700 rounded w-5/6"></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {getToolsByCategory(category).map(renderToolCard)}
+                      </div>
+                    )}
                   </TabsContent>
                 ))}
               </Tabs>
