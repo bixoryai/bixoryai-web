@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,59 +6,243 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Star, ExternalLink, Search, Zap, Code, Palette, BarChart3, Cog, Brain, Plus } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { Star, ExternalLink, Search, Zap, Code, Palette, BarChart3, Cog, Brain } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import aiToolsHeroImage from "@/assets/solutions-hero.jpg";
 
 interface AITool {
-  id: string;
   name: string;
   description: string;
   category: string;
   pricing: string;
-  rating?: number;
-  website_url: string;
-  logo_url?: string;
+  rating: number;
+  website: string;
   tags: string[];
-  features: string[];
-  is_featured: boolean;
-  status: string;
+  featured?: boolean;
 }
+
+const aiTools: AITool[] = [
+  // Content Creation Tools
+  {
+    name: "ChatGPT",
+    description: "Advanced conversational AI for writing, coding, and creative tasks",
+    category: "Content",
+    pricing: "Free / $20/month",
+    rating: 4.8,
+    website: "https://chat.openai.com",
+    tags: ["Writing", "Conversational AI", "OpenAI"],
+    featured: true
+  },
+  {
+    name: "Claude",
+    description: "Anthropic's AI assistant for analysis, writing, and coding",
+    category: "Content",
+    pricing: "Free / $20/month",
+    rating: 4.7,
+    website: "https://claude.ai",
+    tags: ["Writing", "Analysis", "Anthropic"]
+  },
+  {
+    name: "Jasper AI",
+    description: "AI writing assistant for marketing and business content",
+    category: "Content",
+    pricing: "$49/month",
+    rating: 4.5,
+    website: "https://jasper.ai",
+    tags: ["Marketing", "Content Creation", "Business"]
+  },
+  {
+    name: "Copy.ai",
+    description: "AI-powered copywriting for marketing campaigns",
+    category: "Content",
+    pricing: "Free / $36/month",
+    rating: 4.3,
+    website: "https://copy.ai",
+    tags: ["Copywriting", "Marketing", "Sales"]
+  },
+
+  // Development Tools
+  {
+    name: "GitHub Copilot",
+    description: "AI pair programmer that helps you write code faster",
+    category: "Development",
+    pricing: "$10/month",
+    rating: 4.6,
+    website: "https://github.com/features/copilot",
+    tags: ["Coding", "IDE", "GitHub"],
+    featured: true
+  },
+  {
+    name: "Cursor",
+    description: "AI-first code editor built for productivity",
+    category: "Development",
+    pricing: "Free / $20/month",
+    rating: 4.7,
+    website: "https://cursor.sh",
+    tags: ["Code Editor", "AI Assistant", "Productivity"]
+  },
+  {
+    name: "Replit AI",
+    description: "AI-powered collaborative coding environment",
+    category: "Development",
+    pricing: "Free / $7/month",
+    rating: 4.4,
+    website: "https://replit.com",
+    tags: ["Collaboration", "Cloud IDE", "Learning"]
+  },
+  {
+    name: "Tabnine",
+    description: "AI assistant for software developers",
+    category: "Development",
+    pricing: "Free / $12/month",
+    rating: 4.2,
+    website: "https://tabnine.com",
+    tags: ["Code Completion", "IDE Plugin", "Team"]
+  },
+
+  // Design Tools
+  {
+    name: "Midjourney",
+    description: "AI image generation for creative and artistic purposes",
+    category: "Design",
+    pricing: "$10/month",
+    rating: 4.9,
+    website: "https://midjourney.com",
+    tags: ["Image Generation", "Art", "Creative"],
+    featured: true
+  },
+  {
+    name: "DALL-E 3",
+    description: "OpenAI's advanced image generation model",
+    category: "Design",
+    pricing: "Pay per use",
+    rating: 4.6,
+    website: "https://openai.com/dall-e-3",
+    tags: ["Image Generation", "OpenAI", "Creative"]
+  },
+  {
+    name: "Canva AI",
+    description: "AI-powered design tools for everyone",
+    category: "Design",
+    pricing: "Free / $15/month",
+    rating: 4.4,
+    website: "https://canva.com",
+    tags: ["Design", "Templates", "Social Media"]
+  },
+  {
+    name: "Figma AI",
+    description: "AI features integrated into Figma design platform",
+    category: "Design",
+    pricing: "Free / $12/month",
+    rating: 4.5,
+    website: "https://figma.com",
+    tags: ["UI/UX", "Collaboration", "Prototyping"]
+  },
+
+  // Analytics Tools
+  {
+    name: "Tableau AI",
+    description: "AI-powered data visualization and analytics",
+    category: "Analytics",
+    pricing: "$75/month",
+    rating: 4.3,
+    website: "https://tableau.com",
+    tags: ["Data Visualization", "Business Intelligence", "Enterprise"]
+  },
+  {
+    name: "Power BI AI",
+    description: "Microsoft's AI-enhanced business analytics platform",
+    category: "Analytics",
+    pricing: "$10/month",
+    rating: 4.2,
+    website: "https://powerbi.microsoft.com",
+    tags: ["Microsoft", "Business Intelligence", "Data Analysis"]
+  },
+  {
+    name: "Google Analytics Intelligence",
+    description: "AI-powered insights for web analytics",
+    category: "Analytics",
+    pricing: "Free",
+    rating: 4.1,
+    website: "https://analytics.google.com",
+    tags: ["Web Analytics", "Google", "Insights"]
+  },
+
+  // Productivity Tools
+  {
+    name: "Notion AI",
+    description: "AI writing assistant integrated into Notion workspace",
+    category: "Productivity",
+    pricing: "$8/month",
+    rating: 4.4,
+    website: "https://notion.so",
+    tags: ["Workspace", "Writing", "Organization"]
+  },
+  {
+    name: "Grammarly",
+    description: "AI-powered writing assistant and grammar checker",
+    category: "Productivity",
+    pricing: "Free / $12/month",
+    rating: 4.5,
+    website: "https://grammarly.com",
+    tags: ["Writing", "Grammar", "Editing"]
+  },
+  {
+    name: "Otter.ai",
+    description: "AI meeting assistant that records and transcribes",
+    category: "Productivity",
+    pricing: "Free / $17/month",
+    rating: 4.3,
+    website: "https://otter.ai",
+    tags: ["Transcription", "Meetings", "Note-taking"]
+  },
+
+  // AI Models & Platforms
+  {
+    name: "OpenAI API",
+    description: "Access to GPT models and other AI capabilities",
+    category: "AI Models",
+    pricing: "Pay per use",
+    rating: 4.7,
+    website: "https://openai.com/api",
+    tags: ["API", "GPT", "Integration"],
+    featured: true
+  },
+  {
+    name: "Anthropic API",
+    description: "Claude AI models for developers",
+    category: "AI Models",
+    pricing: "Pay per use",
+    rating: 4.6,
+    website: "https://anthropic.com",
+    tags: ["API", "Claude", "Safe AI"]
+  },
+  {
+    name: "Google Gemini",
+    description: "Google's multimodal AI model",
+    category: "AI Models",
+    pricing: "Free / Pay per use",
+    rating: 4.4,
+    website: "https://gemini.google.com",
+    tags: ["Multimodal", "Google", "API"]
+  },
+  {
+    name: "Hugging Face",
+    description: "Open-source AI model hub and platform",
+    category: "AI Models",
+    pricing: "Free / $9/month",
+    rating: 4.5,
+    website: "https://huggingface.co",
+    tags: ["Open Source", "Models", "Community"]
+  }
+];
 
 const AITools = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [tools, setTools] = useState<AITool[]>([]);
-  const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
+  const heroAnimation = useScrollAnimation();
+  const toolsAnimation = useScrollAnimation();
 
-  useEffect(() => {
-    fetchTools();
-  }, []);
-
-  const fetchTools = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('ai_tools')
-        .select('*')
-        .eq('status', 'active')
-        .order('is_featured', { ascending: false })
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setTools(data || []);
-    } catch (error) {
-      console.error('Error fetching tools:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load AI tools",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filteredTools = tools.filter(tool =>
+  const filteredTools = aiTools.filter(tool =>
     tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tool.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tool.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -70,17 +254,30 @@ const AITools = () => {
     return filteredTools.filter(tool => tool.category === category);
   };
 
-  const renderToolCard = (tool: AITool) => (
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "Content": return <Zap className="w-4 h-4" />;
+      case "Development": return <Code className="w-4 h-4" />;
+      case "Design": return <Palette className="w-4 h-4" />;
+      case "Analytics": return <BarChart3 className="w-4 h-4" />;
+      case "Productivity": return <Cog className="w-4 h-4" />;
+      case "AI Models": return <Brain className="w-4 h-4" />;
+      default: return null;
+    }
+  };
+
+  const renderToolCard = (tool: AITool, index: number) => (
     <Card 
-      key={tool.id} 
-      className={`bg-primary/80 border-gray-700 hover:shadow-lg transition-shadow duration-300 ${
-        tool.is_featured ? 'border-2 border-accent' : ''
+      key={tool.name} 
+      className={`bg-primary/80 border-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-105 ${
+        tool.featured ? 'border-2 border-accent' : ''
       }`}
+      style={{ transitionDelay: `${index * 50}ms` }}
     >
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl text-white">{tool.name}</CardTitle>
-          {tool.is_featured && (
+          {tool.featured && (
             <Badge className="bg-accent text-primary">Featured</Badge>
           )}
         </div>
@@ -92,14 +289,13 @@ const AITools = () => {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <Badge variant="secondary" className="bg-gray-700 text-gray-300">
-              {tool.category}
+              {getCategoryIcon(tool.category)}
+              <span className="ml-1">{tool.category}</span>
             </Badge>
-            {tool.rating && (
-              <div className="flex items-center text-yellow-400">
-                <Star className="w-4 h-4 fill-current" />
-                <span className="ml-1 text-sm">{tool.rating}</span>
-              </div>
-            )}
+            <div className="flex items-center text-yellow-400">
+              <Star className="w-4 h-4 fill-current" />
+              <span className="ml-1 text-sm">{tool.rating}</span>
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-400">{tool.pricing}</span>
@@ -108,57 +304,22 @@ const AITools = () => {
               className="bg-secondary hover:bg-secondary/90 text-white"
               asChild
             >
-              <a href={tool.website_url} target="_blank" rel="noopener noreferrer">
+              <a href={tool.website} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-1" />
                 Visit
               </a>
             </Button>
           </div>
-          {tool.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {tool.tags.slice(0, 3).map((tag, index) => (
-                <Badge key={index} variant="outline" className="text-xs border-gray-600 text-gray-400">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          )}
+          <div className="flex flex-wrap gap-1">
+            {tool.tags.slice(0, 3).map((tag, index) => (
+              <Badge key={index} variant="outline" className="text-xs border-gray-600 text-gray-400">
+                {tag}
+              </Badge>
+            ))}
+          </div>
         </div>
       </CardContent>
     </Card>
-  );
-
-  const renderLoadingCards = () => (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <Card key={i} className="bg-primary/80 border-gray-700 animate-pulse">
-          <CardHeader className="pb-3">
-            <div className="h-6 bg-gray-700 rounded mb-2"></div>
-            <div className="h-4 bg-gray-700 rounded w-3/4"></div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="h-6 bg-gray-700 rounded w-20"></div>
-                <div className="h-4 bg-gray-700 rounded w-12"></div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="h-4 bg-gray-700 rounded w-16"></div>
-                <div className="h-8 bg-gray-700 rounded w-20"></div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-
-  const renderEmptyState = () => (
-    <div className="text-center py-12">
-      <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-      <h3 className="text-xl text-white mb-2">No AI Tools Found</h3>
-      <p className="text-gray-400 mb-6">Try adjusting your search terms or check back later</p>
-    </div>
   );
 
   return (
@@ -166,20 +327,32 @@ const AITools = () => {
       <Navbar />
       <div className="min-h-screen bg-primary">
         {/* Hero Section */}
-        <section className="pt-24 pb-12">
+        <section 
+          ref={heroAnimation.elementRef}
+          className="relative pt-24 pb-20 overflow-hidden"
+          style={{
+            background: `linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.9)), url(${aiToolsHeroImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed'
+          }}
+        >
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
+              heroAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                Popular{" "}
                 <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
-                  BIXORY AI
-                </span>{" "}
-                Tools Directory
+                  AI Tools
+                </span>
               </h1>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                Discover and explore the most powerful AI tools across every category
+                Discover the most powerful AI tools across every category. From content creation to development, 
+                find the perfect AI solution for your needs.
               </p>
               
-              {/* Search Controls */}
+              {/* Search Bar */}
               <div className="max-w-2xl mx-auto">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -197,72 +370,71 @@ const AITools = () => {
         </section>
 
         {/* Main Content */}
-        <div className="container mx-auto px-6 pb-20">
-          <div className="max-w-6xl mx-auto">
-            <Tabs defaultValue="All" className="w-full">
-              <TabsList className="grid grid-cols-7 bg-gray-900/50 border border-gray-700">
-                <TabsTrigger value="All" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
-                  All ({getToolsByCategory("All").length})
-                </TabsTrigger>
-                <TabsTrigger value="Content" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
-                  <Zap className="w-4 h-4 mr-1" />
-                  Content ({getToolsByCategory("Content").length})
-                </TabsTrigger>
-                <TabsTrigger value="Development" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
-                  <Code className="w-4 h-4 mr-1" />
-                  Development ({getToolsByCategory("Development").length})
-                </TabsTrigger>
-                <TabsTrigger value="Design" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
-                  <Palette className="w-4 h-4 mr-1" />
-                  Design ({getToolsByCategory("Design").length})
-                </TabsTrigger>
-                <TabsTrigger value="Analytics" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
-                  <BarChart3 className="w-4 h-4 mr-1" />
-                  Analytics ({getToolsByCategory("Analytics").length})
-                </TabsTrigger>
-                <TabsTrigger value="Productivity" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
-                  <Cog className="w-4 h-4 mr-1" />
-                  Productivity ({getToolsByCategory("Productivity").length})
-                </TabsTrigger>
-                <TabsTrigger value="AI Models" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
-                  <Brain className="w-4 h-4 mr-1" />
-                  AI Models ({getToolsByCategory("AI Models").length})
-                </TabsTrigger>
-              </TabsList>
+        <section ref={toolsAnimation.elementRef} className="py-20">
+          <div className="container mx-auto px-6">
+            <div className={`max-w-6xl mx-auto transition-all duration-1000 ${
+              toolsAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <Tabs defaultValue="All" className="w-full">
+                <TabsList className="grid grid-cols-7 bg-gray-900/50 border border-gray-700 mb-8">
+                  <TabsTrigger value="All" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                    All ({getToolsByCategory("All").length})
+                  </TabsTrigger>
+                  <TabsTrigger value="Content" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                    <Zap className="w-4 h-4 mr-1" />
+                    Content ({getToolsByCategory("Content").length})
+                  </TabsTrigger>
+                  <TabsTrigger value="Development" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                    <Code className="w-4 h-4 mr-1" />
+                    Development ({getToolsByCategory("Development").length})
+                  </TabsTrigger>
+                  <TabsTrigger value="Design" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                    <Palette className="w-4 h-4 mr-1" />
+                    Design ({getToolsByCategory("Design").length})
+                  </TabsTrigger>
+                  <TabsTrigger value="Analytics" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                    <BarChart3 className="w-4 h-4 mr-1" />
+                    Analytics ({getToolsByCategory("Analytics").length})
+                  </TabsTrigger>
+                  <TabsTrigger value="Productivity" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                    <Cog className="w-4 h-4 mr-1" />
+                    Productivity ({getToolsByCategory("Productivity").length})
+                  </TabsTrigger>
+                  <TabsTrigger value="AI Models" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                    <Brain className="w-4 h-4 mr-1" />
+                    AI Models ({getToolsByCategory("AI Models").length})
+                  </TabsTrigger>
+                </TabsList>
 
-              {/* All Tools Tab */}
-              <TabsContent value="All" className="space-y-6">
-                {loading ? renderLoadingCards() : 
-                 getToolsByCategory("All").length === 0 ? renderEmptyState() : (
+                {/* All Tools Tab */}
+                <TabsContent value="All" className="space-y-6">
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {getToolsByCategory("All").map(renderToolCard)}
                   </div>
-                )}
-              </TabsContent>
+                </TabsContent>
 
-              {/* Category-specific tabs */}
-              {['Content', 'Development', 'Design', 'Analytics', 'Productivity', 'AI Models'].map((category) => (
-                <TabsContent key={category} value={category} className="space-y-6">
-                  {loading ? renderLoadingCards() : (
+                {/* Category-specific tabs */}
+                {['Content', 'Development', 'Design', 'Analytics', 'Productivity', 'AI Models'].map((category) => (
+                  <TabsContent key={category} value={category} className="space-y-6">
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                       {getToolsByCategory(category).map(renderToolCard)}
                     </div>
-                  )}
-                </TabsContent>
-              ))}
-            </Tabs>
+                  </TabsContent>
+                ))}
+              </Tabs>
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* Call to Action Section */}
         <section className="py-20 bg-gradient-to-br from-primary via-primary to-blue-900">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Missing an AI Tool?
+                Need Help Choosing the Right AI Tool?
               </h2>
-               <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                Can't find the AI tool you're looking for? Let us know and we'll add it to our directory.
+              <p className="text-lg text-gray-300 leading-relaxed mb-8">
+                Our AI experts can help you select and implement the perfect tools for your specific use case and requirements.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
@@ -270,8 +442,7 @@ const AITools = () => {
                   asChild
                 >
                   <a href="/contact">
-                    <Plus className="w-5 h-5 mr-2" />
-                    Submit Tool
+                    Get Consultation
                   </a>
                 </Button>
                 <Button 
@@ -279,8 +450,8 @@ const AITools = () => {
                   className="border border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
                   asChild
                 >
-                  <a href="/contact">
-                    Contact Us
+                  <a href="/solutions">
+                    View Solutions
                   </a>
                 </Button>
               </div>
