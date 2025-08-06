@@ -23,7 +23,7 @@ export const ResearchAgentTest = () => {
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState<'openai' | 'claude'>('openai');
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [result, setResult] = useState<ResearchResult | null>(null);
   const [seedResult, setSeedResult] = useState<any>(null);
   const { toast } = useToast();
@@ -73,7 +73,7 @@ export const ResearchAgentTest = () => {
       const { data, error } = await supabase.functions.invoke('ai-research-agent', {
         body: {
           provider: selectedProvider,
-          category: selectedCategory || undefined,
+          category: selectedCategory && selectedCategory !== 'all' ? selectedCategory : undefined,
           limit: 8
         }
       });
@@ -209,7 +209,7 @@ export const ResearchAgentTest = () => {
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
+                  <SelectItem value="all">All Categories</SelectItem>
                   {categories.map(category => (
                     <SelectItem key={category} value={category}>{category}</SelectItem>
                   ))}
