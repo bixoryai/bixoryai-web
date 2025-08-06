@@ -376,31 +376,31 @@ const AITools = () => {
               toolsAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <Tabs defaultValue="All" className="w-full">
-                <TabsList className="grid grid-cols-7 bg-gray-900/50 border border-gray-700 mb-8">
-                  <TabsTrigger value="All" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                <TabsList className="grid grid-cols-7 bg-gray-900/50 border border-gray-700 mb-8 [&>*]:text-gray-300 [&>*:hover]:text-white">
+                  <TabsTrigger value="All" className="data-[state=active]:bg-secondary data-[state=active]:text-white text-gray-300 hover:text-white">
                     All ({getToolsByCategory("All").length})
                   </TabsTrigger>
-                  <TabsTrigger value="Content" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <TabsTrigger value="Content" className="data-[state=active]:bg-secondary data-[state=active]:text-white text-gray-300 hover:text-white">
                     <Zap className="w-4 h-4 mr-1" />
                     Content ({getToolsByCategory("Content").length})
                   </TabsTrigger>
-                  <TabsTrigger value="Development" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <TabsTrigger value="Development" className="data-[state=active]:bg-secondary data-[state=active]:text-white text-gray-300 hover:text-white">
                     <Code className="w-4 h-4 mr-1" />
                     Development ({getToolsByCategory("Development").length})
                   </TabsTrigger>
-                  <TabsTrigger value="Design" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <TabsTrigger value="Design" className="data-[state=active]:bg-secondary data-[state=active]:text-white text-gray-300 hover:text-white">
                     <Palette className="w-4 h-4 mr-1" />
                     Design ({getToolsByCategory("Design").length})
                   </TabsTrigger>
-                  <TabsTrigger value="Analytics" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <TabsTrigger value="Analytics" className="data-[state=active]:bg-secondary data-[state=active]:text-white text-gray-300 hover:text-white">
                     <BarChart3 className="w-4 h-4 mr-1" />
                     Analytics ({getToolsByCategory("Analytics").length})
                   </TabsTrigger>
-                  <TabsTrigger value="Productivity" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <TabsTrigger value="Productivity" className="data-[state=active]:bg-secondary data-[state=active]:text-white text-gray-300 hover:text-white">
                     <Cog className="w-4 h-4 mr-1" />
                     Productivity ({getToolsByCategory("Productivity").length})
                   </TabsTrigger>
-                  <TabsTrigger value="AI Models" className="data-[state=active]:bg-secondary data-[state=active]:text-white">
+                  <TabsTrigger value="AI Models" className="data-[state=active]:bg-secondary data-[state=active]:text-white text-gray-300 hover:text-white">
                     <Brain className="w-4 h-4 mr-1" />
                     AI Models ({getToolsByCategory("AI Models").length})
                   </TabsTrigger>
