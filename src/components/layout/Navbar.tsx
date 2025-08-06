@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showResourcesMenu, setShowResourcesMenu] = useState(false);
+  const { user, isAdmin, signOut } = useAuth();
   
   
   return <nav className="fixed w-full bg-primary/90 backdrop-blur-sm z-50">
@@ -38,12 +40,41 @@ const Navbar = () => {
             <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
             <Link to="/careers" className="text-white hover:text-accent transition-colors">Careers</Link>
             <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
-            <Link 
-              to="/contact"
-              className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors"
-            >
-              Contact
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-4">
+                {isAdmin && (
+                  <Link 
+                    to="/admin" 
+                    className="flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
+                  >
+                    <Settings className="h-4 w-4" />
+                    Admin
+                  </Link>
+                )}
+                <button 
+                  onClick={signOut}
+                  className="flex items-center gap-2 text-white hover:text-accent transition-colors"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Link 
+                  to="/auth" 
+                  className="text-white hover:text-accent transition-colors border border-white/20 px-4 py-2 rounded-full"
+                >
+                  Sign In
+                </Link>
+                <Link 
+                  to="/contact"
+                  className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors"
+                >
+                  Contact
+                </Link>
+              </div>
+            )}
           </div>
 
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -75,12 +106,38 @@ const Navbar = () => {
               <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
               <Link to="/careers" className="text-white hover:text-accent transition-colors">Careers</Link>
               <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
-              <Link 
-                to="/contact"
-                className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors"
-              >
-                Contact
-              </Link>
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <Link to="/admin" className="text-accent hover:text-accent/80 transition-colors">
+                      Admin Dashboard
+                    </Link>
+                  )}
+                  <button 
+                    onClick={() => { signOut(); setIsOpen(false); }}
+                    className="text-white hover:text-accent transition-colors text-left"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <div className="flex flex-col space-y-2">
+                  <Link 
+                    to="/auth" 
+                    className="text-white hover:text-accent transition-colors border border-white/20 px-4 py-2 rounded-full text-center"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                  <Link 
+                    to="/contact"
+                    className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors text-center"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Contact
+                  </Link>
+                </div>
+              )}
             </div>
           </div>}
       </div>

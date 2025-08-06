@@ -27,6 +27,7 @@ interface ResearchRequest {
   sources?: string[];
   limit?: number;
   category?: string;
+  jobId?: string;
 }
 
 serve(async (req) => {
@@ -40,7 +41,7 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const { provider = 'openai', query = 'AI tools directory', sources = [], limit = 20, category }: ResearchRequest = await req.json();
+    const { provider = 'openai', query = 'AI tools directory', sources = [], limit = 20, category, jobId }: ResearchRequest = await req.json();
 
     console.log(`Starting research with ${provider} for: ${query}${category ? ` (Category: ${category})` : ''}`);
 
@@ -308,6 +309,28 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
 
     console.log(`Successfully saved ${savedTools.length} tools to database`);
 
+    // Update job status if jobId provided
+    if (jobId) {
+      try {
+        await supabase
+          .from('admin_jobs')
+          .update({
+            status: 'completed',
+            completed_at: new Date().toISOString(),
+            result: {
+              crawledSources: crawledData.length,
+              extractedTools: aiTools.length,
+              savedTools: savedTools.length,
+              category: category,
+              provider: provider
+            }
+          })
+          .eq('id', jobId);
+      } catch (jobError) {
+        console.error('Error updating job status:', jobError);
+      }
+    }
+
     return new Response(
       JSON.stringify({
         success: true,
@@ -327,6 +350,23 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
 
   } catch (error) {
     console.error('Error in ai-research-agent:', error);
+    
+    // Update job status to failed if jobId provided
+    if (jobId) {
+      try {
+        await supabase
+          .from('admin_jobs')
+          .update({
+            status: 'failed',
+            completed_at: new Date().toISOString(),
+            error_message: error.message
+          })
+          .eq('id', jobId);
+      } catch (jobError) {
+        console.error('Error updating job status:', jobError);
+      }
+    }
+    
     return new Response(
       JSON.stringify({
         success: false,

@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import AdminRoute from "@/components/layout/AdminRoute";
 import Index from "./pages/Index";
 import AIEmpowerment from "./pages/AIEmpowerment";
 import KnowledgeBase from "./pages/KnowledgeBase";
@@ -24,6 +26,8 @@ import AdminTest from "./pages/AdminTest";
 import AdminTools from "./pages/AdminTools";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import Auth from "./pages/Auth";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +36,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           
@@ -51,11 +56,14 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         <Route path="/admin-test" element={<AdminTest />} />
-        <Route path="/admin-tools" element={<AdminTools />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+        <Route path="/admin-tools" element={<AdminRoute><AdminTools /></AdminRoute>} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
       </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
