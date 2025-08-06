@@ -55,10 +55,10 @@ const App = () => (
           <Route path="/job-application" element={<JobApplication />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-        <Route path="/admin-test" element={<AdminTest />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin-tools" element={<AdminRoute><AdminTools /></AdminRoute>} />
+        <Route path="/admin-test" element={<AdminTest />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
