@@ -276,9 +276,9 @@ const AdminTools = () => {
               </div>
 
               <Tabs defaultValue="manage" className="space-y-6">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="manage">Manage Tools</TabsTrigger>
-                  <TabsTrigger value="add">Add/Edit Tool</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 bg-primary/80 border border-gray-700">
+                  <TabsTrigger value="manage" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Manage Tools</TabsTrigger>
+                  <TabsTrigger value="add" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Add/Edit Tool</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="manage" className="space-y-6">
@@ -302,10 +302,10 @@ const AdminTools = () => {
                           <SelectTrigger className="w-48 bg-white/10 border-white/20 text-white">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">All Categories</SelectItem>
+                          <SelectContent className="bg-primary border-gray-700">
+                            <SelectItem value="all" className="text-white hover:bg-secondary/20">All Categories</SelectItem>
                             {CATEGORIES.map(cat => (
-                              <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                              <SelectItem key={cat} value={cat} className="text-white hover:bg-secondary/20">{cat}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
@@ -411,9 +411,9 @@ const AdminTools = () => {
                               <SelectTrigger className="bg-white/10 border-white/20 text-white">
                                 <SelectValue placeholder="Select category" />
                               </SelectTrigger>
-                              <SelectContent>
+                              <SelectContent className="bg-primary border-gray-700">
                                 {CATEGORIES.map(cat => (
-                                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                                  <SelectItem key={cat} value={cat} className="text-white hover:bg-secondary/20">{cat}</SelectItem>
                                 ))}
                               </SelectContent>
                             </Select>
