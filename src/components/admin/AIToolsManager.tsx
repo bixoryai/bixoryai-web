@@ -328,7 +328,7 @@ export const AIToolsManager = () => {
               {duplicateGroups.length > 0 && (
                 <Alert>
                   <AlertTriangle className="h-4 w-4" />
-                  <AlertDescription className="text-white">
+                  <AlertDescription className="text-gray-900">
                     Found {duplicateGroups.length} duplicate groups. The primary tool will be kept and enhanced with data from duplicates.
                   </AlertDescription>
                 </Alert>
