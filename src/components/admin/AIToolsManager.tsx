@@ -41,59 +41,31 @@ export const AIToolsManager = () => {
 
   const syncAITools = async () => {
     setIsResearching(true);
-    setSyncStatus('🚀 Starting sync...\n⏳ Initializing AI research agent...');
+    setSyncStatus('🔄 Refreshing AI tools data...');
     
     try {
-      // Start with progress updates
-      setSyncStatus(prev => prev + '\n🔍 Crawling external AI tool directories...');
-      
-      const { data, error } = await supabase.functions.invoke('ai-research-agent', {
-        body: {
-          provider: selectedProvider,
-          category: selectedCategory === 'All Categories' ? undefined : selectedCategory,
-          limit: 20,
-          autoConsolidate: true
-        }
-      });
-
-      if (error) throw error;
-
-      setSyncStatus(prev => prev + '\n✅ Crawling completed, processing results...');
-
-      // The function returns: { crawledSources: number, extractedTools: number, savedTools: number, skippedDuplicates: number, consolidationResults: {...} }
-      const results = data;
-      const consolidation = results.consolidationResults;
+      // Simply refresh data from database by reloading the page
       const timestamp = new Date().toLocaleString();
-      
-      setSyncStatus(prev => prev + `\n📊 Extracting data from ${results.crawledSources || 'multiple'} sources...`);
-      setSyncStatus(prev => prev + `\n🔍 Found ${results.extractedTools || 0} tools to process...`);
-      setSyncStatus(prev => prev + `\n💾 Saved ${results.savedTools || 0} new tools to database...`);
-      setSyncStatus(prev => prev + `\n⏭️ Skipped ${results.skippedDuplicates || 0} duplicate tools...`);
-      
-      if (consolidation && consolidation.totalConsolidated > 0) {
-        setSyncStatus(prev => prev + `\n🔄 Auto-consolidated ${consolidation.totalConsolidated} duplicate tools...`);
-      }
-      
-      setSyncStatus(prev => prev + `\n\n✅ Sync completed successfully at ${timestamp}!`);
+      setSyncStatus(`✅ Data refreshed successfully at ${timestamp}!`);
       setLastSyncTime(timestamp);
 
       toast({
         title: "Sync Complete",
-        description: `Found ${results.extractedTools || 0} tools, saved ${results.savedTools || 0} new tools, skipped ${results.skippedDuplicates || 0} duplicates${consolidation ? `, auto-consolidated ${consolidation.totalConsolidated || 0} duplicates` : ''}`,
+        description: "AI tools data refreshed from database",
       });
 
-      // Refresh duplicate scan after sync
-      setSyncStatus(prev => prev + '\n🔍 Scanning for remaining duplicates...');
-      await scanForDuplicates();
-      setSyncStatus(prev => prev + '\n✅ Duplicate scan completed!');
+      // Refresh the page to show latest data
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       
     } catch (error: any) {
-      console.error('Error syncing AI tools:', error);
-      const errorMessage = `❌ Sync failed at ${new Date().toLocaleString()}\n🚨 Error: ${error.message || "Failed to sync AI tools"}`;
+      console.error('Error refreshing AI tools:', error);
+      const errorMessage = `❌ Refresh failed at ${new Date().toLocaleString()}\n🚨 Error: ${error.message || "Failed to refresh AI tools"}`;
       setSyncStatus(errorMessage);
       toast({
         title: "Error",
-        description: error.message || "Failed to sync AI tools",
+        description: error.message || "Failed to refresh AI tools",
         variant: "destructive",
       });
     } finally {
@@ -245,7 +217,7 @@ export const AIToolsManager = () => {
             AI Tools Manager
           </CardTitle>
           <CardDescription className="text-white">
-            Sync, manage, and consolidate AI tools in the database
+            Refresh data and manage duplicate AI tools in the database
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -295,8 +267,8 @@ export const AIToolsManager = () => {
               <Alert>
                 <Clock className="h-4 w-4" />
                 <AlertDescription className="text-gray-800">
-                  This will crawl AI tool directories, extract new tools, and automatically consolidate any duplicates found.
-                  The process may take 2-3 minutes to complete.
+                  This will refresh the AI tools data from the database to show the latest changes.
+                  The page will reload automatically to display updated data.
                 </AlertDescription>
               </Alert>
 
@@ -319,8 +291,8 @@ export const AIToolsManager = () => {
                     <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono">{syncStatus}</pre>
                     {lastSyncTime && (
                       <p className="text-xs text-gray-400 mt-2">
-                        📝 The AI research agent crawls external AI tool directories and uses them as the source of truth. 
-                        New tools are added to our database, while existing tools are skipped to prevent duplicates.
+                        📝 This refresh ensures your frontend displays the latest AI tools data from the database. 
+                        Use this after adding new tools or when the research agent has completed crawling.
                       </p>
                     )}
                   </CardContent>
