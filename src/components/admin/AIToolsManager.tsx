@@ -41,8 +41,12 @@ export const AIToolsManager = () => {
 
   const syncAITools = async () => {
     setIsResearching(true);
-    setSyncStatus('Starting sync...');
+    setSyncStatus('🚀 Starting sync...\n⏳ Initializing AI research agent...');
+    
     try {
+      // Start with progress updates
+      setSyncStatus(prev => prev + '\n🔍 Crawling external AI tool directories...');
+      
       const { data, error } = await supabase.functions.invoke('ai-research-agent', {
         body: {
           provider: selectedProvider,
@@ -54,22 +58,34 @@ export const AIToolsManager = () => {
 
       if (error) throw error;
 
+      setSyncStatus(prev => prev + '\n✅ Crawling completed, processing results...');
+
+      // The function returns: { crawledSources: number, extractedTools: number, savedTools: number, skippedDuplicates: number, consolidationResults: {...} }
       const results = data;
       const consolidation = results.consolidationResults;
       const timestamp = new Date().toLocaleString();
       
-      const statusMessage = `✅ Sync completed at ${timestamp}\n📊 Sources crawled: ${results.crawledSources}\n🔍 Tools extracted: ${results.extractedTools}\n💾 New tools saved: ${results.savedTools}\n⏭️ Duplicates skipped: ${results.skippedDuplicates}${consolidation ? `\n🔄 Auto-consolidated: ${consolidation.totalConsolidated} duplicates` : ''}`;
+      setSyncStatus(prev => prev + `\n📊 Extracting data from ${results.crawledSources || 'multiple'} sources...`);
+      setSyncStatus(prev => prev + `\n🔍 Found ${results.extractedTools || 0} tools to process...`);
+      setSyncStatus(prev => prev + `\n💾 Saved ${results.savedTools || 0} new tools to database...`);
+      setSyncStatus(prev => prev + `\n⏭️ Skipped ${results.skippedDuplicates || 0} duplicate tools...`);
       
-      setSyncStatus(statusMessage);
+      if (consolidation && consolidation.totalConsolidated > 0) {
+        setSyncStatus(prev => prev + `\n🔄 Auto-consolidated ${consolidation.totalConsolidated} duplicate tools...`);
+      }
+      
+      setSyncStatus(prev => prev + `\n\n✅ Sync completed successfully at ${timestamp}!`);
       setLastSyncTime(timestamp);
 
       toast({
         title: "Sync Complete",
-        description: `Found ${results.extractedTools} tools, saved ${results.savedTools} new tools, skipped ${results.skippedDuplicates} duplicates${consolidation ? `, auto-consolidated ${consolidation.totalConsolidated} duplicates` : ''}`,
+        description: `Found ${results.extractedTools || 0} tools, saved ${results.savedTools || 0} new tools, skipped ${results.skippedDuplicates || 0} duplicates${consolidation ? `, auto-consolidated ${consolidation.totalConsolidated || 0} duplicates` : ''}`,
       });
 
       // Refresh duplicate scan after sync
+      setSyncStatus(prev => prev + '\n🔍 Scanning for remaining duplicates...');
       await scanForDuplicates();
+      setSyncStatus(prev => prev + '\n✅ Duplicate scan completed!');
       
     } catch (error: any) {
       console.error('Error syncing AI tools:', error);
