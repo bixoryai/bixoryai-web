@@ -155,7 +155,7 @@ export const DuplicateManager = () => {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-white">
             <AlertTriangle className="w-5 h-5 text-secondary" />
             Duplicate Tool Manager
           </CardTitle>
