@@ -265,10 +265,7 @@ const AdminTools = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-8">
                 <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                  <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
-                    BIXORY AI
-                  </span>{" "}
-                  Admin Tools
+                  Manage AI Tools
                 </h1>
                 <p className="text-lg text-gray-300 leading-relaxed">
                   Manage AI tools database - Add, edit, and categorize tools
@@ -344,9 +341,9 @@ const AdminTools = () => {
                               {tool.tags && tool.tags.length > 0 && (
                                 <div className="flex gap-1 mt-2">
                                   {tool.tags.map((tag, index) => (
-                                    <Badge key={index} variant="outline" className="text-xs">
-                                      {tag}
-                                    </Badge>
+                                     <Badge key={index} variant="outline" className="text-xs border-gray-500 text-gray-300">
+                                       {tag}
+                                     </Badge>
                                   ))}
                                 </div>
                               )}
