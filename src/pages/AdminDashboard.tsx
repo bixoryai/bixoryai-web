@@ -16,7 +16,8 @@ import {
   Clock,
   CheckCircle,
   XCircle,
-  AlertCircle
+  AlertCircle,
+  RefreshCw
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,6 +43,7 @@ const AdminDashboard = () => {
   const [recentJobs, setRecentJobs] = useState<AdminJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [runningResearch, setRunningResearch] = useState(false);
+  const [syncing, setSyncing] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -146,6 +148,58 @@ const AdminDashboard = () => {
       });
     } finally {
       setRunningResearch(false);
+    }
+  };
+
+  const syncAITools = async () => {
+    setSyncing(true);
+    try {
+      // Create job record
+      const { data: job, error: jobError } = await supabase
+        .from('admin_jobs')
+        .insert([{
+          job_type: 'sync_ai_tools',
+          status: 'running',
+          started_at: new Date().toISOString()
+        }])
+        .select()
+        .single();
+
+      if (jobError) throw jobError;
+
+      // Refresh all AI tools data
+      const { data: toolsData, error: syncError } = await supabase
+        .from('ai_tools')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (syncError) throw syncError;
+
+      // Update job status
+      await supabase
+        .from('admin_jobs')
+        .update({
+          status: 'completed',
+          completed_at: new Date().toISOString(),
+          result: { syncedTools: toolsData?.length || 0 }
+        })
+        .eq('id', job.id);
+
+      toast({
+        title: "Success",
+        description: `AI tools synced successfully. ${toolsData?.length || 0} tools in database.`,
+      });
+
+      fetchDashboardData();
+    } catch (error: any) {
+      console.error('Error syncing AI tools:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to sync AI tools",
+        variant: "destructive",
+      });
+    } finally {
+      setSyncing(false);
     }
   };
 
@@ -381,22 +435,33 @@ const AdminDashboard = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-primary/90 to-blue-900/50 border-gray-700/50 opacity-75 transition-all duration-300 group">
+                <Card className="bg-gradient-to-br from-primary/90 to-blue-900/50 border-gray-700/50 hover:border-cyan-400/30 hover:shadow-xl hover:shadow-cyan-400/20 transition-all duration-300 group">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-gray-400 flex items-center gap-3">
-                      <div className="bg-gray-600/20 p-2 rounded-lg">
-                        <Users className="h-5 w-5 text-gray-500" />
+                    <CardTitle className="text-white flex items-center gap-3 group-hover:text-cyan-400 transition-colors">
+                      <div className="bg-cyan-500/10 p-2 rounded-lg group-hover:bg-cyan-500/20 transition-colors">
+                        <RefreshCw className="h-5 w-5 text-cyan-400" />
                       </div>
-                      <span className="text-lg">User Management</span>
+                      <span className="text-lg">Sync AI Tools</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-2">Manage user accounts and permissions</p>
+                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Force refresh frontend data from database</p>
                     <Button 
-                      disabled
-                      className="w-full bg-gray-600/50 cursor-not-allowed text-gray-400 font-medium"
+                      onClick={syncAITools}
+                      disabled={syncing}
+                      className="w-full bg-secondary hover:bg-secondary/90 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium relative"
                     >
-                      Coming Soon
+                      {syncing ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                          Syncing...
+                        </>
+                      ) : (
+                        <>
+                          <RefreshCw className="h-4 w-4 mr-2" />
+                          Sync Tools
+                        </>
+                      )}
                     </Button>
                   </CardContent>
                 </Card>
