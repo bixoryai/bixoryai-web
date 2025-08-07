@@ -217,15 +217,12 @@ const AdminDashboard = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-primary">
+      <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-blue-900">
         <section className="pt-24 pb-20">
           <div className="container mx-auto px-6">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-8">
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                  <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
-                    BIXORY AI
-                  </span>{" "}
+                <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent mb-6">
                   Admin Dashboard
                 </h1>
                 <p className="text-lg text-gray-300 leading-relaxed">
