@@ -54,7 +54,7 @@ export const AIToolsManager = () => {
 
       if (error) throw error;
 
-      const results = data.results;
+      const results = data;
       const consolidation = results.consolidationResults;
       const timestamp = new Date().toLocaleString();
       
