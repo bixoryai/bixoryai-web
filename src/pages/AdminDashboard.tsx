@@ -219,7 +219,7 @@ const AdminDashboard = () => {
       <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-blue-900">
         <section className="pt-24 pb-20">
-          <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 mt-8">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-8">
                 <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
