@@ -267,7 +267,7 @@ export const AIToolsManager = () => {
 
               <Alert>
                 <Clock className="h-4 w-4" />
-                <AlertDescription className="text-white">
+                <AlertDescription className="text-gray-800">
                   This will crawl AI tool directories, extract new tools, and automatically consolidate any duplicates found.
                   The process may take 2-3 minutes to complete.
                 </AlertDescription>
