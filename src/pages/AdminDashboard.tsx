@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { DuplicateManager } from "@/components/admin/DuplicateManager";
+import { AIToolsManager } from "@/components/admin/AIToolsManager";
 import { supabase } from '@/integrations/supabase/client';
 import { 
   Settings, 
@@ -493,9 +493,9 @@ const AdminDashboard = () => {
 
                 <Card className="bg-gradient-to-br from-primary/90 to-blue-900/50 border-gray-700/50 hover:border-orange-400/30 hover:shadow-xl hover:shadow-orange-400/20 transition-all duration-300 group cursor-pointer"
                       onClick={() => {
-                        const duplicatesSection = document.getElementById('duplicates-section');
-                        if (duplicatesSection) {
-                          duplicatesSection.scrollIntoView({ behavior: 'smooth' });
+                        const aiToolsSection = document.getElementById('ai-tools-section');
+                        if (aiToolsSection) {
+                          aiToolsSection.scrollIntoView({ behavior: 'smooth' });
                         }
                       }}>
                   <CardHeader className="pb-3">
@@ -503,30 +503,30 @@ const AdminDashboard = () => {
                       <div className="bg-orange-500/10 p-2 rounded-lg group-hover:bg-orange-500/20 transition-colors">
                         <Settings className="h-5 w-5 text-orange-400" />
                       </div>
-                      <span className="text-lg">Duplicate Manager</span>
+                      <span className="text-lg">AI Tools Manager</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Detect and consolidate duplicate AI tools</p>
+                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Sync AI tools and manage duplicates</p>
                     <Button 
                       onClick={(e) => {
                         e.stopPropagation();
-                        const duplicatesSection = document.getElementById('duplicates-section');
-                        if (duplicatesSection) {
-                          duplicatesSection.scrollIntoView({ behavior: 'smooth' });
+                        const aiToolsSection = document.getElementById('ai-tools-section');
+                        if (aiToolsSection) {
+                          aiToolsSection.scrollIntoView({ behavior: 'smooth' });
                         }
                       }}
                       className="w-full bg-secondary hover:bg-secondary/90 text-white font-medium"
                     >
-                      Manage Duplicates
+                      Manage AI Tools
                     </Button>
                   </CardContent>
                 </Card>
               </div>
 
-              {/* Duplicate Manager Section */}
-              <div id="duplicates-section" className="mb-8">
-                <DuplicateManager />
+              {/* AI Tools Manager Section */}
+              <div id="ai-tools-section" className="mb-8">
+                <AIToolsManager />
               </div>
 
               {/* Recent Jobs */}

@@ -156,7 +156,7 @@ serve(async (req) => {
               return tool1.website_url && d.website_url && 
                      normalizeUrl(tool1.website_url) === normalizeUrl(d.website_url) ? 1.0 : nameSim;
             })),
-            reason
+            reason: reason
           });
           processedTools.add(tool1.id);
         }

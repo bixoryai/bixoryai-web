@@ -28,6 +28,7 @@ interface ResearchRequest {
   limit?: number;
   category?: string;
   jobId?: string;
+  autoConsolidate?: boolean;
 }
 
 serve(async (req) => {
@@ -41,7 +42,7 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const { provider = 'openai', query = 'AI tools directory', sources = [], limit = 20, category, jobId }: ResearchRequest = await req.json();
+    const { provider = 'openai', query = 'AI tools directory', sources = [], limit = 20, category, jobId, autoConsolidate = true }: ResearchRequest = await req.json();
 
     console.log(`Starting research with ${provider} for: ${query}${category ? ` (Category: ${category})` : ''}`);
 
@@ -397,6 +398,51 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
     }
 
     console.log(`Successfully saved ${savedTools.length} tools to database`);
+    
+    // Step 5: Auto-consolidate duplicates if enabled
+    let consolidationResults = null;
+    if (autoConsolidate && savedTools.length > 0) {
+      console.log('Running automatic duplicate consolidation...');
+      
+      try {
+        // Call consolidate function to scan and auto-consolidate
+        const consolidateResponse = await supabase.functions.invoke('consolidate-duplicates', {
+          body: { action: 'scan' }
+        });
+
+        if (consolidateResponse.data?.duplicateGroups?.length > 0) {
+          console.log(`Found ${consolidateResponse.data.duplicateGroups.length} duplicate groups to auto-consolidate`);
+          
+          let totalConsolidated = 0;
+          for (const group of consolidateResponse.data.duplicateGroups) {
+            try {
+              const consolidateGroupResponse = await supabase.functions.invoke('consolidate-duplicates', {
+                body: {
+                  action: 'consolidate',
+                  primaryToolId: group.primaryTool.id,
+                  duplicateIds: group.duplicates.map((d: any) => d.id)
+                }
+              });
+              
+              if (consolidateGroupResponse.data?.consolidatedCount) {
+                totalConsolidated += consolidateGroupResponse.data.consolidatedCount;
+              }
+            } catch (consolidateError) {
+              console.warn('Error consolidating group:', consolidateError);
+            }
+          }
+          
+          consolidationResults = {
+            duplicateGroups: consolidateResponse.data.duplicateGroups.length,
+            totalConsolidated
+          };
+          
+          console.log(`Auto-consolidated ${totalConsolidated} duplicates from ${consolidateResponse.data.duplicateGroups.length} groups`);
+        }
+      } catch (consolidateError) {
+        console.warn('Error during auto-consolidation:', consolidateError);
+      }
+    }
 
     // Update job status if jobId provided
     if (jobId) {
@@ -412,6 +458,7 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
               savedTools: savedTools.length,
               skippedDuplicates: skippedTools.length,
               duplicateDetails: skippedTools,
+              consolidationResults: consolidationResults,
               category: category,
               provider: provider
             }
@@ -425,13 +472,14 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
     return new Response(
       JSON.stringify({
         success: true,
-        message: `Research completed using ${provider}`,
+        message: `Research completed using ${provider}${consolidationResults ? ` with auto-consolidation` : ''}`,
         results: {
           crawledSources: crawledData.length,
           extractedTools: aiTools.length,
           savedTools: savedTools.length,
           skippedDuplicates: skippedTools.length,
           duplicateDetails: skippedTools,
+          consolidationResults: consolidationResults,
           tools: savedTools
         }
       }),
