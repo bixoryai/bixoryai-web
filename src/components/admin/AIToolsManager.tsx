@@ -7,14 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { AlertTriangle, Search, Merge, CheckCircle, ExternalLink, Bot, PlayCircle, Clock, Zap } from "lucide-react";
+import { AlertTriangle, Search, Merge, CheckCircle, ExternalLink, Bot, PlayCircle, Clock, Zap, Star } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface DuplicateGroup {
   primaryTool: any;
   duplicates: any[];
   similarity: number;
   reason: string;
+  selectedPrimaryId?: string;
 }
 
 export const AIToolsManager = () => {
@@ -208,6 +211,25 @@ export const AIToolsManager = () => {
     });
   };
 
+  const setPrimaryTool = (groupIndex: number, toolId: string) => {
+    setDuplicateGroups(prev => prev.map((group, index) => {
+      if (index === groupIndex) {
+        // Find the selected tool among all tools in the group
+        const allTools = [group.primaryTool, ...group.duplicates];
+        const selectedTool = allTools.find(tool => tool.id === toolId);
+        const otherTools = allTools.filter(tool => tool.id !== toolId);
+        
+        return {
+          ...group,
+          primaryTool: selectedTool,
+          duplicates: otherTools,
+          selectedPrimaryId: toolId
+        };
+      }
+      return group;
+    }));
+  };
+
   return (
     <div className="space-y-6">
       <Card>
@@ -377,78 +399,109 @@ export const AIToolsManager = () => {
                       </CardHeader>
                       
                       <CardContent className="space-y-4">
-                        {/* Primary Tool */}
-                        <div className="bg-primary/5 p-4 rounded-lg">
-                          <div className="flex items-start justify-between mb-2">
-                            <h4 className="font-semibold text-green-400">Primary Tool (Will be kept)</h4>
-                            <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Primary</Badge>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                              <span className="font-medium text-white">{group.primaryTool.name}</span>
-                              {group.primaryTool.website_url && (
-                                <a
-                                  href={group.primaryTool.website_url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-accent hover:underline"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                </a>
-                              )}
-                            </div>
-                            <p className="text-sm text-gray-300">{group.primaryTool.description}</p>
-                            <div className="flex items-center gap-2 text-xs text-gray-400">
-                              <Badge variant="outline">{group.primaryTool.category}</Badge>
-                              <span>•</span>
-                              <span>{group.primaryTool.pricing}</span>
-                              {group.primaryTool.rating && (
-                                <>
-                                  <span>•</span>
-                                  <span>★ {group.primaryTool.rating}</span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        <Separator />
-
-                        {/* Duplicate Tools */}
                         <div className="space-y-3">
-                          <h4 className="font-semibold text-red-400">Duplicates (Will be consolidated)</h4>
-                          {group.duplicates.map((duplicate) => (
-                            <div key={duplicate.id} className="bg-red-500/5 p-3 rounded-lg border border-red-500/20">
-                              <div className="space-y-2">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-medium text-white">{duplicate.name}</span>
-                                  {duplicate.website_url && (
-                                    <a
-                                      href={duplicate.website_url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="text-accent hover:underline"
-                                    >
-                                      <ExternalLink className="w-4 h-4" />
-                                    </a>
-                                  )}
-                                  <Badge className="bg-red-500/20 text-red-400 border-red-500/30">Duplicate</Badge>
+                          <div className="flex items-center gap-2 mb-4">
+                            <Star className="w-4 h-4 text-secondary" />
+                            <h4 className="font-semibold text-white">Choose Primary Tool (will be kept)</h4>
+                          </div>
+                          
+                          <RadioGroup
+                            value={group.selectedPrimaryId || group.primaryTool.id}
+                            onValueChange={(value) => setPrimaryTool(groupIndex, value)}
+                            className="space-y-3"
+                          >
+                            {/* Current Primary Tool */}
+                            <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-700 hover:border-secondary/50 transition-colors">
+                              <RadioGroupItem 
+                                value={group.primaryTool.id} 
+                                id={`primary-${groupIndex}-${group.primaryTool.id}`}
+                                className="mt-1 border-gray-600 text-secondary"
+                              />
+                              <Label 
+                                htmlFor={`primary-${groupIndex}-${group.primaryTool.id}`}
+                                className="flex-1 cursor-pointer"
+                              >
+                                <div className="space-y-2">
+                                  <div className="flex items-center gap-2">
+                                    <span className="font-medium text-white">{group.primaryTool.name}</span>
+                                    {group.primaryTool.website_url && (
+                                      <a
+                                        href={group.primaryTool.website_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-accent hover:underline"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <ExternalLink className="w-4 h-4" />
+                                      </a>
+                                    )}
+                                    {group.primaryTool.id === (group.selectedPrimaryId || group.primaryTool.id) && (
+                                      <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Primary</Badge>
+                                    )}
+                                  </div>
+                                  <p className="text-sm text-gray-300">{group.primaryTool.description}</p>
+                                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                                    <Badge variant="outline">{group.primaryTool.category}</Badge>
+                                    <span>•</span>
+                                    <span>{group.primaryTool.pricing}</span>
+                                    {group.primaryTool.rating && (
+                                      <>
+                                        <span>•</span>
+                                        <span>★ {group.primaryTool.rating}</span>
+                                      </>
+                                    )}
+                                  </div>
                                 </div>
-                                <p className="text-sm text-gray-300">{duplicate.description}</p>
-                                <div className="flex items-center gap-2 text-xs text-gray-400">
-                                  <Badge variant="outline">{duplicate.category}</Badge>
-                                  <span>•</span>
-                                  <span>{duplicate.pricing}</span>
-                                  {duplicate.rating && (
-                                    <>
-                                      <span>•</span>
-                                      <span>★ {duplicate.rating}</span>
-                                    </>
-                                  )}
-                                </div>
-                              </div>
+                              </Label>
                             </div>
-                          ))}
+
+                            {/* Duplicate Tools */}
+                            {group.duplicates.map((duplicate) => (
+                              <div key={duplicate.id} className="flex items-start space-x-3 p-3 rounded-lg border border-gray-700 hover:border-secondary/50 transition-colors">
+                                <RadioGroupItem 
+                                  value={duplicate.id} 
+                                  id={`duplicate-${groupIndex}-${duplicate.id}`}
+                                  className="mt-1 border-gray-600 text-secondary"
+                                />
+                                <Label 
+                                  htmlFor={`duplicate-${groupIndex}-${duplicate.id}`}
+                                  className="flex-1 cursor-pointer"
+                                >
+                                  <div className="space-y-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-medium text-white">{duplicate.name}</span>
+                                      {duplicate.website_url && (
+                                        <a
+                                          href={duplicate.website_url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="text-accent hover:underline"
+                                          onClick={(e) => e.stopPropagation()}
+                                        >
+                                          <ExternalLink className="w-4 h-4" />
+                                        </a>
+                                      )}
+                                      {duplicate.id === (group.selectedPrimaryId || group.primaryTool.id) && (
+                                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Primary</Badge>
+                                      )}
+                                    </div>
+                                    <p className="text-sm text-gray-300">{duplicate.description}</p>
+                                    <div className="flex items-center gap-2 text-xs text-gray-400">
+                                      <Badge variant="outline">{duplicate.category}</Badge>
+                                      <span>•</span>
+                                      <span>{duplicate.pricing}</span>
+                                      {duplicate.rating && (
+                                        <>
+                                          <span>•</span>
+                                          <span>★ {duplicate.rating}</span>
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+                                </Label>
+                              </div>
+                            ))}
+                          </RadioGroup>
                         </div>
                       </CardContent>
                     </Card>
