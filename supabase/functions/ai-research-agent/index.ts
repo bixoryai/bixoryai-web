@@ -271,13 +271,104 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
 
     console.log(`Extracted ${aiTools.length} AI tools`);
 
-    // Step 3: Store in database
+    // Helper functions for duplicate detection
+    const normalizeUrl = (url: string): string => {
+      try {
+        const urlObj = new URL(url);
+        return urlObj.hostname.replace(/^www\./, '').toLowerCase();
+      } catch {
+        return url.toLowerCase().replace(/^www\./, '');
+      }
+    };
+
+    const calculateSimilarity = (str1: string, str2: string): number => {
+      const s1 = str1.toLowerCase().trim();
+      const s2 = str2.toLowerCase().trim();
+      
+      if (s1 === s2) return 1;
+      
+      const longer = s1.length > s2.length ? s1 : s2;
+      const shorter = s1.length > s2.length ? s2 : s1;
+      
+      if (longer.length === 0) return 1;
+      
+      const distance = levenshteinDistance(longer, shorter);
+      return (longer.length - distance) / longer.length;
+    };
+
+    const levenshteinDistance = (str1: string, str2: string): number => {
+      const matrix = Array(str2.length + 1).fill(null).map(() => Array(str1.length + 1).fill(null));
+      
+      for (let i = 0; i <= str1.length; i++) matrix[0][i] = i;
+      for (let j = 0; j <= str2.length; j++) matrix[j][0] = j;
+      
+      for (let j = 1; j <= str2.length; j++) {
+        for (let i = 1; i <= str1.length; i++) {
+          const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1;
+          matrix[j][i] = Math.min(
+            matrix[j][i - 1] + 1,
+            matrix[j - 1][i] + 1,
+            matrix[j - 1][i - 1] + indicator
+          );
+        }
+      }
+      
+      return matrix[str2.length][str1.length];
+    };
+
+    // Step 3: Get existing tools for duplicate detection
+    const { data: existingTools, error: fetchError } = await supabase
+      .from('ai_tools')
+      .select('id, name, website_url')
+      .eq('status', 'active');
+
+    if (fetchError) {
+      console.warn('Failed to fetch existing tools for duplicate detection:', fetchError);
+    }
+
+    // Step 4: Filter out duplicates and store new tools
     const savedTools = [];
+    const skippedTools = [];
+    
     for (const tool of aiTools) {
       try {
+        let isDuplicate = false;
+        let duplicateReason = '';
+
+        if (existingTools) {
+          // Check for duplicates using similarity
+          for (const existing of existingTools) {
+            // Name similarity check (85% threshold)
+            const nameSimilarity = calculateSimilarity(tool.name, existing.name);
+            if (nameSimilarity >= 0.85) {
+              isDuplicate = true;
+              duplicateReason = `Similar name to "${existing.name}" (${Math.round(nameSimilarity * 100)}% match)`;
+              break;
+            }
+
+            // URL similarity check (exact domain match)
+            if (tool.website_url && existing.website_url) {
+              const toolDomain = normalizeUrl(tool.website_url);
+              const existingDomain = normalizeUrl(existing.website_url);
+              if (toolDomain === existingDomain) {
+                isDuplicate = true;
+                duplicateReason = `Same domain as "${existing.name}" (${existingDomain})`;
+                break;
+              }
+            }
+          }
+        }
+
+        if (isDuplicate) {
+          console.log(`Skipping duplicate tool "${tool.name}": ${duplicateReason}`);
+          skippedTools.push({ tool: tool.name, reason: duplicateReason });
+          continue;
+        }
+
+        // Save new tool
         const { data, error } = await supabase
           .from('ai_tools')
-          .upsert({
+          .insert({
             name: tool.name,
             description: tool.description,
             category: tool.category,
@@ -291,19 +382,17 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
             source_url: crawledData[0]?.source,
             crawled_at: new Date().toISOString(),
             status: 'active'
-          }, {
-            onConflict: 'name',
-            ignoreDuplicates: false
           })
           .select();
 
         if (!error && data) {
           savedTools.push(data[0]);
+          console.log(`Successfully saved new tool: ${tool.name}`);
         } else {
           console.warn(`Failed to save tool ${tool.name}:`, error);
         }
       } catch (saveError) {
-        console.warn(`Error saving tool ${tool.name}:`, saveError);
+        console.warn(`Error processing tool ${tool.name}:`, saveError);
       }
     }
 
@@ -321,6 +410,8 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
               crawledSources: crawledData.length,
               extractedTools: aiTools.length,
               savedTools: savedTools.length,
+              skippedDuplicates: skippedTools.length,
+              duplicateDetails: skippedTools,
               category: category,
               provider: provider
             }
@@ -339,6 +430,8 @@ ${crawledData.map(d => `Source: ${d.source}\n${d.content.slice(0, 5000)}`).join(
           crawledSources: crawledData.length,
           extractedTools: aiTools.length,
           savedTools: savedTools.length,
+          skippedDuplicates: skippedTools.length,
+          duplicateDetails: skippedTools,
           tools: savedTools
         }
       }),
