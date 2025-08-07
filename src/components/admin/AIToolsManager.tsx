@@ -224,11 +224,11 @@ export const AIToolsManager = () => {
         <CardContent>
           <Tabs defaultValue="sync" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="sync" className="flex items-center gap-2">
+              <TabsTrigger value="sync" className="flex items-center gap-2 text-white data-[state=active]:bg-secondary data-[state=active]:text-white">
                 <Zap className="w-4 h-4" />
                 Sync Tools
               </TabsTrigger>
-              <TabsTrigger value="duplicates" className="flex items-center gap-2">
+              <TabsTrigger value="duplicates" className="flex items-center gap-2 text-white data-[state=active]:bg-secondary data-[state=active]:text-white">
                 <AlertTriangle className="w-4 h-4" />
                 Duplicates ({duplicateGroups.length})
               </TabsTrigger>
