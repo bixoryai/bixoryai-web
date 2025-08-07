@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { AIToolsManager } from "@/components/admin/AIToolsManager";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
 
 interface AITool {
@@ -272,11 +273,16 @@ const AdminTools = () => {
                 </p>
               </div>
 
-              <Tabs defaultValue="manage" className="space-y-6">
-                <TabsList className="grid w-full grid-cols-2 bg-primary/80 border border-gray-700">
+              <Tabs defaultValue="sync" className="space-y-6">
+                <TabsList className="grid w-full grid-cols-3 bg-primary/80 border border-gray-700">
+                  <TabsTrigger value="sync" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Sync & Duplicates</TabsTrigger>
                   <TabsTrigger value="manage" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Manage Tools</TabsTrigger>
                   <TabsTrigger value="add" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Add/Edit Tool</TabsTrigger>
                 </TabsList>
+
+                <TabsContent value="sync" className="space-y-6">
+                  <AIToolsManager />
+                </TabsContent>
 
                 <TabsContent value="manage" className="space-y-6">
                   {/* Search and Filter */}
