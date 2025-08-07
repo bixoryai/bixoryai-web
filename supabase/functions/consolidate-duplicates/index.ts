@@ -148,6 +148,34 @@ serve(async (req) => {
         }
 
         if (duplicates.length > 0) {
+          // Find the best reason from all duplicates
+          let bestReason = '';
+          let maxSimilarity = 0;
+          
+          for (const duplicate of duplicates) {
+            const nameSimilarity = calculateSimilarity(tool1.name, duplicate.name);
+            if (nameSimilarity >= 0.85 && nameSimilarity > maxSimilarity) {
+              bestReason = `Similar names (${Math.round(nameSimilarity * 100)}% match)`;
+              maxSimilarity = nameSimilarity;
+            }
+            
+            if (tool1.website_url && duplicate.website_url) {
+              const domain1 = normalizeUrl(tool1.website_url);
+              const domain2 = normalizeUrl(duplicate.website_url);
+              if (domain1 === domain2) {
+                bestReason = `Same domain (${domain1})`;
+                maxSimilarity = 1.0;
+                break;
+              }
+            }
+            
+            if (tool1.name.toLowerCase().trim() === duplicate.name.toLowerCase().trim()) {
+              bestReason = 'Exact name match';
+              maxSimilarity = 1.0;
+              break;
+            }
+          }
+          
           duplicateGroups.push({
             primaryTool: tool1,
             duplicates,
@@ -156,7 +184,7 @@ serve(async (req) => {
               return tool1.website_url && d.website_url && 
                      normalizeUrl(tool1.website_url) === normalizeUrl(d.website_url) ? 1.0 : nameSim;
             })),
-            reason: reason
+            reason: bestReason || 'Multiple criteria match'
           });
           processedTools.add(tool1.id);
         }

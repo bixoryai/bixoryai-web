@@ -26,6 +26,8 @@ export const AIToolsManager = () => {
   const [selectedGroups, setSelectedGroups] = useState<Set<number>>(new Set());
   const [selectedProvider, setSelectedProvider] = useState<'openai' | 'claude'>('openai');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [syncStatus, setSyncStatus] = useState<string>('');
+  const [lastSyncTime, setLastSyncTime] = useState<string>('');
 
   const categories = [
     'All Categories',
@@ -39,6 +41,7 @@ export const AIToolsManager = () => {
 
   const syncAITools = async () => {
     setIsResearching(true);
+    setSyncStatus('Starting sync...');
     try {
       const { data, error } = await supabase.functions.invoke('ai-research-agent', {
         body: {
@@ -53,6 +56,12 @@ export const AIToolsManager = () => {
 
       const results = data.results;
       const consolidation = results.consolidationResults;
+      const timestamp = new Date().toLocaleString();
+      
+      const statusMessage = `✅ Sync completed at ${timestamp}\n📊 Sources crawled: ${results.crawledSources}\n🔍 Tools extracted: ${results.extractedTools}\n💾 New tools saved: ${results.savedTools}\n⏭️ Duplicates skipped: ${results.skippedDuplicates}${consolidation ? `\n🔄 Auto-consolidated: ${consolidation.totalConsolidated} duplicates` : ''}`;
+      
+      setSyncStatus(statusMessage);
+      setLastSyncTime(timestamp);
 
       toast({
         title: "Sync Complete",
@@ -64,6 +73,8 @@ export const AIToolsManager = () => {
       
     } catch (error: any) {
       console.error('Error syncing AI tools:', error);
+      const errorMessage = `❌ Sync failed at ${new Date().toLocaleString()}\n🚨 Error: ${error.message || "Failed to sync AI tools"}`;
+      setSyncStatus(errorMessage);
       toast({
         title: "Error",
         description: error.message || "Failed to sync AI tools",
@@ -282,6 +293,23 @@ export const AIToolsManager = () => {
                 <PlayCircle className="w-5 h-5" />
                 {isResearching ? "Syncing AI Tools..." : "Sync AI Tools"}
               </Button>
+
+              {syncStatus && (
+                <Card className="mt-4">
+                  <CardHeader>
+                    <CardTitle className="text-sm text-white">Sync Status</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono">{syncStatus}</pre>
+                    {lastSyncTime && (
+                      <p className="text-xs text-gray-400 mt-2">
+                        📝 The AI research agent crawls external AI tool directories and uses them as the source of truth. 
+                        New tools are added to our database, while existing tools are skipped to prevent duplicates.
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
             </TabsContent>
 
             <TabsContent value="duplicates" className="space-y-4">
