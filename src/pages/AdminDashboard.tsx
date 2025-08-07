@@ -491,37 +491,6 @@ const AdminDashboard = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-primary/90 to-blue-900/50 border-gray-700/50 hover:border-orange-400/30 hover:shadow-xl hover:shadow-orange-400/20 transition-all duration-300 group cursor-pointer"
-                      onClick={() => {
-                        const aiToolsSection = document.getElementById('ai-tools-section');
-                        if (aiToolsSection) {
-                          aiToolsSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }}>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-white flex items-center gap-3 group-hover:text-orange-400 transition-colors">
-                      <div className="bg-orange-500/10 p-2 rounded-lg group-hover:bg-orange-500/20 transition-colors">
-                        <Settings className="h-5 w-5 text-orange-400" />
-                      </div>
-                      <span className="text-lg">AI Tools Manager</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Sync AI tools and manage duplicates</p>
-                    <Button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const aiToolsSection = document.getElementById('ai-tools-section');
-                        if (aiToolsSection) {
-                          aiToolsSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }}
-                      className="w-full bg-secondary hover:bg-secondary/90 text-white font-medium"
-                    >
-                      Manage AI Tools
-                    </Button>
-                  </CardContent>
-                </Card>
               </div>
 
               {/* AI Tools Manager Section */}
