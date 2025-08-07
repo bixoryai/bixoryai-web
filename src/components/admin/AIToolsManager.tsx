@@ -242,9 +242,9 @@ export const AIToolsManager = () => {
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="openai">OpenAI GPT-4</SelectItem>
-                      <SelectItem value="claude">Claude Sonnet</SelectItem>
+                    <SelectContent className="bg-primary border-gray-700 z-50">
+                      <SelectItem value="openai" className="text-white hover:bg-secondary/20 focus:bg-secondary/20">OpenAI GPT-4</SelectItem>
+                      <SelectItem value="claude" className="text-white hover:bg-secondary/20 focus:bg-secondary/20">Claude Sonnet</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -254,9 +254,9 @@ export const AIToolsManager = () => {
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-primary border-gray-700 z-50">
                       {categories.map(category => (
-                        <SelectItem key={category} value={category}>
+                        <SelectItem key={category} value={category} className="text-white hover:bg-secondary/20 focus:bg-secondary/20">
                           {category}
                         </SelectItem>
                       ))}
