@@ -167,13 +167,18 @@ const AdminDashboard = () => {
 
       if (jobError) throw jobError;
 
-      // Refresh all AI tools data
-      const { data: toolsData, error: syncError } = await supabase
+      // Call the seed-database function for comprehensive sync
+      const { data: syncResult, error: syncError } = await supabase.functions.invoke('seed-database');
+
+      if (syncError) throw syncError;
+
+      // Fetch updated tools data for verification
+      const { data: toolsData, error: fetchError } = await supabase
         .from('ai_tools')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (syncError) throw syncError;
+      if (fetchError) throw fetchError;
 
       // Update job status
       await supabase
@@ -181,7 +186,10 @@ const AdminDashboard = () => {
         .update({
           status: 'completed',
           completed_at: new Date().toISOString(),
-          result: { syncedTools: toolsData?.length || 0 }
+          result: { 
+            syncedTools: toolsData?.length || 0,
+            seedResult: syncResult 
+          }
         })
         .eq('id', job.id);
 
@@ -193,6 +201,22 @@ const AdminDashboard = () => {
       fetchDashboardData();
     } catch (error: any) {
       console.error('Error syncing AI tools:', error);
+      
+      // Update job status to failed if we have the job ID
+      try {
+        await supabase
+          .from('admin_jobs')
+          .update({
+            status: 'failed',
+            completed_at: new Date().toISOString(),
+            error_message: error.message
+          })
+          .eq('job_type', 'sync_ai_tools')
+          .eq('status', 'running');
+      } catch (updateError) {
+        console.error('Failed to update job status:', updateError);
+      }
+
       toast({
         title: "Error",
         description: error.message || "Failed to sync AI tools",
