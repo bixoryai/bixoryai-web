@@ -1,6 +1,15 @@
 import { VisualArticleLayout } from "@/components/VisualArticleLayout";
 import { TutorialTemplate } from "@/components/knowledge-base/templates/TutorialTemplate";
 import GuideNavigation from "@/components/navigation/GuideNavigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Clock, Star, Download, Code, Terminal, Database, Cloud, GitBranch, Settings, Zap, ChevronRight, Home } from "lucide-react";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Link } from "react-router-dom";
+import aiDevHero from "@/assets/ai-development-hero.jpg";
 
 const AIDevEnvironmentTutorial = () => {
   const steps = [
@@ -506,20 +515,192 @@ tensorboard --logdir=logs`
   };
 
   return (
-    <VisualArticleLayout>
-      <TutorialTemplate
-        title="Setting Up Your AI Development Environment"
-        description="A comprehensive guide to setting up a professional AI development environment from scratch. Learn to configure Python, essential libraries, development tools, version control, containerization, and MLOps tools for productive AI development."
-        difficulty={2}
-        estimatedTime={120}
-        technologies={technologies}
-        prerequisites={prerequisites}
-        steps={steps}
-        finalProject={finalProject}
-        tags={tags}
-      />
+    <div className="min-h-screen bg-primary">
+      <Navbar />
+      
+      {/* Breadcrumb Navigation */}
+      <div className="pt-24 pb-8">
+        <div className="container mx-auto px-6">
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/" className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors">
+                    <Home className="h-4 w-4" />
+                    Home
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/knowledge-base" className="text-gray-400 hover:text-white transition-colors">
+                    Knowledge Base
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbPage className="text-white">AI Development Environment Setup</BreadcrumbPage>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-blue-900">
+          <img 
+            src={aiDevHero} 
+            alt="AI Development Environment" 
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+        
+        <div className="relative container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="flex justify-center mb-6">
+              <Badge variant="outline" className="text-accent border-accent/50 bg-accent/10">
+                <Terminal className="h-4 w-4 mr-2" />
+                Development Tutorial
+              </Badge>
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Setting Up Your
+              <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse block">
+                AI Development Environment
+              </span>
+            </h1>
+            
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              A comprehensive guide to setting up a professional AI development environment from scratch. 
+              Learn to configure Python, essential libraries, development tools, version control, 
+              containerization, and MLOps tools for productive AI development.
+            </p>
+            
+            {/* Meta Information Cards */}
+            <div className="grid md:grid-cols-4 gap-4 mb-8">
+              <Card className="bg-primary/80 border-gray-700">
+                <CardContent className="p-4 text-center">
+                  <Clock className="h-6 w-6 text-accent mx-auto mb-2" />
+                  <p className="text-sm text-gray-300">Duration</p>
+                  <p className="text-white font-semibold">120 minutes</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-primary/80 border-gray-700">
+                <CardContent className="p-4 text-center">
+                  <div className="flex justify-center gap-1 mb-2">
+                    {[1, 2].map((i) => (
+                      <Star key={i} className="h-4 w-4 text-secondary fill-current" />
+                    ))}
+                    {[3, 4, 5].map((i) => (
+                      <Star key={i} className="h-4 w-4 text-gray-600" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-300">Difficulty</p>
+                  <p className="text-white font-semibold">Beginner</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-primary/80 border-gray-700">
+                <CardContent className="p-4 text-center">
+                  <Code className="h-6 w-6 text-accent mx-auto mb-2" />
+                  <p className="text-sm text-gray-300">Steps</p>
+                  <p className="text-white font-semibold">8 Steps</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-primary/80 border-gray-700">
+                <CardContent className="p-4 text-center">
+                  <Download className="h-6 w-6 text-accent mx-auto mb-2" />
+                  <p className="text-sm text-gray-300">Resources</p>
+                  <p className="text-white font-semibold">Included</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Stack Preview */}
+      <section className="py-16 bg-gradient-to-r from-primary to-blue-900">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-white text-center mb-12">
+              Technologies You'll Master
+            </h2>
+            
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {[
+                { name: "Python", icon: Code, color: "text-blue-400", bg: "bg-blue-500/10" },
+                { name: "Jupyter Lab", icon: Terminal, color: "text-orange-400", bg: "bg-orange-500/10" },
+                { name: "Docker", icon: Database, color: "text-cyan-400", bg: "bg-cyan-500/10" },
+                { name: "Git", icon: GitBranch, color: "text-green-400", bg: "bg-green-500/10" },
+                { name: "TensorFlow", icon: Zap, color: "text-purple-400", bg: "bg-purple-500/10" },
+                { name: "PyTorch", icon: Zap, color: "text-red-400", bg: "bg-red-500/10" },
+                { name: "Cloud Platforms", icon: Cloud, color: "text-indigo-400", bg: "bg-indigo-500/10" },
+                { name: "MLOps Tools", icon: Settings, color: "text-yellow-400", bg: "bg-yellow-500/10" },
+              ].map((tech) => (
+                <Card key={tech.name} className="bg-primary/80 border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 hover:scale-105">
+                  <CardContent className="p-4 text-center">
+                    <div className={`w-12 h-12 ${tech.bg} rounded-lg flex items-center justify-center mx-auto mb-3`}>
+                      <tech.icon className={`h-6 w-6 ${tech.color}`} />
+                    </div>
+                    <p className="text-white font-medium">{tech.name}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Prerequisites Section */}
+      <section className="py-16 bg-gradient-to-r from-gray-900/20 to-gray-800/20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <Card className="bg-primary/80 border-gray-700/50">
+              <CardHeader>
+                <CardTitle className="text-2xl text-white flex items-center gap-2">
+                  <Settings className="h-6 w-6 text-accent" />
+                  What You'll Need
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {prerequisites.map((prereq, index) => (
+                    <div key={index} className="flex items-center gap-3 p-3 bg-gray-800/30 rounded-lg">
+                      <div className="w-2 h-2 bg-accent rounded-full flex-shrink-0"></div>
+                      <span className="text-gray-300">{prereq}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Tutorial Content */}
+      <div className="bg-gradient-to-br from-primary via-primary to-blue-900">
+        <TutorialTemplate
+          title="Setting Up Your AI Development Environment"
+          description="A comprehensive guide to setting up a professional AI development environment from scratch. Learn to configure Python, essential libraries, development tools, version control, containerization, and MLOps tools for productive AI development."
+          difficulty={2}
+          estimatedTime={120}
+          technologies={technologies}
+          prerequisites={prerequisites}
+          steps={steps}
+          finalProject={finalProject}
+          tags={tags}
+        />
+      </div>
+      
       <GuideNavigation />
-    </VisualArticleLayout>
+      <Footer />
+    </div>
   );
 };
 
