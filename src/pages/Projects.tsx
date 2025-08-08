@@ -60,7 +60,7 @@ const Projects = () => {
       category: "Creative AI",
       status: "In Progress",
       isOpenSource: true,
-      demoUrl: "#",
+      demoUrl: "https://openmovies.ai",
       githubUrl: "#",
       stars: 1924,
       forks: 312,
