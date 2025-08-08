@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { validateText, validateUrl, validateRating, validateStringArray } from "@/utils/inputValidation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -141,10 +142,24 @@ const AdminTools = () => {
     e.preventDefault();
 
     try {
+      // Validate and sanitize input data
+      const validatedData = {
+        name: validateText(formData.name, 200),
+        description: validateText(formData.description, 1000),
+        category: validateText(formData.category, 100),
+        website_url: formData.website_url ? validateUrl(formData.website_url) : null,
+        pricing: formData.pricing ? validateText(formData.pricing, 100) : null,
+        rating: formData.rating ? validateRating(parseFloat(formData.rating)) : null,
+        tags: formData.tags ? validateStringArray(formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)) : null,
+        is_featured: formData.is_featured,
+        is_verified: formData.is_verified,
+        source_url: 'manual_admin_entry'
+      };
+
       // Check for duplicates
       const hasDuplicates = await checkForDuplicates(
-        formData.name, 
-        formData.website_url,
+        validatedData.name, 
+        validatedData.website_url,
         editingTool?.id
       );
 
@@ -157,18 +172,7 @@ const AdminTools = () => {
         return;
       }
 
-      const toolData = {
-        name: formData.name,
-        description: formData.description,
-        category: formData.category,
-        website_url: formData.website_url || null,
-        pricing: formData.pricing || null,
-        rating: formData.rating ? parseFloat(formData.rating) : null,
-        tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()) : null,
-        is_featured: formData.is_featured,
-        is_verified: formData.is_verified,
-        source_url: 'manual_admin_entry'
-      };
+      const toolData = validatedData;
 
       if (editingTool) {
         const { error } = await supabase

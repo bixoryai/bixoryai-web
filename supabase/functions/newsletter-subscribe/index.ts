@@ -28,18 +28,64 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Rate limiting check - max 5 attempts per hour per IP
+    // Rate limiting check - max 3 attempts per hour per IP
     const clientIP = req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || 'unknown';
     console.log(`Newsletter subscription attempt from IP: ${clientIP}, Email: ${email}`);
 
-    // Sanitize email
-    const sanitizedEmail = email.toLowerCase().trim();
-
-    // Initialize Supabase client
+    // Initialize Supabase client for rate limiting
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
+
+    // Check rate limiting - allow max 3 attempts per hour per IP
+    const rateLimitWindow = new Date(Date.now() - 60 * 60 * 1000); // 1 hour ago
+    
+    const { data: rateLimitData, error: rateLimitError } = await supabase
+      .from('rate_limits')
+      .select('attempt_count')
+      .eq('ip_address', clientIP)
+      .eq('action_type', 'newsletter_subscribe')
+      .gt('window_start', rateLimitWindow.toISOString())
+      .single();
+    
+    if (rateLimitError && rateLimitError.code !== 'PGRST116') {
+      throw rateLimitError;
+    }
+    
+    if (rateLimitData && rateLimitData.attempt_count >= 3) {
+      return new Response(
+        JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }),
+        { 
+          status: 429, 
+          headers: { 'Content-Type': 'application/json', ...corsHeaders } 
+        }
+      );
+    }
+    
+    // Update or create rate limit record
+    if (rateLimitData) {
+      await supabase
+        .from('rate_limits')
+        .update({ attempt_count: rateLimitData.attempt_count + 1 })
+        .eq('ip_address', clientIP)
+        .eq('action_type', 'newsletter_subscribe')
+        .gt('window_start', rateLimitWindow.toISOString());
+    } else {
+      await supabase
+        .from('rate_limits')
+        .insert([{
+          ip_address: clientIP,
+          action_type: 'newsletter_subscribe',
+          attempt_count: 1,
+          window_start: new Date().toISOString()
+        }]);
+    }
+
+    // Sanitize email
+    const sanitizedEmail = email.toLowerCase().trim();
+
+    // Supabase client already initialized above for rate limiting
 
     // Insert subscriber into database
     const { data, error } = await supabase
