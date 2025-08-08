@@ -108,7 +108,7 @@ const Projects = () => {
       category: "AI Agents",
       status: "Completed",
       isOpenSource: true,
-      demoUrl: "#",
+      demoUrl: "https://agentopia.io",
       githubUrl: "#",
       stars: 3621,
       forks: 782,
