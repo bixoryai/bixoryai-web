@@ -76,7 +76,7 @@ const Projects = () => {
       category: "E-Commerce",
       status: "Completed",
       isOpenSource: true,
-      demoUrl: "#",
+      demoUrl: "https://bixory.com",
       githubUrl: "#",
       stars: 892,
       forks: 156,
