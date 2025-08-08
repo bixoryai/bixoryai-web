@@ -258,7 +258,7 @@ const AITools = () => {
 
   const fetchTools = async () => {
     try {
-      // First, try to fetch from database
+      // Fetch only from database - database is now the single source of truth
       const { data: dbTools, error } = await supabase
         .from('ai_tools')
         .select('*')
@@ -268,9 +268,6 @@ const AITools = () => {
 
       if (error) throw error;
 
-      // Merge database tools with static tools, prioritizing database
-      const mergedTools = [...staticAiTools];
-      
       if (dbTools && dbTools.length > 0) {
         // Convert database tools to match interface
         const convertedDbTools: AITool[] = dbTools.map(tool => ({
@@ -290,29 +287,15 @@ const AITools = () => {
           status: tool.status
         }));
 
-        // Replace static tools with database tools where names match, and add new ones
-        const staticToolNames = staticAiTools.map(t => t.name.toLowerCase());
-        
-        convertedDbTools.forEach(dbTool => {
-          const staticIndex = mergedTools.findIndex(t => 
-            t.name.toLowerCase() === dbTool.name.toLowerCase()
-          );
-          
-          if (staticIndex >= 0) {
-            // Replace static tool with database version
-            mergedTools[staticIndex] = dbTool;
-          } else {
-            // Add new database tool
-            mergedTools.push(dbTool);
-          }
-        });
+        setTools(convertedDbTools);
+      } else {
+        // No tools in database
+        setTools([]);
       }
-
-      setTools(mergedTools);
     } catch (error) {
       console.error('Error fetching tools:', error);
-      // Fallback to static tools if database fails
-      setTools(staticAiTools);
+      // Show empty state instead of fallback to static data
+      setTools([]);
     } finally {
       setLoading(false);
     }
