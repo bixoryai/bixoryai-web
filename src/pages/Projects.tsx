@@ -92,7 +92,7 @@ const Projects = () => {
       category: "FinTech",
       status: "In Progress",
       isOpenSource: true,
-      demoUrl: "#",
+      demoUrl: "https://aicryptopia.com",
       githubUrl: "#",
       stars: 1456,
       forks: 298,
