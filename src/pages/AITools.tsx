@@ -207,7 +207,7 @@ const staticAiTools: AITool[] = [
 
   // AI Models & Platforms
   {
-    name: "OpenAI API",
+    name: "OpenAI ChatGPT",
     description: "Access to GPT models and other AI capabilities",
     category: "AI Models",
     pricing: "Pay per use",
@@ -217,7 +217,7 @@ const staticAiTools: AITool[] = [
     featured: true
   },
   {
-    name: "Anthropic API",
+    name: "Anthropic Claude",
     description: "Claude AI models for developers",
     category: "AI Models",
     pricing: "Pay per use",
