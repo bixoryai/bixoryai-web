@@ -67,8 +67,10 @@ const KnowledgeBase = () => {
       title: "Setting Up Your AI Development Environment",
       description: "Complete walkthrough of setting up the perfect development environment for AI and machine learning projects.",
       category: "Tutorial",
+      url: "/knowledge-base/ai-dev-environment-setup",
       tags: ["Setup", "Environment", "Tools", "MLOps"],
-      isPlaceholder: true
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
     },
     {
       id: "7",
