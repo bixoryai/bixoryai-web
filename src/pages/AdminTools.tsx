@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { AIToolsManager } from "@/components/admin/AIToolsManager";
+import { triggerAutoSync } from "@/utils/syncTools";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
 
 interface AITool {
@@ -181,6 +182,10 @@ const AdminTools = () => {
           title: "Success",
           description: "Tool updated successfully",
         });
+        
+        // Trigger auto-sync after update
+        resetForm();
+        await triggerAutoSync("updated");
       } else {
         const { error } = await supabase
           .from('ai_tools')
@@ -192,10 +197,11 @@ const AdminTools = () => {
           title: "Success", 
           description: "Tool added successfully",
         });
+        
+        // Trigger auto-sync after add
+        resetForm();
+        await triggerAutoSync("added");
       }
-
-      resetForm();
-      fetchTools();
     } catch (error) {
       toast({
         title: "Error",
@@ -236,7 +242,9 @@ const AdminTools = () => {
         title: "Success",
         description: "Tool deleted successfully",
       });
-      fetchTools();
+      
+      // Trigger auto-sync after delete
+      await triggerAutoSync("deleted");
     } catch (error) {
       toast({
         title: "Error",

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { triggerAutoSync } from "@/utils/syncTools";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -137,6 +138,9 @@ export const AIToolsManager = () => {
         title: "Consolidation Complete",
         description: `Successfully consolidated ${data.consolidatedCount} duplicates`,
       });
+      
+      // Trigger auto-sync after consolidation
+      await triggerAutoSync("consolidated");
     } catch (error: any) {
       console.error('Error consolidating duplicates:', error);
       toast({
@@ -187,6 +191,9 @@ export const AIToolsManager = () => {
         title: "Bulk Consolidation Complete",
         description: `Successfully consolidated ${consolidatedCount} duplicates from ${selectedGroupsArray.length} groups`,
       });
+      
+      // Trigger auto-sync after bulk consolidation  
+      await triggerAutoSync("bulk consolidated");
     } catch (error: any) {
       console.error('Error consolidating selected duplicates:', error);
       toast({
