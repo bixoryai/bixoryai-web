@@ -281,16 +281,12 @@ const AdminTools = () => {
                 </p>
               </div>
 
-              <Tabs defaultValue="sync" className="space-y-6">
+              <Tabs defaultValue="manage" className="space-y-6">
                 <TabsList className="grid w-full grid-cols-3 bg-primary/80 border border-gray-700">
+                  <TabsTrigger value="manage" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Update Tools</TabsTrigger>
+                  <TabsTrigger value="add" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Add Tools</TabsTrigger>
                   <TabsTrigger value="sync" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Sync & Duplicates</TabsTrigger>
-                  <TabsTrigger value="manage" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Manage Tools</TabsTrigger>
-                  <TabsTrigger value="add" className="text-white data-[state=active]:bg-secondary data-[state=active]:text-white">Add/Edit Tool</TabsTrigger>
                 </TabsList>
-
-                <TabsContent value="sync" className="space-y-6">
-                  <AIToolsManager />
-                </TabsContent>
 
                 <TabsContent value="manage" className="space-y-6">
                   {/* Search and Filter */}
@@ -520,6 +516,10 @@ const AdminTools = () => {
                       </form>
                     </CardContent>
                   </Card>
+                </TabsContent>
+
+                <TabsContent value="sync" className="space-y-6">
+                  <AIToolsManager />
                 </TabsContent>
               </Tabs>
             </div>
