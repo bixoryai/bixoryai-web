@@ -39,8 +39,10 @@ const KnowledgeBase = () => {
       title: "Building Your First Neural Network",
       description: "Step-by-step tutorial on creating a neural network from scratch, with practical examples and code implementations.",
       category: "Tutorial", 
+      url: "/knowledge-base/building-first-neural-network",
       tags: ["Neural Networks", "Python", "Hands-on", "Fine-tuning"],
-      isPlaceholder: true
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
     },
     {
       id: "4",

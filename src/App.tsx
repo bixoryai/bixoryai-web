@@ -16,6 +16,7 @@ import LatestMLTrends from "./pages/LatestMLTrends";
 import UnderstandingRAG from "./pages/UnderstandingRAG";
 import AIEthicsAndResponsibleDevelopment from "./pages/AIEthicsAndResponsibleDevelopment";
 import AIDevEnvironmentTutorial from "./pages/AIDevEnvironmentTutorial";
+import BuildingFirstNeuralNetwork from "./pages/BuildingFirstNeuralNetwork";
 import AITools from "./pages/AITools";
 import Projects from "./pages/Projects";
 import Solutions from "./pages/Solutions";
@@ -50,6 +51,7 @@ const App = () => (
           <Route path="/knowledge-base/understanding-rag" element={<UnderstandingRAG />} />
           <Route path="/knowledge-base/ai-ethics-responsible-development" element={<AIEthicsAndResponsibleDevelopment />} />
           <Route path="/knowledge-base/ai-dev-environment-setup" element={<AIDevEnvironmentTutorial />} />
+          <Route path="/knowledge-base/building-first-neural-network" element={<BuildingFirstNeuralNetwork />} />
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />
