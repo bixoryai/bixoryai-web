@@ -748,12 +748,12 @@ print("Scaler saved successfully!")`,
           </div>
 
           {/* Live Training CTA Section */}
-          <Card className="bg-gradient-to-br from-secondary/20 to-red-600/20 border-secondary/30 mt-12">
+          <Card className="bg-gradient-to-br from-secondary/20 to-accent/10 border-secondary/30 mt-12">
             <CardContent className="p-8 text-center">
               <div className="max-w-3xl mx-auto">
                 <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-secondary to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="text-3xl font-bold text-white mb-4">
                     Want Personalized Live Training?
@@ -786,7 +786,7 @@ print("Scaler saved successfully!")`,
                   <Button 
                     asChild
                     size="lg" 
-                    className="bg-gradient-to-r from-secondary to-red-600 hover:from-secondary/90 hover:to-red-600/90 text-white px-8 py-3 text-lg"
+                    className="bg-gradient-to-r from-secondary to-accent hover:from-secondary/90 hover:to-accent/90 text-primary px-8 py-3 text-lg"
                   >
                     <Link to="/contact">
                       Schedule a Consultation
