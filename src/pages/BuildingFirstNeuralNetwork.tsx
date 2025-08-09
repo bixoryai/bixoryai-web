@@ -332,7 +332,7 @@ print("Scaler saved successfully!")`,
       <div className="container mx-auto px-6 py-12">
         <div className="max-w-6xl mx-auto">
           {/* Tutorial Meta Information */}
-          <div className="grid md:grid-cols-4 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
             <Card className="bg-primary/80 border-gray-700">
               <CardContent className="p-6 text-center">
                 <Clock className="w-8 h-8 text-accent mx-auto mb-2" />
@@ -351,13 +351,6 @@ print("Scaler saved successfully!")`,
               </CardContent>
             </Card>
 
-            <Card className="bg-primary/80 border-gray-700">
-              <CardContent className="p-6 text-center">
-                <Users className="w-8 h-8 text-accent mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">15,000+</div>
-                <div className="text-sm text-gray-400">Students Enrolled</div>
-              </CardContent>
-            </Card>
 
             <Card className="bg-primary/80 border-gray-700">
               <CardContent className="p-6 text-center">
@@ -449,8 +442,21 @@ print("Scaler saved successfully!")`,
               <Accordion type="single" collapsible className="w-full">
                 {tutorialSteps.map((step, index) => (
                   <AccordionItem key={index} value={`step-${index}`} className="border-gray-700">
-                    <AccordionTrigger className="text-white hover:text-accent">
-                      <div className="flex items-center gap-3">
+                    <AccordionTrigger className="text-left hover:no-underline py-6">
+                      <div className="flex items-center gap-4 w-full">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                            completedSteps.has(index) 
+                              ? 'bg-green-500 text-white' 
+                              : 'bg-secondary text-white'
+                          }`}>
+                            {completedSteps.has(index) ? <CheckCircle className="w-4 h-4" /> : index + 1}
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold text-white">{step.title}</h3>
+                            <p className="text-sm text-gray-400 mt-1">{step.description}</p>
+                          </div>
+                        </div>
                         <Button
                           variant="ghost"
                           size="sm"
@@ -458,24 +464,193 @@ print("Scaler saved successfully!")`,
                             e.stopPropagation();
                             toggleStepCompletion(index);
                           }}
-                          className={`w-6 h-6 p-0 ${
-                            completedSteps.has(index)
-                              ? 'bg-green-600 hover:bg-green-700'
-                              : 'border border-gray-600 hover:border-gray-500'
-                          }`}
+                          className="ml-auto text-gray-400 hover:text-white"
                         >
-                          {completedSteps.has(index) && (
-                            <CheckCircle className="w-4 h-4 text-white" />
-                          )}
+                          {completedSteps.has(index) ? 'Mark Incomplete' : 'Mark Complete'}
                         </Button>
-                        <span className="text-left">
-                          Step {index + 1}: {step.title}
-                        </span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="pt-4">
-                      <div className="space-y-4">
-                        <p className="text-gray-300">{step.description}</p>
+                    <AccordionContent className="pt-4 pb-6">
+                      <div className="space-y-6">
+                        {/* Visual illustration for each step */}
+                        <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-blue-400/20">
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                              <Brain className="w-5 h-5 text-white" />
+                            </div>
+                            <h4 className="text-lg font-semibold text-white">Visual Overview</h4>
+                          </div>
+                          
+                          {/* Step-specific visual content */}
+                          {index === 0 && (
+                            <div className="space-y-4">
+                              <div className="bg-white/5 rounded-lg p-4">
+                                <div className="text-center text-gray-300 text-sm mb-3">Neural Network Architecture</div>
+                                <div className="flex items-center justify-center space-x-8">
+                                  <div className="flex flex-col items-center space-y-2">
+                                    <div className="text-accent text-xs">Input Layer</div>
+                                    <div className="flex flex-col space-y-1">
+                                      {[1,2,3].map(i => (
+                                        <div key={i} className="w-4 h-4 rounded-full bg-blue-400"></div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-col items-center space-y-2">
+                                    <div className="text-accent text-xs">Hidden Layer</div>
+                                    <div className="flex flex-col space-y-1">
+                                      {[1,2,3,4].map(i => (
+                                        <div key={i} className="w-4 h-4 rounded-full bg-purple-400"></div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-col items-center space-y-2">
+                                    <div className="text-accent text-xs">Output Layer</div>
+                                    <div className="w-4 h-4 rounded-full bg-green-400"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {index === 1 && (
+                            <div className="grid grid-cols-3 gap-4 text-center">
+                              <div className="bg-white/5 rounded-lg p-3">
+                                <Code className="w-8 h-8 text-blue-400 mx-auto mb-2" />
+                                <div className="text-sm text-white">Install Libraries</div>
+                              </div>
+                              <div className="bg-white/5 rounded-lg p-3">
+                                <Database className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                                <div className="text-sm text-white">Setup Environment</div>
+                              </div>
+                              <div className="bg-white/5 rounded-lg p-3">
+                                <CheckCircle className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+                                <div className="text-sm text-white">Verify Installation</div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {index === 2 && (
+                            <div className="bg-white/5 rounded-lg p-4">
+                              <div className="text-center text-gray-300 text-sm mb-3">Data Pipeline Flow</div>
+                              <div className="flex items-center justify-between">
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-yellow-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">Raw Data</div>
+                                </div>
+                                <div className="text-accent">→</div>
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-orange-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">Split</div>
+                                </div>
+                                <div className="text-accent">→</div>
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-blue-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">Normalize</div>
+                                </div>
+                                <div className="text-accent">→</div>
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-green-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">Ready</div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {index === 3 && (
+                            <div className="bg-white/5 rounded-lg p-4">
+                              <div className="text-center text-gray-300 text-sm mb-3">Layer Architecture</div>
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-16 h-8 bg-blue-400 rounded flex items-center justify-center text-xs text-white">Input</div>
+                                  <div className="text-gray-400 text-sm">20 neurons (features)</div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-16 h-8 bg-purple-400 rounded flex items-center justify-center text-xs text-white">Dense</div>
+                                  <div className="text-gray-400 text-sm">64 neurons + ReLU</div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-16 h-8 bg-purple-400 rounded flex items-center justify-center text-xs text-white">Dense</div>
+                                  <div className="text-gray-400 text-sm">32 neurons + Dropout</div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-16 h-8 bg-green-400 rounded flex items-center justify-center text-xs text-white">Output</div>
+                                  <div className="text-gray-400 text-sm">1 neuron + Sigmoid</div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {index === 4 && (
+                            <div className="bg-white/5 rounded-lg p-4">
+                              <div className="text-center text-gray-300 text-sm mb-3">Training Process</div>
+                              <div className="grid grid-cols-4 gap-2 text-center">
+                                <div className="space-y-2">
+                                  <div className="w-full h-6 bg-gradient-to-r from-red-400 to-orange-400 rounded"></div>
+                                  <div className="text-xs text-gray-400">Forward Pass</div>
+                                </div>
+                                <div className="space-y-2">
+                                  <div className="w-full h-6 bg-gradient-to-r from-orange-400 to-yellow-400 rounded"></div>
+                                  <div className="text-xs text-gray-400">Loss Calculation</div>
+                                </div>
+                                <div className="space-y-2">
+                                  <div className="w-full h-6 bg-gradient-to-r from-yellow-400 to-green-400 rounded"></div>
+                                  <div className="text-xs text-gray-400">Backpropagation</div>
+                                </div>
+                                <div className="space-y-2">
+                                  <div className="w-full h-6 bg-gradient-to-r from-green-400 to-blue-400 rounded"></div>
+                                  <div className="text-xs text-gray-400">Update Weights</div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {index === 5 && (
+                            <div className="bg-white/5 rounded-lg p-4">
+                              <div className="text-center text-gray-300 text-sm mb-3">Model Performance Metrics</div>
+                              <div className="grid grid-cols-2 gap-4">
+                                <div className="text-center">
+                                  <div className="w-16 h-16 rounded-full bg-green-400 flex items-center justify-center mx-auto mb-2">
+                                    <span className="text-white font-bold">85%</span>
+                                  </div>
+                                  <div className="text-xs text-gray-400">Accuracy</div>
+                                </div>
+                                <div className="text-center">
+                                  <div className="w-16 h-16 rounded-full bg-blue-400 flex items-center justify-center mx-auto mb-2">
+                                    <span className="text-white font-bold">0.3</span>
+                                  </div>
+                                  <div className="text-xs text-gray-400">Loss</div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {index === 6 && (
+                            <div className="bg-white/5 rounded-lg p-4">
+                              <div className="text-center text-gray-300 text-sm mb-3">Model Deployment Flow</div>
+                              <div className="flex items-center justify-between">
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-purple-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">New Data</div>
+                                </div>
+                                <div className="text-accent">→</div>
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-blue-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">Preprocess</div>
+                                </div>
+                                <div className="text-accent">→</div>
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-orange-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">Predict</div>
+                                </div>
+                                <div className="text-accent">→</div>
+                                <div className="text-center">
+                                  <div className="w-12 h-8 bg-green-400 rounded mb-2"></div>
+                                  <div className="text-xs text-gray-400">Result</div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                         
                         {step.content && (
                           <div 
@@ -486,25 +661,26 @@ print("Scaler saved successfully!")`,
 
                         {step.code && (
                           <div className="relative">
-                            <div className="flex items-center justify-between bg-gray-900 px-4 py-2 rounded-t-lg">
-                              <span className="text-sm text-gray-400">
-                                {step.language || 'code'}
-                              </span>
+                            <div className="flex items-center justify-between mb-3">
+                              <Badge variant="outline" className="text-accent border-accent">
+                                {step.language}
+                              </Badge>
                               <Button
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => copyToClipboard(step.code!, `step-${index}`)}
-                                className="h-8 w-8 p-0"
+                                className="text-gray-400 hover:text-white"
                               >
                                 {copiedCode === `step-${index}` ? (
-                                  <CheckCircle className="w-4 h-4 text-green-400" />
+                                  <CheckCircle className="w-4 h-4" />
                                 ) : (
                                   <Copy className="w-4 h-4" />
                                 )}
+                                {copiedCode === `step-${index}` ? 'Copied!' : 'Copy'}
                               </Button>
                             </div>
-                            <pre className="bg-gray-900 p-4 rounded-b-lg overflow-x-auto">
-                              <code className="text-sm text-gray-300">{step.code}</code>
+                            <pre className="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm">
+                              <code className="text-gray-300">{step.code}</code>
                             </pre>
                           </div>
                         )}
@@ -571,12 +747,68 @@ print("Scaler saved successfully!")`,
             ))}
           </div>
 
+          {/* Live Training CTA Section */}
+          <Card className="bg-gradient-to-br from-secondary/20 to-red-600/20 border-secondary/30 mt-12">
+            <CardContent className="p-8 text-center">
+              <div className="max-w-3xl mx-auto">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-secondary to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-white mb-4">
+                    Want Personalized Live Training?
+                  </h3>
+                  <p className="text-lg text-gray-300 mb-6">
+                    Take your neural network skills to the next level with our expert-led, hands-on training sessions. 
+                    Get direct mentorship, work on real projects, and accelerate your AI learning journey.
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <Brain className="w-8 h-8 text-accent mx-auto mb-3" />
+                    <h4 className="text-lg font-semibold text-white mb-2">Expert Instructors</h4>
+                    <p className="text-sm text-gray-400">Learn from industry professionals with years of AI experience</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <Code className="w-8 h-8 text-accent mx-auto mb-3" />
+                    <h4 className="text-lg font-semibold text-white mb-2">Hands-on Projects</h4>
+                    <p className="text-sm text-gray-400">Build real-world neural networks and AI applications</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-4">
+                    <Users className="w-8 h-8 text-accent mx-auto mb-3" />
+                    <h4 className="text-lg font-semibold text-white mb-2">Small Groups</h4>
+                    <p className="text-sm text-gray-400">Personalized attention in intimate learning environments</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <Button 
+                    asChild
+                    size="lg" 
+                    className="bg-gradient-to-r from-secondary to-red-600 hover:from-secondary/90 hover:to-red-600/90 text-white px-8 py-3 text-lg"
+                  >
+                    <Link to="/contact">
+                      Schedule a Consultation
+                      <ExternalLink className="w-5 h-5 ml-2" />
+                    </Link>
+                  </Button>
+                  <p className="text-sm text-gray-400">
+                    Free 30-minute consultation to discuss your learning goals and training options
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Social Share */}
-          <SocialShare 
-            url={window.location.href}
-            title="Building Your First Neural Network - BIXORY AI Tutorial"
-            description="Learn to build, train, and deploy neural networks with this comprehensive step-by-step guide."
-          />
+          <div className="text-center mt-8">
+            <SocialShare 
+              url={window.location.href}
+              title="Building Your First Neural Network - BIXORY AI Tutorial"
+              description="Learn to build, train, and deploy neural networks with this comprehensive step-by-step guide."
+            />
+          </div>
         </div>
       </div>
 
