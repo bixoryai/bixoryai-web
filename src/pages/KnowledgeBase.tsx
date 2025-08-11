@@ -99,7 +99,7 @@ const KnowledgeBase = () => {
       title: "Key Milestones of AI Evolution",
       description: "Comprehensive timeline of AI development from 1943 to 2022, covering major breakthroughs, winter periods, and revolutionary moments.",
       category: "Article",
-      url: "#",
+      url: "/knowledge-base/ai-evolution-timeline",
       tags: ["AI History", "Timeline", "Milestones", "Evolution"],
       source: "AI Knowledge Base",
       crawledAt: new Date().toISOString()
