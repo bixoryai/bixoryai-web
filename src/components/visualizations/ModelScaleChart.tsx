@@ -20,7 +20,7 @@ const data: DataPoint[] = [
 export function ModelScaleChart() {
   return (
     <div className="rounded-2xl border border-accent/30 bg-background/40 p-4 sm:p-6 text-accent">
-      <h3 className="text-lg font-semibold text-foreground mb-2">Model Scale Over Time</h3>
+      <h3 className="text-lg font-semibold text-white mb-2">Model Scale Over Time</h3>
       <p className="text-xs text-muted-foreground mb-4">Approximate parameter counts (billions)</p>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">

@@ -107,7 +107,7 @@ export default function AIEvolutionTimeline() {
         <section className="py-6">
           <div className="container mx-auto px-6 grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Timeline Flow</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Timeline Flow</h2>
               <FlowTimeline
                 items={[
                   { period: "1943", title: "Artificial Neurons", description: "McCulloch & Pitts propose a mathematical model of neurons.", Icon: Brain, accent: "blue" },
@@ -126,7 +126,7 @@ export default function AIEvolutionTimeline() {
               />
             </div>
             <div className="lg:col-span-1">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Scale of Models</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Scale of Models</h2>
               <ModelScaleChart />
             </div>
           </div>
