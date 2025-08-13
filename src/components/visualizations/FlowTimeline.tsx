@@ -33,9 +33,9 @@ export function FlowTimeline({ items }: { items: TimelineItem[] }) {
             <div className="bg-card-gradient/40 backdrop-blur-sm rounded-xl border border-white/10 p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs text-accent">{period}</span>
-                <span className="text-foreground font-semibold">{title}</span>
+                <span className="text-white font-semibold">{title}</span>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+              <p className="text-sm text-gray-300 leading-relaxed">{description}</p>
             </div>
           </li>
         ))}
