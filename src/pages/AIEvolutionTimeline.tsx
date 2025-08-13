@@ -3,11 +3,12 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SocialShare } from "@/components/social/SocialShare";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Calendar, Brain, Landmark, Sparkles, Layers } from "lucide-react";
+import { Calendar, Brain, Landmark, Sparkles, Layers, Rocket, Cpu, Atom, Trophy, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-circuit-board.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
-
+import { FlowTimeline } from "@/components/visualizations/FlowTimeline";
+import { ModelScaleChart } from "@/components/visualizations/ModelScaleChart";
 export default function AIEvolutionTimeline() {
   // SEO
   useEffect(() => {
@@ -30,19 +31,40 @@ export default function AIEvolutionTimeline() {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute("href", window.location.origin + "/knowledge-base/ai-evolution-timeline");
+
+    // JSON-LD structured data
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: title,
+      description: metaDescContent,
+      author: { "@type": "Organization", name: "BIXORY AI" },
+      dateModified: new Date().toISOString(),
+      mainEntityOfPage: window.location.href,
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   const relatedLinks = [
     { title: "Dartmouth AI Workshop (1956)", url: "https://plato.stanford.edu/entries/artificial-intelligence/" },
     { title: "AlexNet and ImageNet (2012)", url: "https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" },
     { title: "Attention Is All You Need (2017)", url: "https://arxiv.org/abs/1706.03762" },
-    { title: "GPT-3: Language Models are Few-Shot Learners (2020)", url: "https://arxiv.org/abs/2005.14165" }
+    { title: "GPT-3: Language Models are Few-Shot Learners (2020)", url: "https://arxiv.org/abs/2005.14165" },
+    { title: "Hello GPT-4o (2024)", url: "https://openai.com/index/hello-gpt-4o/" },
+    { title: "Introducing Claude 3.5 Sonnet (2024)", url: "https://www.anthropic.com/news/claude-3-5-sonnet" }
   ];
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-[#0A192F] to-[#0D1B2A]">
+      <div className="min-h-screen bg-hero-pattern">
         {/* Hero */}
         <section className="pt-28 md:pt-32 pb-8 md:pb-12">
           <div className="container mx-auto px-6">
@@ -77,6 +99,35 @@ export default function AIEvolutionTimeline() {
               <div className="lg:pl-6">
                 <img src={heroImage} alt="AI evolution circuit board visualization" className="w-full rounded-2xl shadow-2xl border border-gray-700/40" />
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Visual Timeline and Graph */}
+        <section className="py-6">
+          <div className="container mx-auto px-6 grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Timeline Flow</h2>
+              <FlowTimeline
+                items={[
+                  { period: "1943", title: "Artificial Neurons", description: "McCulloch & Pitts propose a mathematical model of neurons.", Icon: Brain, accent: "blue" },
+                  { period: "1950", title: "Turing Test", description: "Alan Turing formalizes a test for machine intelligence.", Icon: Landmark, accent: "purple" },
+                  { period: "1956", title: "Dartmouth Workshop", description: "‘Artificial Intelligence’ named as a field.", Icon: Landmark, accent: "cyan" },
+                  { period: "1986", title: "Backpropagation", description: "Rumelhart, Hinton & Williams popularize backprop for deep nets.", Icon: Atom, accent: "green" },
+                  { period: "1997", title: "Deep Blue", description: "IBM’s Deep Blue defeats world chess champion Garry Kasparov.", Icon: Trophy, accent: "orange" },
+                  { period: "2012", title: "AlexNet", description: "GPU-trained CNN wins ImageNet, catalyzing deep learning.", Icon: Sparkles, accent: "pink" },
+                  { period: "2014", title: "GANs", description: "Ian Goodfellow introduces Generative Adversarial Networks.", Icon: Zap, accent: "purple" },
+                  { period: "2017", title: "Transformers", description: "‘Attention Is All You Need’ reshapes sequence modeling.", Icon: Layers, accent: "cyan" },
+                  { period: "2020", title: "GPT-3", description: "Few-shot learning at scale popularizes LLM capabilities.", Icon: Cpu, accent: "green" },
+                  { period: "2022", title: "ChatGPT", description: "Instruction-following and RLHF drive mass adoption.", Icon: Rocket, accent: "orange" },
+                  { period: "2024", title: "GPT-4o & Claude 3.5", description: "Multimodal, real-time models reach consumers and devs.", Icon: Sparkles, accent: "pink" },
+                  { period: "2025", title: "Agentic Systems", description: "Tool-use, computer control, and on-device inference mature.", Icon: Rocket, accent: "blue" },
+                ]}
+              />
+            </div>
+            <div className="lg:col-span-1">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Scale of Models</h2>
+              <ModelScaleChart />
             </div>
           </div>
         </section>
