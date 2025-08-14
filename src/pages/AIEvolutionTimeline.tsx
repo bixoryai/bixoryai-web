@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import { SocialShare } from "@/components/social/SocialShare";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Calendar, Brain, Landmark, Sparkles, Layers, Rocket, Cpu, Atom, Trophy, Zap } from "lucide-react";
+import { EraCard, MilestoneItem, InsightBox } from "@/components/knowledge-base/EraCard";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-circuit-board.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
@@ -134,7 +135,7 @@ export default function AIEvolutionTimeline() {
 
         {/* Timeline Blocks */}
         <main className="container mx-auto px-6 pb-16">
-          <div className="grid gap-8 lg:gap-10">
+          <div className="grid gap-6 lg:gap-8">
             {/* Early Foundations */}
             <div className="rounded-2xl p-8 border border-blue-500/20 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
               <div className="flex items-center gap-3 mb-4">
