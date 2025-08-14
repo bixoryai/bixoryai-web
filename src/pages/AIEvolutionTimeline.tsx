@@ -78,7 +78,7 @@ export default function AIEvolutionTimeline() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>AI Evolution</BreadcrumbPage>
+                  <BreadcrumbPage className="text-white">AI Evolution</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
