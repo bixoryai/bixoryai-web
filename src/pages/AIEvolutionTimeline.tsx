@@ -69,7 +69,7 @@ export default function AIEvolutionTimeline() {
         {/* Hero */}
         <section className="pt-28 md:pt-32 pb-8 md:pb-12">
           <div className="container mx-auto px-6">
-            <Breadcrumb className="mb-4">
+            <Breadcrumb className="mb-4 text-white">
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
