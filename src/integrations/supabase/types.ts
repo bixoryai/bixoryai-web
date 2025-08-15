@@ -292,6 +292,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      validate_admin_newsletter_access: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       app_role: "admin" | "user"
