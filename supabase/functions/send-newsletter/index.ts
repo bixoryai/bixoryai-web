@@ -38,6 +38,33 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Initialize Supabase client first to validate admin access
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    );
+
+    // Validate admin access using JWT from Authorization header
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ error: "Authentication required" }),
+        { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Verify the user has admin role
+    const { data: isAdmin, error: adminError } = await supabase
+      .rpc('validate_admin_newsletter_access');
+
+    if (adminError || !isAdmin) {
+      console.error('Admin validation failed:', adminError);
+      return new Response(
+        JSON.stringify({ error: "Admin access required" }),
+        { status: 403, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     const { subject, content, htmlContent }: NewsletterRequest = await req.json();
 
     // Input validation and sanitization
@@ -60,12 +87,6 @@ const handler = async (req: Request): Promise<Response> => {
     const sanitizedHtmlContent = htmlContent ? sanitizeHtml(htmlContent) : null;
 
     console.log(`Sending newsletter: "${sanitizedSubject}" to active subscribers`);
-
-    // Initialize Supabase client
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
 
     // Get all active subscribers
     const { data: subscribers, error } = await supabase
