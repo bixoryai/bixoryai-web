@@ -6,7 +6,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Calendar, Brain, Landmark, Sparkles, Layers, Rocket, Cpu, Atom, Trophy, Zap } from "lucide-react";
 import { EraCard, MilestoneItem, InsightBox } from "@/components/knowledge-base/EraCard";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-circuit-board.jpg";
+import heroImage from "@/assets/ai-evolution-timeline-hero.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
 import { FlowTimeline } from "@/components/visualizations/FlowTimeline";
 import { ModelScaleChart } from "@/components/visualizations/ModelScaleChart";
