@@ -14,7 +14,7 @@ import Newsletter from "@/components/sections/Newsletter";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primary">
       <Navbar />
       <Hero 
         title={
