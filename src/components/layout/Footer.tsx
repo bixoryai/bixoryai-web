@@ -12,7 +12,7 @@ const Footer = () => {
               <span className="text-xl font-bold bg-gradient-to-r from-red-500 via-orange-400 to-red-600 bg-clip-text text-transparent animate-pulse">BIXORY AI</span>
             </Link>
             <p className="text-gray-400">
-              Building the future of AI technology together.
+              Build Intelligence X with AI
             </p>
           </div>
           <div>
