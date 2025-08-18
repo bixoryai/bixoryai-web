@@ -68,9 +68,6 @@ const About = () => {
         secondaryButtonText="Our Solutions"
         height="pt-24 pb-20"
       >
-        <div className="flex items-center justify-center space-x-2 text-white mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_1.4s_forwards]">
-          <Gift className="w-6 h-6 text-secondary" />
-        </div>
       </Hero>
 
       {/* Our Story Section */}
