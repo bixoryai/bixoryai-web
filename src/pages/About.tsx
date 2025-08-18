@@ -238,7 +238,7 @@ const About = () => {
             <Button asChild className="bg-secondary hover:bg-secondary/90 text-white font-semibold px-8 py-3 rounded-full">
               <Link to="/contact">Get Started</Link>
             </Button>
-            <Button asChild variant="outline" className="border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full">
+            <Button asChild variant="outline" className="bg-primary border-accent text-accent hover:bg-accent/20 px-8 py-3 rounded-full">
               <Link to="/solutions">Our Solutions</Link>
             </Button>
           </div>
