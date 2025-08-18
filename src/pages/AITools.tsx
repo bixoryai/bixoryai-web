@@ -536,7 +536,7 @@ const AITools = () => {
                 </Button>
                 <Button 
                   variant="outline"
-                  className="border border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
+                  className="bg-primary border border-accent text-accent hover:bg-accent/20 px-8 py-3 rounded-full"
                   asChild
                 >
                   <a href="/solutions">

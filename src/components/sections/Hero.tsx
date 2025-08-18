@@ -108,7 +108,7 @@ const Hero = ({
               </button>
               <button 
                 onClick={handleSecondaryClick}
-                className="border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent/10 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 relative overflow-hidden group"
+                className="bg-primary border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent/20 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 relative overflow-hidden group"
               >
                 <span className="relative z-10">{secondaryButtonText}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>

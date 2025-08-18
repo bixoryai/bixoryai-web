@@ -36,7 +36,7 @@ const CallToAction = () => {
             <Button 
               onClick={() => navigate('/solutions')}
               variant="outline"
-              className="border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full text-lg"
+              className="bg-primary border-accent text-accent hover:bg-accent/20 px-8 py-3 rounded-full text-lg"
             >
               View Our Solutions
             </Button>

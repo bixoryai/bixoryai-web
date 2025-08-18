@@ -326,7 +326,7 @@ const Solutions = () => {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10 px-8 py-4 text-lg" asChild>
+              <Button variant="outline" size="lg" className="bg-primary border-accent text-accent hover:bg-accent/20 px-8 py-4 text-lg" asChild>
                 <Link to="/about">Learn About Us</Link>
               </Button>
             </div>
