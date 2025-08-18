@@ -11,9 +11,25 @@ const Footer = () => {
               <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="Bixory AI" className="h-9" />
               <span className="text-xl font-bold bg-gradient-to-r from-red-500 via-orange-400 to-red-600 bg-clip-text text-transparent animate-pulse">BIXORY AI</span>
             </Link>
-            <p className="text-gray-400">
+            <p className="text-gray-400 mb-4">
               Build Intelligence X with AI
             </p>
+            <div className="max-w-xs">
+              <form className="flex gap-2">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="flex-1 px-3 py-2 text-sm rounded bg-white/10 text-white border border-white/20 focus:outline-none focus:border-accent transition-all duration-300 placeholder:text-gray-400"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="bg-secondary text-white px-4 py-2 text-sm rounded hover:bg-secondary/90 transition-all duration-300"
+                >
+                  Join
+                </button>
+              </form>
+            </div>
           </div>
           <div>
             <h3 className="text-white font-bold mb-4">Company</h3>
@@ -40,32 +56,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        
-        {/* Newsletter Signup Section */}
-        <div className="border-t border-white/10 mt-12 pt-8 pb-8">
-          <div className="text-center max-w-md mx-auto">
-            <h3 className="text-white font-bold mb-4">Stay Updated</h3>
-            <p className="text-gray-400 mb-6 text-sm">
-              Subscribe to our newsletter for the latest AI insights and updates.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:border-accent transition-all duration-300 placeholder:text-gray-400"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary/90 transition-all duration-300 whitespace-nowrap"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-        
-        <div className="border-t border-white/10 pt-8">
+        <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
             <p className="text-gray-400 text-center md:text-left">
               &copy; {new Date().getFullYear()} Bixory AI. All rights reserved.
