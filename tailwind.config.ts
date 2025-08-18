@@ -26,7 +26,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#0A192F",
+          DEFAULT: "#0B0B0B",
           foreground: "#ffffff",
         },
         secondary: {
@@ -39,7 +39,7 @@ export default {
         },
       },
       backgroundImage: {
-        'hero-pattern': "linear-gradient(225deg, #0A192F 0%, #0D1B2A 100%)",
+        'hero-pattern': "linear-gradient(225deg, #0B0B0B 0%, #1A1A1A 100%)",
         'card-gradient': "linear-gradient(225deg, rgba(255, 77, 0, 0.1) 0%, rgba(0, 240, 255, 0.1) 100%)",
       },
       animation: {

@@ -57,7 +57,7 @@ const Hero = ({
       }}
     >
       {/* Dark overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
+      <div className="absolute inset-0 bg-black/70 z-0"></div>
       
       {/* Animated tech grid overlay */}
       <div className="absolute inset-0 opacity-10 z-5">
