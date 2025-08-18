@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-slate-900 border-t border-gray-600/50 py-12">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16 text-center md:text-left md:justify-items-start lg:justify-items-stretch">
           <div>
             <Link to="/" className="flex items-center justify-center md:justify-start gap-3 mb-4">
               <img src="/lovable-uploads/3e317ebb-6aca-4d6a-8d86-94608c200a42.png" alt="Bixory AI" className="h-9" />
