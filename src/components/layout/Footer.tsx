@@ -40,7 +40,32 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="border-t border-white/10 mt-12 pt-8">
+        
+        {/* Newsletter Signup Section */}
+        <div className="border-t border-white/10 mt-12 pt-8 pb-8">
+          <div className="text-center max-w-md mx-auto">
+            <h3 className="text-white font-bold mb-4">Stay Updated</h3>
+            <p className="text-gray-400 mb-6 text-sm">
+              Subscribe to our newsletter for the latest AI insights and updates.
+            </p>
+            <form className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:border-accent transition-all duration-300 placeholder:text-gray-400"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary/90 transition-all duration-300 whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
             <p className="text-gray-400 text-center md:text-left">
               &copy; {new Date().getFullYear()} Bixory AI. All rights reserved.
