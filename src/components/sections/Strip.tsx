@@ -1,17 +1,24 @@
 
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import chatgptLogo from "@/assets/logos/chatgpt-logo.png";
+import claudeLogo from "@/assets/logos/claude-logo.png";
+import geminiLogo from "@/assets/logos/gemini-logo.svg";
+import grokLogo from "@/assets/logos/grok-logo.png";
+import llamaLogo from "@/assets/logos/llama-logo.png";
+import deepseekLogo from "@/assets/logos/deepseek-logo.png";
+import mistralLogo from "@/assets/logos/mistral-logo.png";
 
 const Strip = () => {
   const { elementRef: stripRef, isVisible: stripVisible } = useScrollAnimation(0.2);
 
   const aiModels = [
-    { name: "ChatGPT", color: "text-green-400" },
-    { name: "Claude", color: "text-orange-400" }, 
-    { name: "Gemini", color: "text-blue-400" },
-    { name: "Grok", color: "text-purple-400" },
-    { name: "Llama", color: "text-yellow-400" },
-    { name: "Deepseek", color: "text-cyan-400" },
-    { name: "Mistral", color: "text-red-400" }
+    { name: "ChatGPT", logo: chatgptLogo },
+    { name: "Claude", logo: claudeLogo }, 
+    { name: "Gemini", logo: geminiLogo },
+    { name: "Grok", logo: grokLogo },
+    { name: "Llama", logo: llamaLogo },
+    { name: "Deepseek", logo: deepseekLogo },
+    { name: "Mistral", logo: mistralLogo }
   ];
 
   return (
@@ -40,7 +47,11 @@ const Strip = () => {
                   animationDelay: stripVisible ? `${index * 0.1}s` : '0s'
                 }}
               >
-                <span className={`text-sm font-medium ${model.color}`}>{model.name}</span>
+                <img 
+                  src={model.logo} 
+                  alt={`${model.name} logo`}
+                  className="h-8 w-auto object-contain filter brightness-0 invert"
+                />
               </div>
             ))}
           </div>
