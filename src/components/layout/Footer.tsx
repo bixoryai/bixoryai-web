@@ -31,7 +31,7 @@ const Footer = () => {
               </form>
             </div>
           </div>
-          <div>
+          <div className="md:ml-8">
             <h3 className="text-white font-bold mb-4">Company</h3>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-gray-400 hover:text-accent">About Us</Link></li>
