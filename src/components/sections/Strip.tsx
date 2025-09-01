@@ -1,6 +1,6 @@
 
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import chatgptLogo from "@/assets/logos/chatgpt-logo.png";
+const chatgptLogo = "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png";
 import claudeLogo from "@/assets/logos/claude-logo.png";
 import geminiLogo from "@/assets/logos/gemini-logo.svg";
 import grokLogo from "@/assets/logos/grok-logo.png";
