@@ -36,8 +36,8 @@ const Strip = () => {
     { name: "Claude", logo: claudeLogo }, 
     { name: "Gemini", logo: geminiLogo },
     { name: "Grok", logo: "/lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png" },
-    { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-be3d-5e89ac5d657e.png" },
     { name: "Deepseek", logo: deepseekLogo },
+    { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-be3d-5e89ac5d657e.png" },
     { name: "Mistral", logo: mistralLogo }
   ];
 
