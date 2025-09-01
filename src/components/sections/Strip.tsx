@@ -35,7 +35,7 @@ const Strip = () => {
     { name: "ChatGPT", logo: processedChatGPTLogo || "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png" },
     { name: "Claude", logo: claudeLogo }, 
     { name: "Gemini", logo: geminiLogo },
-    { name: "Grok", logo: grokLogo },
+    { name: "Grok", logo: "/lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png" },
     { name: "Llama", logo: llamaLogo },
     { name: "Deepseek", logo: deepseekLogo },
     { name: "Mistral", logo: mistralLogo }
