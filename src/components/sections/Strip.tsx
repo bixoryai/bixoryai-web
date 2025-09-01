@@ -50,7 +50,7 @@ const Strip = () => {
                 <img 
                   src={model.logo} 
                   alt={`${model.name} logo`}
-                  className="h-8 w-auto object-contain filter brightness-0 invert"
+                  className="h-8 w-auto object-contain"
                 />
               </div>
             ))}
