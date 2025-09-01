@@ -1,6 +1,7 @@
 
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-const chatgptLogo = "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png";
+import { useEffect, useState } from "react";
+import { removeBackground, loadImage } from "@/utils/backgroundRemoval";
 import claudeLogo from "@/assets/logos/claude-logo.png";
 import geminiLogo from "@/assets/logos/gemini-logo.svg";
 import grokLogo from "@/assets/logos/grok-logo.png";
@@ -10,9 +11,28 @@ import mistralLogo from "@/assets/logos/mistral-logo.png";
 
 const Strip = () => {
   const { elementRef: stripRef, isVisible: stripVisible } = useScrollAnimation(0.2);
+  const [processedChatGPTLogo, setProcessedChatGPTLogo] = useState<string | null>(null);
+
+  useEffect(() => {
+    const processLogo = async () => {
+      try {
+        const response = await fetch("/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png");
+        const blob = await response.blob();
+        const img = await loadImage(blob);
+        const processedBlob = await removeBackground(img);
+        const processedUrl = URL.createObjectURL(processedBlob);
+        setProcessedChatGPTLogo(processedUrl);
+      } catch (error) {
+        console.error("Failed to process ChatGPT logo:", error);
+        setProcessedChatGPTLogo("/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png");
+      }
+    };
+
+    processLogo();
+  }, []);
 
   const aiModels = [
-    { name: "ChatGPT", logo: chatgptLogo },
+    { name: "ChatGPT", logo: processedChatGPTLogo || "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png" },
     { name: "Claude", logo: claudeLogo }, 
     { name: "Gemini", logo: geminiLogo },
     { name: "Grok", logo: grokLogo },
@@ -31,7 +51,7 @@ const Strip = () => {
           }`}
         >
           {/* First Row: Empowered By */}
-          <h3 className="text-lg font-semibold text-white mb-4">
+          <h3 className="text-xl md:text-2xl font-semibold text-white mb-6">
             Empowered By
           </h3>
           
@@ -50,7 +70,7 @@ const Strip = () => {
                 <img 
                   src={model.logo} 
                   alt={`${model.name} logo`}
-                  className="h-8 w-auto object-contain"
+                  className="h-10 md:h-12 w-auto object-contain"
                 />
               </div>
             ))}
