@@ -1,4 +1,3 @@
-
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useEffect, useState } from "react";
 import { removeBackground, loadImage } from "@/utils/backgroundRemoval";
@@ -37,9 +36,9 @@ const aiModels = [
     { name: "Grok", logo: "/lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png" },
     { name: "Google AI", logo: "/lovable-uploads/6e8eb11a-292a-4643-9bd0-0c6dac8cbbe5.png" },
     { name: "Deepseek", logo: deepseekLogo },
-    { name: "Hugging Face", logo: "/lovable-uploads/4142cef5-f907-43dd-be4b-3a46ea2c657e.png" },
-    { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-be3d-5e89ac5d657e.png" },
-    { name: "Mistral", logo: mistralLogo }
+    { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-5e89ac5d657e.png" },
+    { name: "Mistral", logo: mistralLogo },
+    { name: "Hugging Face", logo: "/lovable-uploads/4142cef5-f907-43dd-be4b-3a46ea2c657e.png" }
   ];
 
   return (
