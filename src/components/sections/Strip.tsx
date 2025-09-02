@@ -1,43 +1,16 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useEffect, useState } from "react";
-import { removeBackground, loadImage } from "@/utils/backgroundRemoval";
-import claudeLogo from "@/assets/logos/claude-logo.png";
-import geminiLogo from "@/assets/logos/gemini-logo.svg";
-import grokLogo from "@/assets/logos/grok-logo.png";
-import llamaLogo from "@/assets/logos/llama-logo.png";
-import deepseekLogo from "@/assets/logos/deepseek-logo.png";
-import mistralLogo from "@/assets/logos/mistral-logo.png";
 
 const Strip = () => {
   const { elementRef: stripRef, isVisible: stripVisible } = useScrollAnimation(0.2);
-  const [processedChatGPTLogo, setProcessedChatGPTLogo] = useState<string | null>(null);
-
-  useEffect(() => {
-    const processLogo = async () => {
-      try {
-        const response = await fetch("/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png");
-        const blob = await response.blob();
-        const img = await loadImage(blob);
-        const processedBlob = await removeBackground(img);
-        const processedUrl = URL.createObjectURL(processedBlob);
-        setProcessedChatGPTLogo(processedUrl);
-      } catch (error) {
-        console.error("Failed to process ChatGPT logo:", error);
-        setProcessedChatGPTLogo("/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png");
-      }
-    };
-
-    processLogo();
-  }, []);
 
 const aiModels = [
-    { name: "ChatGPT", logo: processedChatGPTLogo || "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png" },
+    { name: "ChatGPT", logo: "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png" },
     { name: "Claude", logo: "/lovable-uploads/227e4f41-169c-413c-978f-8d8fa4f0a990.png" }, 
     { name: "Grok", logo: "/lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png" },
     { name: "Google AI", logo: "/lovable-uploads/6e8eb11a-292a-4643-9bd0-0c6dac8cbbe5.png" },
-    { name: "Deepseek", logo: deepseekLogo },
+    { name: "Deepseek", logo: "/lovable-uploads/c81fdb86-6992-4d62-af6d-9b1d014921d6.png" },
     { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-5e89ac5d657e.png" },
-    { name: "Mistral", logo: mistralLogo },
+    { name: "Mistral", logo: "/lovable-uploads/e388b3e0-7a73-4ff9-be3e-2848d2a2f38c.png" },
     { name: "Hugging Face", logo: "/lovable-uploads/4142cef5-f907-43dd-be4b-3a46ea2c657e.png" }
   ];
 
@@ -71,6 +44,10 @@ const aiModels = [
                   src={model.logo} 
                   alt={`${model.name} logo`}
                   className="h-10 md:h-12 w-auto object-contain"
+                  onError={(e) => {
+                    console.error(`Failed to load ${model.name} logo:`, model.logo);
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
               </div>
             ))}
