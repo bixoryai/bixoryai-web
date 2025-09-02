@@ -33,7 +33,7 @@ const Strip = () => {
 
   const aiModels = [
     { name: "ChatGPT", logo: processedChatGPTLogo || "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png" },
-    { name: "Claude", logo: claudeLogo }, 
+    { name: "Claude", logo: "/lovable-uploads/227e4f41-169c-413c-978f-8d8fa4f0a990.png" }, 
     { name: "Gemini", logo: geminiLogo },
     { name: "Grok", logo: "/lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png" },
     { name: "Deepseek", logo: deepseekLogo },
