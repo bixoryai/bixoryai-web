@@ -31,13 +31,14 @@ const Strip = () => {
     processLogo();
   }, []);
 
-  const aiModels = [
+const aiModels = [
     { name: "ChatGPT", logo: processedChatGPTLogo || "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png" },
     { name: "Claude", logo: "/lovable-uploads/227e4f41-169c-413c-978f-8d8fa4f0a990.png" }, 
     { name: "Grok", logo: "/lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png" },
     { name: "Google AI", logo: "/lovable-uploads/6e8eb11a-292a-4643-9bd0-0c6dac8cbbe5.png" },
-    { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-be3d-5e89ac5d657e.png" },
     { name: "Deepseek", logo: deepseekLogo },
+    { name: "Hugging Face", logo: "/lovable-uploads/4142cef5-f907-43dd-be4b-3a46ea2c657e.png" },
+    { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-be3d-5e89ac5d657e.png" },
     { name: "Mistral", logo: mistralLogo }
   ];
 
