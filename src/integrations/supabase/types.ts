@@ -24,6 +24,7 @@ export type Database = {
           job_type: string
           result: Json | null
           scheduled_at: string | null
+          scheduled_by: string | null
           started_at: string | null
           status: string
           updated_at: string
@@ -37,6 +38,7 @@ export type Database = {
           job_type: string
           result?: Json | null
           scheduled_at?: string | null
+          scheduled_by?: string | null
           started_at?: string | null
           status?: string
           updated_at?: string
@@ -50,6 +52,7 @@ export type Database = {
           job_type?: string
           result?: Json | null
           scheduled_at?: string | null
+          scheduled_by?: string | null
           started_at?: string | null
           status?: string
           updated_at?: string
