@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { ResearchAgentTest } from "@/components/ResearchAgentTest";
+import { ToolFinderTest } from "@/components/ToolFinderTest";
 
 const AdminTest = () => {
   return (
@@ -15,14 +15,14 @@ const AdminTest = () => {
                 <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
                   BIXORY AI
                 </span>{" "}
-                Research Agent Test
+                Tool Finder Test
               </h1>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Test the autonomous AI research agent and see how it discovers new AI tools
+                Test the autonomous AI tool finder and see how it discovers new AI tools
               </p>
             </div>
             
-            <ResearchAgentTest />
+            <ToolFinderTest />
           </div>
         </section>
       </div>

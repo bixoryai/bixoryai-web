@@ -135,7 +135,7 @@ const AdminDashboard = () => {
 
       toast({
         title: "Success",
-        description: `Research agent completed. Found ${data?.newTools || 0} new tools.`,
+        description: `Tool finder completed. Found ${data?.newTools || 0} new tools.`,
       });
 
       fetchDashboardData();
@@ -143,7 +143,7 @@ const AdminDashboard = () => {
       console.error('Error running research agent:', error);
       toast({
         title: "Error",
-        description: error.message || "Failed to run research agent",
+        description: error.message || "Failed to run tool finder",
         variant: "destructive",
       });
     } finally {
@@ -411,11 +411,11 @@ const AdminDashboard = () => {
                       <div className="bg-blue-500/10 p-2 rounded-lg group-hover:bg-blue-500/20 transition-colors">
                         <Search className="h-5 w-5 text-blue-400" />
                       </div>
-                      <span className="text-lg">Research Agent Test</span>
+                      <span className="text-lg">Tool Finder Test</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Test the autonomous AI research agent functionality</p>
+                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Test the autonomous AI tool finder functionality</p>
                     <Button 
                       onClick={(e) => {
                         e.stopPropagation();
@@ -434,11 +434,11 @@ const AdminDashboard = () => {
                       <div className="bg-green-500/10 p-2 rounded-lg group-hover:bg-green-500/20 transition-colors">
                         <Play className="h-5 w-5 text-green-400" />
                       </div>
-                      <span className="text-lg">Quick Research Run</span>
+                      <span className="text-lg">Quick Tool Discovery</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Run the AI research agent to discover new tools</p>
+                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">Run the AI tool finder to discover new tools</p>
                     <Button 
                       onClick={runResearchAgent}
                       disabled={runningResearch}

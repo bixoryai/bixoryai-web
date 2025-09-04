@@ -19,7 +19,7 @@ interface ResearchResult {
   };
 }
 
-export const ResearchAgentTest = () => {
+export const ToolFinderTest = () => {
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState<'openai' | 'claude'>('openai');
@@ -184,7 +184,7 @@ export const ResearchAgentTest = () => {
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <Brain className="w-6 h-6 text-accent" />
-            AI Research Agent Test
+            AI Tool Finder Test
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -226,12 +226,12 @@ export const ResearchAgentTest = () => {
             {loading ? (
               <>
                 <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                Researching AI Tools...
+                Finding AI Tools...
               </>
             ) : (
               <>
                 <Brain className="w-4 h-4 mr-2" />
-                Start Research Agent
+                Start Tool Finder
               </>
             )}
           </Button>
