@@ -53,7 +53,7 @@ const Projects = () => {
     },
     {
       id: 5,
-      title: "AI Movie Creation Suite",
+      title: "Openmovies AI - Create and Showcase Your AI Movies",
       description: "Comprehensive open-source toolkit for AI-assisted video generation, editing, and post-production workflows.",
       image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=240&fit=crop",
       technologies: ["Stable Diffusion", "FFmpeg", "Python", "TypeScript"],
