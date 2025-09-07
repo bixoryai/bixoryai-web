@@ -101,7 +101,7 @@ const Projects = () => {
     },
     {
       id: 6,
-      title: "AI Agent Builder Framework",
+      title: "AI Agentopia - Locally Run AI Agent Marketplace",
       description: "Modular framework for building and deploying intelligent AI agents with custom capabilities and integrations.",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=240&fit=crop",
       technologies: ["LangChain", "OpenAI", "Docker", "Kubernetes"],
