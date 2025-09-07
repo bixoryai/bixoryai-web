@@ -164,7 +164,17 @@ const Solutions = () => {
                         <span className="text-sm">{feature}</span>
                       </li>)}
                   </ul>
-                  <Button variant="outline" className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white" onClick={() => handleComingSoon(solution.title)}>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white"
+                    onClick={() => {
+                      if (solution.title === "AI Strategy & Consulting") {
+                        window.location.href = "/solutions/ai-strategy-consulting";
+                      } else {
+                        handleComingSoon(solution.title);
+                      }
+                    }}
+                  >
                     Learn More
                   </Button>
                 </CardContent>
