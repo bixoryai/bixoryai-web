@@ -85,7 +85,7 @@ const Projects = () => {
     },
     {
       id: 8,
-      title: "AI Crypto Trading Platform",
+      title: "AI Cryptopia - A happy playground for AI + Web3",
       description: "Open-source algorithmic trading platform with ML-powered market analysis and automated trading strategies.",
       image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=400&h=240&fit=crop",
       technologies: ["Python", "TensorFlow", "FastAPI", "PostgreSQL"],
