@@ -390,64 +390,6 @@ const AIStrategyConsulting = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section ref={ctaRef} className="py-20 bg-gradient-to-br from-primary to-blue-900">
-        <div className="container mx-auto px-6">
-          <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="relative">
-              {/* Background glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 via-accent/20 to-secondary/20 rounded-3xl blur-3xl"></div>
-              
-              <div className="relative z-10 bg-primary/60 rounded-2xl p-12 border border-gray-700">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                  Ready to Transform Your Business with AI?
-                </h2>
-                <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                  Schedule a consultation with our AI strategy experts and discover how 
-                  we can accelerate your digital transformation journey.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button 
-                    size="lg"
-                    onClick={() => navigate('/contact')}
-                    className="bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary text-white font-bold px-8 py-3 rounded-lg shadow-2xl shadow-secondary/30 hover:shadow-secondary/50 hover:scale-105 transition-all duration-300"
-                  >
-                    <MessageSquare className="w-5 h-5 mr-2" />
-                    Schedule Consultation
-                  </Button>
-                  
-                  <Button 
-                    size="lg"
-                    variant="outline"
-                    onClick={() => navigate('/projects')}
-                    className="border-accent text-accent hover:bg-accent/10 font-bold px-8 py-3"
-                  >
-                    <FileText className="w-5 h-5 mr-2" />
-                    View Case Studies
-                  </Button>
-                </div>
-                
-                <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-400" />
-                    Free Initial Consultation
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-400" />
-                    No Obligation Assessment
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-400" />
-                    Custom Strategy Roadmap
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Success Metrics Dashboard */}
       <section ref={metricsRef} className="py-16 bg-gradient-to-br from-primary to-blue-900">
         <div className="container mx-auto px-6">
@@ -508,6 +450,64 @@ const AIStrategyConsulting = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section ref={ctaRef} className="py-20 bg-gradient-to-br from-primary to-blue-900">
+        <div className="container mx-auto px-6">
+          <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="relative">
+              {/* Background glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 via-accent/20 to-secondary/20 rounded-3xl blur-3xl"></div>
+              
+              <div className="relative z-10 bg-primary/60 rounded-2xl p-12 border border-gray-700">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  Ready to Transform Your Business with AI?
+                </h2>
+                <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                  Schedule a consultation with our AI strategy experts and discover how 
+                  we can accelerate your digital transformation journey.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    size="lg"
+                    onClick={() => navigate('/contact')}
+                    className="bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary text-white font-bold px-8 py-3 rounded-lg shadow-2xl shadow-secondary/30 hover:shadow-secondary/50 hover:scale-105 transition-all duration-300"
+                  >
+                    <MessageSquare className="w-5 h-5 mr-2" />
+                    Schedule Consultation
+                  </Button>
+                  
+                  <Button 
+                    size="lg"
+                    variant="outline"
+                    onClick={() => navigate('/projects')}
+                    className="border-accent text-accent hover:bg-accent/10 font-bold px-8 py-3"
+                  >
+                    <FileText className="w-5 h-5 mr-2" />
+                    View Case Studies
+                  </Button>
+                </div>
+                
+                <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    Free Initial Consultation
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    No Obligation Assessment
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    Custom Strategy Roadmap
+                  </div>
+                </div>
               </div>
             </div>
           </div>
