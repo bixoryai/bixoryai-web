@@ -170,6 +170,8 @@ const Solutions = () => {
                     onClick={() => {
                       if (solution.title === "AI Strategy & Consulting") {
                         window.location.href = "/solutions/ai-strategy-consulting";
+                      } else if (solution.title === "AI Data Solutions") {
+                        window.location.href = "/solutions/ai-data-solutions";
                       } else {
                         handleComingSoon(solution.title);
                       }
