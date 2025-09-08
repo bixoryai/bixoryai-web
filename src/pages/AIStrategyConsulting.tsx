@@ -192,71 +192,6 @@ const AIStrategyConsulting = () => {
         />
       </section>
 
-      {/* Success Metrics Dashboard */}
-      <section ref={metricsRef} className="py-16 bg-gradient-to-br from-primary to-blue-900">
-        <div className="container mx-auto px-6">
-          <div className={`max-w-6xl mx-auto transition-all duration-1000 ${metricsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Proven Results Across Industries
-              </h2>
-              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                Our strategic AI consulting delivers measurable outcomes that drive business transformation
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {successMetrics.map((metric, index) => (
-                <Card 
-                  key={index} 
-                  className="text-center bg-primary/80 border-gray-700 hover:border-secondary/50 transition-all duration-300 hover:scale-105"
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <CardContent className="p-6">
-                    <div className="text-4xl font-bold text-secondary mb-2">
-                      {metric.value}{metric.unit}
-                    </div>
-                    <div className="text-gray-300 text-sm font-medium">
-                      {metric.label}
-                    </div>
-                    <div className="mt-3">
-                      <Progress value={metric.value > 100 ? 100 : metric.value} className="h-2" />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Industry Expertise Chart */}
-            <div className="bg-primary/60 rounded-2xl p-8 border border-gray-700">
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">Industry Expertise & Performance</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {industryExpertise.map((industry, index) => (
-                  <div 
-                    key={index} 
-                    className="bg-primary/80 rounded-lg p-6 border border-gray-600 hover:border-secondary/50 transition-all duration-300"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      {industry.icon}
-                      <h4 className="text-white font-semibold">{industry.name}</h4>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-gray-400 text-sm">Projects:</span>
-                        <span className="text-accent font-medium">{industry.projects}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400 text-sm">Avg ROI:</span>
-                        <span className="text-secondary font-bold">{industry.avgROI}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Strategic Services */}
       <section ref={servicesRef} className="py-20 bg-primary">
@@ -507,6 +442,72 @@ const AIStrategyConsulting = () => {
                     Custom Strategy Roadmap
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Success Metrics Dashboard */}
+      <section ref={metricsRef} className="py-16 bg-gradient-to-br from-primary to-blue-900">
+        <div className="container mx-auto px-6">
+          <div className={`max-w-6xl mx-auto transition-all duration-1000 ${metricsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Proven Results Across Industries
+              </h2>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                Our strategic AI consulting delivers measurable outcomes that drive business transformation
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {successMetrics.map((metric, index) => (
+                <Card 
+                  key={index} 
+                  className="text-center bg-primary/80 border-gray-700 hover:border-secondary/50 transition-all duration-300 hover:scale-105"
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="text-4xl font-bold text-secondary mb-2">
+                      {metric.value}{metric.unit}
+                    </div>
+                    <div className="text-gray-300 text-sm font-medium">
+                      {metric.label}
+                    </div>
+                    <div className="mt-3">
+                      <Progress value={metric.value > 100 ? 100 : metric.value} className="h-2" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Industry Expertise Chart */}
+            <div className="bg-primary/60 rounded-2xl p-8 border border-gray-700">
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">Industry Expertise & Performance</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {industryExpertise.map((industry, index) => (
+                  <div 
+                    key={index} 
+                    className="bg-primary/80 rounded-lg p-6 border border-gray-600 hover:border-secondary/50 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      {industry.icon}
+                      <h4 className="text-white font-semibold">{industry.name}</h4>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-400 text-sm">Projects:</span>
+                        <span className="text-accent font-medium">{industry.projects}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-400 text-sm">Avg ROI:</span>
+                        <span className="text-secondary font-bold">{industry.avgROI}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
