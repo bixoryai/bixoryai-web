@@ -172,6 +172,8 @@ const Solutions = () => {
                         window.location.href = "/solutions/ai-strategy-consulting";
                       } else if (solution.title === "AI Data Solutions") {
                         window.location.href = "/solutions/ai-data-solutions";
+                      } else if (solution.title === "Custom AI Development") {
+                        window.location.href = "/solutions/custom-ai-development";
                       } else {
                         handleComingSoon(solution.title);
                       }
