@@ -34,6 +34,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AIStrategyConsulting from "./pages/AIStrategyConsulting";
 import AIDataSolutions from "./pages/AIDataSolutions";
 import CustomAIDevelopment from "./pages/CustomAIDevelopment";
+import AIIntegrationSupport from "./pages/AIIntegrationSupport";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ const App = () => (
         <Route path="/solutions/ai-strategy-consulting" element={<AIStrategyConsulting />} />
         <Route path="/solutions/ai-data-solutions" element={<AIDataSolutions />} />
         <Route path="/solutions/custom-ai-development" element={<CustomAIDevelopment />} />
+        <Route path="/solutions/ai-integration-support" element={<AIIntegrationSupport />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/job-application" element={<JobApplication />} />
           <Route path="/about" element={<About />} />
