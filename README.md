@@ -15,6 +15,12 @@ npm install
 npm run dev
 ```
 
+### Environment variables
+
+1. Copy the example environment file: `cp .env.example .env`
+2. Provide your Supabase credentials by setting values for `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in `.env`.
+3. When deploying, store the same values in your repository secrets so the build pipeline can inject them during `npm run build`.
+
 ## Features
 
 - Modern UI design with Tailwind CSS
