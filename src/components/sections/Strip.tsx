@@ -1,4 +1,3 @@
-
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useEffect, useState } from "react";
 import { removeBackground, loadImage } from "@/utils/backgroundRemoval";
@@ -8,6 +7,7 @@ import grokLogo from "@/assets/logos/grok-logo.png";
 import llamaLogo from "@/assets/logos/llama-logo.png";
 import deepseekLogo from "@/assets/logos/deepseek-logo.png";
 import mistralLogo from "@/assets/logos/mistral-logo.png";
+import { asset } from "@/lib/utils";
 
 const Strip = () => {
   const { elementRef: stripRef, isVisible: stripVisible } = useScrollAnimation(0.2);
@@ -16,7 +16,7 @@ const Strip = () => {
   useEffect(() => {
     const processLogo = async () => {
       try {
-        const response = await fetch("/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png");
+        const response = await fetch(asset('lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png'));
         const blob = await response.blob();
         const img = await loadImage(blob);
         const processedBlob = await removeBackground(img);
@@ -24,7 +24,7 @@ const Strip = () => {
         setProcessedChatGPTLogo(processedUrl);
       } catch (error) {
         console.error("Failed to process ChatGPT logo:", error);
-        setProcessedChatGPTLogo("/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png");
+        setProcessedChatGPTLogo(asset('lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png'));
       }
     };
 
@@ -32,13 +32,13 @@ const Strip = () => {
   }, []);
 
 const aiModels = [
-    { name: "ChatGPT", logo: processedChatGPTLogo || "/lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png" },
-    { name: "Claude", logo: "/lovable-uploads/227e4f41-169c-413c-978f-8d8fa4f0a990.png" }, 
-    { name: "Grok", logo: "/lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png" },
-    { name: "Google AI", logo: "/lovable-uploads/6e8eb11a-292a-4643-9bd0-0c6dac8cbbe5.png" },
+    { name: "ChatGPT", logo: processedChatGPTLogo || asset('lovable-uploads/d419fc4f-d4e6-4e45-8ef7-a8f57deaf9c7.png') },
+    { name: "Claude", logo: asset('lovable-uploads/227e4f41-169c-413c-978f-8d8fa4f0a990.png') }, 
+    { name: "Grok", logo: asset('lovable-uploads/6bae1fdc-4345-40c5-9057-09474541ad6b.png') },
+    { name: "Google AI", logo: asset('lovable-uploads/6e8eb11a-292a-4643-9bd0-0c6dac8cbbe5.png') },
     { name: "Deepseek", logo: deepseekLogo },
-    { name: "Hugging Face", logo: "/lovable-uploads/4142cef5-f907-43dd-be4b-3a46ea2c657e.png" },
-    { name: "Meta AI", logo: "/lovable-uploads/89281abb-bff5-485d-be3d-5e89ac5d657e.png" },
+    { name: "Hugging Face", logo: asset('lovable-uploads/4142cef5-f907-43dd-be4b-3a46ea2c657e.png') },
+    { name: "Meta AI", logo: asset('lovable-uploads/89281abb-bff5-485d-be3d-5e89ac5d657e.png') },
     { name: "Mistral", logo: mistralLogo }
   ];
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { supabase } from "@/integrations/supabase/client";
+import { asset } from "@/lib/utils";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -37,7 +38,7 @@ const Newsletter = () => {
     <section 
       className="py-20 relative"
       style={{ 
-        backgroundImage: "url('/lovable-uploads/e388b3e0-7a73-4ff9-be3e-2848d2a2f38c.png')",
+        backgroundImage: `url('${asset('lovable-uploads/e388b3e0-7a73-4ff9-be3e-2848d2a2f38c.png')}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"

@@ -1,5 +1,5 @@
-
 import { Gift } from "lucide-react";
+import { asset } from "@/lib/utils";
 
 export const Hero = () => {
   return (
@@ -8,7 +8,8 @@ export const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-primary/50 z-10" />
         <div 
-          className="absolute inset-0 bg-[url('/lovable-uploads/775da253-bbac-4914-9fe0-e5646d67a90e.png')] bg-no-repeat bg-cover bg-center opacity-80 z-0"
+          className="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-80 z-0"
+          style={{ backgroundImage: `url('${asset('lovable-uploads/775da253-bbac-4914-9fe0-e5646d67a90e.png')}')` }}
         />
       </div>
       

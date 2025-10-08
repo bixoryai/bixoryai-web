@@ -44,7 +44,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <AuthProvider>
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <BrowserRouter basename={typeof window !== 'undefined' && window.location.pathname.startsWith('/bixoryai-web') ? '/bixoryai-web' : '/'}>
         <Routes>
           <Route path="/" element={<Index />} />
           

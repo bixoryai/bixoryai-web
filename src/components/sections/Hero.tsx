@@ -2,6 +2,7 @@
 import { ArrowRight } from "lucide-react";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { asset } from "@/lib/utils";
 
 interface HeroProps {
   backgroundImage?: string;
@@ -50,7 +51,7 @@ const Hero = ({
     <div 
       className={`${height} relative flex items-center overflow-hidden`}
       style={{ 
-        backgroundImage: `url('${backgroundImage}')`,
+        backgroundImage: `url('${backgroundImage && backgroundImage.startsWith('/') ? asset(backgroundImage) : backgroundImage}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
