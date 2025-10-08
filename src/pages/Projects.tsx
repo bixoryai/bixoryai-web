@@ -8,6 +8,7 @@ import TechnologyLegend from "@/components/projects/TechnologyLegend";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { asset } from "@/lib/utils";
 
 interface Project {
   id: number;
@@ -237,7 +238,7 @@ const Projects = () => {
       
       {/* Hero Section using reusable Hero component */}
       <Hero
-        backgroundImage="/lovable-uploads/4c8804a9-47d9-49dc-8702-904300926b2c.png"
+        backgroundImage={asset('lovable-uploads/4c8804a9-47d9-49dc-8702-904300926b2c.png')}
         title="Our AI Projects"
         subtitle="Explore our innovative AI solutions that are transforming industries. From machine learning models to computer vision systems, discover how we're building the future."
         showButtons={false}

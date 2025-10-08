@@ -8,6 +8,7 @@ import { Gift, Zap, Users, Target, Search, TrendingUp, Shield } from "lucide-rea
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import productivityImage from "@/assets/productivity-illustration.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
+import { asset } from "@/lib/utils";
 
 
 const About = () => {
@@ -57,7 +58,7 @@ const About = () => {
       
       {/* Hero Section */}
       <Hero 
-        backgroundImage="/lovable-uploads/3392d363-afc5-4208-af24-9ed0d2d8a192.png"
+        backgroundImage={asset('lovable-uploads/3392d363-afc5-4208-af24-9ed0d2d8a192.png')}
         title={
           <>
             About <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">BIXORY AI</span>

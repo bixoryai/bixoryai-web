@@ -12,6 +12,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SocialShare } from "@/components/social/SocialShare";
 import Hero from "@/components/sections/Hero";
+import { asset } from "@/lib/utils";
 
 const BuildingFirstNeuralNetwork = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -307,7 +308,7 @@ print("Scaler saved successfully!")`,
       
       {/* Hero Section */}
       <Hero
-        backgroundImage="/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png"
+        backgroundImage={asset('lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png')}
         title={
           <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
             Building Your First Neural Network
