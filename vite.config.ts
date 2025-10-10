@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
   );
 
   return {
-    base: isGhProject ? '/bixoryai-web/' : '/',
+    base: './',
     server: {
       host: "::",
       port: 8080,

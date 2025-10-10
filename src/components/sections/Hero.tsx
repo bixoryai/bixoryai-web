@@ -18,7 +18,7 @@ interface HeroProps {
 }
 
 const Hero = ({ 
-  backgroundImage = '/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png',
+  backgroundImage = asset('lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png'),
   title,
   subtitle,
   showButtons = true,
