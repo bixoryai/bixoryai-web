@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useNavigate } from "react-router-dom";
-import solutionsHeroImage from "@/assets/solutions-hero.jpg";
+import { asset } from "@/lib/utils";
 
 const AIStrategyConsulting = () => {
   const navigate = useNavigate();
@@ -174,7 +174,7 @@ const AIStrategyConsulting = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative">
         <Hero
-          backgroundImage={solutionsHeroImage}
+          backgroundImage={asset('assets/solutions-hero.jpg')}
           title={
             <span>
               <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
