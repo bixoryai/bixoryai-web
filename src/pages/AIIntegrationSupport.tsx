@@ -225,7 +225,7 @@ const AIIntegrationSupport = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white/20 text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full"
+                className="border-white/20 text-accent hover:bg-white/10 px-8 py-4 text-lg rounded-full"
               >
                 Schedule Consultation
               </Button>
