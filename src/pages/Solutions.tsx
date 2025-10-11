@@ -167,21 +167,19 @@ const Solutions = () => {
                   <Button 
                     variant="outline" 
                     className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white"
-                    onClick={() => {
-                      if (solution.title === "AI Strategy & Consulting") {
-                        window.location.href = "/solutions/ai-strategy-consulting";
-                      } else if (solution.title === "AI Data Solutions") {
-                        window.location.href = "/solutions/ai-data-solutions";
-                      } else if (solution.title === "Custom AI Development") {
-                        window.location.href = "/solutions/custom-ai-development";
-                      } else if (solution.title === "AI Integration & Support") {
-                        window.location.href = "/solutions/ai-integration-support";
-                      } else {
-                        handleComingSoon(solution.title);
-                      }
-                    }}
+                    asChild
                   >
-                    Learn More
+                    {solution.title === "AI Strategy & Consulting" ? (
+                      <Link to="/solutions/ai-strategy-consulting">Learn More</Link>
+                    ) : solution.title === "AI Data Solutions" ? (
+                      <Link to="/solutions/ai-data-solutions">Learn More</Link>
+                    ) : solution.title === "Custom AI Development" ? (
+                      <Link to="/solutions/custom-ai-development">Learn More</Link>
+                    ) : solution.title === "AI Integration & Support" ? (
+                      <Link to="/solutions/ai-integration-support">Learn More</Link>
+                    ) : (
+                      <span onClick={() => handleComingSoon(solution.title)}>Learn More</span>
+                    )}
                   </Button>
                 </CardContent>
               </Card>)}

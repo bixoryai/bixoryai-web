@@ -47,11 +47,26 @@ const Hero = ({
     }
   };
 
+  // Handle both imported images and public path images
+  const getBackgroundUrl = () => {
+    if (!backgroundImage) return '';
+    // If it's already a full URL (imported asset), use as-is
+    if (backgroundImage.startsWith('http') || backgroundImage.startsWith('data:')) {
+      return backgroundImage;
+    }
+    // If it starts with /, it's a public path that needs asset() helper
+    if (backgroundImage.startsWith('/')) {
+      return asset(backgroundImage);
+    }
+    // Otherwise it's a Vite-processed import, use directly
+    return backgroundImage;
+  };
+
   return (
     <div 
       className={`${height} relative flex items-center overflow-hidden`}
       style={{ 
-        backgroundImage: `url('${backgroundImage && backgroundImage.startsWith('/') ? asset(backgroundImage) : backgroundImage}')`,
+        backgroundImage: `url('${getBackgroundUrl()}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
