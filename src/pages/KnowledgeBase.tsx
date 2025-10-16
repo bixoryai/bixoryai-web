@@ -110,7 +110,7 @@ const KnowledgeBase = () => {
       title: "Types of Artificial Intelligence",
       description: "Understanding the four types of AI: reactive machines, limited memory, theory of mind, and self-awareness.",
       category: "Guide",
-      url: "#",
+      url: "/knowledge-base/types-of-ai",
       tags: ["AI Types", "Fundamentals", "Theory", "Classification"],
       source: "AI Knowledge Base",
       crawledAt: new Date().toISOString()

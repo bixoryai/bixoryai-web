@@ -18,6 +18,7 @@ import AIEthicsAndResponsibleDevelopment from "./pages/AIEthicsAndResponsibleDev
 import AIDevEnvironmentTutorial from "./pages/AIDevEnvironmentTutorial";
 import BuildingFirstNeuralNetwork from "./pages/BuildingFirstNeuralNetwork";
 import AIEvolutionTimeline from "./pages/AIEvolutionTimeline";
+import TypesOfAI from "./pages/TypesOfAI";
 import AITools from "./pages/AITools";
 import Projects from "./pages/Projects";
 import Solutions from "./pages/Solutions";
@@ -58,6 +59,7 @@ const App = () => (
           <Route path="/knowledge-base/ai-dev-environment-setup" element={<AIDevEnvironmentTutorial />} />
           <Route path="/knowledge-base/building-first-neural-network" element={<BuildingFirstNeuralNetwork />} />
           <Route path="/knowledge-base/ai-evolution-timeline" element={<AIEvolutionTimeline />} />
+          <Route path="/knowledge-base/types-of-ai" element={<TypesOfAI />} />
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />
