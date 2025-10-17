@@ -120,7 +120,7 @@ const KnowledgeBase = () => {
       title: "What is an AI Model?",
       description: "Learn about AI models - programs trained on data to recognize patterns and make decisions without human intervention.",
       category: "Guide",
-      url: "#",
+      url: "/knowledge-base/what-is-ai-model",
       tags: ["AI Models", "Machine Learning", "Pattern Recognition", "Fundamentals"],
       source: "AI Knowledge Base",
       crawledAt: new Date().toISOString()
