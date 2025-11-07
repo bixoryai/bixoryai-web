@@ -150,7 +150,7 @@ const KnowledgeBase = () => {
       title: "Machine Learning Fundamentals",
       description: "Introduction to machine learning - how computers learn from data to identify patterns and improve over time.",
       category: "Guide",
-      url: "#",
+      url: "/knowledge-base/machine-learning-fundamentals",
       tags: ["Machine Learning", "Data Science", "Algorithms", "Fundamentals"],
       source: "AI Knowledge Base",
       crawledAt: new Date().toISOString()

@@ -20,6 +20,7 @@ import BuildingFirstNeuralNetwork from "./pages/BuildingFirstNeuralNetwork";
 import AIEvolutionTimeline from "./pages/AIEvolutionTimeline";
 import TypesOfAI from "./pages/TypesOfAI";
 import WhatIsAIModel from "./pages/WhatIsAIModel";
+import MachineLearningFundamentals from "./pages/MachineLearningFundamentals";
 import AITools from "./pages/AITools";
 import Projects from "./pages/Projects";
 import Solutions from "./pages/Solutions";
@@ -62,6 +63,7 @@ const App = () => (
           <Route path="/knowledge-base/ai-evolution-timeline" element={<AIEvolutionTimeline />} />
           <Route path="/knowledge-base/types-of-ai" element={<TypesOfAI />} />
           <Route path="/knowledge-base/what-is-ai-model" element={<WhatIsAIModel />} />
+          <Route path="/knowledge-base/machine-learning-fundamentals" element={<MachineLearningFundamentals />} />
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />
