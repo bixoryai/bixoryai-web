@@ -170,7 +170,7 @@ const KnowledgeBase = () => {
       title: "Large Language Models (LLMs)",
       description: "Comprehensive guide to LLMs - transformer-based models achieving general-purpose language understanding and generation.",
       category: "Guide",
-      url: "#",
+      url: "/knowledge-base/large-language-models",
       tags: ["LLMs", "Transformers", "Language Models", "NLP"],
       source: "AI Knowledge Base",
       crawledAt: new Date().toISOString()
