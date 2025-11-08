@@ -347,16 +347,6 @@ const KnowledgeBase = () => {
       tags: ["Claude", "Anthropic", "AI Safety", "Responsible AI"],
       source: "AI Knowledge Base",
       crawledAt: new Date().toISOString()
-    },
-    {
-      id: "34",
-      title: "Falcon: Open-Source Language Model",
-      description: "Explore Falcon LLM - TII's 180B parameter open-source model trained on 3.5 trillion tokens, outperforming GPT-3.5.",
-      category: "Article",
-      url: "#",
-      tags: ["Falcon", "Open Source", "Large Scale", "Performance"],
-      source: "AI Knowledge Base",
-      crawledAt: new Date().toISOString()
     }
   ];
 
