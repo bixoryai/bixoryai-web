@@ -1,353 +1,477 @@
+import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Hero from "@/components/sections/Hero";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { BookOpen, TrendingUp, CheckCircle } from "lucide-react";
 import { SocialShare } from "@/components/social/SocialShare";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Brain, MessageSquare, Cpu, Layers, Sparkles, TrendingUp, Globe, Zap, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import heroImage from "@/assets/ai-development-hero.jpg";
+import knowledgeImage from "@/assets/knowledge-illustration.jpg";
 
-const LargeLanguageModels = () => {
+export default function LargeLanguageModels() {
+  // SEO
+  useEffect(() => {
+    const title = "Large Language Models (LLMs) | BIXORY AI";
+    document.title = title;
+
+    const metaDescContent = "Comprehensive guide to Large Language Models: architecture, training, applications, and the future of AI-powered natural language processing.";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement("meta");
+      metaDesc.setAttribute("name", "description");
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute("content", metaDescContent);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", window.location.origin + "/knowledge-base/large-language-models");
+
+    // JSON-LD structured data
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: title,
+      description: metaDescContent,
+      author: { "@type": "Organization", name: "BIXORY AI" },
+      dateModified: new Date().toISOString(),
+      mainEntityOfPage: window.location.href,
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   const keyTakeaways = [
-    "LLMs are transformer-based models with billions of parameters trained on massive text datasets",
-    "Built on attention mechanisms that understand context and relationships in language",
-    "Capable of zero-shot learning - performing tasks without explicit training",
-    "Applications span from content generation to code assistance and translation",
-    "Challenges include computational costs, bias, hallucinations, and ethical considerations"
+    "LLMs are neural networks trained on massive text datasets to understand and generate human-like text",
+    "Transformer architecture with attention mechanisms enables LLMs to process context efficiently",
+    "Pre-training on diverse data followed by fine-tuning creates versatile, task-specific models",
+    "GPT, BERT, and T5 represent different architectural approaches to language understanding",
+    "LLMs power applications from chatbots to code generation, translation, and content creation",
+    "Challenges include computational costs, bias, hallucinations, and ethical considerations",
+    "Prompt engineering and RAG techniques enhance LLM performance and accuracy"
   ];
 
   const relatedLinks = [
-    { title: "What is an AI Model?", url: "/knowledge-base/what-is-ai-model" },
-    { title: "Understanding RAG Systems", url: "/knowledge-base/understanding-rag" },
-    { title: "Advanced Prompt Engineering", url: "/knowledge-base/advanced-prompt-engineering" }
+    { title: "Attention Is All You Need (Original Transformer Paper)", url: "https://arxiv.org/abs/1706.03762" },
+    { title: "GPT-3: Language Models are Few-Shot Learners", url: "https://arxiv.org/abs/2005.14165" },
+    { title: "BERT: Pre-training of Deep Bidirectional Transformers", url: "https://arxiv.org/abs/1810.04805" },
+    { title: "Understanding RAG", url: "/knowledge-base/understanding-rag" },
+    { title: "Advanced Prompt Engineering", url: "/knowledge-base/advanced-prompt-engineering" },
+    { title: "AI Evolution Timeline", url: "/knowledge-base/ai-evolution-timeline" }
   ];
 
-  const content = `
-    <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-      <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-      What are Large Language Models?
-    </h2>
-    <p class="text-gray-300 mb-6 leading-relaxed">
-      Large Language Models (LLMs) are advanced artificial intelligence systems trained on massive amounts of text data to understand and generate human-like language. Built on transformer architecture, these models have revolutionized natural language processing by achieving unprecedented levels of language understanding and generation capabilities.
-    </p>
-    <p class="text-gray-300 mb-6 leading-relaxed">
-      LLMs are characterized by their enormous scale, typically containing billions or even trillions of parameters. These parameters allow the models to capture complex patterns in language, enabling them to perform a wide variety of tasks without task-specific training—a capability known as transfer learning.
-    </p>
-
-    <h2 class="text-2xl font-bold text-white mb-4 mt-8">Key Characteristics of LLMs</h2>
-    
-    <h3 class="text-xl font-semibold text-white mb-3 mt-6">1. Massive Scale</h3>
-    <p class="text-gray-300 mb-4 leading-relaxed">
-      Modern LLMs contain billions to trillions of parameters, trained on diverse datasets spanning books, websites, research papers, and various text sources from the internet. This massive scale enables the models to capture nuanced language patterns, contextual understanding, and world knowledge.
-    </p>
-    <div class="bg-primary/40 border border-gray-700 rounded-lg p-4 mb-4">
-      <p class="text-gray-300 mb-2"><strong class="text-accent">Scale Examples:</strong></p>
-      <ul class="list-disc list-inside text-gray-300 space-y-1">
-        <li>GPT-3: 175 billion parameters</li>
-        <li>GPT-4: Estimated over 1 trillion parameters</li>
-        <li>LLaMA 2: Models ranging from 7B to 70B parameters</li>
-        <li>Training datasets: Hundreds of billions of tokens</li>
-      </ul>
-    </div>
-
-    <h3 class="text-xl font-semibold text-white mb-3 mt-6">2. Transformer Architecture</h3>
-    <p class="text-gray-300 mb-4 leading-relaxed">
-      LLMs are built on transformer networks, introduced in the groundbreaking "Attention is All You Need" paper. The transformer architecture uses self-attention mechanisms that allow the model to weigh the importance of different words in a sentence, understanding context and relationships regardless of their distance in the text.
-    </p>
-    <div class="bg-primary/40 border border-gray-700 rounded-lg p-4 mb-4">
-      <p class="text-gray-300 mb-2"><strong class="text-accent">Key Components:</strong></p>
-      <ul class="list-disc list-inside text-gray-300 space-y-1">
-        <li>Self-attention layers that capture word relationships</li>
-        <li>Feedforward neural networks for processing</li>
-        <li>Positional encodings to understand word order</li>
-        <li>Multiple layers enabling hierarchical understanding</li>
-      </ul>
-    </div>
-
-    <h3 class="text-xl font-semibold text-white mb-3 mt-6">3. Transfer Learning & Fine-tuning</h3>
-    <p class="text-gray-300 mb-4 leading-relaxed">
-      Pre-trained on general language understanding, LLMs can be fine-tuned for specific tasks with minimal additional training data. This transfer learning approach dramatically reduces the time, data, and computational resources needed for specialized applications.
-    </p>
-
-    <h3 class="text-xl font-semibold text-white mb-3 mt-6">4. Zero-Shot and Few-Shot Learning</h3>
-    <p class="text-gray-300 mb-4 leading-relaxed">
-      LLMs can perform tasks they weren't explicitly trained for by understanding instructions and context from prompts alone. Zero-shot learning requires no examples, while few-shot learning uses just a handful of examples to adapt to new tasks—mimicking human-like learning flexibility.
-    </p>
-
-    <h2 class="text-2xl font-bold text-white mb-4 mt-8">How LLMs Work</h2>
-    <div class="space-y-4 mb-6">
-      <div class="flex gap-4 items-start">
-        <div class="bg-secondary/20 rounded-full p-2 mt-1">
-          <span class="text-secondary font-bold">1</span>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-1">Tokenization</h4>
-          <p class="text-gray-300">Input text is broken down into smaller units called tokens (words, subwords, or characters) that the model can process. Modern tokenizers use byte-pair encoding (BPE) or similar algorithms for efficient representation.</p>
-        </div>
-      </div>
-      <div class="flex gap-4 items-start">
-        <div class="bg-secondary/20 rounded-full p-2 mt-1">
-          <span class="text-secondary font-bold">2</span>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-1">Embedding</h4>
-          <p class="text-gray-300">Tokens are converted into high-dimensional numerical vectors (embeddings) that capture semantic meaning and relationships between words. Similar words have similar embeddings in vector space.</p>
-        </div>
-      </div>
-      <div class="flex gap-4 items-start">
-        <div class="bg-secondary/20 rounded-full p-2 mt-1">
-          <span class="text-secondary font-bold">3</span>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-1">Attention Mechanism</h4>
-          <p class="text-gray-300">The transformer's attention layers analyze relationships between all tokens, understanding context and dependencies regardless of distance in the text. This allows the model to focus on relevant information when processing each word.</p>
-        </div>
-      </div>
-      <div class="flex gap-4 items-start">
-        <div class="bg-secondary/20 rounded-full p-2 mt-1">
-          <span class="text-secondary font-bold">4</span>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-1">Generation</h4>
-          <p class="text-gray-300">The model predicts the next token based on the input context and all previous tokens, repeating this process autoregressively to generate coherent, contextually appropriate text sequences.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="text-2xl font-bold text-white mb-4 mt-8">Popular Large Language Models</h2>
-    <div class="space-y-4 mb-6">
-      <div class="bg-primary/40 border-l-4 border-accent rounded-r-lg p-4">
-        <h3 class="text-xl font-semibold text-white mb-2">GPT (Generative Pre-trained Transformer)</h3>
-        <p class="text-gray-300">OpenAI's GPT series, including ChatGPT and GPT-4, represents state-of-the-art language models with billions of parameters. Known for exceptional generation quality, reasoning capabilities, and versatility across tasks.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-secondary rounded-r-lg p-4">
-        <h3 class="text-xl font-semibold text-white mb-2">Claude</h3>
-        <p class="text-gray-300">Anthropic's AI assistant focused on safety, helpfulness, and harmlessness. Claude excels at nuanced conversations, complex reasoning, and following detailed instructions with strong ethical alignment.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-accent rounded-r-lg p-4">
-        <h3 class="text-xl font-semibold text-white mb-2">LLaMA (Large Language Model Meta AI)</h3>
-        <p class="text-gray-300">Meta's efficient open-source models designed to be more accessible while maintaining strong performance. Available in various sizes (7B to 70B parameters) for different computational requirements.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-secondary rounded-r-lg p-4">
-        <h3 class="text-xl font-semibold text-white mb-2">Gemini</h3>
-        <p class="text-gray-300">Google's multimodal AI model capable of understanding and generating text, images, audio, and video. Designed for seamless integration across Google's ecosystem with strong reasoning capabilities.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-accent rounded-r-lg p-4">
-        <h3 class="text-xl font-semibold text-white mb-2">BERT (Bidirectional Encoder Representations)</h3>
-        <p class="text-gray-300">Google's bidirectional model that reads text in both directions simultaneously, excelling at understanding context for tasks like question answering, sentiment analysis, and named entity recognition.</p>
-      </div>
-    </div>
-
-    <h2 class="text-2xl font-bold text-white mb-4 mt-8">Applications of LLMs</h2>
-    <p class="text-gray-300 mb-4 leading-relaxed">
-      Large Language Models have transformed numerous industries and applications:
-    </p>
-    <div class="grid md:grid-cols-2 gap-6 mb-6">
-      <div class="bg-gradient-to-br from-primary via-primary to-blue-900 border border-gray-700 rounded-lg p-6">
-        <div class="text-accent mb-3">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-        </div>
-        <h4 class="text-white font-semibold mb-2">Content Generation</h4>
-        <p class="text-gray-300 text-sm">Creative writing, article creation, marketing copy, social media posts, and storytelling with human-like quality and style adaptation.</p>
-      </div>
-      <div class="bg-gradient-to-br from-primary via-primary to-blue-900 border border-gray-700 rounded-lg p-6">
-        <div class="text-accent mb-3">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-        </div>
-        <h4 class="text-white font-semibold mb-2">Code Generation</h4>
-        <p class="text-gray-300 text-sm">Programming assistance, code completion, debugging, documentation generation, and translating between programming languages with high accuracy.</p>
-      </div>
-      <div class="bg-gradient-to-br from-primary via-primary to-blue-900 border border-gray-700 rounded-lg p-6">
-        <div class="text-accent mb-3">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
-        </div>
-        <h4 class="text-white font-semibold mb-2">Translation & Localization</h4>
-        <p class="text-gray-300 text-sm">High-quality language translation, cultural adaptation, and localization services maintaining context and nuance across languages.</p>
-      </div>
-      <div class="bg-gradient-to-br from-primary via-primary to-blue-900 border border-gray-700 rounded-lg p-6">
-        <div class="text-accent mb-3">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
-        <h4 class="text-white font-semibold mb-2">Question Answering</h4>
-        <p class="text-gray-300 text-sm">Information retrieval, knowledge synthesis, research assistance, and conversational AI providing accurate, contextual answers.</p>
-      </div>
-      <div class="bg-gradient-to-br from-primary via-primary to-blue-900 border border-gray-700 rounded-lg p-6">
-        <div class="text-accent mb-3">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-        </div>
-        <h4 class="text-white font-semibold mb-2">Summarization & Analysis</h4>
-        <p class="text-gray-300 text-sm">Document summarization, sentiment analysis, text classification, and extracting key insights from large volumes of text.</p>
-      </div>
-      <div class="bg-gradient-to-br from-primary via-primary to-blue-900 border border-gray-700 rounded-lg p-6">
-        <div class="text-accent mb-3">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-        </div>
-        <h4 class="text-white font-semibold mb-2">Conversational AI</h4>
-        <p class="text-gray-300 text-sm">Chatbots, virtual assistants, customer service automation, and interactive tutoring systems with natural dialogue capabilities.</p>
-      </div>
-    </div>
-
-    <h2 class="text-2xl font-bold text-white mb-4 mt-8">Challenges and Considerations</h2>
-    <div class="space-y-4 mb-6">
-      <div class="bg-primary/40 border-l-4 border-secondary rounded-r-lg p-4">
-        <h4 class="text-white font-semibold mb-2">Computational Resources</h4>
-        <p class="text-gray-300">Training and running LLMs requires massive computational power, specialized hardware (GPUs/TPUs), and significant energy consumption. This raises environmental concerns and creates barriers to access for smaller organizations.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-secondary rounded-r-lg p-4">
-        <h4 class="text-white font-semibold mb-2">Bias and Fairness</h4>
-        <p class="text-gray-300">LLMs can inherit and amplify biases present in their training data, potentially perpetuating stereotypes, unfair representations, or discriminatory patterns. Careful curation and bias mitigation techniques are essential.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-secondary rounded-r-lg p-4">
-        <h4 class="text-white font-semibold mb-2">Hallucinations</h4>
-        <p class="text-gray-300">Models may generate plausible-sounding but factually incorrect or nonsensical information. This "hallucination" problem requires verification systems and user awareness when deploying LLMs in critical applications.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-secondary rounded-r-lg p-4">
-        <h4 class="text-white font-semibold mb-2">Privacy and Security</h4>
-        <p class="text-gray-300">Concerns about data privacy, potential memorization of training data, prompt injection attacks, and the need for responsible deployment practices with proper safeguards and access controls.</p>
-      </div>
-      <div class="bg-primary/40 border-l-4 border-secondary rounded-r-lg p-4">
-        <h4 class="text-white font-semibold mb-2">Interpretability</h4>
-        <p class="text-gray-300">LLMs operate as "black boxes" where understanding why a model produced a specific output is challenging. This lack of interpretability poses problems for debugging, trust, and deployment in regulated industries.</p>
-      </div>
-    </div>
-
-    <h2 class="text-2xl font-bold text-white mb-4 mt-8">The Future of LLMs</h2>
-    <p class="text-gray-300 mb-4 leading-relaxed">
-      The field of Large Language Models continues to evolve rapidly with groundbreaking developments:
-    </p>
-    <ul class="list-disc list-inside text-gray-300 space-y-2 mb-6">
-      <li><strong class="text-accent">Multimodal Models:</strong> Integration of text, images, audio, and video understanding in unified models capable of cross-modal reasoning and generation.</li>
-      <li><strong class="text-accent">Efficiency Improvements:</strong> Research into smaller, more efficient models through distillation, quantization, and novel architectures that maintain performance with reduced computational costs.</li>
-      <li><strong class="text-accent">Enhanced Reasoning:</strong> Development of models with improved logical reasoning, mathematical capabilities, and multi-step problem-solving abilities.</li>
-      <li><strong class="text-accent">Retrieval-Augmented Generation:</strong> Combining LLMs with external knowledge bases and search systems for more accurate, up-to-date, and factual responses.</li>
-      <li><strong class="text-accent">Specialized Models:</strong> Domain-specific LLMs trained for particular industries (medical, legal, scientific) with enhanced expertise and terminology understanding.</li>
-      <li><strong class="text-accent">Responsible AI:</strong> Continued focus on safety, alignment, bias reduction, and ethical deployment practices to ensure beneficial AI development.</li>
-    </ul>
-
-    <div class="bg-gradient-to-r from-secondary/20 to-accent/20 border-l-4 border-secondary rounded-r-lg p-6 mt-8">
-      <p class="text-white text-lg font-semibold mb-2">Working with LLMs</p>
-      <p class="text-gray-300">
-        To effectively leverage Large Language Models, focus on prompt engineering—crafting clear, specific instructions that guide the model toward desired outputs. Experiment with different prompting techniques like chain-of-thought reasoning, few-shot examples, and role-based instructions. Always validate LLM outputs for accuracy, be aware of their limitations, and combine them with retrieval systems or other AI techniques for production applications. The future of AI development lies in thoughtfully integrating LLMs into broader systems that enhance human capabilities while maintaining safety and reliability.
-      </p>
-    </div>
-  `;
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-blue-900">
+    <>
       <Navbar />
-      
-      <Hero
-        title="Large Language Models (LLMs)"
-        subtitle="Comprehensive Guide to Transformer-Based AI Systems"
-        backgroundImage="/lovable-uploads/d810ceaa-aedc-4471-b105-bfb9efa741c7.png"
-        showButtons={false}
-      />
+      <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-blue-900">
+        {/* Hero */}
+        <section className="pt-28 md:pt-32 pb-8 md:pb-12">
+          <div className="container mx-auto px-6">
+            <Breadcrumb className="mb-4 text-white">
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/knowledge-base">Knowledge Base</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-white">Large Language Models</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
 
-      <div className="container mx-auto px-6 py-8">
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/knowledge-base">Knowledge Base</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbPage>Large Language Models</BreadcrumbPage>
-          </BreadcrumbList>
-        </Breadcrumb>
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                  <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">Large Language Models</span>
+                </h1>
+                <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                  Explore the transformative technology behind modern AI: how LLMs learn, reason, and generate human-like text through billions of parameters and cutting-edge neural architectures.
+                </p>
+                <div className="flex flex-wrap gap-3 text-sm">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/60 border border-gray-700/60 text-gray-300">
+                    <Brain className="h-4 w-4" /> Deep Learning
+                  </span>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/60 border border-gray-700/60 text-gray-300">
+                    <Layers className="h-4 w-4" /> Transformers
+                  </span>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/60 border border-gray-700/60 text-gray-300">
+                    <MessageSquare className="h-4 w-4" /> NLP
+                  </span>
+                </div>
+              </div>
+              <div className="lg:pl-6">
+                <img src={heroImage} alt="Large Language Models Architecture" className="w-full rounded-2xl shadow-2xl border border-gray-700/40" />
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <div className="max-w-4xl mx-auto">
-          <Card className="bg-primary/80 border-gray-700 mb-8">
-            <CardContent className="p-8">
-              <div className="flex items-center gap-2 mb-6">
-                <Badge variant="secondary" className="bg-secondary/20 text-secondary border-secondary/40">
-                  Guide
-                </Badge>
-                <Badge variant="outline" className="border-accent/40 text-accent">
-                  AI Models
-                </Badge>
-                <Badge variant="outline" className="border-accent/40 text-accent">
-                  LLMs
-                </Badge>
+        {/* Main Content */}
+        <main className="container mx-auto px-6 pb-16">
+          <div className="grid gap-6 lg:gap-8">
+            
+            {/* What are LLMs */}
+            <div className="rounded-2xl p-8 border border-blue-500/20 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Brain className="h-6 w-6 text-blue-300" />
+                <h2 className="text-2xl md:text-3xl font-bold text-white">What are Large Language Models?</h2>
+              </div>
+              <div className="grid lg:grid-cols-2 gap-6 items-center">
+                <div>
+                  <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-4">
+                    <strong className="text-white">Large Language Models (LLMs)</strong> are advanced neural networks trained on vast amounts of text data to understand, generate, and manipulate human language. These models contain billions of parameters—learned weights that enable them to capture complex patterns, relationships, and nuances in language.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed mb-4">
+                    Unlike traditional rule-based systems, LLMs learn statistical patterns from data, allowing them to perform a wide range of language tasks without explicit programming for each specific task. They can write essays, answer questions, translate languages, generate code, and even engage in creative writing.
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 mt-4">
+                    <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50">
+                      <div className="text-2xl font-bold text-blue-400 mb-1">175B+</div>
+                      <div className="text-xs text-gray-400">Parameters in GPT-3</div>
+                    </div>
+                    <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50">
+                      <div className="text-2xl font-bold text-purple-400 mb-1">45TB+</div>
+                      <div className="text-xs text-gray-400">Training Data</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="lg:pl-6">
+                  <img src={knowledgeImage} alt="LLM Knowledge Representation" className="w-full rounded-xl border border-gray-700/40" />
+                </div>
+              </div>
+            </div>
+
+            {/* Transformer Architecture */}
+            <div className="rounded-2xl p-8 border border-green-500/20 bg-gradient-to-r from-green-900/20 to-teal-900/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Layers className="h-6 w-6 text-green-300" />
+                <h2 className="text-2xl md:text-3xl font-bold text-white">The Transformer Architecture</h2>
+              </div>
+              <p className="text-gray-300 leading-relaxed mb-6">
+                Modern LLMs are built on the <strong className="text-white">Transformer architecture</strong>, introduced in the groundbreaking 2017 paper "Attention Is All You Need." This architecture revolutionized NLP by replacing recurrent networks with a mechanism called <em className="text-accent">self-attention</em>.
+              </p>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-3">
+                    <Cpu className="h-6 w-6 text-green-400" />
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">Self-Attention</h4>
+                  <p className="text-sm text-gray-400">Weighs the importance of different words in a sequence to understand context and relationships.</p>
+                </div>
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <div className="w-12 h-12 bg-teal-500/20 rounded-full flex items-center justify-center mb-3">
+                    <Layers className="h-6 w-6 text-teal-400" />
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">Multi-Head Attention</h4>
+                  <p className="text-sm text-gray-400">Processes multiple representations simultaneously, capturing diverse linguistic patterns.</p>
+                </div>
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center mb-3">
+                    <Sparkles className="h-6 w-6 text-cyan-400" />
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">Positional Encoding</h4>
+                  <p className="text-sm text-gray-400">Injects information about word positions since transformers don't inherently process sequences.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Training Process */}
+            <div className="rounded-2xl p-8 border border-purple-500/20 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+              <div className="flex items-center gap-3 mb-4">
+                <TrendingUp className="h-6 w-6 text-purple-300" />
+                <h2 className="text-2xl md:text-3xl font-bold text-white">How LLMs Learn</h2>
+              </div>
+              <p className="text-gray-300 leading-relaxed mb-6">
+                Training an LLM is a multi-stage process that requires massive computational resources and carefully curated datasets. The process typically involves two main phases:
+              </p>
+              <div className="grid lg:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-gray-800/30 rounded-xl p-5 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                        <span className="text-purple-400 font-bold">1</span>
+                      </div>
+                      <h4 className="font-semibold text-white">Pre-Training</h4>
+                    </div>
+                    <p className="text-sm text-gray-400 mb-3">
+                      The model learns general language understanding by predicting masked or next tokens on billions of text examples from books, websites, and articles.
+                    </p>
+                    <ul className="space-y-1 text-xs text-gray-400">
+                      <li>• Unsupervised learning on diverse corpora</li>
+                      <li>• Captures grammar, facts, reasoning patterns</li>
+                      <li>• Weeks to months of GPU/TPU training</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-800/30 rounded-xl p-5 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-pink-500/20 rounded-lg flex items-center justify-center">
+                        <span className="text-pink-400 font-bold">2</span>
+                      </div>
+                      <h4 className="font-semibold text-white">Fine-Tuning</h4>
+                    </div>
+                    <p className="text-sm text-gray-400 mb-3">
+                      The pre-trained model is adapted to specific tasks or domains using smaller, task-specific datasets and human feedback.
+                    </p>
+                    <ul className="space-y-1 text-xs text-gray-400">
+                      <li>• Supervised learning on labeled data</li>
+                      <li>• Reinforcement Learning from Human Feedback (RLHF)</li>
+                      <li>• Domain adaptation and instruction following</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-xl p-6 border border-gray-700/50">
+                  <h3 className="text-xl font-bold text-white mb-4">Training Challenges</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <Shield className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Computational Cost</div>
+                        <div className="text-xs text-gray-400">Training can cost millions in GPU hours</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Shield className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Data Quality</div>
+                        <div className="text-xs text-gray-400">Biased data leads to biased models</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Shield className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Scaling Laws</div>
+                        <div className="text-xs text-gray-400">More parameters ≠ always better performance</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Popular LLM Families */}
+            <div className="rounded-2xl p-8 border border-orange-500/20 bg-gradient-to-r from-orange-900/20 to-red-900/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Sparkles className="h-6 w-6 text-orange-300" />
+                <h2 className="text-2xl md:text-3xl font-bold text-white">Popular LLM Families</h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <h4 className="font-semibold text-white mb-2">GPT Series (OpenAI)</h4>
+                  <p className="text-sm text-gray-400 mb-3">Autoregressive models trained to predict the next token. GPT-3, GPT-4, and ChatGPT excel at text generation and conversation.</p>
+                  <div className="text-xs text-accent">Decoder-only architecture</div>
+                </div>
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <h4 className="font-semibold text-white mb-2">BERT (Google)</h4>
+                  <p className="text-sm text-gray-400 mb-3">Bidirectional encoder trained with masked language modeling. Excels at understanding context for classification tasks.</p>
+                  <div className="text-xs text-accent">Encoder-only architecture</div>
+                </div>
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <h4 className="font-semibold text-white mb-2">T5 (Google)</h4>
+                  <p className="text-sm text-gray-400 mb-3">Text-to-text transformer that frames all NLP tasks as text generation, enabling unified training.</p>
+                  <div className="text-xs text-accent">Encoder-decoder architecture</div>
+                </div>
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <h4 className="font-semibold text-white mb-2">LLaMA (Meta)</h4>
+                  <p className="text-sm text-gray-400 mb-3">Open-source foundation models available in multiple sizes. Optimized for efficiency and research accessibility.</p>
+                  <div className="text-xs text-accent">Decoder-only architecture</div>
+                </div>
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <h4 className="font-semibold text-white mb-2">Claude (Anthropic)</h4>
+                  <p className="text-sm text-gray-400 mb-3">Safety-focused LLM trained with Constitutional AI. Emphasizes helpfulness, harmlessness, and honesty.</p>
+                  <div className="text-xs text-accent">Decoder-only with RLHF</div>
+                </div>
+                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/40">
+                  <h4 className="font-semibold text-white mb-2">Gemini (Google)</h4>
+                  <p className="text-sm text-gray-400 mb-3">Multimodal LLM capable of understanding text, images, audio, and video in a unified model.</p>
+                  <div className="text-xs text-accent">Multimodal architecture</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Applications */}
+            <div className="rounded-2xl p-8 border border-cyan-500/20 bg-gradient-to-r from-cyan-900/20 to-blue-900/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Globe className="h-6 w-6 text-cyan-300" />
+                <h2 className="text-2xl md:text-3xl font-bold text-white">Real-World Applications</h2>
+              </div>
+              <p className="text-gray-300 leading-relaxed mb-6">
+                LLMs are transforming industries by automating complex language tasks, enhancing productivity, and enabling new forms of human-AI collaboration:
+              </p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-2">
+                      <MessageSquare className="h-5 w-5 text-cyan-400" />
+                      <h4 className="font-semibold text-white">Conversational AI</h4>
+                    </div>
+                    <p className="text-sm text-gray-400">Chatbots, virtual assistants, customer support automation</p>
+                  </div>
+                  <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Cpu className="h-5 w-5 text-blue-400" />
+                      <h4 className="font-semibold text-white">Code Generation</h4>
+                    </div>
+                    <p className="text-sm text-gray-400">GitHub Copilot, code completion, debugging assistance</p>
+                  </div>
+                  <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Globe className="h-5 w-5 text-green-400" />
+                      <h4 className="font-semibold text-white">Translation</h4>
+                    </div>
+                    <p className="text-sm text-gray-400">Real-time multilingual communication, localization</p>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Sparkles className="h-5 w-5 text-purple-400" />
+                      <h4 className="font-semibold text-white">Content Creation</h4>
+                    </div>
+                    <p className="text-sm text-gray-400">Marketing copy, articles, creative writing, summarization</p>
+                  </div>
+                  <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Brain className="h-5 w-5 text-pink-400" />
+                      <h4 className="font-semibold text-white">Education & Research</h4>
+                    </div>
+                    <p className="text-sm text-gray-400">Tutoring, knowledge extraction, literature review</p>
+                  </div>
+                  <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/30">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Zap className="h-5 w-5 text-yellow-400" />
+                      <h4 className="font-semibold text-white">Data Analysis</h4>
+                    </div>
+                    <p className="text-sm text-gray-400">Sentiment analysis, entity extraction, document classification</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Challenges & Future */}
+            <div className="rounded-2xl p-8 border border-pink-500/20 bg-gradient-to-r from-pink-900/20 to-rose-900/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Shield className="h-6 w-6 text-pink-300" />
+                <h2 className="text-2xl md:text-3xl font-bold text-white">Challenges & The Future</h2>
+              </div>
+              <div className="grid lg:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-4">Current Challenges</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <div className="text-white font-semibold">Hallucinations</div>
+                        <div className="text-sm text-gray-400">Models can generate plausible-sounding but incorrect information</div>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-rose-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <div className="text-white font-semibold">Bias & Fairness</div>
+                        <div className="text-sm text-gray-400">Training data biases can be amplified in model outputs</div>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <div className="text-white font-semibold">Environmental Impact</div>
+                        <div className="text-sm text-gray-400">Massive energy consumption for training and inference</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-4">Future Directions</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <div className="text-white font-semibold">Multimodal Models</div>
+                        <div className="text-sm text-gray-400">Unified understanding of text, images, audio, and video</div>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <div className="text-white font-semibold">Efficient Architectures</div>
+                        <div className="text-sm text-gray-400">Smaller models with comparable performance through distillation</div>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <div className="text-white font-semibold">Better Reasoning</div>
+                        <div className="text-sm text-gray-400">Enhanced logical reasoning and fact verification capabilities</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Key Takeaways */}
+            <div className="grid lg:grid-cols-2 gap-6">
+              <div className="rounded-2xl p-6 border border-gray-700/40 bg-gray-900/40">
+                <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                  <Brain className="h-5 w-5 text-accent" />
+                  Key Takeaways
+                </h3>
+                <ul className="space-y-2">
+                  {keyTakeaways.map((takeaway, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-2 h-2 rounded-full bg-accent"></div>
+                      </div>
+                      <span className="text-sm text-gray-300">{takeaway}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div 
-                className="prose prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: content }}
+              <div className="rounded-2xl p-6 border border-gray-700/40 bg-gray-900/40">
+                <h3 className="text-xl font-semibold text-white mb-4">Related Research & Articles</h3>
+                <div className="space-y-2">
+                  {relatedLinks.map((link) => (
+                    <a
+                      key={link.title}
+                      href={link.url}
+                      target={link.url.startsWith('http') ? "_blank" : undefined}
+                      rel={link.url.startsWith('http') ? "noreferrer" : undefined}
+                      className="group flex items-center justify-between gap-4 p-3 rounded-lg border border-gray-700/50 hover:border-accent/50 bg-gray-800/40 hover:bg-gray-800/60 transition-colors"
+                    >
+                      <span className="text-sm text-gray-200 group-hover:text-white">{link.title}</span>
+                      <span className="text-accent text-xs">{link.url.startsWith('http') ? 'Open ↗' : 'Read →'}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Share */}
+            <div className="rounded-2xl p-6 border border-gray-700/40 bg-gray-900/40">
+              <SocialShare
+                title="Large Language Models (LLMs)"
+                description="Comprehensive guide to Large Language Models: architecture, training, applications, and the future of AI-powered NLP."
+                url="/knowledge-base/large-language-models"
+                className="justify-between"
               />
-            </CardContent>
-          </Card>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <Card className="bg-primary/80 border-gray-700">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <CheckCircle className="w-5 h-5 text-accent" />
-                  <h3 className="text-xl font-bold text-white">Key Takeaways</h3>
-                </div>
-                <ul className="space-y-3">
-                  {keyTakeaways.map((takeaway, index) => (
-                    <li key={index} className="flex items-start gap-2 text-gray-300">
-                      <span className="text-secondary mt-1">•</span>
-                      <span>{takeaway}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-primary/80 border-gray-700">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <BookOpen className="w-5 h-5 text-accent" />
-                  <h3 className="text-xl font-bold text-white">Related Articles</h3>
-                </div>
-                <ul className="space-y-3">
-                  {relatedLinks.map((link, index) => (
-                    <li key={index}>
-                      <Link 
-                        to={link.url}
-                        className="text-accent hover:text-accent/80 transition-colors flex items-center gap-2"
-                      >
-                        <TrendingUp className="w-4 h-4" />
-                        {link.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+            </div>
           </div>
-
-          <Card className="bg-primary/80 border-gray-700 mb-8">
-            <CardContent className="p-6">
-              <SocialShare 
-                url={window.location.href}
-                title="Large Language Models (LLMs) - BIXORY AI"
-                description="Comprehensive guide to Large Language Models - transformer-based AI systems achieving general-purpose language understanding and generation."
-              />
-            </CardContent>
-          </Card>
-        </div>
+        </main>
       </div>
-
       <Footer />
-    </div>
+    </>
   );
-};
-
-export default LargeLanguageModels;
+}
