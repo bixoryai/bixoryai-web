@@ -125,7 +125,7 @@ export type Database = {
           created_at: string
           details: Json | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           resource_id: string | null
           resource_type: string
           user_agent: string | null
@@ -136,7 +136,7 @@ export type Database = {
           created_at?: string
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type: string
           user_agent?: string | null
@@ -147,7 +147,7 @@ export type Database = {
           created_at?: string
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type?: string
           user_agent?: string | null
@@ -262,10 +262,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      assign_admin_role: {
-        Args: { user_email: string }
-        Returns: boolean
-      }
+      assign_admin_role: { Args: { user_email: string }; Returns: boolean }
       check_rate_limit: {
         Args: {
           p_action_type: string
@@ -295,10 +292,7 @@ export type Database = {
         }
         Returns: undefined
       }
-      validate_admin_newsletter_access: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      validate_admin_newsletter_access: { Args: never; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user"

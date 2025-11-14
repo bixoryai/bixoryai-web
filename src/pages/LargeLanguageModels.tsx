@@ -3,7 +3,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SocialShare } from "@/components/social/SocialShare";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Brain, MessageSquare, Cpu, Layers, Sparkles, TrendingUp, Globe, Zap, Shield } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Brain, MessageSquare, Cpu, Layers, Sparkles, TrendingUp, Globe, Zap, Shield, Book, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/ai-development-hero.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
@@ -74,45 +75,61 @@ export default function LargeLanguageModels() {
     <>
       <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-primary via-primary to-blue-900">
-        {/* Hero */}
-        <section className="pt-28 md:pt-32 pb-8 md:pb-12">
-          <div className="container mx-auto px-6">
-            <Breadcrumb className="mb-4 text-white">
+        {/* Hero Section with Overlay */}
+        <section className="relative h-[500px] md:h-[600px] flex items-center">
+          {/* Background image */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-primary/60 z-10" />
+            <img
+              src={heroImage}
+              alt="Large Language Models Visualization"
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
+          </div>
+          
+          {/* Content overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-primary/80 z-10" />
+          
+          <div className="container mx-auto px-6 relative z-20">
+            <Breadcrumb className="mb-8">
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
+                  <BreadcrumbLink asChild className="text-gray-300 hover:text-white">
                     <Link to="/knowledge-base">Knowledge Base</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator className="text-gray-400" />
                 <BreadcrumbItem>
                   <BreadcrumbPage className="text-white">Large Language Models</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">Large Language Models</span>
-                </h1>
-                <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                  Explore the transformative technology behind modern AI: how LLMs learn, reason, and generate human-like text through billions of parameters and cutting-edge neural architectures.
-                </p>
-                <div className="flex flex-wrap gap-3 text-sm">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/60 border border-gray-700/60 text-gray-300">
-                    <Brain className="h-4 w-4" /> Deep Learning
-                  </span>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/60 border border-gray-700/60 text-gray-300">
-                    <Layers className="h-4 w-4" /> Transformers
-                  </span>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/60 border border-gray-700/60 text-gray-300">
-                    <MessageSquare className="h-4 w-4" /> NLP
-                  </span>
-                </div>
-              </div>
-              <div className="lg:pl-6">
-                <img src={heroImage} alt="Large Language Models Architecture" className="w-full rounded-2xl shadow-2xl border border-gray-700/40" />
+            <div className="max-w-4xl space-y-6">
+              <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                Understanding{" "}
+                <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
+                  Large Language Models
+                </span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-200 leading-relaxed">
+                Explore the revolutionary technology powering modern AI, from GPT to Claude, 
+                and understand how these powerful models are transforming communication and creativity.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                  <Book className="w-3 h-3 mr-1" />
+                  Guide
+                </Badge>
+                <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                  <Clock className="w-3 h-3 mr-1" />
+                  15 min read
+                </Badge>
+                <Badge variant="secondary" className="bg-green-500/20 text-green-300 border-green-500/30">
+                  Advanced
+                </Badge>
               </div>
             </div>
           </div>
