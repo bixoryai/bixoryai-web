@@ -91,7 +91,7 @@ export default function LargeLanguageModels() {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-primary/80 z-10" />
           
           <div className="container mx-auto px-6 relative z-20">
-            <Breadcrumb className="mb-8">
+            <Breadcrumb className="mb-8 flex justify-center">
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild className="text-gray-300 hover:text-white">
@@ -105,7 +105,7 @@ export default function LargeLanguageModels() {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="max-w-4xl space-y-6">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
               <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
                 Understanding{" "}
                 <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent animate-pulse">
@@ -118,7 +118,7 @@ export default function LargeLanguageModels() {
                 and understand how these powerful models are transforming communication and creativity.
               </p>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 justify-center">
                 <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30">
                   <Book className="w-3 h-3 mr-1" />
                   Guide
