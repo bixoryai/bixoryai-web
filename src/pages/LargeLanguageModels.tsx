@@ -91,7 +91,7 @@ export default function LargeLanguageModels() {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-primary/80 z-10" />
           
           <div className="container mx-auto px-6 relative z-20">
-            <Breadcrumb className="mb-8 flex justify-center">
+            <Breadcrumb className="mb-8">
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild className="text-gray-300 hover:text-white">
