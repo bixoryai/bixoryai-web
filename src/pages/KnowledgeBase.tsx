@@ -211,7 +211,7 @@ const KnowledgeBase = () => {
       title: "Three Types of Machine Learning",
       description: "Comprehensive guide to supervised, unsupervised, and reinforcement learning approaches with practical examples.",
       category: "Guide",
-      url: "#",
+      url: "/knowledge-base/three-types-of-machine-learning",
       tags: ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "ML Types"],
       source: "AI Knowledge Base",
       crawledAt: new Date().toISOString()
