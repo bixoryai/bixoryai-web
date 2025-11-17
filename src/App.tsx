@@ -23,6 +23,7 @@ import WhatIsAIModel from "./pages/WhatIsAIModel";
 import MachineLearningFundamentals from "./pages/MachineLearningFundamentals";
 import LargeLanguageModels from "./pages/LargeLanguageModels";
 import ThreeTypesOfML from "./pages/ThreeTypesOfML";
+import BuildingAIAgents from "./pages/BuildingAIAgents";
 import AITools from "./pages/AITools";
 import Projects from "./pages/Projects";
 import Solutions from "./pages/Solutions";
@@ -68,6 +69,7 @@ const App = () => (
           <Route path="/knowledge-base/machine-learning-fundamentals" element={<MachineLearningFundamentals />} />
           <Route path="/knowledge-base/large-language-models" element={<LargeLanguageModels />} />
           <Route path="/knowledge-base/three-types-of-machine-learning" element={<ThreeTypesOfML />} />
+          <Route path="/knowledge-base/building-ai-agents" element={<BuildingAIAgents />} />
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />
