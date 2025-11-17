@@ -55,6 +55,16 @@ const KnowledgeBase = () => {
       crawledAt: new Date().toISOString()
     },
     {
+      id: "4a",
+      title: "Fundamentals of Building AI Agents",
+      description: "Learn how to build intelligent agents that can perceive, reason, and act autonomously using modern AI frameworks and techniques.",
+      category: "Article",
+      url: "/knowledge-base/building-ai-agents",
+      tags: ["AI Agents", "LLMs", "Autonomous Systems", "ReAct"],
+      source: "BIXORY AI Knowledge Base",
+      crawledAt: new Date().toISOString()
+    },
+    {
       id: "5",
       title: "Advanced Prompt Engineering Techniques",
       description: "Master the art of prompt engineering with advanced techniques for getting better results from large language models.",
