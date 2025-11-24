@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 import { 
   Brain, Code, Eye, TrendingUp, ArrowRight, CheckCircle, Layers, Zap, 
   Cpu, Database, Network, MessageSquare, Camera, BarChart3, Users, 
-  Clock, Award, Shield, Target, Workflow, Lightbulb, Settings
+  Clock, Award, Shield, Target, Workflow, Lightbulb, Settings, Bot, 
+  GitBranch, Server, Package
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { showComingSoonToast } from "@/utils/comingSoon";
@@ -67,6 +68,32 @@ const developmentServices = [
     ],
     complexity: "Intermediate",
     timeframe: "6-12 weeks"
+  },
+  {
+    icon: <Bot className="w-8 h-8 text-secondary" />,
+    title: "AI Agents & Agentic Workflows",
+    description: "Intelligent autonomous agents that can plan, reason, and execute complex multi-step tasks.",
+    features: [
+      "Multi-Agent Orchestration",
+      "Tool-Using AI Agents",
+      "Autonomous Task Execution",
+      "Human-in-the-Loop Workflows"
+    ],
+    complexity: "Expert",
+    timeframe: "10-18 weeks"
+  },
+  {
+    icon: <Server className="w-8 h-8 text-secondary" />,
+    title: "Local AI Deployment",
+    description: "Deploy AI models on-premises for complete data privacy and control.",
+    features: [
+      "Local LLM Deployment",
+      "Edge AI Solutions",
+      "Private Cloud Setup",
+      "Zero Cloud Dependency"
+    ],
+    complexity: "Advanced",
+    timeframe: "8-14 weeks"
   }
 ];
 
@@ -128,6 +155,16 @@ const technicalStack = [
     category: "MLOps & Deployment",
     technologies: ["Docker", "Kubernetes", "MLflow", "Kubeflow", "Apache Airflow"],
     icon: <Network className="w-6 h-6 text-secondary" />
+  },
+  {
+    category: "AI Agent Frameworks",
+    technologies: ["LangChain", "LangGraph", "CrewAI", "AutoGen", "LlamaIndex", "Semantic Kernel"],
+    icon: <Bot className="w-6 h-6 text-secondary" />
+  },
+  {
+    category: "Local Deployment",
+    technologies: ["Ollama", "LocalAI", "LM Studio", "vLLM", "llama.cpp", "Hugging Face TGI"],
+    icon: <Server className="w-6 h-6 text-secondary" />
   }
 ];
 
@@ -342,7 +379,7 @@ const CustomAIDevelopment = () => {
             </p>
           </div>
 
-          <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-1000 ${
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${
             stackVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {technicalStack.map((stack, index) => (
@@ -367,6 +404,149 @@ const CustomAIDevelopment = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* AI Agents & Agentic Workflows Section */}
+      <section className="py-20 bg-gradient-to-br from-primary to-blue-900">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              AI Agents & Agentic Workflow Systems
+            </h2>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              Build intelligent autonomous agents that can reason, plan, and execute complex tasks 
+              using state-of-the-art agentic frameworks and local deployment options.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <Card className="bg-primary/80 border-gray-700 hover:border-secondary/50 transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-4">
+                  <Bot className="w-8 h-8 text-secondary" />
+                  <CardTitle className="text-xl text-white">Agentic Frameworks</CardTitle>
+                </div>
+                <CardDescription className="text-gray-300 leading-relaxed">
+                  Build sophisticated AI agents using industry-leading frameworks for autonomous task execution.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-semibold text-secondary mb-2 flex items-center gap-2">
+                    <GitBranch className="w-4 h-4" />
+                    LangChain & LangGraph
+                  </h4>
+                  <p className="text-sm text-gray-300">Orchestrate complex agent workflows with stateful graph-based architectures.</p>
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-secondary mb-2 flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    CrewAI & AutoGen
+                  </h4>
+                  <p className="text-sm text-gray-300">Build multi-agent systems where specialized agents collaborate on complex tasks.</p>
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-secondary mb-2 flex items-center gap-2">
+                    <Database className="w-4 h-4" />
+                    LlamaIndex & Semantic Kernel
+                  </h4>
+                  <p className="text-sm text-gray-300">Create knowledge-aware agents with powerful RAG capabilities and semantic search.</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-primary/80 border-gray-700 hover:border-secondary/50 transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-4">
+                  <Server className="w-8 h-8 text-secondary" />
+                  <CardTitle className="text-xl text-white">Local Deployment Solutions</CardTitle>
+                </div>
+                <CardDescription className="text-gray-300 leading-relaxed">
+                  Run powerful AI models on-premises for complete data privacy, security, and control.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-semibold text-secondary mb-2 flex items-center gap-2">
+                    <Package className="w-4 h-4" />
+                    Ollama & LM Studio
+                  </h4>
+                  <p className="text-sm text-gray-300">User-friendly local LLM deployment with optimized inference engines.</p>
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-secondary mb-2 flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    vLLM & llama.cpp
+                  </h4>
+                  <p className="text-sm text-gray-300">High-performance model serving with optimized memory and throughput.</p>
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-secondary mb-2 flex items-center gap-2">
+                    <Shield className="w-4 h-4" />
+                    Private Cloud Setup
+                  </h4>
+                  <p className="text-sm text-gray-300">Enterprise-grade infrastructure with zero cloud dependency for sensitive data.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Agent Capabilities */}
+          <Card className="bg-primary/80 border-gray-700 hover:border-secondary/50 transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="text-2xl text-white mb-2">Key Agent Capabilities</CardTitle>
+              <CardDescription className="text-gray-300 leading-relaxed">
+                Our custom AI agents are designed to autonomously handle complex, multi-step workflows.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Workflow className="w-5 h-5 text-secondary" />
+                    <h4 className="text-sm font-semibold text-white">Task Planning</h4>
+                  </div>
+                  <p className="text-sm text-gray-300">Agents break down complex goals into actionable steps.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Brain className="w-5 h-5 text-secondary" />
+                    <h4 className="text-sm font-semibold text-white">Reasoning & Logic</h4>
+                  </div>
+                  <p className="text-sm text-gray-300">Advanced decision-making with context-aware reasoning.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Settings className="w-5 h-5 text-secondary" />
+                    <h4 className="text-sm font-semibold text-white">Tool Integration</h4>
+                  </div>
+                  <p className="text-sm text-gray-300">Seamlessly use APIs, databases, and external tools.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Database className="w-5 h-5 text-secondary" />
+                    <h4 className="text-sm font-semibold text-white">Memory Management</h4>
+                  </div>
+                  <p className="text-sm text-gray-300">Maintain context across conversations and sessions.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Users className="w-5 h-5 text-secondary" />
+                    <h4 className="text-sm font-semibold text-white">Multi-Agent Collaboration</h4>
+                  </div>
+                  <p className="text-sm text-gray-300">Coordinate multiple specialized agents for complex tasks.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Target className="w-5 h-5 text-secondary" />
+                    <h4 className="text-sm font-semibold text-white">Self-Correction</h4>
+                  </div>
+                  <p className="text-sm text-gray-300">Learn from mistakes and adapt strategies on the fly.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
