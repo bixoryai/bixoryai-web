@@ -254,8 +254,8 @@ const CustomAIDevelopment = () => {
               Our Development Services
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed">
-              From machine learning models to computer vision systems, we develop 
-              cutting-edge AI solutions tailored to your specific requirements.
+              From intelligent AI agents and agentic workflows to computer vision and machine learning models, 
+              we develop cutting-edge autonomous AI solutions tailored to your specific requirements.
             </p>
           </div>
 
