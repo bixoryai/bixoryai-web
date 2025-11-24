@@ -668,15 +668,16 @@ const CustomAIDevelopment = () => {
                 <Lightbulb className="w-5 h-5 mr-2" />
                 Schedule Consultation
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
-                onClick={() => handleComingSoon("Technical Documentation")}
-              >
-                <Settings className="w-5 h-5 mr-2" />
-                View Technical Docs
-              </Button>
+              <Link to="/technical-docs">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="border-accent text-accent hover:bg-accent/10 px-8 py-3 rounded-full"
+                >
+                  <Settings className="w-5 h-5 mr-2" />
+                  View Technical Docs
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
