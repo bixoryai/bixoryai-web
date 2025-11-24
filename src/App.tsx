@@ -40,6 +40,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AIStrategyConsulting from "./pages/AIStrategyConsulting";
 import AIDataSolutions from "./pages/AIDataSolutions";
 import CustomAIDevelopment from "./pages/CustomAIDevelopment";
+import TechnicalDocs from "./pages/TechnicalDocs";
 import AIIntegrationSupport from "./pages/AIIntegrationSupport";
 
 const queryClient = new QueryClient();
@@ -75,7 +76,8 @@ const App = () => (
           <Route path="/solutions" element={<Solutions />} />
         <Route path="/solutions/ai-strategy-consulting" element={<AIStrategyConsulting />} />
         <Route path="/solutions/ai-data-solutions" element={<AIDataSolutions />} />
-        <Route path="/solutions/custom-ai-development" element={<CustomAIDevelopment />} />
+          <Route path="/solutions/custom-ai-development" element={<CustomAIDevelopment />} />
+          <Route path="/technical-docs" element={<TechnicalDocs />} />
         <Route path="/solutions/ai-integration-support" element={<AIIntegrationSupport />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/job-application" element={<JobApplication />} />
