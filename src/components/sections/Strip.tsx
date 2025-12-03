@@ -57,11 +57,11 @@ const aiModels = [
           </h3>
           
           {/* Second Row: AI Models */}
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
             {aiModels.map((model, index) => (
               <div
                 key={model.name}
-                className={`bg-card-gradient backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10 hover:border-secondary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                className={`flex items-center gap-3 bg-card-gradient backdrop-blur-sm px-5 py-3 rounded-xl border border-white/10 hover:border-secondary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-secondary/20 ${
                   stripVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
                 style={{
@@ -71,8 +71,11 @@ const aiModels = [
                 <img 
                   src={model.logo} 
                   alt={`${model.name} logo`}
-                  className="h-10 md:h-12 w-auto object-contain"
+                  className="h-8 w-8 object-contain"
                 />
+                <span className="text-sm md:text-base font-medium text-white whitespace-nowrap">
+                  {model.name}
+                </span>
               </div>
             ))}
           </div>
