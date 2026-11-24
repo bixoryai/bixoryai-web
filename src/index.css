@@ -99,3 +99,15 @@
     background: #e63900;
   }
 }
+
+/* White on brand orange #FF4D00 is about 3.32:1. #1a0a00 on the same orange is about 6:1. */
+a.bg-secondary,
+button.bg-secondary,
+.bg-secondary.text-white,
+.bg-secondary.text-secondary-foreground,
+a[class~="from-secondary"],
+button[class~="from-secondary"],
+a[class*="from-[#FF4D00]"],
+button[class*="from-[#FF4D00]"] {
+  color: #1a0a00;
+}

@@ -63,7 +63,12 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+          <button
+            className="md:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+          >
             {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
           </button>
         </div>
