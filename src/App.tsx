@@ -42,6 +42,7 @@ import AIDataSolutions from "./pages/AIDataSolutions";
 import CustomAIDevelopment from "./pages/CustomAIDevelopment";
 import TechnicalDocs from "./pages/TechnicalDocs";
 import AIIntegrationSupport from "./pages/AIIntegrationSupport";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
         <BrowserRouter basename={typeof window !== 'undefined' && window.location.pathname.startsWith('/bixoryai-web') ? '/bixoryai-web' : '/'}>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/ai-empowerment" element={<AIEmpowerment />} />
           
           <Route path="/knowledge-base" element={<KnowledgeBase />} />
           <Route path="/knowledge-base/getting-started-ai-development" element={<AIGettingStartedGuide />} />
@@ -89,6 +91,7 @@ const App = () => (
         <Route path="/admin-test" element={<AdminTest />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
       </AuthProvider>

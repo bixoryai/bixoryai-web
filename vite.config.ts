@@ -2,17 +2,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import fs from "fs";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
+// Root-absolute asset URLs. A relative base (`./`) makes nested routes such as
+// /solutions/ai-strategy-consulting request /solutions/assets/... and render blank.
+// Production is the custom domain https://bixory.ai (base '/'). GitHub Pages still
+// answers unknown paths with HTTP 404 and public/404.html rewrites them back to
+// the SPA; this repo does not change DNS or Pages settings.
 export default defineConfig(({ mode }) => {
-  const isGhProject = Boolean(
-    process.env.GITHUB_REPOSITORY?.endsWith('/bixoryai-web')
-  );
-
   return {
-    base: './',
+    base: "/",
     server: {
       host: "::",
       port: 8080,
