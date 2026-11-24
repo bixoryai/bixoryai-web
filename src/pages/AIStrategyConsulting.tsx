@@ -28,6 +28,8 @@ import {
   Rocket
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 import { useNavigate } from "react-router-dom";
 import { asset } from "@/lib/utils";
 
@@ -184,10 +186,10 @@ const AIStrategyConsulting = () => {
             </span>
           }
           subtitle="Transform your business with strategic AI implementation. Our expert consultants design custom roadmaps that drive measurable results and sustainable competitive advantage."
-          primaryButtonText="Start Your AI Journey"
+          primaryButtonText={CONSULTATION_CTA_LABEL}
+          primaryHref={BOOKING_URL}
           secondaryButtonText="View Case Studies"
           height="pt-24 pb-20"
-          onPrimaryClick={() => navigate('/contact')}
           onSecondaryClick={() => navigate('/projects')}
         />
       </section>
@@ -474,14 +476,10 @@ const AIStrategyConsulting = () => {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button 
-                    size="lg"
-                    onClick={() => navigate('/contact')}
-                    className="bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary text-white font-bold px-8 py-3 rounded-lg shadow-2xl shadow-secondary/30 hover:shadow-secondary/50 hover:scale-105 transition-all duration-300"
-                  >
+                  <ConsultationLink className="inline-flex items-center justify-center bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary text-white font-bold px-8 py-3 rounded-lg shadow-2xl shadow-secondary/30 hover:shadow-secondary/50 hover:scale-105 transition-all duration-300">
                     <MessageSquare className="w-5 h-5 mr-2" />
-                    Schedule Consultation
-                  </Button>
+                    {CONSULTATION_CTA_LABEL}
+                  </ConsultationLink>
                   
                   <Button 
                     size="lg"

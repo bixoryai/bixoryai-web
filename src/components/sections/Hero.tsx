@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { asset } from "@/lib/utils";
+import { BOOKING_URL, isBookingConfigured } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 
 interface HeroProps {
   backgroundImage?: string;
@@ -11,6 +13,8 @@ interface HeroProps {
   showButtons?: boolean;
   primaryButtonText?: string;
   secondaryButtonText?: string;
+  /** When set, the primary control is a real link instead of a button. */
+  primaryHref?: string;
   onPrimaryClick?: () => void;
   onSecondaryClick?: () => void;
   children?: ReactNode;
@@ -24,6 +28,7 @@ const Hero = ({
   showButtons = true,
   primaryButtonText = "Contact",
   secondaryButtonText = "Learn More",
+  primaryHref,
   onPrimaryClick,
   onSecondaryClick,
   children,
@@ -64,7 +69,7 @@ const Hero = ({
 
   return (
     <div 
-      className={`${height} relative flex items-center overflow-hidden`}
+      className={`${height} ${isBookingConfigured() ? "" : "max-md:min-h-[560px]"} relative flex items-center overflow-hidden`}
       style={{ 
         backgroundImage: `url('${getBackgroundUrl()}')`,
         backgroundSize: "cover",
@@ -96,7 +101,7 @@ const Hero = ({
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main title with staggered animation and increased top margin */}
-          <div className="text-4xl md:text-6xl font-bold text-white mb-6 mt-20 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
+          <div className={`text-4xl md:text-6xl font-bold text-white mb-6 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards] ${isBookingConfigured() ? "mt-20" : "mt-36 md:mt-24"}`}>
             {title}
           </div>
           
@@ -115,13 +120,28 @@ const Hero = ({
           {/* Buttons with enhanced animations */}
           {showButtons && (
             <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-[fadeInUp_0.8s_ease-out_1.1s_forwards]">
-              <button 
-                onClick={handlePrimaryClick}
-                className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 flex items-center gap-2 justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-secondary/25 group"
-              >
-                {primaryButtonText}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+              {primaryHref === BOOKING_URL ? (
+                <ConsultationLink className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 flex items-center gap-2 justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-secondary/25 group">
+                  {primaryButtonText}
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </ConsultationLink>
+              ) : primaryHref ? (
+                <a
+                  href={primaryHref}
+                  className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 flex items-center gap-2 justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-secondary/25 group"
+                >
+                  {primaryButtonText}
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+              ) : (
+                <button 
+                  onClick={handlePrimaryClick}
+                  className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-secondary/90 transition-all duration-300 flex items-center gap-2 justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-secondary/25 group"
+                >
+                  {primaryButtonText}
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              )}
               <button 
                 onClick={handleSecondaryClick}
                 className="bg-primary border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent/20 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 relative overflow-hidden group"

@@ -3,6 +3,8 @@ import { Menu, X, ChevronDown, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { asset } from "@/lib/utils";
+import { CONSULTATION_CTA_LABEL } from "@/config/site";
+import { BookingPlaceholderBanner, ConsultationLink } from "@/components/conversion/ConsultationLink";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +27,7 @@ const Navbar = () => {
   
   
   return <nav className="fixed w-full bg-primary/90 backdrop-blur-sm z-50">
+      <BookingPlaceholderBanner />
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
@@ -55,12 +58,9 @@ const Navbar = () => {
             <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
             <Link to="/careers" className="text-white hover:text-accent transition-colors">Careers</Link>
             <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
-            <Link 
-              to="/contact"
-              className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors"
-            >
-              Contact
-            </Link>
+            <ConsultationLink className="bg-secondary text-white px-4 py-2 rounded-full hover:bg-secondary/90 transition-colors text-center text-sm leading-snug max-w-[13.5rem]">
+              {CONSULTATION_CTA_LABEL}
+            </ConsultationLink>
           </div>
 
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -92,13 +92,9 @@ const Navbar = () => {
               <Link to="/solutions" className="text-white hover:text-accent transition-colors">Solutions</Link>
               <Link to="/careers" className="text-white hover:text-accent transition-colors">Careers</Link>
               <Link to="/about" className="text-white hover:text-accent transition-colors">About</Link>
-              <Link 
-                to="/contact"
-                className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-secondary/90 transition-colors text-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
+              <ConsultationLink className="bg-secondary text-white px-4 py-2 rounded-full hover:bg-secondary/90 transition-colors text-center text-sm leading-snug">
+                {CONSULTATION_CTA_LABEL}
+              </ConsultationLink>
             </div>
           </div>}
       </div>

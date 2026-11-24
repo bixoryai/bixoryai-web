@@ -9,6 +9,8 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import productivityImage from "@/assets/productivity-illustration.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
 import { asset } from "@/lib/utils";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 
 
 const About = () => {
@@ -65,7 +67,8 @@ const About = () => {
           </>
         }
         subtitle="Pushing Boundaries & Redefining Possibilities"
-        primaryButtonText="Get Started"
+        primaryButtonText={CONSULTATION_CTA_LABEL}
+        primaryHref={BOOKING_URL}
         secondaryButtonText="Our Solutions"
         height="pt-24 pb-20"
       >
@@ -236,9 +239,9 @@ const About = () => {
             Your Cost-effective Full-cycle AI Solution Partner
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild className="bg-secondary hover:bg-secondary/90 text-white font-semibold px-8 py-3 rounded-full">
-              <Link to="/contact">Get Started</Link>
-            </Button>
+            <ConsultationLink className="bg-secondary hover:bg-secondary/90 text-white font-semibold px-8 py-3 rounded-full inline-flex items-center justify-center">
+              {CONSULTATION_CTA_LABEL}
+            </ConsultationLink>
             <Button asChild variant="outline" className="bg-primary border-accent text-accent hover:bg-accent/20 px-8 py-3 rounded-full">
               <Link to="/solutions">Our Solutions</Link>
             </Button>

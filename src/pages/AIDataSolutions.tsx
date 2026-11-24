@@ -28,6 +28,8 @@ import {
   Settings
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 import { useNavigate } from "react-router-dom";
 import solutionsHeroImage from "@/assets/solutions-hero.jpg";
 
@@ -192,10 +194,10 @@ const AIDataSolutions = () => {
             </span>
           }
           subtitle="Transform raw data into powerful AI assets with our comprehensive data solutions. From synthetic data generation to privacy-preserving analytics, we make your data AI-ready."
-          primaryButtonText="Start Your Data Journey"
+          primaryButtonText={CONSULTATION_CTA_LABEL}
+          primaryHref={BOOKING_URL}
           secondaryButtonText="View Case Studies"
           height="pt-24 pb-20"
-          onPrimaryClick={() => navigate('/contact')}
           onSecondaryClick={() => navigate('/projects')}
         />
       </section>
@@ -485,12 +487,9 @@ const AIDataSolutions = () => {
               with privacy-preserving, scalable, and AI-ready data solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/contact')}
-                className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full"
-              >
-                Start Your Data Project
-              </Button>
+              <ConsultationLink className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full inline-flex items-center justify-center">
+                {CONSULTATION_CTA_LABEL}
+              </ConsultationLink>
               <Button 
                 variant="outline" 
                 onClick={() => navigate('/projects')}

@@ -9,9 +9,17 @@ import { Mail, Phone, Send } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { toast } from "@/hooks/use-toast";
 import Hero from "@/components/sections/Hero";
 import contactHeroImage from "@/assets/contact-hero.jpg";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL, CONTACT_EMAIL, buildMailto } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
+
+const SUBJECT_LABELS: Record<string, string> = {
+  general: "General Inquiry",
+  "ai-training": "AI Training",
+  "custom-solutions": "Custom AI Solutions",
+  consultation: "Enterprise Consultation",
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +31,7 @@ const Contact = () => {
     message: ""
   });
 
+  const [deliveryNote, setDeliveryNote] = useState<string | null>(null);
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation(0.2);
   const { elementRef: formRef, isVisible: formVisible } = useScrollAnimation(0.3);
   const { elementRef: infoRef, isVisible: infoVisible } = useScrollAnimation(0.4);
@@ -43,22 +52,26 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, just show a success toast
-    toast({
-      title: "Message Sent! 🚀",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-      duration: 5000,
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      phone: "",
-      subject: "general",
-      message: ""
-    });
+    const subjectLabel = SUBJECT_LABELS[formData.subject] ?? "Inquiry";
+    const mailto = buildMailto(
+      `${subjectLabel} from ${formData.name}`,
+      [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Company: ${formData.company || "—"}`,
+        `Phone: ${formData.phone || "—"}`,
+        `Subject: ${subjectLabel}`,
+        "",
+        formData.message,
+        "",
+        "This draft was opened from the bixory.ai contact form. The website did not send it.",
+      ].join("\n"),
+    );
+
+    setDeliveryNote(
+      `This form is not connected to a server, so your message was not sent. An email draft to ${CONTACT_EMAIL} should have opened — you still need to send that email.`,
+    );
+    window.location.href = mailto;
   };
 
   return (
@@ -87,6 +100,16 @@ const Contact = () => {
             >
               <div className="bg-primary/80 border border-gray-700 rounded-lg p-8 hover:shadow-lg transition-shadow duration-300">
                 <h2 className="text-3xl font-bold text-white mb-6">Send us a Message</h2>
+
+                <p role="note" className="mb-6 rounded-md border border-amber-400/60 bg-amber-950 px-4 py-3 text-sm text-amber-50">
+                  This website cannot deliver form messages. Submitting opens an email draft to {CONTACT_EMAIL}. Nothing is sent until you send that email. Or use “{CONSULTATION_CTA_LABEL}” once a calendar link is configured ({BOOKING_URL}).
+                </p>
+
+                <div className="mb-6">
+                  <ConsultationLink className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-full inline-flex items-center justify-center">
+                    {CONSULTATION_CTA_LABEL}
+                  </ConsultationLink>
+                </div>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -187,8 +210,13 @@ const Contact = () => {
                     className="w-full bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
-                    Send Message
+                    Open email draft
                   </Button>
+                  {deliveryNote && (
+                    <p role="alert" className="rounded-md border border-amber-400/60 bg-amber-950 px-4 py-3 text-sm text-amber-50">
+                      {deliveryNote}
+                    </p>
+                  )}
                 </form>
               </div>
             </div>

@@ -11,6 +11,8 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect } from "react";
 import aiToolsHeroImage from "@/assets/solutions-hero.jpg";
+import { CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 
 interface AITool {
   id?: string;
@@ -526,14 +528,9 @@ const AITools = () => {
                 Our AI experts can help you select and implement the perfect tools for your specific use case and requirements.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full"
-                  asChild
-                >
-                  <a href="/contact">
-                    Get Consultation
-                  </a>
-                </Button>
+                <ConsultationLink className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full inline-flex items-center justify-center">
+                  {CONSULTATION_CTA_LABEL}
+                </ConsultationLink>
                 <Button 
                   variant="outline"
                   className="bg-primary border border-accent text-accent hover:bg-accent/20 px-8 py-3 rounded-full"
