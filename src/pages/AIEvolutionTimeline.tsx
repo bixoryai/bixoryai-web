@@ -31,7 +31,7 @@ export default function AIEvolutionTimeline() {
       canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute("href", window.location.origin + "/knowledge-base/ai-evolution-timeline");
+    canonical.setAttribute("href", "https://bixory.ai/knowledge-base/ai-evolution-timeline");
 
     // JSON-LD structured data
     const jsonLd = {
@@ -40,8 +40,8 @@ export default function AIEvolutionTimeline() {
       headline: title,
       description: metaDescContent,
       author: { "@type": "Organization", name: "BIXORY AI" },
-      dateModified: new Date().toISOString(),
-      mainEntityOfPage: window.location.href,
+      dateModified: "2025-08-15",
+      mainEntityOfPage: "https://bixory.ai/knowledge-base/ai-evolution-timeline",
     };
     const script = document.createElement("script");
     script.type = "application/ld+json";

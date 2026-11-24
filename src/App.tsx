@@ -42,6 +42,7 @@ import AIDataSolutions from "./pages/AIDataSolutions";
 import CustomAIDevelopment from "./pages/CustomAIDevelopment";
 import TechnicalDocs from "./pages/TechnicalDocs";
 import AIIntegrationSupport from "./pages/AIIntegrationSupport";
+import DocumentMeta, { Analytics } from "./components/seo/DocumentMeta";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,8 @@ const App = () => (
       <Sonner />
       <AuthProvider>
         <BrowserRouter basename={typeof window !== 'undefined' && window.location.pathname.startsWith('/bixoryai-web') ? '/bixoryai-web' : '/'}>
+        <DocumentMeta />
+        <Analytics />
         <Routes>
           <Route path="/" element={<Index />} />
           
