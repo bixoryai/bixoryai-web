@@ -1,7 +1,8 @@
 
 import { GraduationCap, Cog, Building } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useNavigate } from "react-router-dom";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 
 const services = [
   {
@@ -13,7 +14,7 @@ const services = [
       "Hands-on workshops", 
       "Expert-led training"
     ],
-    link: "/knowledge-base"
+    link: "/ai-empowerment"
   },
   {
     icon: <Cog className="w-8 h-8 text-secondary" />,
@@ -35,15 +36,13 @@ const services = [
       "Implementation roadmap",
       "Technology selection"
     ],
-    link: "/about"
+    link: "booking"
   },
 ];
 
 const Services = () => {
   const { elementRef: sectionRef, isVisible: sectionVisible } = useScrollAnimation(0.2);
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation(0.3);
-  const navigate = useNavigate();
-
   return (
     <section 
       id="services" 
@@ -109,12 +108,20 @@ const Services = () => {
 
                   {/* Call to Action */}
                   <div className="mt-6 pt-6 border-t border-white/10">
-                    <button 
-                      onClick={() => navigate(service.link)}
-                      className="w-full py-3 px-4 bg-transparent border border-secondary text-secondary rounded-lg hover:bg-secondary hover:text-white transition-all duration-300 font-medium text-sm group-hover:shadow-lg group-hover:shadow-secondary/20"
-                    >
-                      Learn More
-                    </button>
+                    {service.link === "booking" ? (
+                      <div className="w-full [&>span]:w-full">
+                        <ConsultationLink className="block w-full py-3 px-4 bg-transparent border border-secondary text-secondary rounded-lg hover:bg-secondary hover:text-white transition-all duration-300 font-medium text-sm text-center group-hover:shadow-lg group-hover:shadow-secondary/20">
+                          Learn More
+                        </ConsultationLink>
+                      </div>
+                    ) : (
+                      <Link
+                        to={service.link}
+                        className="block w-full py-3 px-4 bg-transparent border border-secondary text-secondary rounded-lg hover:bg-secondary hover:text-white transition-all duration-300 font-medium text-sm text-center group-hover:shadow-lg group-hover:shadow-secondary/20"
+                      >
+                        Learn More
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
