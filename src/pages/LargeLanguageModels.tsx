@@ -12,27 +12,11 @@ import knowledgeImage from "@/assets/knowledge-illustration.jpg";
 export default function LargeLanguageModels() {
   // SEO
   useEffect(() => {
-    const title = "Large Language Models (LLMs) | BIXORY AI";
-    document.title = title;
+    const title = "Large Language Models (LLMs) | Bixory AI";
+    const metaDescContent = "Guide to large language models: architecture, training, applications, and natural language processing.";
 
-    const metaDescContent = "Comprehensive guide to Large Language Models: architecture, training, applications, and the future of AI-powered natural language processing.";
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement("meta");
-      metaDesc.setAttribute("name", "description");
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute("content", metaDescContent);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute("href", "https://bixory.ai/knowledge-base/large-language-models");
-
-    // JSON-LD structured data
+    // Title, description, and canonical come from DocumentMeta.
+    // This effect only adds the article schema.
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "Article",
