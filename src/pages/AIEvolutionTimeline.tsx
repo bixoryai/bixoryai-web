@@ -13,27 +13,11 @@ import { ModelScaleChart } from "@/components/visualizations/ModelScaleChart";
 export default function AIEvolutionTimeline() {
   // SEO
   useEffect(() => {
-    const title = "Key Milestones of AI Evolution | BIXORY AI";
-    document.title = title;
-
+    const title = "Key Milestones of AI Evolution | Bixory AI";
     const metaDescContent = "Timeline of AI milestones: early symbolic AI, winters, deep learning, transformers, and modern LLM breakthroughs.";
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement("meta");
-      metaDesc.setAttribute("name", "description");
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute("content", metaDescContent);
 
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute("href", "https://bixory.ai/knowledge-base/ai-evolution-timeline");
-
-    // JSON-LD structured data
+    // Title, description, and canonical come from DocumentMeta.
+    // This effect only adds the article schema.
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "Article",
