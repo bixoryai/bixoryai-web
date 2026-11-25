@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { supabase } from "@/integrations/supabase/client";
 import { asset } from "@/lib/utils";
+import { subscribeToNewsletter } from "@/lib/newsletter";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -13,25 +13,22 @@ const Newsletter = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
-      const { data, error } = await supabase.functions.invoke('newsletter-subscribe', {
-        body: { email }
-      });
+    const result = await subscribeToNewsletter(email);
 
-      if (error) throw error;
-
+    if (!result.ok) {
       toast({
-        title: "Success!",
-        description: "Thank you for subscribing! Check your email for a welcome message.",
-      });
-      setEmail("");
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to subscribe. Please try again.",
+        title: "Not subscribed",
+        description: result.message,
         variant: "destructive",
       });
+      return;
     }
+
+    toast({
+      title: "Subscribed",
+      description: "The newsletter service confirmed this address. Check your email for a welcome message.",
+    });
+    setEmail("");
   };
 
   return (

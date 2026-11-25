@@ -11,6 +11,7 @@ import FeaturedSolutions from "@/components/sections/FeaturedSolutions";
 import IndustriesPreview from "@/components/sections/IndustriesPreview";
 import CallToAction from "@/components/sections/CallToAction";
 import Newsletter from "@/components/sections/Newsletter";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL } from "@/config/site";
 
 const Index = () => {
   return (
@@ -26,6 +27,8 @@ const Index = () => {
           </span>
         }
         subtitle="Transform your vision into AI-powered reality with cutting-edge solutions that adapt, learn, and evolve with your business"
+        primaryButtonText={CONSULTATION_CTA_LABEL}
+        primaryHref={BOOKING_URL}
       />
       <Strip />
       <WhyChooseUs />

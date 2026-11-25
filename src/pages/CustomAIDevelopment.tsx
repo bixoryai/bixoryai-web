@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { showComingSoonToast } from "@/utils/comingSoon";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 import aiDevelopmentHeroImage from "@/assets/ai-development-hero.jpg";
 
 const developmentServices = [
@@ -239,10 +241,10 @@ const CustomAIDevelopment = () => {
         backgroundImage={aiDevelopmentHeroImage}
         title="Custom AI Development Services"
         subtitle="Bespoke artificial intelligence solutions designed and built specifically for your unique business challenges and workflows."
-        primaryButtonText="Start Your Project"
+        primaryButtonText={CONSULTATION_CTA_LABEL}
+        primaryHref={BOOKING_URL}
         secondaryButtonText="View Case Studies"
         height="pt-24 pb-20"
-        onPrimaryClick={() => handleComingSoon("Project Consultation")}
         onSecondaryClick={() => handleComingSoon("Case Studies")}
       />
 
@@ -660,14 +662,10 @@ const CustomAIDevelopment = () => {
               plan that aligns with your business objectives and technical constraints.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full"
-                onClick={() => handleComingSoon("Project Consultation")}
-              >
+              <ConsultationLink className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full inline-flex items-center justify-center">
                 <Lightbulb className="w-5 h-5 mr-2" />
-                Schedule Consultation
-              </Button>
+                {CONSULTATION_CTA_LABEL}
+              </ConsultationLink>
               <Link to="/technical-docs">
                 <Button 
                   variant="outline" 
