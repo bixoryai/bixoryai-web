@@ -3,7 +3,8 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
+import { CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 import { 
   Shield, 
   Monitor, 
@@ -222,13 +223,9 @@ const AIIntegrationSupport = () => {
                 Start Integration
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-white/20 text-accent hover:bg-white/10 px-8 py-4 text-lg rounded-full"
-              >
-                Schedule Consultation
-              </Button>
+              <ConsultationLink className="inline-flex items-center justify-center border border-white/20 text-accent hover:bg-white/10 px-8 py-4 text-lg rounded-full">
+                {CONSULTATION_CTA_LABEL}
+              </ConsultationLink>
             </div>
 
             {/* Hero Stats */}
@@ -532,16 +529,9 @@ const AIIntegrationSupport = () => {
                 Start Your Integration
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-white/20 text-accent hover:bg-white/10 px-8 py-4 text-lg rounded-full"
-                asChild
-              >
-                <Link to="/contact">
-                  Contact Our Team
-                </Link>
-              </Button>
+              <ConsultationLink className="inline-flex items-center justify-center border border-white/20 text-accent hover:bg-white/10 px-8 py-4 text-lg rounded-full">
+                {CONSULTATION_CTA_LABEL}
+              </ConsultationLink>
             </div>
           </div>
         </div>

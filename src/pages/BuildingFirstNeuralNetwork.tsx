@@ -13,6 +13,8 @@ import Footer from "@/components/layout/Footer";
 import { SocialShare } from "@/components/social/SocialShare";
 import Hero from "@/components/sections/Hero";
 import { asset } from "@/lib/utils";
+import { CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 
 const BuildingFirstNeuralNetwork = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -784,16 +786,10 @@ print("Scaler saved successfully!")`,
                 </div>
                 
                 <div className="space-y-4">
-                  <Button 
-                    asChild
-                    size="lg" 
-                    className="bg-gradient-to-r from-secondary to-accent hover:from-secondary/90 hover:to-accent/90 text-primary px-8 py-3 text-lg"
-                  >
-                    <Link to="/contact">
-                      Schedule a Consultation
-                      <ExternalLink className="w-5 h-5 ml-2" />
-                    </Link>
-                  </Button>
+                  <ConsultationLink className="inline-flex items-center justify-center bg-gradient-to-r from-secondary to-accent hover:from-secondary/90 hover:to-accent/90 text-primary px-8 py-3 text-lg rounded-md">
+                    {CONSULTATION_CTA_LABEL}
+                    <ExternalLink className="w-5 h-5 ml-2" />
+                  </ConsultationLink>
                   <p className="text-sm text-gray-400">
                     Free 30-minute consultation to discuss your learning goals and training options
                   </p>

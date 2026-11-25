@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Brain, Zap, Shield, Users, Cog, TrendingUp, ArrowRight, CheckCircle, Database, Layers, FileText, BarChart3, Lock, Award, Clock, Heart, DollarSign, Factory, ShoppingCart, GraduationCap, Monitor } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { showComingSoonToast } from "@/utils/comingSoon";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 import solutionsHeroImage from "@/assets/solutions-hero.jpg";
 const mainSolutionCategories = [{
   icon: <Brain className="w-8 h-8 text-secondary" />,
@@ -122,7 +124,7 @@ const Solutions = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <Hero backgroundImage={solutionsHeroImage} title="AI Solutions That Transform" subtitle="Comprehensive artificial intelligence solutions designed to accelerate your business growth and operational efficiency." primaryButtonText="Get Started" secondaryButtonText="View Case Studies" height="pt-24 pb-20" onPrimaryClick={() => handleComingSoon("Get Started Form")} onSecondaryClick={() => handleComingSoon("Case Studies")} />
+      <Hero backgroundImage={solutionsHeroImage} title="AI Solutions That Transform" subtitle="Comprehensive artificial intelligence solutions designed to accelerate your business growth and operational efficiency." primaryButtonText={CONSULTATION_CTA_LABEL} primaryHref={BOOKING_URL} secondaryButtonText="View Case Studies" height="pt-24 pb-20" onSecondaryClick={() => handleComingSoon("Case Studies")} />
 
       {/* Main Solution Categories */}
       <section ref={categoriesRef} className="py-12 pb-8 bg-primary">
@@ -334,12 +336,10 @@ const Solutions = () => {
               and unlock new opportunities for growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg flex items-center gap-2" asChild>
-                <Link to="/contact">
-                  Schedule Consultation
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
+              <ConsultationLink className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg inline-flex items-center justify-center gap-2">
+                {CONSULTATION_CTA_LABEL}
+                <ArrowRight className="w-5 h-5" />
+              </ConsultationLink>
               <Button variant="outline" size="lg" className="bg-primary border-accent text-accent hover:bg-accent/20 px-8 py-4 text-lg" asChild>
                 <Link to="/about">Learn About Us</Link>
               </Button>

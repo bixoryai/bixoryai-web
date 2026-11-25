@@ -7,6 +7,7 @@ import { SocialShare } from "@/components/social/SocialShare";
 import { Link } from "react-router-dom";
 import Hero from "@/components/sections/Hero";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { BOOKING_URL, CONSULTATION_CTA_LABEL } from "@/config/site";
 import heroImage from "@/assets/ai-development-hero.jpg";
 import knowledgeImage from "@/assets/knowledge-illustration.jpg";
 import productivityImage from "@/assets/productivity-illustration.jpg";
@@ -395,6 +396,8 @@ export default function TypesOfAI() {
           subtitle="Understanding the spectrum of AI capabilities from reactive machines to theoretical superintelligence"
           backgroundImage={heroImage}
           height="h-[50vh]"
+          primaryButtonText={CONSULTATION_CTA_LABEL}
+          primaryHref={BOOKING_URL}
         />
         
         {/* Breadcrumb Navigation */}

@@ -15,7 +15,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Upload, FileText, Loader2 } from "lucide-react";
+import { ArrowLeft, Upload, FileText } from "lucide-react";
+import { CONTACT_EMAIL, buildMailto } from "@/config/site";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -38,7 +39,7 @@ const JobApplication = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [resume, setResume] = useState<File | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [deliveryNote, setDeliveryNote] = useState<string | null>(null);
 
   // Get the job title from the URL state if available
   const selectedPosition = location.state?.position || "";
@@ -86,8 +87,8 @@ const JobApplication = () => {
       
       setResume(file);
       toast({
-        title: "Resume uploaded",
-        description: `${file.name} has been uploaded successfully`,
+        title: "Resume selected on this device",
+        description: `${file.name} is not uploaded. You will need to attach it to an email yourself.`,
       });
     }
   };
@@ -96,41 +97,38 @@ const JobApplication = () => {
     if (!resume) {
       toast({
         title: "Resume required",
-        description: "Please upload your resume before submitting",
+        description: "Select a resume on this device before opening the email draft. It is not uploaded.",
         variant: "destructive",
       });
       return;
     }
 
-    setIsSubmitting(true);
-    
-    try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      toast({
-        title: "Application submitted!",
-        description: "We'll review your application and get back to you soon.",
-      });
-      
-      // Reset form
-      form.reset();
-      setResume(null);
-      
-      // Navigate back to careers page
-      setTimeout(() => {
-        navigate("/careers");
-      }, 2000);
-      
-    } catch (error) {
-      toast({
-        title: "Submission failed",
-        description: "There was an error submitting your application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    const mailto = buildMailto(
+      `Job application: ${data.position} — ${data.firstName} ${data.lastName}`,
+      [
+        `Name: ${data.firstName} ${data.lastName}`,
+        `Email: ${data.email}`,
+        `Phone: ${data.phone}`,
+        `Position: ${data.position}`,
+        `Experience: ${data.experience}`,
+        `Availability: ${data.availability}`,
+        `LinkedIn: ${data.linkedIn || "—"}`,
+        `Portfolio: ${data.portfolio || "—"}`,
+        "",
+        "Cover letter:",
+        data.coverLetter,
+        "",
+        `Resume selected in the browser (not uploaded): ${resume.name}`,
+        "Attach that file to this email before sending.",
+        "",
+        "The bixory.ai careers form did not submit this application.",
+      ].join("\n"),
+    );
+
+    setDeliveryNote(
+      `This application was not submitted. There is no application inbox connected to the form. An email draft to ${CONTACT_EMAIL} should have opened. Attach ${resume.name} to that draft and send it yourself.`,
+    );
+    window.location.href = mailto;
   };
 
   return (
@@ -178,8 +176,11 @@ const JobApplication = () => {
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl text-white">Application Form</CardTitle>
                 <CardDescription className="text-gray-300">
-                  Please fill out all required fields and upload your resume
+                  Fill out the required fields and select a resume. This website does not store or email applications. The button opens a draft to {CONTACT_EMAIL}; attach the resume and send it yourself.
                 </CardDescription>
+                <p role="note" className="mt-4 rounded-md border border-amber-400/60 bg-amber-950 px-4 py-3 text-sm text-amber-50">
+                  There is no careers form endpoint in this project. Nothing you type here is delivered until you send the email draft.
+                </p>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
@@ -456,18 +457,15 @@ const JobApplication = () => {
                     <div className="animate-fadeInUp" style={{ animationDelay: '1.5s' }}>
                       <Button 
                         type="submit" 
-                        disabled={isSubmitting}
-                        className="w-full bg-secondary hover:bg-secondary/90 text-white py-3 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full bg-secondary hover:bg-secondary/90 text-white py-3 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
                       >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                            Submitting Application...
-                          </>
-                        ) : (
-                          "Submit Application"
-                        )}
+                        Email this application
                       </Button>
+                      {deliveryNote && (
+                        <p role="alert" className="mt-4 rounded-md border border-amber-400/60 bg-amber-950 px-4 py-3 text-sm text-amber-50">
+                          {deliveryNote}
+                        </p>
+                      )}
                     </div>
                   </form>
                 </Form>

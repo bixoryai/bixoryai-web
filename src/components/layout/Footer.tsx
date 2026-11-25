@@ -1,7 +1,28 @@
+import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { asset } from "@/lib/utils";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
+import { subscribeToNewsletter } from "@/lib/newsletter";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [pending, setPending] = useState(false);
+  const [status, setStatus] = useState<{ ok: boolean; message: string } | null>(null);
+
+  const handleJoin = async (event: FormEvent) => {
+    event.preventDefault();
+    setPending(true);
+    setStatus(null);
+    const result = await subscribeToNewsletter(email);
+    setPending(false);
+    if (result.ok) {
+      setEmail("");
+      setStatus({ ok: true, message: "Subscribed. The newsletter service confirmed this address." });
+      return;
+    }
+    setStatus({ ok: false, message: result.message });
+  };
+
   return (
     <footer className="bg-slate-900 border-t border-gray-600/50 py-12">
       <div className="container mx-auto px-6 max-w-7xl">
@@ -15,20 +36,32 @@ const Footer = () => {
               Build Intelligence X with AI
             </p>
             <div className="max-w-xs">
-              <form className="flex gap-2">
+              <form className="flex gap-2" onSubmit={handleJoin}>
                 <input
                   type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="Your email"
+                  aria-label="Email for the newsletter"
                   className="flex-1 px-3 py-2 text-sm rounded bg-white/10 text-white border border-white/20 focus:outline-none focus:border-accent transition-all duration-300 placeholder:text-gray-400"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-secondary text-white px-4 py-2 text-sm rounded hover:bg-secondary/90 transition-all duration-300"
+                  disabled={pending}
+                  className="bg-secondary text-white px-4 py-2 text-sm rounded hover:bg-secondary/90 transition-all duration-300 disabled:opacity-60"
                 >
-                  Join
+                  {pending ? "Joining…" : "Join"}
                 </button>
               </form>
+              {status && (
+                <p
+                  role={status.ok ? "status" : "alert"}
+                  className={`mt-2 text-xs ${status.ok ? "text-emerald-300" : "text-amber-200"}`}
+                >
+                  {status.message}
+                </p>
+              )}
             </div>
           </div>
           <div className="md:ml-12">
@@ -44,14 +77,18 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/ai-empowerment" className="text-gray-400 hover:text-accent">AI Education & Training</Link></li>
               <li><Link to="/solutions" className="text-gray-400 hover:text-accent">Custom AI Solutions</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-accent">Enterprise AI Consultation</Link></li>
+              <li>
+                <ConsultationLink className="text-gray-400 hover:text-accent">
+                  Enterprise AI Consultation
+                </ConsultationLink>
+              </li>
             </ul>
           </div>
           <div>
             <h3 className="text-white font-bold mb-4">Connect</h3>
             <ul className="space-y-2">
               <li><a href="https://www.facebook.com/bixoryai" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-              <li><a href="https://www.linkedin.com/company/1767868/admin/dashboard/" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="https://www.linkedin.com/company/1767868" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
               <li><a href="https://github.com/bixoryai" className="text-gray-400 hover:text-accent" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             </ul>
           </div>

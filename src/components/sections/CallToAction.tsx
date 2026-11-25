@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { CONSULTATION_CTA_LABEL } from "@/config/site";
+import { ConsultationLink } from "@/components/conversion/ConsultationLink";
 
 const CallToAction = () => {
   const navigate = useNavigate();
@@ -26,12 +28,9 @@ const CallToAction = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              onClick={() => navigate('/contact')}
-              className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full text-lg"
-            >
-              Schedule Free Consultation
-            </Button>
+            <ConsultationLink className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-full text-lg inline-flex items-center justify-center">
+              {CONSULTATION_CTA_LABEL}
+            </ConsultationLink>
             
             <Button 
               onClick={() => navigate('/solutions')}
