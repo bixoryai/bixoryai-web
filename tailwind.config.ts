@@ -31,7 +31,8 @@ export default {
         },
         secondary: {
           DEFAULT: "#FF4D00",
-          foreground: "#ffffff",
+          // Near-black on #FF4D00 clears 4.5:1. White on this orange is about 3.32:1.
+          foreground: "#1a0a00",
         },
         accent: {
           DEFAULT: "#00F0FF",
