@@ -89,7 +89,7 @@ const TermsOfService = () => {
 
             <section>
               <p className="text-sm text-gray-400">
-                Last updated: {new Date().toLocaleDateString()}
+                Last updated: June 11, 2025
               </p>
             </section>
           </div>

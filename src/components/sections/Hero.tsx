@@ -96,9 +96,11 @@ const Hero = ({
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main title with staggered animation and increased top margin */}
-          <div className="text-4xl md:text-6xl font-bold text-white mb-6 mt-20 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
-            {title}
-          </div>
+          {title ? (
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 mt-20 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
+              {title}
+            </h1>
+          ) : null}
           
           {/* Subtitle with typing effect */}
           {subtitle && (

@@ -70,13 +70,17 @@ export const TutorialTemplate = ({
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0A192F] to-[#0D1B2A] py-12">
       <div className="container mx-auto px-6 max-w-6xl">
-        {/* Header */}
+        {/* Header. The h1 is omitted when title is empty so a page that already
+            has a hero h1 (the only current caller) does not render a second one.
+            GuideTemplate uses the same pattern. */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
-              {title}
-            </span>
-          </h1>
+          {title ? (
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              <span className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 bg-clip-text text-transparent">
+                {title}
+              </span>
+            </h1>
+          ) : null}
           
           {/* Meta Information */}
           <div className="flex flex-wrap items-center gap-6 text-gray-300 mb-6">

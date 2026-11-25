@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin-tools
+Disallow: /admin-test
+Disallow: /auth
+
+Sitemap: https://bixory.ai/sitemap.xml
