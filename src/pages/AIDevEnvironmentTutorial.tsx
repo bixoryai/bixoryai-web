@@ -686,7 +686,7 @@ tensorboard --logdir=logs`
       {/* Tutorial Content */}
       <div className="bg-gradient-to-br from-primary via-primary to-blue-900">
         <TutorialTemplate
-          title="Setting Up Your AI Development Environment"
+          title="" // Hero above is the page h1. An empty title skips TutorialTemplate's h1.
           description="A comprehensive guide to setting up a professional AI development environment from scratch. Learn to configure Python, essential libraries, development tools, version control, containerization, and MLOps tools for productive AI development."
           difficulty={2}
           estimatedTime={120}

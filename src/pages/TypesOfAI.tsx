@@ -434,7 +434,7 @@ export default function TypesOfAI() {
               </Badge>
               <span className="text-sm text-gray-400">15 min read</span>
               <span className="text-sm text-gray-400">•</span>
-              <span className="text-sm text-gray-400">Updated {new Date().toLocaleDateString()}</span>
+              <span className="text-sm text-gray-400">Updated October 16, 2025</span>
             </div>
 
             {/* Article Content */}
